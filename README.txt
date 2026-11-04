@@ -1,0 +1,3 @@
+JUNGLE PARK installable version. Host this folder on any HTTPS static host (Netlify Drop, GitHub Pages). Live GPS, camera QR scanning and offline install work here. Live cloud sync runs in the claude.ai version; here friends use the Offline snapshot QR and devices use Backup / Restore.
+Gym memberships, invites, password sign-in and coaching need the live sync of the claude.ai version.
+Coach and gym applications from this copy are emailed to abbeldawit@gmail.com through FormSubmit (formsubmit.co). The first application triggers a one-time confirmation email: click Activate in it, and every later application arrives in your inbox.
