@@ -2178,7 +2178,7 @@ input[type=date]::-webkit-date-and-time-value{text-align:left}
 .seg.ico-seg button>.ico,.seg.ico-seg button>.mico{display:block;margin:0}
 .seg.ico-seg button:hover:not(.on){background:color-mix(in srgb,var(--fg) 6%,transparent)}
 
-.arena>.lb-filters,.lb-filters{position:relative;z-index:200!important}
+.arena>.lb-filters,.lb-filters{position:relative;z-index:6!important}
 .arena .stage{position:relative;z-index:1}
 /* ===== v46 ===== */
 /* park stats: stacked rows */
@@ -2334,6 +2334,46 @@ select.inp.gym-sel:focus{outline:0;border-color:var(--accent)!important}
 .ci-imm select.inp.gym-sel:focus{border-color:rgba(255,255,255,.55)!important}
 .lc-bars{height:120px;min-height:0!important;align-self:center;box-sizing:border-box}
 @media (max-width:420px){.lc-bars{height:104px}}
+
+/* v51 fixes */
+:root{--m-lift:url(data:image/png;base64,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);--m-tread:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAWhklEQVR42u1de7RcVXn/nZm5SchLYhJDK68KAYPFEsEUeT/ksbqUh1hQiUUxrYiVVUHxsajG+sKqBawJRaTRRaVEFyUgtIuEADYhEBESy8PwMoHwSu4NISTh3tyZc07/2N9e8+Vjf/vsmbn3zpm556x11tw7s+fMOfv79vf4fY9dRvccEYAK/Z02+J0Uo/SIuuQ5ygBi9v9eAP4cwIEApjLGqAF4DcCzAB4HsNFzjeLoIOLb148AuBPANlrVvnMngHsAXAhgPF2j1EWLYlRIrxL9fRqAhwWBYwBV5ayJsX8AcF4XSsauJr4l0ncZIWt0JgESIKGxVfbedQB6CibIP/HL9HojI3ycQeSqhzlixgj/DWBsoQ7yr/MXEsEGPYTXVr/GCPZavxK/1fWT2WnW/scBfIdWbY8Yk9DqLRFBHwSwBMD9AHYBeBut8IjGRuL6VQCHAthB3ymPZjcxj3p/OoBeYoTYsbJTAAMAfgjgYMd1/gzAN5inUFOkxxsA3iGMzeLIgbT6JhGqqhD/cQBHOMCeiiDkwSQdXExgr339aFEFnQJYTQDwIq3SWBhxKYC1AKbR2B5l5ZYYMDQBwL3iGlYKJABeBzCj8Arys/pPV4gVA9gCYH9G/ErGOY6uO4OYSl7XSoW/oWtWCjK076gwnz8R4t8S6iJG/EaP4x0AUZV+64ZuZoBOeShrhc8SIFBCq3g9gEX0dw3AWwBcAmAf+m4UEAupAtiDjbfnLPq8iBPkwAZ4QKx6Kwm+T5+PodfFAUhg1mnVwVNMBUWFBGjvsYcghH1dQX/X6JmOYmBPqcW5GNfNkcJKh4ev7cp8ToA1lhGSIfDho9FgXHXiYXV1CqBf2Aoa0WIPqheNRn+/WyzbtEuh74IBAkRzFlRrJcUuAP8AAwFHQlqk5DlcRTq/wP5zSuzfCwvdRvTmsHE9ADawcXbMdiKudkwjJkkF0riReRddZw+UOlzUW8v8IOa3p8oKjgC8laQeRwrH0uscIrSMECbdvLI6jQF2KoxwOhP1Jc9Kj1nWUI0lktQAnKgQ/A3CG4oD7Y8FLBZAkA3abAPwdhrzA8eYFCa+P0OxHyYAeEGoF/v95R26WLpKAliCPexw9xIAkwF8HsCpAC5jELHLGJRGcALgUmKgmM2JVSW/72YG6DRGPZytepnEUSU8QH5uDbodZANwYxEwqOGAI03MSoK/KlzIfKWBPxKQ8+dKFPkpXWMMY6j3AtgkVAX3Hp5HvWagyAfIiR1wgSeVK1GI/xiAieJ6nyLXMHWkltkg05eLXIB8qQErtu9WmCB1iP7tAA6j7+0Lk+Cx0iHq5f/riWmiYvXnK3t5HwBXOtLCtHMXgDVkzO1wiHmXLZECOKXQ/cgVXL0f6fHXW4zz1xTJEbP3LytEf34qgADgbACbxUptNLkjVr4nU8y+WhA/H/re6t3LHXl66TCcvTDVxYXYz4m+74HJy0+VIpCU1f3VmiR6AtMv4CdkIBbEz4m+nwEDwWqr3mUAJk3m/J1f5Avki/izATytVP9It20lgM8B+HcHFsDDwC6E0F57oXAxi6ONvX0+xKz8qgfV6wcwT1znW0oQ6GXUA0SuaqLHGDJY+Ps5MfZcOr3KEjSOYd+3UO0hwlZIGLOMhzuSmMJAwRMzGMB6JBV2z5F4v2CeJiN8PWSEpR5XzRJ/NeEBQL2JA2BKvu9XsoX6YcK97xG2g/18C0w6mMYA5S7Or2h7qfe0AGPPrtj/ZKt9LLvWJ2GCNqkjCpjCxPnHAtiTLH5pK2gMUGIEnQDgXJgWMvcC+C2dq2GaSVzI7qlgggYMvusYXOsz9r7pWI1zUI8JaAGdBKY5hPUsXnUwQC9MPgFngIpgsKcDvIqHAbyzYILGfP17BASbOsS3rM6dBpO9Ww1s93Ia6o0hdjoY4GVmA5QZ8fYHcKuCOcjT/tYGUkdFACmQAZY5jD5LnOeYscdX43MZxmLCJMrP2HdnCf3Ps34nCOlyIerQc62BoFMK4McFphDOALd5GOB9zEjcnzGLDxLmruMtMMmhFZb8waWLJeozGateix1o+QivAJhUuJVhNsDFDsLZif00Y5Rb2SqLFXvBErYPpgBE/tYHFGarAjgOJg7Ql6FWaoHw8iGFLRDmLu0Dk3bNV6ad5PvY+DXQw7j8vUXMTYwEyDTPwWz2N7cGrHr7/mswEcPveXISDisYIJwJlikATT8ZboDJA/StwN8CeL9S8mb//icPwqillMnfvI31IPpuBzBA1Alq4CIHYezfl9BDrFLEdz9MSnfZYcXL37nJwwBJxqrfAmAuXecUmKYRGu7QbhXgqnIu55EZQtTAChrzHUV8DzIp0ZOxClY1oMf5mCUAphCQ9B8eVRHnwAgsd1pvgyw1sAumMeQRjhVnmeFLQte7JmAy3OnfvlX/KoCPMbewLyM3wbqBC9rgBvKYyjSY4NfjANbReS15RLnrfxyiBj5DN/6KUrq11CNu7XuHenz5xFFncAvMRhMzWR9Bn4HIgaAZIwgESXHPYXF5fimPqW4hauB/aczNgjHsuG2EvkEp/QKt5BDxvwUG8+8B8HU2PsQtXDPCULCExZeLxROLYthNpMZyh1JmqYFBmJKucx2Tbv8+WxG7lgF+5DEAB8mY/AWJz+MAPNGAWzhAHsYeI0R8LsanA7i6AUbNZcKrjaVf5JhwS7B5xL2Dgjns5/+mPJjWXs6+/pImcRIR/ycBaCO/v2XM5Rtu4meJ+6wimYSkwJS8SYFGQKHV4n3ey08j/p+iXhAir3sjgANg0sp6M4w8/v7LAP7OwcQjJe7vVuDvkDK5r+TZFljqUQNTSIQlDncwgUn4KLHJ4mlmzbh/Wt3AImIqjEAreS7up8K0wM+KgsaeJFjrpuZOCoSogQsAvMvxkPbzvxeTZjOGrg0AgEKMvEdhOpGMRAaxFPcXBIj7REjGfofbm1tbIEQNLKeJeUn5/HYAezNjzB7PZKyMJNDIGz9CqBon/HsDxL3LGzmG7Cbp3sbMFnhrXkGhpR5QaCrqKeCuydgBU9X7Gxr344zK4YSdsWMXsaUwaepSUg3HKcGcqwPFfcKAq8uwewf0AU86/EV5jA1EGaDQ+QDO8vQHGKoysRcA/C27tzEjOA+hSS/8/Z/T4gDZQjczLyZRUuXm580StDd6J+kv2bodAD4K0wtIw73lRGnP+AZMCHgy6we0jbyJOwjz72Mrc5DAoXHDGLGbRTGPk7B7v+Oyo9NZmc5HyPZ5gNDOhQA+HGCYJnnsFGobO2+ESfF+P2v2ZCfhBDLunoep5ZONn7IsWzuptxO+P5n1GuxHvQ0d2G5hMUme+TR+uKznaYzAJQdtEmYcvgbTveQ6Qh9vJqAsEteIlF7JFXJ70UkhYish7mYJHIlS419lcKjLRXqBgCVtPyFO5D0D9yIeijNE3C8kZpmJeog7CwySeY23waTC5zZEvC/q/XuSBip9Q963TDUf9TCya1Xze9klegwM1+ljiPsAHEmq4mdNEn4ZTCs9dELF0IMZcXcJBG2GSdaYS27bL1DvLez6fi8ZTlFGJHFvsqZTpXBlOE7+zM+TujqCoOqkCcIvFYTPbdo6F7ubMvx3uaKXwL3bx3pH6pb9ztc9thBngF3D4Glknf0w9Q+nUjCrOgQr/k3ZQlFOt4Y9ASYO79rxI2WvMYnwhDDytXQNazzugsk8XsCsZ36NLWREveroQVyi6+wN4FlyBVNhaL02DMy/nZ7jHtLzFzIQKlYQyFhIsmUwSSFLBWQdd0q6+D9mIF8yE2euIxoXserhDQFSoBwoAew1niYJM5a9NnuOYy7fcQRibW0g0qeJ+lKnFajYSb9LefBBmEhcL0xd/4KMJAxZf+AqQOljtkDUAAM8S9b4VPbazDmNztlk3A0E7HIuib+UtbXrSMJL/d/niPsnZATZhMu3wGQCTfOoM0vU8YG2QLkBGyAh3KDV8w3UaxZDCc9to892OuFlEOQEzzauZ9GYMwE8SQTcSWJTi9CFSIFehxRohxFYC/yNhBWpTIKeFItOLBe7Qsn92wGTfXOtYxWso1XuitRxKdCILTDSbmAjDGGZ+K5uqkDSooExCwdfIpIeOQF/6HHpmrEFXEBQjQFCrZ6tSAL7zF/olqaWWfo/JXBnnqjH51Bp4lEFzUgBXlPQN4L+fyog21s929vP7hYJEKL/P4B6Iyhtc4d1MFHEsidF3CUF4gwpcAZMosUfyZjc0OK5nmXsuLKUf416Y4u7PHmQPd1Shq75/wnLyjkA9aJMF0ZgJ+hqpVSsVVwAYrexZs4x9DrVUalUY6seLEOqX5GI13dTT+Ms/b+GuThjHfsHuvIHXZPTjBQYyvw/+5wne3IbP82e9TxPLcRfd0snkhD9v0Bk5swh/zlWUr12ATjaMUHNegTy+82eNvL4z4qkqzJgCwBu8HhEf9It4j9E/5/LVrBdxYsUVcBz9/d1GEnlJnGBoWyP97C415jtUFZizP6sUg95Xze5f1n+/wBM7x6e8l0B8JAHJ7fv/Y5We0m0g/VJgVpApLAV8X+AA1iyz3wVG3+4J6HzitGm/yMRypwdgMzZyfqVo3qnHVKgwjarctkffIs6oN4615UVdWQ36P8Ss6pD9H+lgXYvkgm+LYiQFSMYDikgdz+tOlrW8lz9ZcqC2IB6cmpH6f9I5Nzx47hA/W+lgOYF+DaBkg0nG4kRtKpvI9Zy9kVFr9/Jxr8N9TxEuSBu7LTVX1JW0H7k5lxDoIar1z/X/3w/gbiBHEDNMwiVAvOHQAqUPYxuCctb253lcf/mdoL+jxwNmyKYvLZvwKR97wwIda5xtHvTxH8V9S4iiccz2M8ROvXhAs8MAeLmu3fLeO9m4xcoaqJf8WxyudMXWMHDFURMbc8frdHzggDxz3v+HoJ6Y+c40DPgUsB1XemFtKICVil6fZ1QTU8oauKBvOp+GY8eC1OhcqejE3g1I9rFe/2eJwAgl/i3zLKYjdmuRN2qrDGEVE8Xe6zzU1vQu77CV3s/17LxhyrPyLumV/K64qfAhGyfcEx8nNGZS3bkGEC9Dr/HI0ItwT7EJvtMT5cPG0n8mpAuE/HmymP7O5e2MPH2O+cHtLiBCHlLRjw+TwYgv4k9yW993rFDp6/8uqbs3/cbAB8U4I9P/PeySh/LLF/0IIUxuV0TM7qXV0XX8UoL8/RzRa+/DtNZzB53KNXRLwVsbTNiVj2HKy/Gm6tZ4waI/ipMyPMrAI5lbpfswOET/zeJybaEul5x8Wwx6HRRHXSNIFKNtaJtZuIjphLXK3p9uZCgGh7yy3avfinuz0C9h6+vqVLiWIWbYSp3zmNBDe23KgHi/xxhh/DNnO5VVtRO0stcanxKWaV9TMJETej/v/TAul9m40/34CHz2qn/ufU7G6a6Nit9KXEQ6y7yY6crWEFZJGNU2E5dIeLflda9F0mZxIE1HCoY4Egl+9f2IGrUE7DE+qri/iXkGtvjXxQGHARwYLvcv4jtuXM1M6Jij6ivitV+FZtsrhtdBHeJuPcoK8gl/l31b08q0bdTBKGmOxC4VgAYS6x7Fffvj2KzqbXKfT7Srno+a4DNgqnbb2TjhI3k/+/lyFsvZRC8BOBggm9vIPxba3h0TkZatCv8WhU59bwkfK0y9nsNMkDEJNB2Ra8vYuMPUvIDUgDfHy7xXwlggBpM2xKbHz9GIRqvt7uKfNutjt9JWYeKhK3eA0lXHgvgKJoQrfdfSt/pYy1SY+X+beWwrP2D6P9ja+f+AOAvWF1ixPzz3bprBFj/NYKfJ4q6vohFQO1xIj1vjT03r/Vz3f+wM4A99mAFl5oYSumGt8O0OgFM1ComTpaTcxBMF6zjSfe6CB6z65YcbVKWwRRHlDMYYL2YwBLrwmUJX6HXR1HfRp4T62CyFaqsHY3vsJ+f5ihqLRMotIKNP0WZzz6YBpmNMN+QM8g1geFXK5YvdxD8nQA+AeCnMK3MaxnQcAhSeE4GI9v3P+sxrmYKtPGDitcwgPreBKGGWA/bXEK6fyvZuEmObuhV1v5u2Iy/Sotbj7h69KQwrVeXkdgMXeGRR7UkbOVERKxNMO1iIk/Zs111a4WhGBEhesj1epp950kmhu3zJWSsHUTSJAosc38XTAZQygiYCrEO8gRmKOXwS4U0a4sE+FED5dpZEiJrhccKNMyNy1tIfGetjIgVkvYq1v1KcZ1xDNGMm4SE7eeXemBdvieitiNKjZiobdG/LAZYlxGTDxXpPoK/QGLwizB7CU5qsMFFiUGsiQMVrJExyD2J5S1CwvY3/0dx/zai3vQhYk2wY8fW9m3d70djgBrb1GldYHZOKME3EsG/QKpjkiJiSw0+w2c8DSgXiU2ppc0TNwAJ8+bOWxW37iY2fn9H8akd96/tjv5pDFBlUaxPZmADcYMrfKInq6iZ1cDDsTsdaKDdfexANtYHCU/JYIKyZ6NK+/cnsHsjaC0MfUa78f8sBjiLgI7EAwfL916EqX27nPz9SUNMcB9RligQNV+VFdLP2rZwh3sMVt+cubwJUEzENW4r/M0vcqECPs/Cl7Gn7+7tI0xwjQFO82QLJai3aR0ntprnz/5Rpi4iT/Lro4r79xD73niHwZmr2v8sI9C3W0WVfOqJbSC4pgpsf91EEblPwWQyfZgRxpW9U1ECZfbvQzxzdSUbf5RnO7xc1P6HuIHaalotVmClzRatlQJnNxDP0NrMPwbTmn2sILwEnlxMdhK7p695kkRnd4IESJT6dlu9mrfeNRZwWulpOV9rgDlWA3iHI8t4iYImvoJ6h3LAbImX69r/RqBgDtEuzmnqcpkhb3EGPpHVocsy+jOE4pUY6LRZAZ3+i93L21lqfNtq/xvxpfnqkGfMINpfk2tYGo7oVYuHDSL9DqaTpgavup4vdZS1VQnqXciuMwcmryAR0UsZ/TuGjMCYjXNFCXOxYj4WsCpeQn0f3zzXrVk1sKcj+aOZdu72vaPpuj9osfZ/O0aw9r+iJHtCRLQWE7eeJAJAKUxQ5iGYwEwvS65Ikd+qJRtYqjo+HyApVhM1fe9jfjlEwMnWMN6Peli3JAJmT5BuB0nKE8S4hGU+b6YxwxX8SeS1O77LRJNHn2OjxRc9jHOlo8bBSoA7CCUcVLqchtb+f24kU/34ap1JfqmWe5aVDJLkeNVDSXJx7QE0kdy4QaG/d5H7t4kMuFSkrc8E8C2SmKnoOBph9/DvySwkXRHqdh9mQw21BLDMtgomBB5ZTjgMpkAhLc4hPUNr/0f63EY0j2zSw5kE0Q50S9uRFhNiak18J2V6HEKvP8j2JJhOnoLmhcXDLElrhEWcCWBtRRhGlVHGAK1mSmVVRruyf45mu5WVM0ruhutIuQ3gMwSTdqQhoTNb3WnETGB2/7DHqUqG73DNtcu7ixpJCy8V9G1pH8SnyAW0832iIv7bMteVjJtfBeD/cu7X5wFTmExgmWsOV7C5ngWTWJoK/79EdsLaIZxre513k3eX+BhsvvBFB0U5VHH4j5M92T/Hs3EXK0miMeq1f0N9zBU03W3fxEoGBHwuDCxZKmwBVUUmMM0ppB1lU8NPRr2w9OMOlLBE3tdHCGsY6ns7NsS4nD9Ead/Fmf8zSAIUXkDrlrYLUwgdN1L39qaizcILaB+mMJL4Syp/1OLV1YJeXX9UWdMNyFatxTl6zmN5Fw37xkmjODQ8Wo4UBplcwWldEH10glj4fxeNTcA9RXdPAAAAAElFTkSuQmCC);--m-pose:url(data:image/png;base64,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)}
+.mk-lift{--mk:var(--m-lift)}.mk-tread{--mk:var(--m-tread)}.mk-pose{--mk:var(--m-pose)}
+.goal .ico.mki{width:28px;height:28px;background:var(--muted)}.goal.on .ico.mki{background:var(--accent)}.goal .ico.mki{margin:-2px 0}
+.goal-tags .pill .ico.mki,.goal-mini .ico.mki{display:inline-block;background:currentColor}
+.travel-pills{gap:8px}.travel-pills .chip{padding:10px 16px;font-size:14px;border-radius:999px;cursor:pointer;flex:0 0 auto}
+.nt-prog{display:flex;align-items:center;gap:10px;margin-top:8px;width:100%}.nt-prog .nt-bar{flex:1;margin-top:0}.nt-prog>b{font-size:12.5px;font-weight:800;color:var(--accent);min-width:3ch;text-align:right}
+.toast{width:max-content;max-width:min(560px,calc(100vw - 32px));box-sizing:border-box;padding:12px 20px;line-height:1.35;border-radius:18px}
+body.has-livepill .toast{bottom:calc(150px + env(safe-area-inset-bottom,0px))}
+@media (min-width:900px){body.has-livepill .toast{bottom:84px}}
+.arena{isolation:isolate;z-index:1}.arena .dd-pop{z-index:20}
+.biz-cta.cc.open .cc-body{display:flex;flex-direction:column;gap:12px}
+.biz-cta .grid2 .btn{white-space:nowrap;padding-left:12px;padding-right:12px;gap:8px;justify-content:center}
+.key-link{display:inline-flex!important;align-items:center;gap:6px;align-self:flex-start;line-height:1}.key-link .ico{width:16px;height:16px;flex:none;display:block}.key-link span{display:block;line-height:16px}
+.watch-card.cc.open .cc-body{display:flex;flex-direction:column;gap:14px}.watch-card .cc-body>*{margin:0!important}
+.watch-card .grid2{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px}.watch-card .grid2 .btn{white-space:nowrap;padding-left:10px;padding-right:10px;justify-content:center}
+.watch-card .codebox{padding:12px}
+.devs-card.cc.open .cc-body{display:flex;flex-direction:column;gap:14px}.devs-card .cc-body>.btn{align-self:center;justify-content:center;margin-top:2px}
+input.inp[type=date],input.inp[type=time],input.inp[type=datetime-local],input.inp[type=month]{-webkit-appearance:none;appearance:none;display:block;width:100%;min-width:0;max-width:100%;box-sizing:border-box;line-height:1.25;min-height:calc(1.25em + 24px);text-align:left}
+input.inp::-webkit-date-and-time-value{text-align:left;margin:0;min-height:1.25em}input.inp::-webkit-datetime-edit{padding:0}input.inp::-webkit-calendar-picker-indicator{margin:0 0 0 4px;padding:0}
+.inp{box-sizing:border-box}.form>.field,.wt-form>.field,.trow>.field{min-width:0}
+.wt-form{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;align-items:end}.wt-form .inp{height:46px;min-height:46px;padding-top:0;padding-bottom:0}.wt-form .wt-log{grid-column:1/-1}
+.sched-times{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;grid-column:1/-1}.sched-times .inp{padding-left:10px;padding-right:8px}
+.ph-form,.sheet .form{min-width:0}.sheet .form .inp{min-width:0}
+.sheet{overflow-x:hidden}.sheet .field{min-width:0}
+.onb-pfp{position:relative;display:grid;place-items:center;width:92px;height:92px;margin:0 auto 4px;border-radius:50%;border:0;padding:0;background:var(--surface-2);cursor:pointer;box-shadow:0 0 0 3px var(--surface),0 0 0 5px color-mix(in srgb,var(--accent) 45%,transparent)}
+.onb-pfp .avatar.xl{width:92px;height:92px;border-radius:50%;background-size:cover;background-position:center}.onb-pfp-empty{display:grid;place-items:center;color:var(--muted)}.onb-pfp-empty .ico{width:40px;height:40px}.onb-pfp .pfp-cam{right:0;bottom:0}
+.onb-pfp-l{display:block;text-align:center;font-size:12.5px;margin-bottom:6px}
+.code-row{display:flex;gap:8px}.code-row .inp{flex:1}.code-inp{font-family:var(--f-mono);font-size:22px!important;letter-spacing:.18em;text-align:center;text-transform:uppercase;font-weight:700}
+.code-big{font-family:var(--f-mono);font-size:34px;font-weight:800;letter-spacing:.14em;text-align:center;color:var(--fg);user-select:all;margin-top:4px}.code-exp{text-align:center;font-size:12.5px;margin-top:-6px}
+.acct-card.cc.open .cc-body{display:flex;flex-direction:column;gap:12px}.acct-card .grid2 .btn{justify-content:center;text-align:center}
+.acct-card .grid2{grid-template-columns:minmax(0,1fr)!important}
+.wk-ctrl{justify-content:center;gap:22px}
+.live-pill{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(104px + env(safe-area-inset-bottom,0px));z-index:44;display:inline-flex;align-items:center;gap:8px;height:42px;padding:0 16px 0 12px;border-radius:999px;border:0;background:#141018;color:#fff;font:inherit;font-weight:700;font-size:15px;box-shadow:0 10px 26px -8px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.08) inset;cursor:pointer;animation:lpIn .25s ease-out;white-space:nowrap}
+.live-pill[hidden]{display:none!important}.live-pill .ico{width:17px;height:17px;color:var(--accent);flex:none}.live-pill .lp-sub{font-size:12.5px;font-weight:600;opacity:.7;padding-left:8px;border-left:1px solid rgba(255,255,255,.2)}
+.lp-dot{width:8px;height:8px;border-radius:50%;background:#4ADE80;box-shadow:0 0 0 0 rgba(74,222,128,.6);animation:lpPulse 1.6s infinite;flex:none}.lp-dot.paused{background:#E9B949;animation:none}
+@keyframes lpIn{from{opacity:0;transform:translate(-50%,10px)}}@keyframes lpPulse{70%{box-shadow:0 0 0 7px rgba(74,222,128,0)}100%{box-shadow:0 0 0 0 rgba(74,222,128,0)}}
+@media (min-width:900px){.live-pill{bottom:24px}}
+body:has(.sheet) .live-pill{display:none}body:has(.sheet) .toast{bottom:auto!important}
 </style>
 <div id="splash" aria-live="polite" aria-label="Loading JUNGLE PARK"><div class="sp-bg"></div><div class="sp-in">
  <span class="logo sp-logo"><i class="paw"></i></span><div class="sp-title">JUNGLE PARK</div>
@@ -2504,9 +2544,7 @@ select.inp.gym-sel:focus{outline:0;border-color:var(--accent)!important}
   <div class="im-lap" id="wkFlash"></div>
   <div class="im-ctrl wk-ctrl">
     <button class="cbtn" data-act="wkLock" aria-label="Lock controls"><svg class="ico" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></button>
-    <button class="cbtn" data-act="wkSkip" aria-label="Skip to next interval"><svg class="ico" viewBox="0 0 24 24"><path d="M5 5l9 7-9 7zM17 5v14"/></svg></button>
     <button class="cbtn big" data-act="wkPause" aria-label="Pause"><svg class="ico" viewBox="0 0 24 24"><path d="M9 5v14M15 5v14"/></svg></button>
-    <button class="cbtn" data-act="wkLog" aria-label="Log sets"><svg class="ico" viewBox="0 0 24 24"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg></button>
     <button class="cbtn" data-act="wkFinish" aria-label="Finish workout"><svg class="ico" viewBox="0 0 24 24" style="fill:currentColor"><rect x="6" y="6" width="12" height="12" rx="2"/></svg></button>
   </div>
 </div>
@@ -2764,7 +2802,7 @@ async function initCloud(){
   try{NET.dl=await window.claude.use('downloads')}catch(e){}
   try{NET.user=await window.claude.use('user')}catch(e){}
   NET.ready=true;updateStatus();
-  if(NET.db){touchDevice();startSync();subscribeCoachPlans();watchMyApps();refreshFriends();subscribeBuddies();setTimeout(loadMyRegs,1500);setTimeout(()=>{shareIntake();loadCoachNotes();watchCoachWorkouts();watchMyRequests();watchStories();setTimeout(pruneStories,8000);setTimeout(watchMyInvoices,1500);if(S.coachMode)watchCoachInv();watchCoachPrograms();if(S.coachMode)watchPro();watchMyPhotos();watchLib();if(S.coachMode)watchMySubs();setTimeout(autoReports,4000);myCoachIds().forEach(cid=>{ftWatch(cid);watchThread(cid,S.profile.id)});if(S.coachMode)ftWatch(coachId())},4000);if(location.hash)handleHash()}
+  if(NET.db){touchDevice();startSync();watchFriendInbox();friendCode();subscribeCoachPlans();watchMyApps();refreshFriends();subscribeBuddies();setTimeout(loadMyRegs,1500);setTimeout(()=>{shareIntake();loadCoachNotes();watchCoachWorkouts();watchMyRequests();watchStories();setTimeout(pruneStories,8000);setTimeout(watchMyInvoices,1500);if(S.coachMode)watchCoachInv();watchCoachPrograms();if(S.coachMode)watchPro();watchMyPhotos();watchLib();if(S.coachMode)watchMySubs();setTimeout(autoReports,4000);myCoachIds().forEach(cid=>{ftWatch(cid);watchThread(cid,S.profile.id)});if(S.coachMode)ftWatch(coachId())},4000);if(location.hash)handleHash()}
 }
 // --- pack/merge ---
 const CORE_KEYS=['onboarded','profile','settings','gyms','sessions','friends','buddies','plan','schedule','schedIn','deleted','devices','revoked','loginIds','myGyms','coachMode','myCoaches','coachId','keysUsed','prs','weights','health','courseRegs','intake','workouts','repSent','coachReqs','ts'];
@@ -2792,7 +2830,7 @@ function touchDevice(force){S.devices=S.devices||{};const d=S.devices[DEV_ID];co
 function checkRevoked(){if(S.revoked&&S.revoked[DEV_ID]&&(!S.devices[DEV_ID]||S.devices[DEV_ID].add<S.revoked[DEV_ID])){unlinkSelf(true);return true}return false}
 function unlinkSelf(remote){const keep=S.profile.id;S.profile=Object.assign({},S.profile,{id:rid(12)});S.devices={};S.revoked={};S.friends=S.friends.filter(f=>f.id!==keep);
   S.sync={pushedCore:'',pushedPub:'',runs:{}};saveNow();try{for(const k in NET.subs)NET.subs[k]&&NET.subs[k]()}catch(e){}NET.subs={};
-  if(NET.db){touchDevice(true);startSync();subscribeBuddies();scheduleSync()}rerender();toast(remote?'This device was removed from your linked devices. Your data here is kept as a separate profile.':'This device is now unlinked')}
+  if(NET.db){touchDevice(true);startSync();watchFriendInbox();subscribeBuddies();scheduleSync()}rerender();toast(remote?'This device was removed from your linked devices. Your data here is kept as a separate profile.':'This device is now unlinked')}
 let syncT=0,syncing=false;
 function scheduleSync(){clearTimeout(syncT);syncT=setTimeout(pushNow,700)}
 function slimRun(r){const o=Object.assign({},r);if(o.pts&&o.pts.length>1500){const step=Math.ceil(o.pts.length/1500);o.pts=o.pts.filter((p,i)=>i%step===0||i===o.pts.length-1)}return o}
@@ -2828,14 +2866,14 @@ function startSync(){
 async function refreshFriends(){
   if(!online()||!NET.db)return;
   // all at once instead of one after another; one slow friend no longer holds up the rest
-  await Promise.all(S.friends.filter(f=>f.mode==='live').map(async f=>{try{const s=await NET.db.doc('pub/'+f.id).get();if(s.exists){f.snap=s.data();f.name=f.snap.name||f.name;f.u=Date.now()}}catch(e){}}));
+  await Promise.all(S.friends.filter(f=>f.mode==='live'&&!NET.pubs[f.id]).map(async f=>{try{const s=await NET.db.doc('pub/'+f.id).get();if(s.exists){f.snap=s.data();f.name=f.snap.name||f.name;f.u=Date.now()}}catch(e){}}));
   saveNow();if(cur==='crew'||cur==='home')rerenderSoft();
 }
 function subscribeBuddies(){
   if(!NET.db)return;
   const want=new Set([...S.buddies]);
   // every live friend gets a live leaderboard card (not just the 5 buddies), capped to keep it light
-  const pubWant=new Set([...S.buddies]); // live cards only for buddies; other friends are refreshed with one-off reads (the store allows 64 live subscriptions per page)
+  const pubWant=new Set([...S.buddies,...liveFriendIds()]); // live cards for buddies and the most active friends; the rest are refreshed with one-off reads (the store allows 64 live subscriptions per page)
   for(const id in NET.pubs){if(!pubWant.has(id)){NET.pubs[id]();delete NET.pubs[id]}}
   NET.lives=NET.lives||{};for(const id in NET.lives){if(!want.has(id)){NET.lives[id]();delete NET.lives[id]}}
   for(const id of want){if(!NET.lives[id])NET.lives[id]=NET.db.doc('live/'+id).onSnapshot(s=>{const f=S.friends.find(x=>x.id===id);if(!f)return;const d=s.exists?s.data():null;f.now=d&&Date.now()-(d.ts||0)<15*60e3?d:null;liveRefresh()},()=>{})}
@@ -2857,7 +2895,7 @@ async function pushLive(force){if(!canWrite()||!S.onboarded||!S.buddies.length&&
   if(!p){if(lastLive==='null')return;lastLive='null';try{await NET.db.doc('live/'+S.profile.id).set({ts:0})}catch(e){}return}
   if(!force&&key===lastLive)return;lastLive=key;try{await NET.db.doc('live/'+S.profile.id).set(Object.assign({ts:Date.now(),n:S.profile.name||''},p))}catch(e){}}
 setInterval(()=>pushLive(),10000);
-setInterval(()=>{if(document.visibilityState==='visible'&&NET.db&&(cur==='crew'||cur==='home'))refreshFriends()},90000);
+
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&NET.db){refreshFriends();scheduleSync();pushLive(true)}});
 function liveTag(f){const n=f.now;if(!n||!n.k)return '';const m=Math.floor((n.s||0)/60);
   return n.k==='run'?`<span class="pill live"><i></i>${n.st==='paused'?'Paused':'Running'} · ${(n.d/U()).toFixed(2)} ${uName()}</span>`:`<span class="pill live"><i></i>Training · ${m} min</span>`}
@@ -2899,7 +2937,7 @@ function showApp(tab){
 function go(h){if(location.hash==='#'+h)route();else location.hash=h}
 function route(){
   const h=decodeURIComponent(location.hash.slice(1));
-  if(/^(add|sync|s|v|g|i|c|hr)-/.test(h)){handleHash();return}
+  if(/^(add|sync|s|v|g|i|c|hr|j)-/.test(h)){handleHash();return}
   if(h==='welcome'||(!h&&!S.onboarded)){showLanding();return}
   showApp(h||'home');
 }
@@ -2911,6 +2949,7 @@ function handleHash(){
   const hr=h.match(/^hr-([a-z0-9]{6,12})$/);if(hr){showApp('home');hashHandled=h;openHrRelay(hr[1]);try{history.replaceState(null,'','#home')}catch(e){}return}
   const bz=h.match(/^(g|i|c)-([a-z0-9]{6,24})$/);if(bz){showApp(bz[1]==='c'?'jungle':'home');if(!NET.ready&&window.claude&&window.claude.use)return;hashHandled=h;({g:openGymLink,i:openInvite,c:openCoachLink})[bz[1]](bz[2]);try{history.replaceState(null,'','#home')}catch(e){}return}
   const sh=h.match(/^s-([a-z0-9]{6,20})$/);if(sh){showApp('home');if(!NET.ready&&window.claude&&window.claude.use)return;hashHandled=h;openShared(sh[1]);try{history.replaceState(null,'','#home')}catch(e){}return}
+  const jc=h.match(/^j-([A-Za-z0-9]{6})$/);if(jc){showApp('home');if(!NET.ready&&window.claude&&window.claude.use)return;hashHandled=h;try{history.replaceState(null,'','#home')}catch(e){}useCode(jc[1]);return}
   const m=h.match(/^(add|sync)-([a-z0-9]{6,20})$/);
   if(!m){showApp('home');return}
   showApp(m[1]==='add'?'crew':'me');
@@ -3026,18 +3065,18 @@ const TILES={c:new Map(),state:'unknown',waiting:new Set()};
 function mapOn(){return S.settings.mapBg!==false}
 function tile(z,x,y){const n=2**z;x=((x%n)+n)%n;if(y<0||y>=n)return null;const k=`${z}/${x}/${y}`;let t=TILES.c.get(k);if(t)return t;
   t={img:new Image(),ok:false};t.img.crossOrigin='anonymous';t.img.decoding='async';
-  t.img.onload=()=>{t.ok=true;TILES.state='ok';const ws=[...TILES.waiting];TILES.waiting.clear();ws.forEach(f=>f());clearTimeout(TILES.t);TILES.t=setTimeout(()=>TILES.onState&&TILES.onState(),120)};
-  t.img.onerror=()=>{t.bad=true;if(TILES.state!=='ok'){TILES.state='blocked';const ws=[...TILES.waiting];TILES.waiting.clear();ws.forEach(f=>f());TILES.onState&&TILES.onState()}};
+  t.img.onload=()=>{t.cv=darkTile(t.img);t.ok=true;TILES.state='ok';TILES.fails=0;const ws=[...TILES.waiting];TILES.waiting.clear();ws.forEach(f=>f());clearTimeout(TILES.t);TILES.t=setTimeout(()=>TILES.onState&&TILES.onState(),120)};
+  t.img.onerror=()=>{t.bad=true;TILES.fails=(TILES.fails||0)+1;if(TILES.state!=='ok'&&TILES.fails>=4){TILES.state='blocked';const ws=[...TILES.waiting];TILES.waiting.clear();ws.forEach(f=>f());TILES.onState&&TILES.onState()}};
   t.img.src=`https://tile.openstreetmap.org/${k}.png`;TILES.c.set(k,t);if(TILES.c.size>400){const first=TILES.c.keys().next().value;TILES.c.delete(first)}return t}
 function drawTiles(ctx,w,h,X0,Y0,sc,redraw){ // canvas px = (X - X0)*sc, (Y - Y0)*sc in mercator metres
   if(TILES.state==='blocked')return false;
   const W=2*Math.PI*MR;const zf=Math.log2(sc*W/256);const z=Math.max(2,Math.min(19,Math.round(zf)));const tm=W/2**z;// metres per tile
   const x0=Math.floor((X0+W/2)/tm),x1=Math.floor((X0+w/sc+W/2)/tm),y0=Math.floor((Y0+W/2)/tm),y1=Math.floor((Y0+h/sc+W/2)/tm);
   if((x1-x0+1)*(y1-y0+1)>64)return false;
-  const dark=true;ctx.save();if('filter'in ctx)ctx.filter='grayscale(1) invert(1) brightness(.62) contrast(1.25)';let any=false,pending=false;
-  for(let tx=x0;tx<=x1;tx++)for(let ty=y0;ty<=y1;ty++){const t=tile(z,tx,ty);if(!t)continue;if(t.ok){const px=(tx*tm-W/2-X0)*sc,py=(ty*tm-W/2-Y0)*sc;ctx.drawImage(t.img,px,py,tm*sc+.5,tm*sc+.5);any=true}else if(!t.bad)pending=true}
+  ctx.save();let any=false,pending=false,raw=false;
+  for(let tx=x0;tx<=x1;tx++)for(let ty=y0;ty<=y1;ty++){const t=tile(z,tx,ty);if(!t)continue;if(t.ok){const px=(tx*tm-W/2-X0)*sc,py=(ty*tm-W/2-Y0)*sc;if(t.cv)ctx.drawImage(t.cv,px,py,tm*sc+.5,tm*sc+.5);else{if('filter'in ctx)ctx.filter='grayscale(1) invert(1) brightness(.62) contrast(1.25)';ctx.drawImage(t.img,px,py,tm*sc+.5,tm*sc+.5);ctx.filter='none';raw=true}any=true}else if(!t.bad)pending=true}
   ctx.restore();
-  if(any&&!('filter'in ctx)){ctx.save();ctx.globalCompositeOperation='multiply';ctx.fillStyle='rgba(40,30,26,.85)';ctx.fillRect(0,0,w,h);ctx.restore()}
+  if(any&&raw&&!('filter'in ctx)){ctx.save();ctx.globalCompositeOperation='multiply';ctx.fillStyle='rgba(40,30,26,.85)';ctx.fillRect(0,0,w,h);ctx.restore()}
   if(any){ctx.save();ctx.fillStyle='rgba(11,8,7,.18)';ctx.fillRect(0,0,w,h);ctx.restore()}
   if(pending&&redraw)TILES.waiting.add(redraw);
   return any}
@@ -3049,7 +3088,7 @@ function drawRoute(c,pts,o={}){
   let P=null,sc,X0,Y0;
   if(pts&&pts.length){const xy=project(pts);const xs=xy.map(p=>p[0]),ys=xy.map(p=>p[1]);
     const mnx=Math.min(...xs),mxx=Math.max(...xs),mny=Math.min(...ys),mxy=Math.max(...ys);
-    const k=1/Math.cos(pts[0][0]*Math.PI/180);const minSpan=60*k; // never zoom closer than ~60 m across
+    const k=1/Math.cos(pts[0][0]*Math.PI/180);const minSpan=(pts.length<3?(o.minSpan||450):60)*k; // never zoom closer than ~60 m across (wider around a single "you are here" point)
     sc=Math.min(aw/Math.max(mxx-mnx,minSpan),ah/Math.max(mxy-mny,minSpan));
     const ox=ax+(aw-(mxx-mnx)*sc)/2,oy=ay+(ah-(mxy-mny)*sc)/2;X0=mnx-ox/sc;Y0=mny-oy/sc;
     P=xy.map(p=>[(p[0]-X0)*sc,(p[1]-Y0)*sc])}
@@ -3089,23 +3128,29 @@ function runName(r){return (r.name&&String(r.name).trim())||autoRunName(r)}
 // ================= RUN ENGINE =================
 const R={state:'idle',mode:'gps',pts:[],raw:0,dist:0,elev:0,altRef:null,start:0,active:0,resumeAt:0,watch:null,splits:[],kf:null,lastFix:0,acc:null,tick:null,wake:null,lock:false,lastSplit:0};
 function runActiveSec(){return (R.active+(R.state==='running'?Date.now()-R.resumeAt:0))/1000}
-function kalman(lat,lng,acc,t){ // simple 2D Kalman on lat/lng in meters variance
-  const Q=3; acc=Math.max(acc||10,3);
+function kalman(lat,lng,acc,t,spd){ // simple 2D Kalman on lat/lng in meters variance
+  const Q=spd!=null&&spd>=0?Math.max(1.5,Math.min(6,spd*1.2)):3; acc=Math.max(acc||10,3);
   if(!R.kf){R.kf={lat,lng,v:acc*acc,t};return [lat,lng]}
   const dt=(t-R.kf.t)/1000;if(dt>0)R.kf.v+=dt*Q*Q;
   const K=R.kf.v/(R.kf.v+acc*acc);R.kf.lat+=K*(lat-R.kf.lat);R.kf.lng+=K*(lng-R.kf.lng);R.kf.v=(1-K)*R.kf.v;R.kf.t=t;return [R.kf.lat,R.kf.lng]}
 function onFix(pos){
   const c=pos.coords,t=pos.timestamp||Date.now();R.acc=c.accuracy;R.lastFix=Date.now();updGps();
+  if(c.accuracy<=100){rememberPos(c.latitude,c.longitude);if(!R.pts.length&&R.state!=='idle')runTick()}
   if(R.state!=='running')return;
+  if(Date.now()-t>15000)return; // a stale cached fix, not where you are now
+  R.accH=(R.accH||[]).concat(c.accuracy).slice(-12);const med=R.accH.slice().sort((a,b)=>a-b)[Math.floor(R.accH.length/2)];
   const gap=R.pts.length?(t-R.pts[R.pts.length-1][2])/1000:0;
+  if(!R.pts.length&&c.accuracy>(Date.now()-R.start>25000?45:20))return; // wait for the GPS to settle before the first point (the first fixes jump around)
   if(c.accuracy>(gap>20?70:40))return; // too noisy (looser right after a background gap, when the first fixes are coarse)
+  if(gap<=20&&c.accuracy>15&&c.accuracy>med*2.2)return; // much worse than the fixes around it: a reflection off buildings
   if(gap>20)R.kf=null; // don't let the filter drag the new fix back towards where we were minutes ago
-  const [la,ln]=kalman(c.latitude,c.longitude,c.accuracy,t);
+  const [la,ln]=kalman(c.latitude,c.longitude,c.accuracy,t,c.speed);
   const p=[+la.toFixed(6),+ln.toFixed(6),t,c.altitude!=null?Math.round(c.altitude*10)/10:null];
   const last=R.pts[R.pts.length-1];
   if(!last){R.pts.push(p);return}
   const d=hav(last,p),dt=(t-last[2])/1000;if(dt<=0)return;
   const v=d/dt;if(v>11)return; // spike: faster than a sprinter
+  if(c.speed!=null&&c.speed>=0&&dt<10&&v>Math.max(4,c.speed*2.5)+2)return; // the jump disagrees with the speed the phone measured
   if(d<Math.max(2.5,c.accuracy*.2)){R.lastGood=t;return} // jitter
   if(S.settings.autoPause&&v<.45&&dt>8&&dt<60){R.active-=Math.min(dt*1000,Date.now()-R.resumeAt);}
   // coming back from a gap (phone locked, app in background, tunnel): swap the pace estimate for the real path.
@@ -3164,6 +3209,7 @@ function stopKeepAlive(){if(KA){try{KA.pause()}catch(e){}KA=null}}
 setInterval(()=>{if(R.state!=='idle')saveLive()},5000);
 function startRun(mode){
   if(R.state!=='idle'){openImmersive();return}
+  if(mode!=='demo'&&busyWith('run'))return;
   Object.assign(R,{state:'running',mode:mode||'gps',hr:[],pts:[],gapEst:0,gaps:0,dist:0,elev:0,altRef:null,start:Date.now(),active:0,resumeAt:Date.now(),splits:[],kf:null,lock:false,estimated:false,estSrc:null,lastTick:Date.now(),lastFix:Date.now()});
   MOT.steps=0;MOT.pending=0;motionStart();
   if(R.mode==='gps'){
@@ -3172,7 +3218,7 @@ function startRun(mode){
   }
   clearInterval(R.tick);R.tick=setInterval(runTick,1000);wakeLock(true);startKeepAlive();updGps();openImmersive();runTick();saveLive();setTimeout(()=>pushLive(true),500);
 }
-ACT.startRun=()=>{if(R.state!=='idle'){openImmersive();return}startRunSheet()};
+ACT.startRun=()=>{if(R.state!=='idle'){openImmersive();return}if(busyWith('run'))return;startRunSheet()};
 function startRunSheet(){
   openSheet('Start a run',`
   <p class="muted">Distance is tracked automatically. Outdoors it uses GPS; indoors it counts your steps. You can adjust it after the run.</p>
@@ -3193,7 +3239,7 @@ function runTick(){
   set('imTime',fmtDurLong(sec));set('imDist',fmtDist(R.dist));set('imCal',cal);set('imPace',fmtPace(pace));set('imDu',uName());set('imPu','/'+uName());
   set('rhTime',fmtDurLong(sec));set('rhDist',fmtDist(R.dist));set('rhCal',cal);set('rhPace',fmtPace(pace));
   set('imClock',new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}));
-  if(!$('#immersive').hidden){const im=$('#immersive');drawRoute($('#imCanvas'),R.pts,{live:true,area:areaBetween(im,$('.im-stats',im),$('.im-ctrl',im),.1),lw:5})}
+  if(!$('#immersive').hidden){const im=$('#immersive');drawRoute($('#imCanvas'),R.pts.length?R.pts:(R.here?[R.here]:[]),{live:true,area:areaBetween(im,$('.im-stats',im),$('.im-ctrl',im),.1),lw:5})}
   if($('#rhMap'))drawHero();
 }
 ACT.pauseRun=()=>{if(R.lock)return;
@@ -3331,15 +3377,15 @@ function drawOverlay(c,run,layout,prog,live){
   ctx.font=`900 ${34*s}px "Big Shoulders Display", Impact, sans-serif`;ctx.globalAlpha=.9;ctx.fillText('JUNGLE PARK',left,y+400*s);ctx.save();ctx.font=`700 ${44*s}px "Plus Jakarta Sans", Figtree, system-ui, sans-serif`;ctx.globalAlpha=1;ctx.fillText(runName(run),left,y-56*s);ctx.restore();
   ctx.font=`500 ${26*s}px Figtree, system-ui, sans-serif`;ctx.globalAlpha=.7;ctx.fillText(new Date(run.start).toLocaleDateString([], {day:'numeric',month:'short',year:'numeric'}),left+250*s,y+400*s);ctx.restore()}
 
-function drawHero(){const c=$('#rhMap');if(!c)return;const hero=c.parentElement;const live=R.state!=='idle';const last=S.runs.find(r=>trailOf(r));
-  drawRoute(c,live?R.pts:(last?last.pts:[]),{live,area:areaBetween(hero,$('.rh-stats',hero),$('.rh-ctrl',hero),.1)});
+function drawHero(){const c=$('#rhMap');if(!c)return;const hero=c.parentElement;const live=R.state!=='idle';const last=S.runs.find(r=>trailOf(r));if(!R.here){const lp=lastPos();if(lp)R.here=lp.p}
+  const here=R.here?[R.here]:[];drawRoute(c,live?(R.pts.length?R.pts:here):(last?last.pts:here),{live,area:areaBetween(hero,$('.rh-stats',hero),$('.rh-ctrl',hero),.1)});
   const a=$('#rhAttr');if(a){a.hidden=c.dataset.map!=='on';a.textContent='© OpenStreetMap contributors'}
   const b=$('.rh-mapbtn');if(b){b.classList.toggle('on',mapOn());b.setAttribute('aria-pressed',mapOn());b.title=!mapOn()?'Map background off':c.dataset.map==='blocked'?'Map tiles cannot load here':c.dataset.map==='on'?'Map background on':'Map shows once a run has GPS points'}}
 TILES.onState=()=>drawHero();
 ACT.toggleMap=()=>{S.settings.mapBg=!mapOn();save('settings');drawHero();if(R.state!=='idle')runTick();
   setTimeout(()=>{const c=$('#rhMap');toast(!mapOn()?'Map background off':c&&c.dataset.map==='blocked'?'Map tiles can’t load in this view. Open the installed app to see the map.':c&&c.dataset.map==='off'?'Map on. It appears when a run has GPS points.':'Map background on')},400)};
 // ================= PARK VIEW =================
-RENDER.park=()=>{
+RENDER.park=()=>{setTimeout(warmMap,50);
   const v=$('#v-park');const live=R.state!=='idle';
   const st=computeStats(S.runs,[],'week'),all=computeStats(S.runs,[],'all');
   const longest=S.runs.reduce((a,r)=>r.dist>a.dist?r:a,{dist:0});
@@ -3483,7 +3529,7 @@ function wireGraph(box,W){if(!box)return;const svg=$('svg',box),tip=$('.lg-tip',
 ACT.addGym=()=>openSheet('Add a gym',`<div class="form"><div class="field full"><label for="gName">Gym name</label><input class="inp" id="gName" placeholder="e.g. Iron Paradise"></div><div class="field full"><label for="gCity">City / area</label><input class="inp" id="gCity" value="${esc(S.profile.city||'')}"></div></div><button class="btn block" id="gSave">Save gym</button>`,el=>{
   $('#gSave',el).onclick=()=>{const n=$('#gName',el).value.trim();if(!n){toast('Give your gym a name');return}S.gyms.push({id:rid(8),name:n,city:$('#gCity',el).value.trim(),ts:Date.now(),u:Date.now()});save('gyms');closeSheet();rerender()}});
 ACT.delGym=b=>{if(b.dataset.sure!=='1'){b.dataset.sure='1';toast('Tap again to remove this gym');return}S.gyms=S.gyms.filter(g=>g.id!==b.dataset.id);S.deleted[b.dataset.id]=Date.now();save('gyms');rerender()};
-ACT.checkIn=()=>{S.live={gymId:$('#gymSel').value,start:Date.now(),ex:[]};save('live');toast('Checked in. Have a great session!');rerender()};
+ACT.checkIn=()=>{if(busyWith('workout'))return;S.live={gymId:$('#gymSel').value,start:Date.now(),ex:[]};save('live');toast('Checked in. Have a great session!');rerender()};
 ACT.addEx=()=>exPicker(x=>{S.live.ex.push({n:x.n,id:x.id,sets:[{r:'',kg:'',t:'',rest:''}],done:false,note:''});save('live');renderExList()});
 ACT.rmSet=b=>{const x=S.live.ex[b.dataset.i];x.sets.splice(b.dataset.j,1);if(!x.sets.length)S.live.ex.splice(b.dataset.i,1);save('live');renderExList()};
 ACT.endSession=()=>openSheet('Check out',`<p class="muted">How hard was it? (1 easy · 5 all-out)</p><div class="chips" id="rpe">${[1,2,3,4,5].map(n=>`<button class="chip ${n===3?'on':''}" data-r="${n}">${n}</button>`).join('')}</div>
@@ -3598,10 +3644,10 @@ function jSchedule(el){
   const I=S.schedIn||(S.schedIn=defaultSchedIn());const SC=S.schedule;
   const dayChips=(sel,key)=>`<div class="chips" data-days="${key}">${WD.map((d,i)=>`<button class="chip ${sel.includes(i)?'on':''}" data-d="${i}">${d}</button>`).join('')}</div>`;
   el.innerHTML=`<div class="card"><h3 style="margin-bottom:12px">Your day</h3><div class="form">
-   <div class="field"><label for="sWake">Wake up</label><input class="inp" type="time" id="sWake" value="${I.wake}"></div>
+   <div class="sched-times"><div class="field"><label for="sWake">Wake up</label><input class="inp" type="time" id="sWake" value="${I.wake}"></div>
    <div class="field"><label for="sSleep">Sleep</label><input class="inp" type="time" id="sSleep" value="${I.sleep}"></div>
    <div class="field"><label for="sWs">Work starts</label><input class="inp" type="time" id="sWs" value="${I.ws}"></div>
-   <div class="field"><label for="sWe">Work ends</label><input class="inp" type="time" id="sWe" value="${I.we}"></div>
+   <div class="field"><label for="sWe">Work ends</label><input class="inp" type="time" id="sWe" value="${I.we}"></div></div>
    <div class="field full"><span class="lbl">Work days</span>${dayChips(I.wd,'wd')}</div>
    <div class="field"><label for="sCom">Commute each way (min)</label><input class="inp" type="number" id="sCom" value="${I.commute}" min="0"></div>
    <div class="field"><label for="sPref">I prefer to train</label><select class="inp" id="sPref">${[['any','Whenever is best'],['morning','Mornings'],['lunch','Lunchtime'],['evening','Evenings']].map(([k,l])=>`<option value="${k}" ${I.pref===k?'selected':''}>${l}</option>`).join('')}</select></div>
@@ -3860,37 +3906,43 @@ function unb64u(s){s=s.replace(/-/g,'+').replace(/_/g,'/');while(s.length%4)s+='
 function appLink(h){const base=APP_URL.startsWith('http')?APP_URL:location.href.split('#')[0];return base+'#'+h}
 function liveLinksWork(){return online()&&APP_URL.startsWith('http')||(!window.claude&&location.protocol.startsWith('http'))&&false}
 function snapshotCode(){const c=publicCard();const s={n:c.name,i:S.profile.id,x:c.xp,k:c.streak,g:c.gymRate,b:c.badges.slice(-4),w:c.week,a:c.all,m:c.month,t:c.t,at:Date.now(),r:c.recent.slice(0,1).map(r=>({t:r.t,m:r.m,d:r.d,rt:r.rt.filter((p,i)=>i%2===0)}))};return 'JP1.'+b64u(JSON.stringify(s))}
-function makeQR(el,text){el.innerHTML='';if(!window.QRCode){el.innerHTML='<p class="muted" style="color:#333;font-size:12px;text-align:center">QR library did not load (offline?). Share the code below instead.</p>';return}
+function makeQR(el,text){el.innerHTML='';if(!window.QRCode){try{const m=QRLite.make(text,text.length>600?'L':'M');const n=m.length,q=2,sz=464,c=document.createElement('canvas');c.width=c.height=sz;const x=c.getContext('2d');x.fillStyle='#ffffff';x.fillRect(0,0,sz,sz);const cell=sz/(n+q*2);x.fillStyle='#120D0A';
+    for(let r=0;r<n;r++)for(let k=0;k<n;k++)if(m[r][k])x.fillRect(Math.floor((k+q)*cell),Math.floor((r+q)*cell),Math.ceil(cell)+.5,Math.ceil(cell)+.5);c.setAttribute('role','img');c.setAttribute('aria-label','QR code');el.appendChild(c)}catch(e){el.innerHTML='<p style="color:#333;font-size:12px;text-align:center">This code is too long for a QR. Share the text below.</p>'}return}
   try{new QRCode(el,{text,width:464,height:464,colorDark:'#120D0A',colorLight:'#ffffff',correctLevel:text.length>600?QRCode.CorrectLevel.L:QRCode.CorrectLevel.M})}catch(e){el.innerHTML='<p style="color:#333;font-size:12px">This code is too long for a QR. Share the text below.</p>'}}
-ACT.myQR=()=>{const live=online()&&APP_URL.startsWith('http');let mode=live?'live':'snap';
-  openSheet('Your JUNGLE PARK code',`<div class="seg" id="qrMode"><button data-q="live" class="${mode==='live'?'on':''}" ${live?'':'disabled'}>Live friend link</button><button data-q="snap" class="${mode==='snap'?'on':''}">Offline snapshot</button></div>
-   <div class="qrbox" id="qrBox"></div><p class="muted" id="qrHelp" style="font-size:13.5px;text-align:center"></p>
-   <div class="codebox" id="qrText"></div><div class="grid2"><button class="btn soft" id="qrCopy">Copy ${'link'}</button><button class="btn soft" id="qrSave">${ICON.dl} Save QR</button></div>
-   ${live?'':netNote('Live friend links')}`,el=>{
-    const draw=()=>{const txt=mode==='live'?appLink('add-'+S.profile.id):snapshotCode();makeQR($('#qrBox',el),txt);$('#qrText',el).textContent=txt;
-      $('#qrHelp',el).textContent=mode==='live'?'Friends scan this with their phone camera or in the app. You both appear on each other\'s leaderboard and stay in sync.':'A one-time copy of your current stats. Works with no internet: a friend scans it in their app to compare records.';
-      $('#qrCopy',el).textContent=mode==='live'?'Copy link':'Copy code'};
+ACT.myQR=()=>{const live=canWrite();let mode=live?'live':'snap';let fc=S.profile.fcode||'';
+  openSheet('Your JUNGLE PARK code',`<div class="seg" id="qrMode"><button data-q="live" class="${mode==='live'?'on':''}" ${live?'':'disabled'}>Live friend code</button><button data-q="snap" class="${mode==='snap'?'on':''}">Offline snapshot</button></div>
+   <div class="qrbox" id="qrBox"></div><div class="code-big num" id="qrCode" hidden></div><p class="muted" id="qrHelp" style="font-size:13.5px;text-align:center"></p>
+   <div class="codebox" id="qrText" hidden></div><div class="grid2"><button class="btn soft" id="qrCopy">Copy code</button><button class="btn soft" id="qrShare">${ICON.share} Share</button></div>
+   ${live?'':netNote('Live friend codes')}`,el=>{
+    const draw=()=>{const box=$('#qrBox',el),cb=$('#qrCode',el),tx=$('#qrText',el);
+      if(mode==='live'){tx.hidden=true;cb.hidden=false;if(!fc){cb.textContent='···-···';box.innerHTML='<p class="muted" style="color:#555;font-size:13px;text-align:center">Making your code…</p>';friendCode().then(c=>{fc=c;if(el.isConnected&&mode==='live'){if(c)draw();else{box.innerHTML='<p style="color:#555;font-size:13px;text-align:center">Could not make a code right now.</p>'}}});}
+        else{cb.textContent=fmtCode(fc);makeQR(box,codeQrText(fc))}
+        $('#qrHelp',el).textContent='Friends scan this or type the code in their app. You both appear on each other\'s leaderboard and stay in sync.'}
+      else{const t=snapshotCode();cb.hidden=true;tx.hidden=false;tx.textContent=t;makeQR(box,t);$('#qrHelp',el).textContent='A one-time copy of your current stats. Works with no internet: a friend scans it in their app to compare records.'}};
     draw();$('#qrMode',el).onclick=e=>{const b=e.target.closest('[data-q]');if(!b||b.disabled)return;mode=b.dataset.q;$$('#qrMode button',el).forEach(x=>x.classList.toggle('on',x===b));draw()};
-    $('#qrCopy',el).onclick=()=>copyText($('#qrText',el).textContent);
-    $('#qrSave',el).onclick=()=>{const c=$('#qrBox canvas',el);if(!c)return;c.toBlob(b=>b&&saveFile('jungle-park-code.png',b),'image/png')};
+    const txt=()=>mode==='live'?fmtCode(fc):$('#qrText',el).textContent;
+    $('#qrCopy',el).onclick=()=>{const t=txt();if(t)copyText(t)};
+    $('#qrShare',el).onclick=async()=>{const t=txt();if(!t)return;const msg=mode==='live'?`Add me on JUNGLE PARK: my friend code is ${t}`:t;try{if(navigator.share){await navigator.share({text:msg});return}}catch(e){if(e&&e.name==='AbortError')return}copyText(msg)};
   })};
 let SCAN_HOOK=null;
 ACT.scan=b=>{let stream=null,raf=0;if(!(b&&b._hook))SCAN_HOOK=null;
   openSheet(SCAN_HOOK?SCAN_HOOK.title:'Scan a code',`<video class="scan-video" id="scV" playsinline muted hidden></video>
    <div id="scMsg" class="lock-note" hidden></div>
    <button class="btn block" id="scPhoto">${ICON.scan} Scan from photo</button>
-   <div class="field"><label for="scTxt">Or paste a link or code</label><div style="display:flex;gap:8px"><input class="inp" id="scTxt" placeholder="https://…#add-… or JP1.…" autocomplete="off"><button class="btn" id="scGo">Add</button></div></div>`,async el=>{
+   <div class="field"><label for="scTxt">Or enter a code</label><div class="code-row"><input class="inp code-inp" id="scTxt" placeholder="ABC-123" maxlength="2000" autocomplete="off" autocapitalize="characters" autocorrect="off" spellcheck="false"><button class="btn" id="scGo">${SCAN_HOOK?'Go':'Add'}</button></div></div>`,async el=>{
     const v=$('#scV',el);const stop=()=>{cancelAnimationFrame(raf);if(stream)stream.getTracks().forEach(t=>t.stop());stream=null};$('#sheets').onclose=stop;
     try{if(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia&&window.jsQR){stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}});v.srcObject=stream;v.hidden=false;await v.play();
       const c=document.createElement('canvas'),ctx=c.getContext('2d',{willReadFrequently:true});const loop=()=>{if(!stream)return;if(v.videoWidth){c.width=v.videoWidth;c.height=v.videoHeight;ctx.drawImage(v,0,0);const r=jsQR(ctx.getImageData(0,0,c.width,c.height).data,c.width,c.height);if(r&&r.data){stop();closeSheet();handleScan(r.data);return}}raf=requestAnimationFrame(loop)};loop()}}
     catch(e){v.hidden=true}
     $('#scPhoto',el).onclick=()=>$('#qrFile').click();
-    $('#scGo',el).onclick=()=>{const t=$('#scTxt',el).value.trim();if(t){stop();closeSheet();handleScan(t)}};
+    const sct=$('#scTxt',el);sct.oninput=()=>{const v=sct.value;if(/^[A-Za-z0-9-]{0,7}$/.test(v)){let x=v.toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,6);sct.value=x.length>3?x.slice(0,3)+'-'+x.slice(3):x}};
+    const goT=()=>{const t=sct.value.trim();if(t){stop();closeSheet();handleScan(t)}};$('#scGo',el).onclick=goT;sct.onkeydown=e=>{if(e.key==='Enter')goT()};
   })};
 $('#qrFile')?.addEventListener('change',async e=>{const f=e.target.files[0];e.target.value='';if(!f)return;if(!window.jsQR){toast('QR reader did not load. Paste the code instead.');return}
   try{const img=await createImageBitmap(f);const s=Math.min(1,1400/Math.max(img.width,img.height));const c=document.createElement('canvas');c.width=img.width*s;c.height=img.height*s;const ctx=c.getContext('2d');ctx.drawImage(img,0,0,c.width,c.height);
     const r=jsQR(ctx.getImageData(0,0,c.width,c.height).data,c.width,c.height,{inversionAttempts:'attemptBoth'});if(!r){toast('No QR code found in that photo. Try again closer.');return}closeSheet();handleScan(r.data)}catch(err){toast('Could not read that image')}});
 function handleScan(txt){txt=String(txt).trim();if(SCAN_HOOK){const h=SCAN_HOOK;SCAN_HOOK=null;h.fn(txt);return}
+  if(parseCode(txt)){useCode(txt);return}
   const bz=txt.match(/#(g|i|c)-([a-z0-9]{6,24})/);if(bz){({g:openGymLink,i:openInvite,c:openCoachLink})[bz[1]](bz[2]);return}
   let m=txt.match(/#(add|sync)-([a-z0-9]{6,20})/);if(m){if(m[1]==='add')addLiveFriend(m[2]);else linkDevicePrompt(m[2]);return}
   if(txt.startsWith('JP1.')){try{const s=JSON.parse(unb64u(txt.slice(4)));addSnapshotFriend(s)}catch(e){toast('That code is damaged or incomplete')}return}
@@ -3902,7 +3954,7 @@ async function addLiveFriend(id){
   let snap=null;try{const s=await NET.db.doc('pub/'+id).get();if(s.exists)snap=s.data()}catch(e){dbErr(e)}
   if(!snap){toast("Couldn't find that runner yet. They need to open the app online once.");return}
   const ex=S.friends.find(f=>f.id===id);if(ex){ex.snap=snap;ex.mode='live';ex.name=snap.name;ex.u=Date.now()}else S.friends.push({id,name:snap.name||'Runner',snap,mode:'live',ts:Date.now(),u:Date.now()});
-  delete S.deleted[id];save('friends');toast(`${snap.name||'Friend'} added to your crew`);if(cur!=='crew')go('crew');else RENDER.crew()}
+  delete S.deleted[id];save('friends');subscribeBuddies();sendFriendHello(id);toast(`${snap.name||'Friend'} added to your crew`);if(cur!=='crew')go('crew');else RENDER.crew()}
 function addSnapshotFriend(s){if(s.i===S.profile.id){toast("That's your own code");return}
   const snap={name:s.n,xp:s.x,streak:s.k,gymRate:s.g,badges:s.b||[],week:s.w,all:s.a,month:s.m,t:s.t,at:s.at,recent:(s.r||[])};
   const ex=S.friends.find(f=>f.id===s.i);if(ex){if(ex.mode!=='live'||!online()){ex.snap=snap;ex.name=s.n}ex.u=Date.now()}else S.friends.push({id:s.i,name:s.n,snap,mode:online()?'live':'offline',ts:Date.now(),u:Date.now()});
@@ -3912,17 +3964,26 @@ function addSnapshotFriend(s){if(s.i===S.profile.id){toast("That's your own code
 function linkDevicePrompt(id){
   if(id===S.profile.id){toast('This device is already linked to that profile');return}
   if(!online()){toast('Linking devices needs a connection');return}
+  if(!S.onboarded||(!S.runs.length&&!S.sessions.length)){signInWith(id).catch(e=>toast(e&&e.msg||'Could not sign in right now'));return}
   openSheet('Link this device?',`<p>This device will join the profile from the code you scanned. Anything already on this device is merged in, so nothing is lost.</p>
    <div class="grid2"><button class="btn soft" data-act="closeSheet">Cancel</button><button class="btn" id="lnk">Link device</button></div>`,el=>{
-    $('#lnk',el).onclick=async()=>{closeSheet();toast('Linking…');try{await linkProfile(id);toast('Device linked. Your data now syncs live.')}catch(e){toast(e&&e.msg||'Could not link right now')}}})}
+    $('#lnk',el).onclick=async()=>{closeSheet();try{await signInWith(id)}catch(e){toast(e&&e.msg||'Could not link right now')}}})}
 async function linkProfile(id){
   let s;try{s=await NET.db.doc('v/'+id).get()}catch(e){dbErr(e);throw {msg:'Could not reach your profile right now'}}
   if(!s.exists)throw {msg:'That profile has not synced yet. Open the app on the other device first.'};
-  const old=S.profile.id;S.profile.id=id;S.sync={pushedCore:'',pushedPub:'',runs:{}};mergeCore(JSON.parse(s.data().core));S.profile.id=id;S.onboarded=true;S.devices=S.devices||{};delete S.devices[DEV_ID];touchDevice(true);
-  S.friends=S.friends.filter(f=>f.id!==id&&f.id!==old);saveNow();startSync();subscribeBuddies();applyTheme();scheduleSync();closeSheet();rerender()}
-ACT.deviceQR=()=>{if(!(online()&&APP_URL.startsWith('http'))){toast('Device linking needs a live connection');return}
-  openSheet('Link another device',`<p class="muted">Scan this with your other phone, tablet or laptop camera. That device will open JUNGLE PARK and join this profile. Keep this code private: anyone who scans it can see and edit your data.</p>
-   <div class="qrbox" id="dqr"></div><div class="codebox" id="dTxt"></div><button class="btn soft block" id="dCopy">Copy link</button>`,el=>{const t=appLink('sync-'+S.profile.id);makeQR($('#dqr',el),t);$('#dTxt',el).textContent=t;$('#dCopy',el).onclick=()=>copyText(t)})};
+  const old=S.profile.id;S.profile.id=id;S.sync={pushedCore:'',pushedPub:'',runs:{}};S.ts={};mergeCore(JSON.parse(s.data().core));S.profile.id=id;S.onboarded=true;S.devices=S.devices||{};delete S.devices[DEV_ID];touchDevice(true);
+  S.friends=S.friends.filter(f=>f.id!==id&&f.id!==old);saveNow();startSync();watchFriendInbox();subscribeBuddies();applyTheme();scheduleSync();closeSheet();rerender()}
+ACT.deviceQR=()=>{if(!canWrite()){toast('Signing in on another device needs a live connection');return}
+  let code='',exp=0,tm=0;
+  openSheet('Sign in on another device',`<p class="muted">On the other phone, tablet or computer, open JUNGLE PARK and tap <b>Sign in from another device</b>. Scan this QR code or type the code. It signs that device straight into your account.</p>
+   <div class="qrbox" id="dqr"><p class="muted" style="color:#555;font-size:13px;text-align:center">Making your code…</p></div>
+   <div class="code-big num" id="dCode" aria-live="polite">···-···</div><p class="muted code-exp" id="dExp"></p>
+   <div class="grid2"><button class="btn soft" id="dCopy">Copy code</button><button class="btn soft" id="dNew">${ICON.sync} New code</button></div>
+   <p class="muted" style="font-size:12px">Keep this code private: whoever uses it can see and edit your data. It works once and expires after 10 minutes.</p>`,el=>{
+    const make=async()=>{$('#dCode',el).textContent='···-···';try{code=await claimCode('d',DEV_TTL);exp=Date.now()+DEV_TTL;if(!el.isConnected)return;$('#dCode',el).textContent=fmtCode(code);makeQR($('#dqr',el),codeQrText(code))}catch(e){toast(e&&e.msg||'Could not make a code');$('#dqr',el).innerHTML='<p style="color:#555;font-size:13px;text-align:center">No code. Check your connection and tap New code.</p>'}};
+    const tick=()=>{if(!el.isConnected){clearInterval(tm);return}const left=Math.max(0,exp-Date.now());const e=$('#dExp',el);if(!code){e.textContent='';return}if(!left){make();return}e.textContent='Expires in '+Math.floor(left/60000)+':'+String(Math.floor(left/1000)%60).padStart(2,'0')};
+    tm=setInterval(tick,1000);$('#sheets').onclose=()=>{clearInterval(tm);if(code&&NET.db)NET.db.doc('codes/'+code).delete().catch(()=>{})};
+    $('#dCopy',el).onclick=()=>code&&copyText(fmtCode(code));$('#dNew',el).onclick=()=>{if(code&&NET.db)NET.db.doc('codes/'+code).delete().catch(()=>{});code='';make()};make()})};
 
 // ================= EXTRAS: install prompt, sharing, best-distance, celebrations =================
 
@@ -3964,7 +4025,7 @@ const WATCH_SVG='<svg class="ico" viewBox="0 0 24 24"><rect x="6" y="6" width="1
 function appUrl(){return APP_URL.startsWith('http')?APP_URL:location.href.split('#')[0]}
 function watchSteps(){return `<ol class="a2hs-steps watch-steps"><li>Copy the app link below.</li><li>On your iPhone, send it to <b>yourself</b> in <b>Messages</b> or <b>Mail</b>.</li><li>On your Apple Watch, open that message and tap the link. JUNGLE PARK opens in a compact view made for your wrist.</li></ol>`}
 function watchCard(){return `<div class="card watch-card"><div class="watch-h"><span class="watch-ico">${WATCH_SVG}</span><div><h3>Add to Apple Watch</h3><small class="muted">Check your stats and start runs from your wrist</small></div></div>${watchSteps()}
-  <div class="codebox" id="watchUrl">${esc(appUrl())}</div><div class="grid2"><button class="btn" data-act="copyWatch">${ICON.link} Copy app link</button><button class="btn soft" data-act="shareWatch">Send to myself</button></div>
+  <div class="codebox" id="watchUrl">${esc(appUrl())}</div><div class="grid2"><button class="btn" data-act="copyWatch">${ICON.link} Copy link</button><button class="btn soft" data-act="shareWatch">Send to myself</button></div>
   <p class="muted" style="font-size:12px">Tip: on the watch, pin the message so the link is always one tap away. The watch needs a connection to load the app the first time.</p></div>`}
 ACT.copyWatch=()=>copyText(appUrl());
 ACT.shareWatch=async()=>{try{await navigator.share({title:'JUNGLE PARK',text:'Open JUNGLE PARK on my Apple Watch',url:appUrl()})}catch(e){copyText(appUrl());toast('Link copied. Paste it into a message to yourself.')}};
@@ -4091,8 +4152,9 @@ ACT.signIn=()=>openSheet('Sign in',`<p class="muted">Use the phone number and pa
 ACT.setPw=()=>{const ids=S.loginIds||[];openSheet(ids.length?'Change password':'Create a password',`<p class="muted">Sign in on any phone, tablet or computer with this phone number and password.</p>${netNote('Saving a password')}
   <div class="field"><label for="spId">Phone number</label><input class="inp" id="spId" type="tel" inputmode="tel" value="${esc((ids.find(x=>!x.includes('@'))||''))}" autocomplete="username tel" placeholder="+251 9…"></div>${pwFields('sp')}
   <button class="btn block" id="spGo" data-net="write">Save password</button>`,el=>{wirePw(el,'sp');$('#spGo',el).onclick=async()=>{if(!needOnline('Saving a password'))return;try{const pw=readPw(el,'sp');await setPassword([$('#spId',el).value],pw);closeSheet();rerender();toast('Password saved')}catch(e){toast(e&&e.msg||'Could not save the password')}}})};
-function accountCard(){const ids=S.loginIds||[];return `<div class="card acct-card"><div class="watch-h"><span class="watch-ico" style="background:var(--soft);color:var(--accent)">${ICON.lock}</span><div><h3>Account</h3><small class="muted">${ids.filter(x=>!x.includes('@')).length?'Signed up with '+esc(ids.filter(x=>!x.includes('@')).join(', ')):'Add a phone and password to sign in on any device'}</small></div></div>
-  <div class="grid2"><button class="btn ${ids.length?'soft':''}" data-act="setPw">${ids.length?'Change password':'Create password'}</button><button class="btn soft" data-act="signIn">Sign in to another profile</button></div></div>`}
+function accountCard(){return `<div class="card acct-card"><div class="watch-h"><span class="watch-ico" style="background:var(--soft);color:var(--accent)">${ICON.lock}</span><div><h3>Account</h3><small class="muted">Sign in on another device with a QR code or a 6-character code</small></div></div>
+  ${netNote('Signing in on another device')}
+  <div class="grid2"><button class="btn" data-net="write" data-act="deviceQR">${ICON.qr} Show sign-in code</button><button class="btn soft" data-act="signInOther">${ICON.scan} Sign in from another account</button></div></div>`}
 
 // ---------- gym owner ----------
 const BIZ={tab:'gym',gid:null,members:[],checkins:[],gym:null,unsub:[],filter:'all',q:'',clients:[],cunsub:null,state:'idle'};
@@ -4344,8 +4406,8 @@ async function openCoachLink(cid){if(!NET.db){toast('Coach links need a connecti
 function bizCard(){const ok=bizAllowed();return `<div class="card biz-cta"><div class="watch-h"><span class="watch-ico">${GYMSVG}</span><div><h3>For gyms &amp; coaches</h3><small class="muted">${ok?'Your business dashboard is unlocked':'Apply to list your gym or coaching. Dashboards open after approval.'}</small></div></div>
   ${ok?`<button class="btn" data-tab="biz">${GYMSVG} Open business dashboard</button>`:''}
   ${appStatusCard('gym')}${appStatusCard('coach')}
-  <div class="grid2">${(S.myGyms||[]).length||(APPS.mine&&APPS.mine.gym&&APPS.mine.gym.status!=='declined')?'':`<button class="btn ${ok?'soft':''}" data-act="newGym">${GYMSVG} Register a gym</button>`}${S.coachMode||(APPS.mine&&APPS.mine.coach&&APPS.mine.coach.status!=='declined')?'':`<button class="btn soft" data-act="proForm">${USERSVG} Join as coach</button>`}</div>
-  <button class="link" data-act="enterKey" style="align-self:flex-start">${ICON.lock} Enter access key</button></div>`}
+  <div class="grid2">${(S.myGyms||[]).length||(APPS.mine&&APPS.mine.gym&&APPS.mine.gym.status!=='declined')?'':`<button class="btn ${ok?'soft':''}" data-act="newGym">${GYMSVG} Register gym</button>`}${S.coachMode||(APPS.mine&&APPS.mine.coach&&APPS.mine.coach.status!=='declined')?'':`<button class="btn soft" data-act="proForm">${USERSVG} Join as coach</button>`}</div>
+  <button class="link key-link" data-act="enterKey">${ICON.lock}<span>Enter access key</span></button></div>`}
 ACT.openBizGym=()=>{BIZ.tab='gym';go('biz')};
 ACT.openBizCoach=()=>{BIZ.tab='coach';go('biz')};
 
@@ -4466,14 +4528,14 @@ ACT.courseAdmin=b=>{const gid=BIZ.gid,cid=b.dataset.c;const c=(CRS.bygym[gid]||[
 // Saved once on the user's profile (S.intake, synced to their devices) and shared with every coach they join.
 const GOALS=[['loss','Weight loss','<path d="M12 3c3 4 6 7 6 11a6 6 0 0 1-12 0c0-4 3-7 6-11z"/><path d="M9.5 14.5h5"/>'],['muscle','Muscle gain','<path d="M7 12h10M4 9v6M20 9v6M2 11v2M22 11v2M7 8v8M17 8v8"/>'],
  ['diet','Diet & nutrition','<path d="M12 7c-3-3-8-1-8 4 0 6 4 10 8 10s8-4 8-10c0-5-5-7-8-4z"/><path d="M12 7c0-2 1-4 3-4"/>'],['health','General health','<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>'],
- ['strength','Strength','<path d="M6 18 18 6M8 20l-4-4M20 8l-4-4M4 20l2-2M18 6l2-2"/>'],['endurance','Endurance & running','<path d="M13 4a2 2 0 1 0 0 .1M8 21l3-6 3 2v4M7 12l3-3 4 1 2 3h3"/>'],
- ['mobility','Mobility & flexibility','<circle cx="12" cy="5" r="2"/><path d="M4 20c3-2 5-6 8-9 3 3 5 7 8 9M12 11v-4"/>'],['rehab','Injury recovery','<path d="m9 9 6 6M15 9l-6 6"/><rect x="3" y="8" width="18" height="8" rx="4" transform="rotate(-45 12 12)"/>'],
+ ['strength','Strength','mk:lift'],['endurance','Endurance & running','mk:tread'],
+ ['mobility','Mobility & flexibility','mk:pose'],['rehab','Injury recovery','<path d="m9 9 6 6M15 9l-6 6"/><rect x="3" y="8" width="18" height="8" rx="4" transform="rotate(-45 12 12)"/>'],
  ['sport','Sports performance','<circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18M5.6 5.6c3 3 9.8 3 12.8 0M5.6 18.4c3-3 9.8-3 12.8 0"/>']];
-const goalIco=k=>{const g=GOALS.find(x=>x[0]===k);return g?`<svg class="ico" viewBox="0 0 24 24">${g[2]}</svg>`:''};
+const goalIco=k=>{const g=GOALS.find(x=>x[0]===k);if(!g)return '';return g[2].startsWith('mk:')?`<span class="ico mki mk-${g[2].slice(3)}" aria-hidden="true"></span>`:`<svg class="ico" viewBox="0 0 24 24">${g[2]}</svg>`};
 const goalName=k=>(GOALS.find(x=>x[0]===k)||[,k])[1];
 const STRESSORS=[['work','Work'],['finance','Finance'],['health','Health'],['family','Family'],['training','Training'],['none','Not stressed']];
 const TRAVEL=[['rarely','Rarely'],['year','A few times a year'],['month','Every month'],['week','Weekly']];
-const SCALE=['Nothing','Little','Fair amount','Fairly high','Very high'];
+const SCALE=['Nothing','Little','Fair','Fairly high','Very high'];
 const IN=()=>{S.intake=S.intake||{};const i=S.intake;i.goals=i.goals||[];i.med=i.med||{};i.inj=i.inj||{};i.life=i.life||{};return i};
 function intakeDone(){const i=IN();return !!(i.goals.length&&i.med.has!=null&&i.inj.has!=null&&i.life.energy)}
 function intakePct(){const i=IN();let n=0;[i.goals.length,i.med.has!=null,i.inj.has!=null,i.life.occ,i.life.energy,i.life.sleep,i.life.stress,i.life.travel,i.life.smoker!=null,i.life.alcohol!=null&&i.life.alcohol!==''].forEach(x=>{if(x)n++});return Math.round(n/10*100)}
@@ -4513,14 +4575,14 @@ const IPAGES=[
    <div class="form"><div class="field"><label for="lS">Average hours of sleep</label><input class="inp" id="lS" type="number" inputmode="decimal" step="0.5" min="0" max="14" value="${L.sleep??''}"></div><div class="field"><span class="lbl">Do you wake up feeling rested?</span>${yn('lR',L.rested)}</div></div>
    <div class="q col"><span class="ql">How much stress do you have in your work or personal life?</span>${scale('lSt',L.stress)}</div>
    <div class="q col"><span class="ql">What stresses you most?</span><div class="chips" id="lStr">${STRESSORS.map(([k,l])=>`<button type="button" class="chip ${(L.stressors||[]).includes(k)?'on':''}" data-s="${k}">${l}</button>`).join('')}</div><input class="inp" id="lSO" placeholder="Other (please specify)" value="${esc(L.stressOther||'')}"></div>
-   <div class="q col"><span class="ql">How often do you travel?</span><div class="seg wrap-seg" id="lT">${TRAVEL.map(([k,l])=>`<button type="button" data-t="${k}" class="${L.travel===k?'on':''}">${l}</button>`).join('')}</div></div>
+   <div class="q col"><span class="ql">How often do you travel?</span><div class="chips travel-pills" id="lT" role="radiogroup" aria-label="How often do you travel">${TRAVEL.map(([k,l])=>`<button type="button" role="radio" aria-checked="${L.travel===k}" data-t="${k}" class="chip ${L.travel===k?'on':''}">${l}</button>`).join('')}</div></div>
    <div class="q"><span class="ql">Does travelling feel hard on your body?</span>${yn('lTH',L.travelHard)}</div>
    <div class="q"><span class="ql">Do you currently smoke?</span>${yn('lSm',L.smoker)}</div>
    <div class="field"><label for="lA">Alcohol: average units per week <small class="muted">(1 unit ≈ a small beer or a single shot; 0 if none)</small></label><input class="inp" id="lA" type="number" inputmode="numeric" min="0" value="${L.alcohol??''}"></div>`},
   wire:(el,i)=>{const L=i.life;L.stressors=L.stressors||[];$('#lStr',el).onclick=e=>{const b=e.target.closest('[data-s]');if(!b)return;const k=b.dataset.s;
      if(k==='none')L.stressors=L.stressors.includes('none')?[]:['none'];else{L.stressors=L.stressors.filter(x=>x!=='none');L.stressors=L.stressors.includes(k)?L.stressors.filter(x=>x!==k):[...L.stressors,k]}
      $$('#lStr [data-s]',el).forEach(x=>x.classList.toggle('on',L.stressors.includes(x.dataset.s)))};
-   $('#lT',el).onclick=e=>{const b=e.target.closest('[data-t]');if(!b)return;L.travel=b.dataset.t;$$('#lT button',el).forEach(x=>x.classList.toggle('on',x===b))}},
+   $('#lT',el).onclick=e=>{const b=e.target.closest('[data-t]');if(!b)return;L.travel=b.dataset.t;$$('#lT button',el).forEach(x=>{x.classList.toggle('on',x===b);x.setAttribute('aria-checked',x===b)})}},
   read:(el,i)=>{const L=i.life;const n=id=>{const v=$(id,el).value;return v===''?null:+v};Object.assign(L,{occ:$('#lO',el).value.trim(),flex:ynv(el,'lF'),energy:+rv(el,'lE')||null,sleep:n('#lS'),rested:ynv(el,'lR'),stress:+rv(el,'lSt')||null,stressOther:$('#lSO',el).value.trim(),travelHard:ynv(el,'lTH'),smoker:ynv(el,'lSm'),alcohol:n('#lA')})}}];
 // the form: in its own container (sign-up) or a sheet (profile, joining a coach). onDone runs after the last page or a skip.
 function intakeForm(host,{start=0,skippable=true,doneLabel='Save',onDone}={}){const i=IN();let pg=start;
@@ -5537,7 +5599,9 @@ const markStory=id=>{const s=seenSet();s.add(id);try{localStorage.setItem('jp:st
 function storyPeople(){return [S.profile.id,...S.friends.filter(f=>f.mode==='live').map(f=>f.id)].slice(0,60)}
 function watchStories(){if(!NET.db||STY.unsub)return;STY.unsub=NET.db.collection('stories').where('exp','>',Date.now()).limit(500).onSnapshot(q=>{const by={};
     q.docs.forEach(d=>{const x=Object.assign({_id:d.id,_u:d.data().uid},d.data());if(x.exp>Date.now())(by[x.uid]=by[x.uid]||[]).push(x)});for(const k in by)by[k].sort((a,b)=>a.ts-b.ts);STY.by=by;
-    if((cur==='crew'||cur==='home')&&!document.querySelector('.sheet,#storyv'))paintStoryBars()},()=>{})}
+    if((cur==='crew'||cur==='home')&&!document.querySelector('.sheet,#storyv'))paintStoryBars()},err=>{dbErr(err);try{STY.unsub&&STY.unsub()}catch(e){}STY.unsub=null;setTimeout(watchStories,20000)})}
+// re-open the stories listener every hour so its 24-hour window keeps moving
+setInterval(()=>{if(STY.unsub&&NET.db){try{STY.unsub()}catch(e){}STY.unsub=null;watchStories()}},3600e3);
 // tidy: delete my own expired stories
 async function pruneStories(){if(!NET.db||!canWrite())return;try{const q=await NET.db.collection('stories').where('uid','==',S.profile.id).get();for(const d of q.docs)if((d.data().exp||0)<Date.now())await NET.db.doc('stories/'+d.id).delete()}catch(e){}}
 const liveStories=id=>isBanned(id)?[]:(STY.by[id]||[]).filter(s=>s.exp>Date.now());
@@ -5557,11 +5621,12 @@ ACT.storyAdd=()=>{if(!online()){toast('Stories need a connection');return}let im
    <div class="field"><label for="stT">Caption</label><input class="inp" id="stT" maxlength="140" placeholder="e.g. New squat PR! 🦁"></div>
    <p class="muted" style="font-size:13px">Your friends can see it for 24 hours.</p><button class="btn block" id="stGo">${ICON.check} Share story</button>`,el=>{
     const P=$('#stP',el),T=$('#stTx',el);const draw=()=>{P.style.backgroundImage=img?`url(${img})`:'';P.classList.toggle('img',!!img);T.textContent=$('#stT',el).value||(img?'':'Tap to add a photo')};
-    const pick=()=>pickImage(async f=>{try{img=await resizeImage(f,1080);draw()}catch(e){toast('Could not read that image')}},true);
+    const pick=()=>pickImage(async f=>{try{img=await fitImage(f,1080,300000);draw()}catch(e){toast('Could not read that image')}});
     P.onclick=pick;$('#stPh',el).onclick=pick;$('#stT',el).oninput=draw;
     $('#stCol',el).onclick=e=>{const b=e.target.closest('[data-c]');if(!b)return;bg=b.dataset.c;$('#stC',el).style.setProperty('--sbg',bg);$$('#stCol button',el).forEach(x=>x.classList.toggle('on',x===b))};
     $('#stGo',el).onclick=async e=>{const text=$('#stT',el).value.trim();if(!img&&!text){toast('Add a photo or a caption');return}if(!needOnline('Sharing a story'))return;e.currentTarget.disabled=true;
-      try{const t=Date.now();await NET.db.doc(`stories/${t.toString(36)+rid(5)}`).set({uid:S.profile.id,img:img||'',text,bg,ts:t,exp:t+DAY24,name:S.profile.name||'Friend'});closeSheet();toast('Story shared for 24 hours')}catch(err){dbErr(err);toast(err&&/large|size/i.test(String(err.message||''))?'That photo is too large':'Could not share right now');e.currentTarget.disabled=false}}})};
+      try{const t=Date.now();const sid=t.toString(36)+rid(5);const doc={uid:S.profile.id,img:img||'',text,bg,ts:t,exp:t+DAY24,name:S.profile.name||'Friend'};await NET.db.doc(`stories/${sid}`).set(doc);
+        const mine=(STY.by[S.profile.id]||[]).filter(x=>x._id!==sid);mine.push(Object.assign({_id:sid,_u:S.profile.id},doc));STY.by[S.profile.id]=mine;closeSheet();paintStoryBars();toast('Story shared for 24 hours')}catch(err){dbErr(err);toast(err&&/large|size/i.test(String(err.message||''))?'That photo is too large':'Could not share right now');e.currentTarget.disabled=false}}})};
 // viewer: full screen, tap left/right, hold to pause, 5 s per story, then the next friend
 function storyQueue(start){const seen=seenSet();const ids=[S.profile.id,...S.friends.filter(f=>f.mode==='live'&&liveStories(f.id).length).sort((a,b)=>(liveStories(b.id).some(s=>!seen.has(s._id))-liveStories(a.id).some(s=>!seen.has(s._id)))).map(f=>f.id)].filter(id=>liveStories(id).length);
   const i=ids.indexOf(start);return i<0?[start]:ids.slice(i)}
@@ -5880,7 +5945,7 @@ ACT.soundPick=()=>{const cur_=+S.settings.sound||1;openSheet('Alert sound',`<p c
   $('#sndL',el).onclick=e=>{const b=e.target.closest('[data-k]');if(!b)return;S.settings.sound=+b.dataset.k;save('settings');$$('.snd-o',el).forEach(x=>x.classList.toggle('on',x===b));beep(1);toast(soundOf()[1]+' sound selected')}})};
 const IV_PRESETS=[['off','Off',0,0],['r30','30s',30,0],['r45','45s',45,0],['r60','1m',60,0],['r90','90s',90,0],['r120','2m',120,0],['r180','3m',180,0],['custom','Custom',0,0]];
 const DUR_PRESETS=[['0','No limit'],['1800','30m'],['2700','45m'],['3600','1h'],['4500','75m'],['5400','90m']];
-ACT.startWorkout=()=>{closeFab();if(WK.on){openWk();return}
+ACT.startWorkout=()=>{closeFab();if(WK.on){openWk();return}if(busyWith('workout'))return;
   const gyms=S.gyms;let preset='off',dur='0';const TM=ICON.clock;
   openSheet('Start a workout',`<div class="field"><label for="wkWhere">Select gym</label><select class="inp gym-sel" id="wkWhere">${(()=>{const sel=S.live?S.live.gymId:mainGymId();return gyms.map(g=>`<option value="${g.id}" ${sel===g.id?'selected':''}>${esc(g.name)}</option>`).join('')+`<option value="home" ${sel==='home'?'selected':''}>Home or outdoors</option>`})()}</select></div>
    <div><div class="lbl wk-lbl">Gym duration</div><div class="tm-grid" id="wkDur">${DUR_PRESETS.map(p=>`<button class="chip tm-chip ${p[0]===dur?'on':''}" data-d="${p[0]}">${TM}<span>${p[1]}</span></button>`).join('')}</div></div>
@@ -5913,13 +5978,14 @@ function drawWkHr(){const c=$('#wkHrC');if(!c||$('#wkimm').hidden)return;const {
   const lo=Math.min(...H.map(x=>x[1]))-5,hi=Math.max(...H.map(x=>x[1]))+5;ctx.lineWidth=2.5*dpr;ctx.lineJoin='round';const g=ctx.createLinearGradient(0,0,w,0);g.addColorStop(0,'rgba(229,56,59,.2)');g.addColorStop(1,'#FF5C5F');ctx.strokeStyle=g;ctx.shadowColor='#E5383B';ctx.shadowBlur=10*dpr;ctx.beginPath();
   H.forEach((p,i)=>{const x=i/(H.length-1)*w,y=h-((p[1]-lo)/(hi-lo||1))*h*.85-h*.075;i?ctx.lineTo(x,y):ctx.moveTo(x,y)});ctx.stroke()}
 function openWk(){const o=$('#wkimm');if(!o)return;o.hidden=false;paintHr();wkTick();try{document.documentElement.requestFullscreen&&matchMedia('(max-width:900px)').matches&&document.documentElement.requestFullscreen().catch(()=>{})}catch(e){}}
-ACT.wkClose=()=>{$('#wkimm').hidden=true;try{document.fullscreenElement&&document.exitFullscreen()}catch(e){}jTab='train';if(cur!=='jungle')go('jungle');else rerender()};
+ACT.wkClose=()=>{$('#wkimm').hidden=true;try{document.fullscreenElement&&document.exitFullscreen()}catch(e){}jTab='train';if(cur!=='jungle')go('jungle');else RENDER.jungle();
+  setTimeout(()=>{const c=$('#v-jungle .gymlive')||$('#v-jungle .wkhero');if(c){c.style.scrollMarginTop=((($('.appbar')||{}).offsetHeight)||0)+12+'px';c.scrollIntoView({behavior:'smooth',block:'start'})}},350);livePill()};
 ACT.openWk=()=>openWk();
 ACT.wkPause=()=>{if(WK.lock)return;if(!WK.paused){WK.active+=Date.now()-WK.resumeAt;WK.paused=true;WK.pausedAt=Date.now()}else{WK.paused=false;WK.resumeAt=Date.now();WK.phaseAt+=Date.now()-WK.pausedAt}
   $$('[data-act=wkPause]').forEach(b=>{b.innerHTML=WK.paused?ICON.play:ICON.pause;b.classList.toggle('go',WK.paused)});wkTick()};
 ACT.wkSkip=()=>{if(WK.lock||!wkPhaseLen())return;WK.phaseAt=Date.now()-wkPhaseLen()*1000-1;wkTick()};
 ACT.wkLock=b=>{WK.lock=!WK.lock;b.classList.toggle('go',WK.lock);toast(WK.lock?'Controls locked':'Controls unlocked')};
-ACT.wkLog=()=>{$('#wkimm').hidden=true;jTab='train';go('jungle');setTimeout(()=>$('#exList')?.scrollIntoView({behavior:'smooth',block:'center'}),300)};
+ACT.wkLog=()=>ACT.wkClose();
 ACT.wkFinish=()=>{if(WK.lock){toast('Unlock controls first');return}ACT.endSession()};// check-out pops up over the full view; it closes once saved or discarded
 function wkStop(){if(!WK.on)return null;if(!WK.paused)WK.active+=Date.now()-WK.resumeAt;clearInterval(WK.tick);WK.on=false;wakeLock(false);const out={hr:WK.hr.slice(),kcal:Math.round(WK.kcal),dur:Math.round(WK.active/1000)};const st=hrStats(out.hr);if(st){out.hrAvg=st.avg;out.hrMax=st.max}return out}
 
@@ -6095,7 +6161,7 @@ function adStop(){if(AD.fn)removeEventListener('devicemotion',AD.fn);AD.fn=null}
 function adPrompt(k,cad){try{navigator.vibrate&&navigator.vibrate([100,60,100])}catch(e){}
   openSheet(k==='run'?'Looks like you are running':'Looks like you are working out',`<p class="muted">${k==='run'?`We picked up a steady running cadence (${cad} steps a minute).`:'We picked up repeated, strong movement for the last two minutes.'} Start tracking now so it counts?</p>
    <div class="grid2"><button class="btn soft" data-act="closeSheet">Not now</button><button class="btn" data-act="${k==='run'?'adRun':'startWorkout'}">${k==='run'?ICON.run+' Start run':LIFT+' Start workout'}</button></div>`)}
-ACT.adRun=()=>{closeSheet();startRun('gps')};
+ACT.adRun=()=>{closeSheet();if(busyWith('run'))return;startRun('gps')};
 ACT.toggleAD=()=>{S.settings.autoDetect=!S.settings.autoDetect;save('settings');S.settings.autoDetect?adStart():adStop();RENDER.health();toast(S.settings.autoDetect?'Activity detection on':'Activity detection off')};
 // ---------- detailed view ----------
 const fmtH=m=>m==null?'--':`${Math.floor(m/60)}h ${String(Math.round(m%60)).padStart(2,'0')}m`;
@@ -6468,7 +6534,7 @@ RENDER.home=()=>{
 ACT.goTrain=()=>{jTab='train';go('jungle')};
 // one swipeable notice for setup steps (intake form, plan), with dot indicators
 function noteCarousel(today){const sl=[];
-  if(profileTodo())sl.push(`<button class="nt-slide" data-act="finishProfile"><span class="watch-ico">${USERSVG}</span><span class="t"><b>Finish your intake form</b><small>${intakePct()}% done. Your answers set your plan and are shared with coaches you hire.</small><span class="nt-bar"><i style="width:${intakePct()}%"></i></span></span><span class="todo-go"><svg class="ico" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></span></button>`);
+  if(profileTodo())sl.push(`<button class="nt-slide" data-act="finishProfile"><span class="watch-ico">${USERSVG}</span><span class="t"><b>Finish your intake form</b><small>Your answers set your plan and are shared with coaches you hire.</small><span class="nt-prog"><span class="nt-bar"><i style="width:${intakePct()}%"></i></span><b class="num">${intakePct()}%</b></span><span class="nt-cta">${ICON.pen} Finish now</span></span><span class="todo-go"><svg class="ico" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></span></button>`);
   if(!S.plan&&!(today&&(today.gym||today.run)))sl.push(`<button class="nt-slide" data-act="goPlan"><span class="watch-ico">${ICON.bolt}</span><span class="t"><b>Get your plan</b><small>Tell us your goal and level. You get workouts and a weekly schedule built around your day.</small><span class="nt-cta">${ICON.bolt} Build my plan</span></span><span class="todo-go"><svg class="ico" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></span></button>`);
   if(!sl.length)return '';
   return `<div class="card nt-car todo-card" aria-roledescription="carousel" aria-label="Setup steps"><div class="nt-track" tabindex="0">${sl.join('')}</div>${sl.length>1?`<div class="nt-dots" role="tablist">${sl.map((_,i)=>`<button role="tab" class="${i?'':'on'}" data-nt="${i}" aria-label="Step ${i+1} of ${sl.length}"></button>`).join('')}</div>`:''}</div>`}
@@ -6515,9 +6581,9 @@ RENDER.me=()=>{
     <p class="muted" style="font-size:13.5px;margin-bottom:12px">No account. Your data is saved on this device and, when online, synced to every device you link by QR.</p>
     <div class="lbl" style="margin-bottom:4px">Linked devices</div><div class="list dev-list">${deviceRows()}</div>
     ${netNote('Linking devices')}
-    <div class="grid2" style="margin-top:10px"><button class="btn" data-net="write" data-act="deviceQR">${ICON.qr} Link a device</button><button class="btn soft" data-act="scan">${ICON.scan} Scan code</button></div>
+    <div class="grid2" style="margin-top:10px"><button class="btn" data-net="write" data-act="deviceQR">${ICON.qr} Link a device</button><button class="btn soft" data-act="signInOther">${ICON.scan} Enter a code</button></div>
     <div class="grid2" style="margin-top:10px"><button class="btn ghost" data-act="exportBackup">${ICON.dl} Backup file</button><button class="btn ghost" data-act="importBackup">Restore backup</button></div>
-    <p class="muted" style="font-size:12px;margin-top:10px">Profile code: <span class="mono" style="user-select:all">${p.id}</span></p></div>
+    ${p.fcode?`<p class="muted" style="font-size:12px;margin-top:10px">Friend code: <span class="mono" style="user-select:all;font-weight:700">${fmtCode(p.fcode)}</span></p>`:''}</div>
    <div class="card"><h3 style="margin-bottom:6px">Install</h3><p class="muted" style="font-size:13.5px">On iPhone, tap Share then Add to Home Screen. On Android, open the browser menu and choose Install app.</p><button class="btn soft sm" style="margin-top:10px" data-act="a2hs">${ICON.dl} Show install steps</button></div>
    ${devicesCard()}
    ${accountCard()}
@@ -6583,12 +6649,13 @@ function onboard(){if($('#onb')||S.onboarded)return;const o=document.createEleme
   const close=()=>{o.classList.add('out');setTimeout(()=>o.remove(),350);clearInterval(o._w)};
   o._w=setInterval(()=>{if(S.onboarded)close()},800); // signed in or linked a device from the buttons below
   const step1=()=>{o.innerHTML=`<div class="onb-card"><div class="onb-steps"><i class="on"></i><i></i></div>
-     <span class="logo onb-logo"><i class="paw"></i></span><h1>Create your account</h1><p class="muted">Your name and city are all it takes. Friends see your name on the leaderboard, and your city finds gyms, classes and coaches near you.</p>
+     <button type="button" class="onb-pfp ${S.profile.photo?'has':''}" id="obPfp" aria-label="Add a profile picture">${S.profile.photo?`<span class="avatar xl has-photo" style="background-image:url(${S.profile.photo})"></span>`:`<span class="onb-pfp-empty">${USERSVG}</span>`}<span class="pfp-cam">${ICON.cam}</span></button><small class="onb-pfp-l muted" id="obPfpL">${S.profile.photo?'Tap to change photo':'Add a profile picture (optional)'}</small><h1>Create your account</h1><p class="muted">Your name and city are all it takes. Friends see your name and photo on the leaderboard, and your city finds gyms, classes and coaches near you.</p>
      <div class="field"><label for="obName">Your name <b class="req">*</b></label><input class="inp" id="obName" maxlength="30" autocomplete="name" placeholder="e.g. Dawit Abebe" value="${esc(S.profile.name||'')}"></div>
      <div class="field"><label for="obCity">City <b class="req">*</b></label><input class="inp" id="obCity" placeholder="Start typing your city" value="${esc(S.profile.city||'')}"></div>
      <button class="btn block" id="obGo">Continue</button>
      <div class="onb-or"><span>Already have an account?</span></div>
-     <div class="grid2"><button class="btn soft" data-act="signIn">${ICON.lock} Sign in with phone</button><button class="btn soft" data-act="scan">${ICON.scan} Link a device</button></div></div>`;
+     <button class="btn soft block" data-act="signInOther">${ICON.qr} Sign in from another device</button></div>`;
+    $('#obPfp',o).onclick=()=>{const fi=$('#photoFile');fi.onchange=async()=>{const f=fi.files[0];fi.value='';if(!f)return;try{S.profile.photo=await squarePhoto(f,256);S.sync.pushedPub='';save('profile');const b=$('#obPfp',o);if(b){b.classList.add('has');b.innerHTML=`<span class="avatar xl has-photo" style="background-image:url(${S.profile.photo})"></span><span class="pfp-cam">${ICON.cam}</span>`;$('#obPfpL',o).textContent='Tap to change photo'}}catch(e){toast('Could not read that image. Try a JPG or PNG.')}};fi.click()};
     const go_=()=>{const n=$('#obName',o).value.trim(),c=$('#obCity',o).value.trim();
       if(!n){toast('Add your name so friends recognise you');$('#obName',o).focus();return}
       if(!c){toast('Choose your city');$('#obCity',o).focus();return}
@@ -6630,6 +6697,1379 @@ function runSplash(){const sp=$('#splash');if(!sp)return;const reduce=matchMedia
   const finish=()=>{clearInterval(ft);sp.classList.add('out');setTimeout(()=>sp.remove(),reduce?0:600)};
   Promise.race([ready,new Promise(r=>setTimeout(r,4000))]).then(()=>setTimeout(()=>{done=true},Math.max(0,(reduce?300:1800)-(Date.now()-t0))));
   requestAnimationFrame(step)}
+
+
+// close any open dropdown when the page scrolls or re-renders, so a menu never floats loose over the screen
+addEventListener('scroll',e=>{if(e.target&&e.target.closest&&e.target.closest('.dd-pop'))return;document.querySelectorAll('.dd-pop:not([hidden])').forEach(p=>{p.hidden=true;p.previousElementSibling?.setAttribute('aria-expanded','false')})},{passive:true,capture:true});
+
+
+// ================= SHORT CODES =================
+// One 6-character code instead of long links. codes/<CODE> = {k:'f'|'d', id, ts, exp?}
+//  f = friend code: permanent, one per profile (S.profile.fcode), adds you as a live friend
+//  d = device sign-in code: lasts 10 minutes and works once, signs a new device into this account
+// Letters that look alike (0/O, 1/I/L) are left out, so codes are easy to read out and type.
+const CODE_A='23456789ABCDEFGHJKMNPQRSTUVWXYZ';const DEV_TTL=10*60e3;
+function newCode(){const r=crypto.getRandomValues(new Uint8Array(6));let c='';for(const x of r)c+=CODE_A[x%CODE_A.length];return c}
+const fmtCode=c=>c?c.slice(0,3)+'-'+c.slice(3):'';
+function parseCode(t){t=String(t||'').trim();const m=t.match(/#j-([A-Za-z0-9]{6})\b/)||t.match(/^JP:([A-Za-z0-9-]{6,7})$/i);if(m)t=m[1];
+  t=t.toUpperCase().replace(/[\s-]/g,'').replace(/O/g,'0').replace(/[IL]/g,'1');if(t.length!==6)return '';if([...t].some(ch=>!CODE_A.includes(ch)))return '';return t}
+function shareBase(){if(APP_URL.startsWith('http'))return APP_URL;if(!window.claude&&/^https?:/.test(location.protocol))return location.href.split('#')[0];return ''}
+const codeQrText=c=>{const b=shareBase();return b?b+'#j-'+c:'JP:'+c};
+async function claimCode(kind,ttl){for(let i=0;i<6;i++){const c=newCode();let taken=false;try{const s=await NET.db.doc('codes/'+c).get();taken=s.exists&&!((s.data().exp||0)&&s.data().exp<Date.now())}catch(e){dbErr(e);throw {msg:'Could not reach the server right now'}}
+  if(taken)continue;const d={k:kind,id:S.profile.id,ts:Date.now()};if(ttl)d.exp=Date.now()+ttl;await NET.db.doc('codes/'+c).set(d);return c}throw {msg:'Could not make a code right now. Try again.'}}
+async function resolveCode(c){let s;try{s=await NET.db.doc('codes/'+c).get()}catch(e){dbErr(e);throw {msg:'Could not reach the server right now'}}
+  if(!s.exists)throw {msg:'No account uses that code. Check the letters and try again.'};const d=s.data();if(d.exp&&d.exp<Date.now())throw {msg:'That code has expired. Ask for a new one on the other device.'};return d}
+// my permanent friend code (created once, synced with the profile)
+async function friendCode(){if(!canWrite())return S.profile.fcode||'';const c=S.profile.fcode;
+  if(c){if(S.sync.fcode!==c+S.profile.id){try{const s=await NET.db.doc('codes/'+c).get();if(!s.exists||s.data().id!==S.profile.id){if(s.exists){S.profile.fcode='';return friendCode()}await NET.db.doc('codes/'+c).set({k:'f',id:S.profile.id,ts:Date.now()})}S.sync.fcode=c+S.profile.id;saveNow()}catch(e){}}return c}
+  try{const n=await claimCode('f');S.profile.fcode=n;S.sync.fcode=n+S.profile.id;save('profile');return n}catch(e){return ''}}
+// what to do with a code someone typed or scanned
+async function useCode(raw){const c=parseCode(raw);if(!c){toast('Enter the 6-character code, like K7M-2QX');return false}
+  if(!online()){toast('Codes need a connection. Try again when you are online.');return false}
+  if(c===S.profile.fcode){toast("That's your own code");return false}
+  try{const d=await resolveCode(c);if(d.id===S.profile.id){toast(d.k==='d'?'This device is already signed in to that account':"That's your own code");return false}
+    if(d.k==='d'){await signInWith(d.id);NET.db.doc('codes/'+c).delete().catch(()=>{});return true}
+    await addLiveFriend(d.id);return true}catch(e){toast(e&&e.msg||'Could not use that code right now');return false}}
+// sign this device into another account and go straight in: no extra confirmation, no second sign-up step
+async function signInWith(id){toast('Signing in…');await linkProfile(id);S.profile.setup=S.profile.setup||1;saveNow();
+  const o=$('#onb');if(o){clearInterval(o._w);o.classList.add('out');setTimeout(()=>o.remove(),350)}
+  showApp('home');try{history.replaceState(null,'','#home')}catch(e){}setTimeout(()=>toast(`Signed in as ${S.profile.name||'you'}. Your data syncs live on this device.`),400)}
+// sheet: sign in from another device (scan its QR or type its code)
+ACT.signInOther=()=>openSheet('Sign in from another device',`<p class="muted">On a phone or computer that is already signed in, open <b>My Profile</b> and tap <b>Show sign-in code</b>. Scan the QR code it shows, or type the 6-character code.</p>
+  ${netNote('Signing in')}
+  <button class="btn block" id="soScan" data-net="1">${ICON.scan} Scan QR code</button>
+  <div class="onb-or"><span>or type the code</span></div>
+  <div class="code-row"><input class="inp code-inp" id="soCode" maxlength="7" autocomplete="one-time-code" autocapitalize="characters" autocorrect="off" spellcheck="false" placeholder="ABC-123" aria-label="Sign-in code"><button class="btn" id="soGo" data-net="1">Sign in</button></div>`,el=>{
+   const inp=$('#soCode',el);inp.oninput=()=>{let v=inp.value.toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,6);inp.value=v.length>3?v.slice(0,3)+'-'+v.slice(3):v};
+   const go_=async()=>{const b=$('#soGo',el);b.disabled=true;const ok=await useCode(inp.value);if(ok)closeSheet();else{b.disabled=false;inp.focus()}};
+   $('#soGo',el).onclick=go_;inp.onkeydown=e=>{if(e.key==='Enter')go_()};
+   $('#soScan',el).onclick=()=>{SCAN_HOOK={title:'Scan the sign-in code',fn:t=>useCode(t)};ACT.scan({_hook:1})};
+   setTimeout(()=>inp.focus(),300)});
+ACT.signIn=ACT.signInOther; // older buttons (invites) open the same sheet
+
+// QR code encoder: QRCode for JavaScript, Copyright (c) 2009 Kazuhiko Arase, MIT license (http://www.d-project.com/). Bundled so QR codes draw even when the CDN library cannot load.
+const QRLite=(()=>{const M={};const req=n=>M[n.replace("./","")];
+{const module={exports:{}};const require=req;
+module.exports = {
+    MODE_NUMBER :       1 << 0,
+    MODE_ALPHA_NUM :    1 << 1,
+    MODE_8BIT_BYTE :    1 << 2,
+    MODE_KANJI :        1 << 3
+};
+
+M["QRMode"]=module.exports;}
+{const module={exports:{}};const require=req;
+module.exports = {
+	L : 1,
+	M : 0,
+	Q : 3,
+	H : 2
+};
+
+
+M["QRErrorCorrectLevel"]=module.exports;}
+{const module={exports:{}};const require=req;
+module.exports = {
+	PATTERN000 : 0,
+	PATTERN001 : 1,
+	PATTERN010 : 2,
+	PATTERN011 : 3,
+	PATTERN100 : 4,
+	PATTERN101 : 5,
+	PATTERN110 : 6,
+	PATTERN111 : 7
+};
+
+M["QRMaskPattern"]=module.exports;}
+{const module={exports:{}};const require=req;
+var QRMath = {
+
+	glog : function(n) {
+	
+		if (n < 1) {
+			throw new Error("glog(" + n + ")");
+		}
+		
+		return QRMath.LOG_TABLE[n];
+	},
+	
+	gexp : function(n) {
+	
+		while (n < 0) {
+			n += 255;
+		}
+	
+		while (n >= 256) {
+			n -= 255;
+		}
+	
+		return QRMath.EXP_TABLE[n];
+	},
+	
+	EXP_TABLE : new Array(256),
+	
+	LOG_TABLE : new Array(256)
+
+};
+	
+for (var i = 0; i < 8; i++) {
+	QRMath.EXP_TABLE[i] = 1 << i;
+}
+for (var i = 8; i < 256; i++) {
+	QRMath.EXP_TABLE[i] = QRMath.EXP_TABLE[i - 4]
+		^ QRMath.EXP_TABLE[i - 5]
+		^ QRMath.EXP_TABLE[i - 6]
+		^ QRMath.EXP_TABLE[i - 8];
+}
+for (var i = 0; i < 255; i++) {
+	QRMath.LOG_TABLE[QRMath.EXP_TABLE[i] ] = i;
+}
+
+module.exports = QRMath;
+
+M["QRMath"]=module.exports;}
+{const module={exports:{}};const require=req;
+var QRMath = require('./QRMath');
+
+function QRPolynomial(num, shift) {
+	if (num.length === undefined) {
+		throw new Error(num.length + "/" + shift);
+	}
+
+	var offset = 0;
+
+	while (offset < num.length && num[offset] === 0) {
+		offset++;
+	}
+
+	this.num = new Array(num.length - offset + shift);
+	for (var i = 0; i < num.length - offset; i++) {
+		this.num[i] = num[i + offset];
+	}
+}
+
+QRPolynomial.prototype = {
+
+	get : function(index) {
+		return this.num[index];
+	},
+	
+	getLength : function() {
+		return this.num.length;
+	},
+	
+	multiply : function(e) {
+	
+		var num = new Array(this.getLength() + e.getLength() - 1);
+	
+		for (var i = 0; i < this.getLength(); i++) {
+			for (var j = 0; j < e.getLength(); j++) {
+				num[i + j] ^= QRMath.gexp(QRMath.glog(this.get(i) ) + QRMath.glog(e.get(j) ) );
+			}
+		}
+	
+		return new QRPolynomial(num, 0);
+	},
+	
+	mod : function(e) {
+	
+		if (this.getLength() - e.getLength() < 0) {
+			return this;
+		}
+	
+		var ratio = QRMath.glog(this.get(0) ) - QRMath.glog(e.get(0) );
+	
+		var num = new Array(this.getLength() );
+		
+		for (var i = 0; i < this.getLength(); i++) {
+			num[i] = this.get(i);
+		}
+		
+		for (var x = 0; x < e.getLength(); x++) {
+			num[x] ^= QRMath.gexp(QRMath.glog(e.get(x) ) + ratio);
+		}
+	
+		// recursive call
+		return new QRPolynomial(num, 0).mod(e);
+	}
+};
+
+module.exports = QRPolynomial;
+
+M["QRPolynomial"]=module.exports;}
+{const module={exports:{}};const require=req;
+var QRMode = require('./QRMode');
+
+function QR8bitByte(data) {
+	this.mode = QRMode.MODE_8BIT_BYTE;
+	this.data = data;
+}
+
+QR8bitByte.prototype = {
+
+	getLength : function() {
+		return this.data.length;
+	},
+	
+	write : function(buffer) {
+		for (var i = 0; i < this.data.length; i++) {
+			// not JIS ...
+			buffer.put(this.data.charCodeAt(i), 8);
+		}
+	}
+};
+
+module.exports = QR8bitByte;
+
+M["QR8bitByte"]=module.exports;}
+{const module={exports:{}};const require=req;
+function QRBitBuffer() {
+	this.buffer = [];
+	this.length = 0;
+}
+
+QRBitBuffer.prototype = {
+
+	get : function(index) {
+		var bufIndex = Math.floor(index / 8);
+		return ( (this.buffer[bufIndex] >>> (7 - index % 8) ) & 1) == 1;
+	},
+	
+	put : function(num, length) {
+		for (var i = 0; i < length; i++) {
+			this.putBit( ( (num >>> (length - i - 1) ) & 1) == 1);
+		}
+	},
+	
+	getLengthInBits : function() {
+		return this.length;
+	},
+	
+	putBit : function(bit) {
+	
+		var bufIndex = Math.floor(this.length / 8);
+		if (this.buffer.length <= bufIndex) {
+			this.buffer.push(0);
+		}
+	
+		if (bit) {
+			this.buffer[bufIndex] |= (0x80 >>> (this.length % 8) );
+		}
+	
+		this.length++;
+	}
+};
+
+module.exports = QRBitBuffer;
+
+M["QRBitBuffer"]=module.exports;}
+{const module={exports:{}};const require=req;
+var QRErrorCorrectLevel = require('./QRErrorCorrectLevel');
+
+function QRRSBlock(totalCount, dataCount) {
+	this.totalCount = totalCount;
+	this.dataCount  = dataCount;
+}
+
+QRRSBlock.RS_BLOCK_TABLE = [
+
+	// L
+	// M
+	// Q
+	// H
+
+	// 1
+	[1, 26, 19],
+	[1, 26, 16],
+	[1, 26, 13],
+	[1, 26, 9],
+	
+	// 2
+	[1, 44, 34],
+	[1, 44, 28],
+	[1, 44, 22],
+	[1, 44, 16],
+
+	// 3
+	[1, 70, 55],
+	[1, 70, 44],
+	[2, 35, 17],
+	[2, 35, 13],
+
+	// 4		
+	[1, 100, 80],
+	[2, 50, 32],
+	[2, 50, 24],
+	[4, 25, 9],
+	
+	// 5
+	[1, 134, 108],
+	[2, 67, 43],
+	[2, 33, 15, 2, 34, 16],
+	[2, 33, 11, 2, 34, 12],
+	
+	// 6
+	[2, 86, 68],
+	[4, 43, 27],
+	[4, 43, 19],
+	[4, 43, 15],
+	
+	// 7		
+	[2, 98, 78],
+	[4, 49, 31],
+	[2, 32, 14, 4, 33, 15],
+	[4, 39, 13, 1, 40, 14],
+	
+	// 8
+	[2, 121, 97],
+	[2, 60, 38, 2, 61, 39],
+	[4, 40, 18, 2, 41, 19],
+	[4, 40, 14, 2, 41, 15],
+	
+	// 9
+	[2, 146, 116],
+	[3, 58, 36, 2, 59, 37],
+	[4, 36, 16, 4, 37, 17],
+	[4, 36, 12, 4, 37, 13],
+	
+	// 10		
+	[2, 86, 68, 2, 87, 69],
+	[4, 69, 43, 1, 70, 44],
+	[6, 43, 19, 2, 44, 20],
+	[6, 43, 15, 2, 44, 16],
+
+	// 11
+	[4, 101, 81],
+	[1, 80, 50, 4, 81, 51],
+	[4, 50, 22, 4, 51, 23],
+	[3, 36, 12, 8, 37, 13],
+
+	// 12
+	[2, 116, 92, 2, 117, 93],
+	[6, 58, 36, 2, 59, 37],
+	[4, 46, 20, 6, 47, 21],
+	[7, 42, 14, 4, 43, 15],
+
+	// 13
+	[4, 133, 107],
+	[8, 59, 37, 1, 60, 38],
+	[8, 44, 20, 4, 45, 21],
+	[12, 33, 11, 4, 34, 12],
+
+	// 14
+	[3, 145, 115, 1, 146, 116],
+	[4, 64, 40, 5, 65, 41],
+	[11, 36, 16, 5, 37, 17],
+	[11, 36, 12, 5, 37, 13],
+
+	// 15
+	[5, 109, 87, 1, 110, 88],
+	[5, 65, 41, 5, 66, 42],
+	[5, 54, 24, 7, 55, 25],
+	[11, 36, 12],
+
+	// 16
+	[5, 122, 98, 1, 123, 99],
+	[7, 73, 45, 3, 74, 46],
+	[15, 43, 19, 2, 44, 20],
+	[3, 45, 15, 13, 46, 16],
+
+	// 17
+	[1, 135, 107, 5, 136, 108],
+	[10, 74, 46, 1, 75, 47],
+	[1, 50, 22, 15, 51, 23],
+	[2, 42, 14, 17, 43, 15],
+
+	// 18
+	[5, 150, 120, 1, 151, 121],
+	[9, 69, 43, 4, 70, 44],
+	[17, 50, 22, 1, 51, 23],
+	[2, 42, 14, 19, 43, 15],
+
+	// 19
+	[3, 141, 113, 4, 142, 114],
+	[3, 70, 44, 11, 71, 45],
+	[17, 47, 21, 4, 48, 22],
+	[9, 39, 13, 16, 40, 14],
+
+	// 20
+	[3, 135, 107, 5, 136, 108],
+	[3, 67, 41, 13, 68, 42],
+	[15, 54, 24, 5, 55, 25],
+	[15, 43, 15, 10, 44, 16],
+
+	// 21
+	[4, 144, 116, 4, 145, 117],
+	[17, 68, 42],
+	[17, 50, 22, 6, 51, 23],
+	[19, 46, 16, 6, 47, 17],
+
+	// 22
+	[2, 139, 111, 7, 140, 112],
+	[17, 74, 46],
+	[7, 54, 24, 16, 55, 25],
+	[34, 37, 13],
+
+	// 23
+	[4, 151, 121, 5, 152, 122],
+	[4, 75, 47, 14, 76, 48],
+	[11, 54, 24, 14, 55, 25],
+	[16, 45, 15, 14, 46, 16],
+
+	// 24
+	[6, 147, 117, 4, 148, 118],
+	[6, 73, 45, 14, 74, 46],
+	[11, 54, 24, 16, 55, 25],
+	[30, 46, 16, 2, 47, 17],
+
+	// 25
+	[8, 132, 106, 4, 133, 107],
+	[8, 75, 47, 13, 76, 48],
+	[7, 54, 24, 22, 55, 25],
+	[22, 45, 15, 13, 46, 16],
+
+	// 26
+	[10, 142, 114, 2, 143, 115],
+	[19, 74, 46, 4, 75, 47],
+	[28, 50, 22, 6, 51, 23],
+	[33, 46, 16, 4, 47, 17],
+
+	// 27
+	[8, 152, 122, 4, 153, 123],
+	[22, 73, 45, 3, 74, 46],
+	[8, 53, 23, 26, 54, 24],
+	[12, 45, 15, 28, 46, 16],
+
+	// 28
+	[3, 147, 117, 10, 148, 118],
+	[3, 73, 45, 23, 74, 46],
+	[4, 54, 24, 31, 55, 25],
+	[11, 45, 15, 31, 46, 16],
+
+	// 29
+	[7, 146, 116, 7, 147, 117],
+	[21, 73, 45, 7, 74, 46],
+	[1, 53, 23, 37, 54, 24],
+	[19, 45, 15, 26, 46, 16],
+
+	// 30
+	[5, 145, 115, 10, 146, 116],
+	[19, 75, 47, 10, 76, 48],
+	[15, 54, 24, 25, 55, 25],
+	[23, 45, 15, 25, 46, 16],
+
+	// 31
+	[13, 145, 115, 3, 146, 116],
+	[2, 74, 46, 29, 75, 47],
+	[42, 54, 24, 1, 55, 25],
+	[23, 45, 15, 28, 46, 16],
+
+	// 32
+	[17, 145, 115],
+	[10, 74, 46, 23, 75, 47],
+	[10, 54, 24, 35, 55, 25],
+	[19, 45, 15, 35, 46, 16],
+
+	// 33
+	[17, 145, 115, 1, 146, 116],
+	[14, 74, 46, 21, 75, 47],
+	[29, 54, 24, 19, 55, 25],
+	[11, 45, 15, 46, 46, 16],
+
+	// 34
+	[13, 145, 115, 6, 146, 116],
+	[14, 74, 46, 23, 75, 47],
+	[44, 54, 24, 7, 55, 25],
+	[59, 46, 16, 1, 47, 17],
+
+	// 35
+	[12, 151, 121, 7, 152, 122],
+	[12, 75, 47, 26, 76, 48],
+	[39, 54, 24, 14, 55, 25],
+	[22, 45, 15, 41, 46, 16],
+
+	// 36
+	[6, 151, 121, 14, 152, 122],
+	[6, 75, 47, 34, 76, 48],
+	[46, 54, 24, 10, 55, 25],
+	[2, 45, 15, 64, 46, 16],
+
+	// 37
+	[17, 152, 122, 4, 153, 123],
+	[29, 74, 46, 14, 75, 47],
+	[49, 54, 24, 10, 55, 25],
+	[24, 45, 15, 46, 46, 16],
+
+	// 38
+	[4, 152, 122, 18, 153, 123],
+	[13, 74, 46, 32, 75, 47],
+	[48, 54, 24, 14, 55, 25],
+	[42, 45, 15, 32, 46, 16],
+
+	// 39
+	[20, 147, 117, 4, 148, 118],
+	[40, 75, 47, 7, 76, 48],
+	[43, 54, 24, 22, 55, 25],
+	[10, 45, 15, 67, 46, 16],
+
+	// 40
+	[19, 148, 118, 6, 149, 119],
+	[18, 75, 47, 31, 76, 48],
+	[34, 54, 24, 34, 55, 25],
+	[20, 45, 15, 61, 46, 16]
+];
+
+QRRSBlock.getRSBlocks = function(typeNumber, errorCorrectLevel) {
+	
+	var rsBlock = QRRSBlock.getRsBlockTable(typeNumber, errorCorrectLevel);
+	
+	if (rsBlock === undefined) {
+		throw new Error("bad rs block @ typeNumber:" + typeNumber + "/errorCorrectLevel:" + errorCorrectLevel);
+	}
+
+	var length = rsBlock.length / 3;
+	
+	var list = [];
+	
+	for (var i = 0; i < length; i++) {
+
+		var count = rsBlock[i * 3 + 0];
+		var totalCount = rsBlock[i * 3 + 1];
+		var dataCount  = rsBlock[i * 3 + 2];
+
+		for (var j = 0; j < count; j++) {
+			list.push(new QRRSBlock(totalCount, dataCount) );	
+		}
+	}
+	
+	return list;
+};
+
+QRRSBlock.getRsBlockTable = function(typeNumber, errorCorrectLevel) {
+
+	switch(errorCorrectLevel) {
+	case QRErrorCorrectLevel.L :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 0];
+	case QRErrorCorrectLevel.M :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 1];
+	case QRErrorCorrectLevel.Q :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 2];
+	case QRErrorCorrectLevel.H :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 3];
+	default :
+		return undefined;
+	}
+};
+
+module.exports = QRRSBlock;
+
+M["QRRSBlock"]=module.exports;}
+{const module={exports:{}};const require=req;
+var QRMode = require('./QRMode');
+var QRPolynomial = require('./QRPolynomial');
+var QRMath = require('./QRMath');
+var QRMaskPattern = require('./QRMaskPattern');
+
+var QRUtil = {
+
+    PATTERN_POSITION_TABLE : [
+        [],
+        [6, 18],
+        [6, 22],
+        [6, 26],
+        [6, 30],
+        [6, 34],
+        [6, 22, 38],
+        [6, 24, 42],
+        [6, 26, 46],
+        [6, 28, 50],
+        [6, 30, 54],        
+        [6, 32, 58],
+        [6, 34, 62],
+        [6, 26, 46, 66],
+        [6, 26, 48, 70],
+        [6, 26, 50, 74],
+        [6, 30, 54, 78],
+        [6, 30, 56, 82],
+        [6, 30, 58, 86],
+        [6, 34, 62, 90],
+        [6, 28, 50, 72, 94],
+        [6, 26, 50, 74, 98],
+        [6, 30, 54, 78, 102],
+        [6, 28, 54, 80, 106],
+        [6, 32, 58, 84, 110],
+        [6, 30, 58, 86, 114],
+        [6, 34, 62, 90, 118],
+        [6, 26, 50, 74, 98, 122],
+        [6, 30, 54, 78, 102, 126],
+        [6, 26, 52, 78, 104, 130],
+        [6, 30, 56, 82, 108, 134],
+        [6, 34, 60, 86, 112, 138],
+        [6, 30, 58, 86, 114, 142],
+        [6, 34, 62, 90, 118, 146],
+        [6, 30, 54, 78, 102, 126, 150],
+        [6, 24, 50, 76, 102, 128, 154],
+        [6, 28, 54, 80, 106, 132, 158],
+        [6, 32, 58, 84, 110, 136, 162],
+        [6, 26, 54, 82, 110, 138, 166],
+        [6, 30, 58, 86, 114, 142, 170]
+    ],
+
+    G15 : (1 << 10) | (1 << 8) | (1 << 5) | (1 << 4) | (1 << 2) | (1 << 1) | (1 << 0),
+    G18 : (1 << 12) | (1 << 11) | (1 << 10) | (1 << 9) | (1 << 8) | (1 << 5) | (1 << 2) | (1 << 0),
+    G15_MASK : (1 << 14) | (1 << 12) | (1 << 10)    | (1 << 4) | (1 << 1),
+
+    getBCHTypeInfo : function(data) {
+        var d = data << 10;
+        while (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G15) >= 0) {
+            d ^= (QRUtil.G15 << (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G15) ) );    
+        }
+        return ( (data << 10) | d) ^ QRUtil.G15_MASK;
+    },
+
+    getBCHTypeNumber : function(data) {
+        var d = data << 12;
+        while (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G18) >= 0) {
+            d ^= (QRUtil.G18 << (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G18) ) );    
+        }
+        return (data << 12) | d;
+    },
+
+    getBCHDigit : function(data) {
+
+        var digit = 0;
+
+        while (data !== 0) {
+            digit++;
+            data >>>= 1;
+        }
+
+        return digit;
+    },
+
+    getPatternPosition : function(typeNumber) {
+        return QRUtil.PATTERN_POSITION_TABLE[typeNumber - 1];
+    },
+
+    getMask : function(maskPattern, i, j) {
+        
+        switch (maskPattern) {
+            
+        case QRMaskPattern.PATTERN000 : return (i + j) % 2 === 0;
+        case QRMaskPattern.PATTERN001 : return i % 2 === 0;
+        case QRMaskPattern.PATTERN010 : return j % 3 === 0;
+        case QRMaskPattern.PATTERN011 : return (i + j) % 3 === 0;
+        case QRMaskPattern.PATTERN100 : return (Math.floor(i / 2) + Math.floor(j / 3) ) % 2 === 0;
+        case QRMaskPattern.PATTERN101 : return (i * j) % 2 + (i * j) % 3 === 0;
+        case QRMaskPattern.PATTERN110 : return ( (i * j) % 2 + (i * j) % 3) % 2 === 0;
+        case QRMaskPattern.PATTERN111 : return ( (i * j) % 3 + (i + j) % 2) % 2 === 0;
+
+        default :
+            throw new Error("bad maskPattern:" + maskPattern);
+        }
+    },
+
+    getErrorCorrectPolynomial : function(errorCorrectLength) {
+
+        var a = new QRPolynomial([1], 0);
+
+        for (var i = 0; i < errorCorrectLength; i++) {
+            a = a.multiply(new QRPolynomial([1, QRMath.gexp(i)], 0) );
+        }
+
+        return a;
+    },
+
+    getLengthInBits : function(mode, type) {
+
+        if (1 <= type && type < 10) {
+
+            // 1 - 9
+
+            switch(mode) {
+            case QRMode.MODE_NUMBER     : return 10;
+            case QRMode.MODE_ALPHA_NUM  : return 9;
+            case QRMode.MODE_8BIT_BYTE  : return 8;
+            case QRMode.MODE_KANJI      : return 8;
+            default :
+                throw new Error("mode:" + mode);
+            }
+
+        } else if (type < 27) {
+
+            // 10 - 26
+
+            switch(mode) {
+            case QRMode.MODE_NUMBER     : return 12;
+            case QRMode.MODE_ALPHA_NUM  : return 11;
+            case QRMode.MODE_8BIT_BYTE  : return 16;
+            case QRMode.MODE_KANJI      : return 10;
+            default :
+                throw new Error("mode:" + mode);
+            }
+
+        } else if (type < 41) {
+
+            // 27 - 40
+
+            switch(mode) {
+            case QRMode.MODE_NUMBER     : return 14;
+            case QRMode.MODE_ALPHA_NUM  : return 13;
+            case QRMode.MODE_8BIT_BYTE  : return 16;
+            case QRMode.MODE_KANJI      : return 12;
+            default :
+                throw new Error("mode:" + mode);
+            }
+
+        } else {
+            throw new Error("type:" + type);
+        }
+    },
+
+    getLostPoint : function(qrCode) {
+        
+        var moduleCount = qrCode.getModuleCount();
+        var lostPoint = 0;
+        var row = 0; 
+        var col = 0;
+
+        
+        // LEVEL1
+        
+        for (row = 0; row < moduleCount; row++) {
+
+            for (col = 0; col < moduleCount; col++) {
+
+                var sameCount = 0;
+                var dark = qrCode.isDark(row, col);
+
+                for (var r = -1; r <= 1; r++) {
+
+                    if (row + r < 0 || moduleCount <= row + r) {
+                        continue;
+                    }
+
+                    for (var c = -1; c <= 1; c++) {
+
+                        if (col + c < 0 || moduleCount <= col + c) {
+                            continue;
+                        }
+
+                        if (r === 0 && c === 0) {
+                            continue;
+                        }
+
+                        if (dark === qrCode.isDark(row + r, col + c) ) {
+                            sameCount++;
+                        }
+                    }
+                }
+
+                if (sameCount > 5) {
+                    lostPoint += (3 + sameCount - 5);
+                }
+            }
+        }
+
+        // LEVEL2
+
+        for (row = 0; row < moduleCount - 1; row++) {
+            for (col = 0; col < moduleCount - 1; col++) {
+                var count = 0;
+                if (qrCode.isDark(row,     col    ) ) count++;
+                if (qrCode.isDark(row + 1, col    ) ) count++;
+                if (qrCode.isDark(row,     col + 1) ) count++;
+                if (qrCode.isDark(row + 1, col + 1) ) count++;
+                if (count === 0 || count === 4) {
+                    lostPoint += 3;
+                }
+            }
+        }
+
+        // LEVEL3
+
+        for (row = 0; row < moduleCount; row++) {
+            for (col = 0; col < moduleCount - 6; col++) {
+                if (qrCode.isDark(row, col) && 
+                        !qrCode.isDark(row, col + 1) && 
+                         qrCode.isDark(row, col + 2) && 
+                         qrCode.isDark(row, col + 3) && 
+                         qrCode.isDark(row, col + 4) && 
+                        !qrCode.isDark(row, col + 5) && 
+                         qrCode.isDark(row, col + 6) ) {
+                    lostPoint += 40;
+                }
+            }
+        }
+
+        for (col = 0; col < moduleCount; col++) {
+            for (row = 0; row < moduleCount - 6; row++) {
+                if (qrCode.isDark(row, col) &&
+                        !qrCode.isDark(row + 1, col) &&
+                         qrCode.isDark(row + 2, col) &&
+                         qrCode.isDark(row + 3, col) &&
+                         qrCode.isDark(row + 4, col) &&
+                        !qrCode.isDark(row + 5, col) &&
+                         qrCode.isDark(row + 6, col) ) {
+                    lostPoint += 40;
+                }
+            }
+        }
+
+        // LEVEL4
+        
+        var darkCount = 0;
+
+        for (col = 0; col < moduleCount; col++) {
+            for (row = 0; row < moduleCount; row++) {
+                if (qrCode.isDark(row, col) ) {
+                    darkCount++;
+                }
+            }
+        }
+        
+        var ratio = Math.abs(100 * darkCount / moduleCount / moduleCount - 50) / 5;
+        lostPoint += ratio * 10;
+
+        return lostPoint;       
+    }
+
+};
+
+module.exports = QRUtil;
+
+M["QRUtil"]=module.exports;}
+{const module={exports:{}};const require=req;
+//---------------------------------------------------------------------
+// QRCode for JavaScript
+//
+// Copyright (c) 2009 Kazuhiko Arase
+//
+// URL: http://www.d-project.com/
+//
+// Licensed under the MIT license:
+//   http://www.opensource.org/licenses/mit-license.php
+//
+// The word "QR Code" is registered trademark of 
+// DENSO WAVE INCORPORATED
+//   http://www.denso-wave.com/qrcode/faqpatent-e.html
+//
+//---------------------------------------------------------------------
+// Modified to work in node for this project (and some refactoring)
+//---------------------------------------------------------------------
+
+var QR8bitByte = require('./QR8bitByte');
+var QRUtil = require('./QRUtil');
+var QRPolynomial = require('./QRPolynomial');
+var QRRSBlock = require('./QRRSBlock');
+var QRBitBuffer = require('./QRBitBuffer');
+
+function QRCode(typeNumber, errorCorrectLevel) {
+	this.typeNumber = typeNumber;
+	this.errorCorrectLevel = errorCorrectLevel;
+	this.modules = null;
+	this.moduleCount = 0;
+	this.dataCache = null;
+	this.dataList = [];
+}
+
+QRCode.prototype = {
+	
+	addData : function(data) {
+		var newData = new QR8bitByte(data);
+		this.dataList.push(newData);
+		this.dataCache = null;
+	},
+	
+	isDark : function(row, col) {
+		if (row < 0 || this.moduleCount <= row || col < 0 || this.moduleCount <= col) {
+			throw new Error(row + "," + col);
+		}
+		return this.modules[row][col];
+	},
+
+	getModuleCount : function() {
+		return this.moduleCount;
+	},
+	
+	make : function() {
+		// Calculate automatically typeNumber if provided is < 1
+		if (this.typeNumber < 1 ){
+			var typeNumber = 1;
+			for (typeNumber = 1; typeNumber < 40; typeNumber++) {
+				var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, this.errorCorrectLevel);
+
+				var buffer = new QRBitBuffer();
+				var totalDataCount = 0;
+				for (var i = 0; i < rsBlocks.length; i++) {
+					totalDataCount += rsBlocks[i].dataCount;
+				}
+
+				for (var x = 0; x < this.dataList.length; x++) {
+					var data = this.dataList[x];
+					buffer.put(data.mode, 4);
+					buffer.put(data.getLength(), QRUtil.getLengthInBits(data.mode, typeNumber) );
+					data.write(buffer);
+				}
+				if (buffer.getLengthInBits() <= totalDataCount * 8)
+					break;
+			}
+			this.typeNumber = typeNumber;
+		}
+		this.makeImpl(false, this.getBestMaskPattern() );
+	},
+	
+	makeImpl : function(test, maskPattern) {
+		
+		this.moduleCount = this.typeNumber * 4 + 17;
+		this.modules = new Array(this.moduleCount);
+		
+		for (var row = 0; row < this.moduleCount; row++) {
+			
+			this.modules[row] = new Array(this.moduleCount);
+			
+			for (var col = 0; col < this.moduleCount; col++) {
+				this.modules[row][col] = null;//(col + row) % 3;
+			}
+		}
+	
+		this.setupPositionProbePattern(0, 0);
+		this.setupPositionProbePattern(this.moduleCount - 7, 0);
+		this.setupPositionProbePattern(0, this.moduleCount - 7);
+		this.setupPositionAdjustPattern();
+		this.setupTimingPattern();
+		this.setupTypeInfo(test, maskPattern);
+		
+		if (this.typeNumber >= 7) {
+			this.setupTypeNumber(test);
+		}
+	
+		if (this.dataCache === null) {
+			this.dataCache = QRCode.createData(this.typeNumber, this.errorCorrectLevel, this.dataList);
+		}
+	
+		this.mapData(this.dataCache, maskPattern);
+	},
+
+	setupPositionProbePattern : function(row, col)  {
+		
+		for (var r = -1; r <= 7; r++) {
+			
+			if (row + r <= -1 || this.moduleCount <= row + r) continue;
+			
+			for (var c = -1; c <= 7; c++) {
+				
+				if (col + c <= -1 || this.moduleCount <= col + c) continue;
+				
+				if ( (0 <= r && r <= 6 && (c === 0 || c === 6) ) || 
+                     (0 <= c && c <= 6 && (r === 0 || r === 6) ) || 
+                     (2 <= r && r <= 4 && 2 <= c && c <= 4) ) {
+					this.modules[row + r][col + c] = true;
+				} else {
+					this.modules[row + r][col + c] = false;
+				}
+			}		
+		}		
+	},
+	
+	getBestMaskPattern : function() {
+	
+		var minLostPoint = 0;
+		var pattern = 0;
+	
+		for (var i = 0; i < 8; i++) {
+			
+			this.makeImpl(true, i);
+	
+			var lostPoint = QRUtil.getLostPoint(this);
+	
+			if (i === 0 || minLostPoint >  lostPoint) {
+				minLostPoint = lostPoint;
+				pattern = i;
+			}
+		}
+	
+		return pattern;
+	},
+	
+	createMovieClip : function(target_mc, instance_name, depth) {
+	
+		var qr_mc = target_mc.createEmptyMovieClip(instance_name, depth);
+		var cs = 1;
+	
+		this.make();
+
+		for (var row = 0; row < this.modules.length; row++) {
+			
+			var y = row * cs;
+			
+			for (var col = 0; col < this.modules[row].length; col++) {
+	
+				var x = col * cs;
+				var dark = this.modules[row][col];
+			
+				if (dark) {
+					qr_mc.beginFill(0, 100);
+					qr_mc.moveTo(x, y);
+					qr_mc.lineTo(x + cs, y);
+					qr_mc.lineTo(x + cs, y + cs);
+					qr_mc.lineTo(x, y + cs);
+					qr_mc.endFill();
+				}
+			}
+		}
+		
+		return qr_mc;
+	},
+
+	setupTimingPattern : function() {
+		
+		for (var r = 8; r < this.moduleCount - 8; r++) {
+			if (this.modules[r][6] !== null) {
+				continue;
+			}
+			this.modules[r][6] = (r % 2 === 0);
+		}
+	
+		for (var c = 8; c < this.moduleCount - 8; c++) {
+			if (this.modules[6][c] !== null) {
+				continue;
+			}
+			this.modules[6][c] = (c % 2 === 0);
+		}
+	},
+	
+	setupPositionAdjustPattern : function() {
+	
+		var pos = QRUtil.getPatternPosition(this.typeNumber);
+		
+		for (var i = 0; i < pos.length; i++) {
+		
+			for (var j = 0; j < pos.length; j++) {
+			
+				var row = pos[i];
+				var col = pos[j];
+				
+				if (this.modules[row][col] !== null) {
+					continue;
+				}
+				
+				for (var r = -2; r <= 2; r++) {
+				
+					for (var c = -2; c <= 2; c++) {
+					
+						if (Math.abs(r) === 2 || 
+                            Math.abs(c) === 2 ||
+                            (r === 0 && c === 0) ) {
+							this.modules[row + r][col + c] = true;
+						} else {
+							this.modules[row + r][col + c] = false;
+						}
+					}
+				}
+			}
+		}
+	},
+	
+	setupTypeNumber : function(test) {
+	
+		var bits = QRUtil.getBCHTypeNumber(this.typeNumber);
+        var mod;
+	
+		for (var i = 0; i < 18; i++) {
+			mod = (!test && ( (bits >> i) & 1) === 1);
+			this.modules[Math.floor(i / 3)][i % 3 + this.moduleCount - 8 - 3] = mod;
+		}
+	
+		for (var x = 0; x < 18; x++) {
+			mod = (!test && ( (bits >> x) & 1) === 1);
+			this.modules[x % 3 + this.moduleCount - 8 - 3][Math.floor(x / 3)] = mod;
+		}
+	},
+	
+	setupTypeInfo : function(test, maskPattern) {
+	
+		var data = (this.errorCorrectLevel << 3) | maskPattern;
+		var bits = QRUtil.getBCHTypeInfo(data);
+        var mod;
+	
+		// vertical		
+		for (var v = 0; v < 15; v++) {
+	
+			mod = (!test && ( (bits >> v) & 1) === 1);
+	
+			if (v < 6) {
+				this.modules[v][8] = mod;
+			} else if (v < 8) {
+				this.modules[v + 1][8] = mod;
+			} else {
+				this.modules[this.moduleCount - 15 + v][8] = mod;
+			}
+		}
+	
+		// horizontal
+		for (var h = 0; h < 15; h++) {
+	
+			mod = (!test && ( (bits >> h) & 1) === 1);
+			
+			if (h < 8) {
+				this.modules[8][this.moduleCount - h - 1] = mod;
+			} else if (h < 9) {
+				this.modules[8][15 - h - 1 + 1] = mod;
+			} else {
+				this.modules[8][15 - h - 1] = mod;
+			}
+		}
+	
+		// fixed module
+		this.modules[this.moduleCount - 8][8] = (!test);
+	
+	},
+	
+	mapData : function(data, maskPattern) {
+		
+		var inc = -1;
+		var row = this.moduleCount - 1;
+		var bitIndex = 7;
+		var byteIndex = 0;
+		
+		for (var col = this.moduleCount - 1; col > 0; col -= 2) {
+	
+			if (col === 6) col--;
+	
+			while (true) {
+	
+				for (var c = 0; c < 2; c++) {
+					
+					if (this.modules[row][col - c] === null) {
+						
+						var dark = false;
+	
+						if (byteIndex < data.length) {
+							dark = ( ( (data[byteIndex] >>> bitIndex) & 1) === 1);
+						}
+	
+						var mask = QRUtil.getMask(maskPattern, row, col - c);
+	
+						if (mask) {
+							dark = !dark;
+						}
+						
+						this.modules[row][col - c] = dark;
+						bitIndex--;
+	
+						if (bitIndex === -1) {
+							byteIndex++;
+							bitIndex = 7;
+						}
+					}
+				}
+								
+				row += inc;
+	
+				if (row < 0 || this.moduleCount <= row) {
+					row -= inc;
+					inc = -inc;
+					break;
+				}
+			}
+		}
+		
+	}
+
+};
+
+QRCode.PAD0 = 0xEC;
+QRCode.PAD1 = 0x11;
+
+QRCode.createData = function(typeNumber, errorCorrectLevel, dataList) {
+	
+	var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, errorCorrectLevel);
+	
+	var buffer = new QRBitBuffer();
+	
+	for (var i = 0; i < dataList.length; i++) {
+		var data = dataList[i];
+		buffer.put(data.mode, 4);
+		buffer.put(data.getLength(), QRUtil.getLengthInBits(data.mode, typeNumber) );
+		data.write(buffer);
+	}
+
+	// calc num max data.
+	var totalDataCount = 0;
+	for (var x = 0; x < rsBlocks.length; x++) {
+		totalDataCount += rsBlocks[x].dataCount;
+	}
+
+	if (buffer.getLengthInBits() > totalDataCount * 8) {
+		throw new Error("code length overflow. (" + 
+            buffer.getLengthInBits() + 
+            ">" +  
+            totalDataCount * 8 + 
+            ")");
+	}
+
+	// end code
+	if (buffer.getLengthInBits() + 4 <= totalDataCount * 8) {
+		buffer.put(0, 4);
+	}
+
+	// padding
+	while (buffer.getLengthInBits() % 8 !== 0) {
+		buffer.putBit(false);
+	}
+
+	// padding
+	while (true) {
+		
+		if (buffer.getLengthInBits() >= totalDataCount * 8) {
+			break;
+		}
+		buffer.put(QRCode.PAD0, 8);
+		
+		if (buffer.getLengthInBits() >= totalDataCount * 8) {
+			break;
+		}
+		buffer.put(QRCode.PAD1, 8);
+	}
+
+	return QRCode.createBytes(buffer, rsBlocks);
+};
+
+QRCode.createBytes = function(buffer, rsBlocks) {
+
+	var offset = 0;
+	
+	var maxDcCount = 0;
+	var maxEcCount = 0;
+	
+	var dcdata = new Array(rsBlocks.length);
+	var ecdata = new Array(rsBlocks.length);
+	
+	for (var r = 0; r < rsBlocks.length; r++) {
+
+		var dcCount = rsBlocks[r].dataCount;
+		var ecCount = rsBlocks[r].totalCount - dcCount;
+
+		maxDcCount = Math.max(maxDcCount, dcCount);
+		maxEcCount = Math.max(maxEcCount, ecCount);
+		
+		dcdata[r] = new Array(dcCount);
+		
+		for (var i = 0; i < dcdata[r].length; i++) {
+			dcdata[r][i] = 0xff & buffer.buffer[i + offset];
+		}
+		offset += dcCount;
+		
+		var rsPoly = QRUtil.getErrorCorrectPolynomial(ecCount);
+		var rawPoly = new QRPolynomial(dcdata[r], rsPoly.getLength() - 1);
+
+		var modPoly = rawPoly.mod(rsPoly);
+		ecdata[r] = new Array(rsPoly.getLength() - 1);
+		for (var x = 0; x < ecdata[r].length; x++) {
+            var modIndex = x + modPoly.getLength() - ecdata[r].length;
+			ecdata[r][x] = (modIndex >= 0)? modPoly.get(modIndex) : 0;
+		}
+
+	}
+	
+	var totalCodeCount = 0;
+	for (var y = 0; y < rsBlocks.length; y++) {
+		totalCodeCount += rsBlocks[y].totalCount;
+	}
+
+	var data = new Array(totalCodeCount);
+	var index = 0;
+
+	for (var z = 0; z < maxDcCount; z++) {
+		for (var s = 0; s < rsBlocks.length; s++) {
+			if (z < dcdata[s].length) {
+				data[index++] = dcdata[s][z];
+			}
+		}
+	}
+
+	for (var xx = 0; xx < maxEcCount; xx++) {
+		for (var t = 0; t < rsBlocks.length; t++) {
+			if (xx < ecdata[t].length) {
+				data[index++] = ecdata[t][xx];
+			}
+		}
+	}
+
+	return data;
+
+};
+
+module.exports = QRCode;
+
+M["index"]=module.exports;}
+return {make(text,ec){const Q=M.index;const q=new Q(-1,M.QRErrorCorrectLevel[ec||"M"]);q.addData(text);q.make();return q.modules}}})();
+
+// ================= LIVE FRIENDS =================
+// Adding a friend writes a small note to their inbox (fr/<them>/in/<me>). Their app watches the inbox and adds you back,
+// so you show up on each other's leaderboard without both people scanning.
+function sendFriendHello(id){if(!canWrite())return;NET.db.doc(`fr/${id}/in/${S.profile.id}`).set({id:S.profile.id,name:S.profile.name||'Runner',ts:Date.now()}).catch(()=>{})}
+function watchFriendInbox(){if(!NET.db)return;if(NET.subs.frIn)NET.subs.frIn();const me=S.profile.id;
+  NET.subs.frIn=NET.db.collection(`fr/${me}/in`).onSnapshot(async q=>{for(const d of q.docs){const x=d.data()||{};const id=x.id||d.id;
+    if(id&&id!==S.profile.id&&!(S.deleted[id]&&S.deleted[id]>(x.ts||0))){let snap=null;try{const s=await NET.db.doc('pub/'+id).get();if(s.exists)snap=s.data()}catch(e){}
+      const ex=S.friends.find(f=>f.id===id);if(ex){ex.mode='live';if(snap){ex.snap=snap;ex.name=snap.name||ex.name}ex.u=Date.now()}else{S.friends.push({id,name:(snap&&snap.name)||x.name||'Runner',snap:snap||null,mode:'live',ts:Date.now(),u:Date.now()});toast(`${(snap&&snap.name)||x.name||'A friend'} added you. You're now on each other's leaderboard.`)}
+      delete S.deleted[id];save('friends');subscribeBuddies()}
+    NET.db.doc(`fr/${me}/in/${d.id}`).delete().catch(()=>{})}
+    if(cur==='crew'||cur==='home')rerenderSoft()},()=>{setTimeout(watchFriendInbox,30000)})}
+// keep friend cards fresh without hammering the store: live listeners for buddies and the most recently active friends,
+// one batched read for the rest every 60 s while the app is open, and right away when it comes back to the foreground
+const LIVE_FRIENDS_MAX=12;
+function liveFriendIds(){return S.friends.filter(f=>f.mode==='live'&&!S.buddies.includes(f.id)).sort((a,b)=>((b.snap&&b.snap.at)||b.u||0)-((a.snap&&a.snap.at)||a.u||0)).slice(0,LIVE_FRIENDS_MAX).map(f=>f.id)}
+let frT=0;function refreshFriendsSoon(){clearTimeout(frT);frT=setTimeout(()=>{if(document.visibilityState==='visible')refreshFriends()},300)}
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&NET.db){refreshFriendsSoon();pushLive(true)}});
+setInterval(()=>{if(document.visibilityState==='visible'&&NET.db)refreshFriends()},60000);
+
+
+// shrink a photo until its data URL fits under maxBytes (stories and posts are stored inline)
+async function fitImage(file,max,maxBytes){let m=max,q=.8,out='';for(let i=0;i<7;i++){out=await new Promise((res,rej)=>{const img=new Image();img.onload=()=>{const s=Math.min(1,m/Math.max(img.width,img.height));const c=document.createElement('canvas');c.width=Math.round(img.width*s);c.height=Math.round(img.height*s);c.getContext('2d').drawImage(img,0,0,c.width,c.height);URL.revokeObjectURL(img.src);res(c.toDataURL('image/jpeg',q))};img.onerror=rej;img.src=URL.createObjectURL(file)});
+  if(out.length<=maxBytes)return out;if(q>.6)q-=.1;else m=Math.round(m*.8)}return out}
+
+
+// ================= ONE LIVE ACTIVITY AT A TIME =================
+function wkActive(){return !!(WK.on||S.live)}
+function runActive(){return R.state!=='idle'&&R.mode!=='demo'}
+function busyWith(want){ // returns true (and explains) if the other activity is still going
+  if(want==='run'&&wkActive()){openSheet('Finish your workout first',`<p class="muted">You have a ${WK.on?'workout':'gym check-in'} going${WK.on?' ('+fmtDurLong(wkSec())+')':''}. Stop it before you start a run, so your time and calories are not counted twice.</p>
+     <div class="grid2"><button class="btn soft" id="bwGo">${WK.on?'Open workout':'Go to check-in'}</button><button class="btn" id="bwEnd">${ICON.door} Finish workout</button></div>`,el=>{
+     $('#bwGo',el).onclick=()=>{closeSheet();if(WK.on)openWk();else{jTab='train';go('jungle')}};$('#bwEnd',el).onclick=()=>{closeSheet();ACT.endSession()}});return true}
+  if(want==='workout'&&runActive()){openSheet('Finish your run first',`<p class="muted">Your run is still ${R.state==='paused'?'paused':'going'} (${fmtDist(R.dist)} ${uName()}, ${fmtDurLong(runActiveSec())}). Finish it before you start a workout.</p>
+     <div class="grid2"><button class="btn soft" id="bwGo">Open run</button><button class="btn" id="bwEnd">${ICON.stop} Finish run</button></div>`,el=>{
+     $('#bwGo',el).onclick=()=>{closeSheet();openImmersive()};$('#bwEnd',el).onclick=()=>{closeSheet();R.lock=false;ACT.stopRun()}});return true}
+  return false}
+
+
+// ================= FLOATING LIVE TIMER =================
+// While a run or workout is going and you are on another page, a small pill floats above the bottom bar. Tap it to go back.
+function livePill(){let p=document.getElementById('livePill');const run=runActive(),wk=WK.on;
+  const imm=!$('#immersive').hidden||!$('#wkimm').hidden;let show=(run||wk)&&!imm&&!$('#app').hidden&&!document.querySelector('#onb,.sheet,#storyv');
+  if(show){const hero=run?$('#v-park.on .runhero:not(.wkhero)'):$('#v-jungle.on .wkhero');if(hero){const r=hero.getBoundingClientRect();if(r.bottom>80&&r.top<innerHeight-120)show=false}}
+  if(!p){if(!show)return;p=document.createElement('button');p.id='livePill';p.type='button';p.className='live-pill';p.onclick=()=>{if(runActive())openImmersive();else if(WK.on)openWk();livePill()};document.body.appendChild(p)}
+  p.hidden=!show;document.body.classList.toggle('has-livepill',show);if(!show)return;
+  const paused=run?R.state==='paused':WK.paused;const sec=run?runActiveSec():wkSec();
+  const html=`<i class="lp-dot ${paused?'paused':''}"></i>${run?ICON.run:'<svg class="ico" viewBox="0 0 24 24"><path d="M6.5 6.5v11M17.5 6.5v11M3 9v6M21 9v6M6.5 12h11"/></svg>'}<b class="num">${fmtDurLong(sec)}</b>${run?`<span class="lp-sub num">${fmtDist(R.dist)} ${uName()}</span>`:`<span class="lp-sub">${paused?'Paused':'Workout'}</span>`}`;
+  if(p._h!==html){p.innerHTML=html;p._h=html}p.setAttribute('aria-label',(run?'Run':'Workout')+' in progress, '+fmtDurLong(sec)+'. Tap to open.')}
+setInterval(livePill,1000);addEventListener('scroll',()=>{if(runActive()||WK.on)livePill()},{passive:true});addEventListener('hashchange',()=>setTimeout(livePill,60));
+
+
+// map tiles are darkened once when they arrive (works in Safari too, which has no canvas filter), so redraws stay cheap
+function darkTile(img){try{const c=document.createElement('canvas');c.width=c.height=256;const x=c.getContext('2d',{willReadFrequently:true});x.drawImage(img,0,0,256,256);const d=x.getImageData(0,0,256,256),p=d.data;
+  for(let i=0;i<p.length;i+=4){let v=255-(p[i]*.299+p[i+1]*.587+p[i+2]*.114);v=((v*.62)-128)*1.25+128;v=v<0?0:v>255?255:v;p[i]=p[i+1]=p[i+2]=v}x.putImageData(d,0,0);
+  x.fillStyle='rgba(11,8,7,.18)';x.fillRect(0,0,256,256);return c}catch(e){return null}}
+// if tiles failed (offline, captive wifi), try again a minute later instead of hiding the map for good
+setInterval(()=>{if(TILES.state==='blocked'&&navigator.onLine){TILES.state='unknown';TILES.fails=0;for(const [k,t] of [...TILES.c])if(t.bad)TILES.c.delete(k);if(typeof drawHero==='function')drawHero()}},60000);
+// where you are (last known), so the run map can draw before the first GPS fix of a run
+function lastPos(){try{const p=JSON.parse(localStorage.getItem('jp:lastpos')||'null');return p&&Date.now()-p.t<14*DAY?p:null}catch(e){return null}}
+function rememberPos(la,ln){R.here=[+la.toFixed(5),+ln.toFixed(5)];try{const o=lastPos();if(!o||Date.now()-o.t>60000||hav(o.p,R.here)>50)localStorage.setItem('jp:lastpos',JSON.stringify({p:R.here,t:Date.now()}))}catch(e){}}
+function warmTiles(la,ln){if(!mapOn())return;const W=2*Math.PI*MR;for(const z of [15,16,17]){const tm=W/2**z;const xy=project([[la,ln]])[0];const cx=Math.floor((xy[0]+W/2)/tm),cy=Math.floor((xy[1]+W/2)/tm);for(let dx=-1;dx<=1;dx++)for(let dy=-1;dy<=1;dy++)tile(z,cx+dx,cy+dy)}}
+let warmed=0;function warmMap(){if(!mapOn()||Date.now()-warmed<120000)return;warmed=Date.now();const lp=lastPos();if(lp){R.here=R.here||lp.p;warmTiles(lp.p[0],lp.p[1])}
+  const get=()=>{try{navigator.geolocation.getCurrentPosition(p=>{rememberPos(p.coords.latitude,p.coords.longitude);warmTiles(p.coords.latitude,p.coords.longitude);if(cur==='park'&&R.state==='idle')drawHero()},()=>{},{enableHighAccuracy:false,maximumAge:300000,timeout:8000})}catch(e){}};
+  try{navigator.permissions&&navigator.permissions.query({name:'geolocation'}).then(r=>{if(r.state==='granted')get()}).catch(()=>{})}catch(e){}}
 
 // ================= INIT =================
 runSplash();
