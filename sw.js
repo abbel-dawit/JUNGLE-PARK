@@ -1,4 +1,4 @@
-const C='jp-v56';const T='jp-tiles-v1';const PRE=['./','index.html','manifest.webmanifest','icon192.png','icon512.png','icon180.png'];
+const C='jp-v58';const T='jp-tiles-v1';const PRE=['./','index.html','manifest.webmanifest','icon192.png','icon512.png','icon180.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(PRE)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==C&&x!==T).map(x=>caches.delete(x)))).then(()=>self.clients.claim()))});
 // map tiles: served from cache first so the run map appears instantly; at most ~600 tiles are kept

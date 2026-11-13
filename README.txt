@@ -6,6 +6,7 @@ Sync without accounts or a server of your own:
 - "Show sign-in code" gives an 8-character code (valid 15 minutes) and a QR code. Friend codes are 8 characters too; they work while the owner has opened the app within the last 12 hours (the relay keeps messages for 12 hours). The friend QR code always works.
 - ntfy.sh is a free public service with rate limits. Heavy use (many devices or friends) may hit them; a self-hosted ntfy server removes the limits.
 - The buddy board also works over the relay (posts are end-to-end encrypted; buddies see them).
+- The coach directory works here too, over the same relay. A coach's listing goes live as soon as they send the Join as coach form (the application is still emailed for review). Listings are signed on the coach's device so nobody else can change or remove them, every app keeps the listings it has seen for 30 days, and the coach's app republishes the listing every few hours while it is open (the relay forgets messages after 12 hours). The Certified badge is only given in the claude.ai version, where the admin approves coaches. A listing can be edited or removed only from the device that created it.
 - Gym memberships, invites, stories and coaching still need the live sync of the claude.ai version, or use Demo mode.
 
 Demo mode: My Profile > For gyms & coaches > Demo mode (password 09876543210). Opens a sample gym business and coach (personal trainer & nutritionist) profile with Pro, running on a local sandbox database on the device. Your real profile is untouched; tap Demo > Exit to leave.

@@ -2054,7 +2054,7 @@ input[type=date]::-webkit-date-and-time-value{text-align:left}
 .pay-tools{display:flex;gap:6px;align-items:center;flex:none}
 .eye-tg .ico{width:18px;height:18px}
 .money{transition:filter .2s}
-.hide-money .money{filter:blur(7px);-webkit-user-select:none;user-select:none}
+.mhid .money{filter:blur(7px);-webkit-user-select:none;user-select:none}
 .biz-hero.locked{align-items:center;text-align:center}
 .biz-hero.locked .bh-go{align-self:center}
 .key-card .btn{align-self:center!important}
@@ -2165,9 +2165,9 @@ input[type=date]::-webkit-date-and-time-value{text-align:left}
 .card.metric.ic.mrow::after{content:""!important;display:block!important;position:absolute!important;top:0!important;right:0!important;bottom:0;left:48%;width:auto!important;height:auto!important;border-radius:0!important;opacity:.55!important;background:radial-gradient(color-mix(in srgb,var(--tint) 45%,transparent) 1.1px,transparent 1.6px) 0 0/12px 12px!important;-webkit-mask:linear-gradient(90deg,transparent,#000 75%);mask:linear-gradient(90deg,transparent,#000 75%);pointer-events:none}
 .card.metric.mrow>.v,.card.metric.mrow>.mt,.card.metric.mrow>.meter,.card.metric.mrow>.spark{position:relative;z-index:1}
 /* business: password-style dots, eye inside each amount box */
-.hide-money .money{filter:none!important;font-size:0!important;letter-spacing:0!important}
-.hide-money .money::after{content:"••••••";font-size:20px;letter-spacing:1px;color:var(--fg);line-height:1}
-.hide-money .inv-amt .money::after{font-size:15px}
+.mhid .money{filter:none!important;font-size:0!important;letter-spacing:0!important}
+.mhid .money::after{content:"••••••";font-size:20px;letter-spacing:1px;color:var(--fg);line-height:1}
+.mhid .inv-amt .money::after{font-size:15px}
 .pay-grid>div{position:relative;padding-right:42px}
 .pay-grid .eye-tg{position:absolute;top:8px;right:8px;width:30px;height:30px;min-width:0;background:var(--surface)}
 .pay-grid .eye-tg .ico{width:16px;height:16px}
@@ -2247,11 +2247,11 @@ input[type=date]::-webkit-date-and-time-value{text-align:left}
 #v-biz .card>.card-h:has(>div:first-child>h3+small)>div:first-child>small,.fd>.card-h:has(>div:first-child>h3+small)>div:first-child>small{grid-column:1/span 5;grid-row:2;white-space:normal}
 #v-biz .card>.card-h:has(>div:first-child>h3+small)>:not(:first-child),.fd>.card-h:has(>div:first-child>h3+small)>:not(:first-child){grid-row:1;margin-left:8px;justify-self:end}
 /* money: keep the currency, dot out the digits */
-.hide-money .money{font-size:inherit!important}
-.hide-money .money::after{content:none!important}
-.hide-money .money .mnum{font-size:0;letter-spacing:0}
-.hide-money .money .mnum::after{content:"••••";font-size:18px;letter-spacing:1px;vertical-align:middle}
-.hide-money .inv-amt .money .mnum::after{font-size:14px}
+.mhid .money{font-size:inherit!important}
+.mhid .money::after{content:none!important}
+.mhid .money .mnum{font-size:0;letter-spacing:0}
+.mhid .money .mnum::after{content:"••••";font-size:18px;letter-spacing:1px;vertical-align:middle}
+.mhid .inv-amt .money .mnum::after{font-size:14px}
 @media (max-width:420px){.wt-card>.card-h>.wt-goal{grid-row:3!important;grid-column:1!important;justify-self:start!important;margin:4px 0 0!important}}
 .srch-btns .btn{white-space:nowrap;padding-inline:10px}
 @media (max-width:380px){.fd>.card-h h3,#v-biz .card>.card-h h3{font-size:15.5px}.fd>.card-h .btn{font-size:13px;padding:4px!important}}
@@ -2391,6 +2391,160 @@ body:has(.sheet) .live-pill{display:none}body:has(.sheet) .toast{bottom:auto!imp
 .demo-band{position:fixed;left:12px;bottom:calc(98px + env(safe-area-inset-bottom,0px));z-index:43;white-space:nowrap;display:inline-flex;align-items:center;gap:8px;padding:6px 8px 6px 12px;border-radius:999px;border:0;background:#1F1A33;color:#fff;font:inherit;font-size:12.5px;font-weight:700;box-shadow:0 8px 20px -8px rgba(0,0,0,.5);cursor:pointer}.demo-band i{width:8px;height:8px;border-radius:50%;background:#A78BFA}.demo-band b{background:#ffffff22;padding:3px 10px;border-radius:999px}
 @media (min-width:900px){.demo-band{bottom:20px;left:20px}}
 .key-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.key-row .demo-link{display:inline-flex;align-items:center;gap:6px;line-height:1}.key-row .demo-link .ico{width:16px;height:16px}
+</style>
+<style id="v15">
+/* personal records: date and workout stacked, weight + reps side by side, then Add */
+.pr-form{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important}
+.pr-form>.field:nth-child(1),.pr-form>.pr-w,.pr-form>.pr-add{grid-column:1/-1!important}
+.pr-form>.field:nth-child(3),.pr-form>.field:nth-child(4){grid-column:auto!important}
+/* gym stat tiles: the circle sits inside the tile, the number centred in it */
+.rate-grid.biz-stats .rate-tile:not(.hero){padding:12px 16px 12px 14px;column-gap:14px}
+.rate-grid.biz-stats .rate-tile::after{content:none}
+.rate-grid.biz-stats .rate-tile:not(.hero)>b{display:grid;place-items:center;min-width:52px;height:52px;padding:0 10px;box-sizing:border-box;border-radius:999px;background:color-mix(in srgb,var(--c) 18%,var(--surface));color:var(--fg);font-size:21px;line-height:1;text-align:center;justify-self:end;margin:0}
+.rate-grid.biz-stats .rate-tile:not(.hero)>b>span{display:block;line-height:1}
+/* pill buttons without their own hover get a theme-coloured ring */
+@media (hover:hover){
+ .btn:not(:disabled):not(.btn-line):hover{box-shadow:0 0 0 2px var(--bg),0 0 0 3.5px var(--accent)}
+ .btn.soft:not(:disabled):hover,.btn.ghost:not(:disabled):hover{box-shadow:none;border-color:var(--accent)!important}
+ .chip:not(:disabled):hover,button.pill:hover{border-color:var(--accent)!important;box-shadow:inset 0 0 0 .5px var(--accent)}
+ .fd>.card-h .btn:hover{box-shadow:none}
+}
+.btn,.chip,button.pill{transition:box-shadow .15s,border-color .15s,background .2s,transform .15s}
+button.pill{border:1px solid transparent;cursor:pointer;font:inherit;font-size:11.5px;font-weight:600}
+/* My gyms: the count sits right after the title */
+.sec-t.sec-t-l{justify-content:flex-start}
+.sec-t-l .sec-n{font-size:13px;font-weight:700;min-width:24px;height:24px;padding:0 8px;border-radius:999px;display:inline-grid;place-items:center;background:var(--soft);color:var(--accent);box-sizing:border-box}
+/* gym card: address and phone numbers */
+.gym-contact{display:flex;flex-direction:column;gap:8px;padding-top:10px;border-top:1px solid var(--line)}
+.gc-row{display:flex;align-items:flex-start;gap:10px;color:var(--fg);text-decoration:none;font-size:13.5px;line-height:1.35;min-width:0}
+a.gc-row:hover .gc-txt{color:var(--accent);text-decoration:underline}
+.gc-ico{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--soft);color:var(--accent)}
+.gc-ico .ico{width:15px;height:15px}
+.gc-txt{padding-top:6px;min-width:0;overflow-wrap:anywhere}
+.gc-phones{display:flex;flex-wrap:wrap;gap:4px 14px}
+.gc-phones a{color:var(--accent);font-weight:600;text-decoration:none;white-space:nowrap}
+.gc-phones a:hover{text-decoration:underline}
+/* coach */
+.btn.prog-browse{background:#F26A1F;color:#fff;border-color:#F26A1F;align-self:flex-start}
+.btn.prog-browse .ico{width:17px;height:17px}
+.coach-roles{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+/* invoices */
+.inv-tools{display:flex;flex-direction:column;gap:10px;margin-top:10px}
+.inv-srch{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center}
+.inv-filt{display:flex;flex-direction:column;gap:8px}
+.inv-filt .chips{gap:6px}.inv-filt .chip{padding:6px 11px;font-size:12.5px}
+.inv-dates{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.inv-dates select{width:auto;min-width:150px;flex:0 1 auto}
+.inv-cust{display:flex;align-items:center;gap:6px;flex:1 1 260px;min-width:0}.inv-cust[hidden]{display:none}
+.inv-cust .inp{flex:1;min-width:0;padding-left:10px;padding-right:6px}
+.inv-more{margin-top:8px}.inv-count{display:block;text-align:center;margin-top:6px;font-size:12px}
+.inv-logo-row{display:flex;justify-content:flex-start;margin-bottom:10px}
+.inv-logo{max-width:160px;max-height:64px;object-fit:contain;border-radius:8px}
+.inv-brand{display:flex;align-items:center;gap:8px;margin-top:14px;padding-top:10px;border-top:1px dashed var(--line);font-size:12px;color:var(--muted)}
+.inv-brand .logo{font-size:22px;color:var(--accent)}
+.inv-made{margin-bottom:10px}
+.inv-stbox{margin-top:10px}.inv-stbox .chips{gap:6px}
+.ex-sum{font-size:13px;margin:4px 0 0}
+.seg button:disabled{opacity:.45}
+/* each amount hides on its own */
+.money-tile{position:relative}
+/* gym settings: plans, phones, logo */
+.plan-cust{display:flex;flex-direction:column;gap:8px;margin-top:8px}.plan-cust:empty{display:none}
+.cust-plan{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,.7fr) minmax(0,1fr) 34px;gap:6px;align-items:center;padding:8px;border-radius:14px;background:var(--surface-2);border:1px dashed color-mix(in srgb,var(--accent) 35%,var(--line))}
+.cust-plan .inp{min-width:0;background:var(--surface)}
+.plan-add{margin-top:8px;align-self:flex-start}
+.plan-ed{display:flex;flex-direction:column}
+@media (max-width:420px){.cust-plan{grid-template-columns:minmax(0,1fr) minmax(0,1fr) 34px}.cust-plan [data-pc=n]{grid-column:1/-1}}
+.ph-rows{display:flex;flex-direction:column;gap:8px}
+.phones-f .phone-row:has([data-ph-rm]){grid-template-columns:minmax(0,.9fr) minmax(0,1.3fr) 34px;align-items:center}
+.phones-f [data-ph-add]{align-self:flex-start;margin-top:4px}
+.logo-pick{display:flex;align-items:center;gap:14px}
+.logo-box{width:84px;height:84px;flex:none;border-radius:18px;border:1.5px dashed color-mix(in srgb,var(--accent) 45%,var(--line));background:var(--surface-2);display:grid;place-items:center;color:var(--accent);cursor:pointer;overflow:hidden;padding:0}
+.logo-box.has{border-style:solid;background:#fff}
+.logo-box img{width:100%;height:100%;object-fit:contain}
+.logo-acts{display:flex;flex-direction:column;align-items:flex-start;gap:6px;min-width:0}
+.logo-acts small{font-size:12px}
+</style>
+<style id="v16">
+/* count badges inside buttons: theme-coloured circle, white number */
+.cnt{display:inline-grid;place-items:center;min-width:20px;height:20px;padding:0 6px;box-sizing:border-box;border-radius:999px;background:var(--accent);color:#fff!important;font-size:11.5px;font-weight:700;line-height:1;font-variant-numeric:tabular-nums;margin-left:2px;vertical-align:middle;opacity:1!important}
+.btn:not(.soft):not(.ghost):not(.btn-line) .cnt,.chip.on .cnt,.seg button.on .cnt{background:#fff;color:var(--accent)!important}
+.chip .cnt{min-width:18px;height:18px;font-size:10.5px;padding:0 5px}
+/* business buttons in the theme colour */
+.btn.btn-theme{color:var(--accent)!important;border:1.5px solid transparent}
+.btn.btn-theme .ico{color:var(--accent)}
+.btn-line.btn-line-theme{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 30%,var(--line))}
+.btn-line.btn-line-theme .ico{color:var(--accent)}
+@media (hover:hover){.btn.btn-theme:not(:disabled):hover{border-color:var(--accent)!important;box-shadow:none}.btn-line.btn-line-theme:hover{border-color:var(--accent);box-shadow:inset 0 0 0 .5px var(--accent)}
+ .btn-line.pay-line:hover{border-color:#1FA463;color:#1FA463;box-shadow:inset 0 0 0 .5px #1FA463}}
+/* overview: bigger stat cards, in a card that folds (open by default) */
+.biz-ov .rate-grid.biz-stats{margin-top:4px;gap:12px}
+.rate-grid.biz-stats .rate-tile:not(.hero){min-height:104px;padding:18px 20px 18px 18px;border-radius:22px;column-gap:16px;row-gap:4px}
+.rate-grid.biz-stats .rate-tile:not(.hero) small{font-size:14.5px;font-weight:600}
+.rate-grid.biz-stats .rate-tile:not(.hero) .rt-sub{font-size:13px}
+.rate-grid.biz-stats .rate-tile:not(.hero) .rt-ico{width:44px;height:44px;border-radius:14px}
+.rate-grid.biz-stats .rate-tile:not(.hero) .rt-ico .ico,.rate-grid.biz-stats .rate-tile:not(.hero) .rt-ico svg{width:22px;height:22px}
+.rate-grid.biz-stats .rate-tile:not(.hero)>b{min-width:66px;height:66px;font-size:26px;box-shadow:inset 0 0 0 2px color-mix(in srgb,var(--c) 30%,transparent)}
+/* check-in buttons: QR check-in is the main (orange) one */
+.btn.ci-go.ci-main{background:linear-gradient(135deg,#FF8A3D,#F26A1F)!important;color:#fff!important;box-shadow:0 10px 24px -10px #F26A1F!important}
+/* recent check-ins */
+.live-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#1FA463;margin-left:6px;vertical-align:middle;box-shadow:0 0 0 0 #1FA46399;animation:livePulse 1.8s infinite}
+@keyframes livePulse{0%{box-shadow:0 0 0 0 #1FA46388}70%{box-shadow:0 0 0 8px #1FA46300}100%{box-shadow:0 0 0 0 #1FA46300}}
+.ci-legend{display:flex;flex-wrap:wrap;gap:6px 14px;margin:2px 0 12px;font-size:12.5px;color:var(--muted)}
+.ci-legend span{display:inline-flex;align-items:center;gap:5px}.ci-legend svg{width:16px;height:16px}.ci-legend b{color:var(--fg)}
+.ci-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:10px;margin-bottom:10px}
+.ci-tile{--s:#1FA463;position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:3px;padding:14px 8px 12px;border-radius:20px;border:1.5px solid color-mix(in srgb,var(--s) 35%,var(--line));background:linear-gradient(180deg,color-mix(in srgb,var(--s) 20%,var(--surface)) 0%,color-mix(in srgb,var(--s) 6%,var(--surface)) 60%,var(--surface) 100%);color:var(--fg);font:inherit;min-width:0;overflow:hidden;cursor:default}
+button.ci-tile{cursor:pointer;transition:transform .15s,box-shadow .2s}
+@media (hover:hover){button.ci-tile:hover{transform:translateY(-2px);box-shadow:0 10px 22px -14px var(--s)}}
+.ci-tile.s-warn{--s:#F2B300}.ci-tile.s-bad{--s:#E5383B}
+.ci-av{position:relative;display:inline-block;margin-bottom:6px}
+.ci-av .avatar{width:60px;height:60px;font-size:20px;box-shadow:0 0 0 3px var(--surface),0 0 0 5px var(--s)}
+.ci-av::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--s);opacity:.16;pointer-events:none}
+.ci-badge{position:absolute;right:-6px;bottom:-4px;width:28px;height:28px;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 2px 6px #0003;z-index:1}
+.ci-badge svg{width:20px;height:20px}
+.ci-nm{font-size:13.5px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ci-ago{font-size:11.5px;color:var(--muted)}
+.ci-st{margin-top:3px;font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;color:color-mix(in srgb,var(--s) 75%,#000);background:color-mix(in srgb,var(--s) 16%,transparent);max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+:root[data-theme=dark] .ci-st,.dark .ci-st{color:color-mix(in srgb,var(--s) 70%,#fff)}
+.ci-new{animation:ciIn .6s cubic-bezier(.2,1.4,.4,1) both,ciGlow 2.4s ease-out}
+@keyframes ciIn{from{opacity:0;transform:scale(.7) translateY(8px)}to{opacity:1;transform:none}}
+@keyframes ciGlow{0%,30%{box-shadow:0 0 0 3px var(--s)}100%{box-shadow:0 0 0 0 transparent}}
+/* charts: a little depth and motion */
+.rep-chart.jc{overflow:visible}
+.jc .ch-bar{transform-box:fill-box;transform-origin:50% 100%;animation:chUp .7s cubic-bezier(.2,.9,.3,1.15) both}
+.jc .ch-bar:nth-of-type(2n){animation-delay:.04s}
+.jc .ch-line{stroke-dasharray:1;stroke-dashoffset:0;animation:chDraw 1s ease-out both}
+.jc .ch-line[stroke-dasharray="2 5"]{animation:none}
+.jc .ch-area{animation:chFade .9s ease-out both}
+.jc .ch-dot{transition:r .15s}
+.jc .ch-halo{animation:chHalo 2s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes chUp{from{transform:scaleY(0)}to{transform:none}}
+@keyframes chDraw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes chFade{from{opacity:0}to{opacity:1}}
+@keyframes chHalo{0%,100%{transform:scale(1);opacity:.18}50%{transform:scale(1.5);opacity:.05}}
+@media (prefers-reduced-motion:reduce){.jc *,.ci-new,.live-dot{animation:none!important}}
+/* business lock */
+.biz-lock{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding:28px 20px}
+.biz-lock .bl-ico{width:64px;height:64px;border-radius:22px;display:grid;place-items:center;background:var(--soft);color:var(--accent)}
+.biz-lock .bl-ico .ico{width:30px;height:30px}
+.biz-lock h3{margin:4px 0 0}.biz-lock .pin-f{width:100%;max-width:300px}.biz-lock .pin-f label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.biz-lock .btn.block{max-width:300px}
+.pin-wrap{position:relative}
+.pin-inp{font-size:20px;letter-spacing:.5em;text-align:center;padding-right:50px!important;padding-left:50px!important;font-variant-numeric:tabular-nums}
+.pin-wrap.big .pin-inp{font-size:26px;height:60px}
+.pin-inp::placeholder{letter-spacing:.35em;opacity:.4}
+.pin-eye{position:absolute;right:6px;top:50%;transform:translateY(-50%)}
+.pin-dots{display:flex;justify-content:center;gap:8px;margin-top:8px}
+.pin-dots i{width:9px;height:9px;border-radius:50%;background:var(--line);transition:background .15s,transform .15s}
+.pin-dots i.on{background:var(--accent);transform:scale(1.15)}
+.pin-f.bad .pin-wrap{animation:pinShake .4s}.pin-f.bad .pin-inp{border-color:#E5383B!important;box-shadow:0 0 0 3px #E5383B22}
+@keyframes pinShake{0%,100%{transform:none}20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}
+.pin-row{display:flex;align-items:center;gap:12px;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+.pin-row .pr-ico{width:36px;height:36px;border-radius:12px;display:grid;place-items:center;background:var(--soft);color:var(--accent);flex:none}
+.pin-row .t{display:flex;flex-direction:column;min-width:0;flex:1}.pin-row .t small{font-size:12.5px}
+.pin-acts{display:flex;align-items:center;gap:10px;flex:none}
+.coach-off{align-self:center;display:inline-flex;align-items:center;gap:6px;font-size:13px}
+.coach-off .ico{width:15px;height:15px}
 </style>
 <div id="splash" aria-live="polite" aria-label="Loading JUNGLE PARK"><div class="sp-bg"></div><div class="sp-in">
  <span class="logo sp-logo"><i class="paw"></i></span><div class="sp-title">JUNGLE PARK</div>
@@ -2592,7 +2746,7 @@ if(window.__JP_DEMO){(()=>{
     for(let d=0;d<21;d++)for(let k=0;k<3+(d*7)%6;k++){const [mid,name]=mids[(d*5+k)%12];D[`gyms/${gid}/checkins/c${d}_${k}`]={uid:'',mid,name,ts:now-d*DAY-(k*53+7)*60e3,warn:''}}
     const C=[['HIIT Bootcamp','Mon, Wed, Fri','6:30 AM',20,600],['Morning Yoga','Tue, Thu','7:00 AM',15,0],['Strength 101','Sat','9:00 AM',12,800]];
     C.forEach(([title,days,time,cap,price],i)=>{D[`gyms/${gid}/courses/k${i}`]={title,coach:'Demo Coach',days,time,cap,regs:3+i*2,price,memberFree:i===2,weeks:i===2?6:0,start:now+(i+1)*DAY,desc:'A sample class in demo mode.',ts:now-5*DAY}});
-    D['pros/'+me]={type:'trainer',name:'Demo Coach',city:'Addis Ababa',bio:'Certified personal trainer and nutritionist. Strength, fat loss and meal plans that fit your day.',tags:['Strength','Weight loss','Nutrition','Meal plans','Mobility'],years:6,wa:'+251911000000',tg:'demo_coach',owner:me,approved:true,certified:true,certs:[{n:'Personal Trainer',org:'NASM',y:'2019'},{n:'Sports Nutrition',org:'ISSA',y:'2021'}],ts:now-80*DAY};
+    D['pros/'+me]={type:'both',types:['trainer','nutritionist'],name:'Demo Coach',city:'Addis Ababa',bio:'Certified personal trainer and nutritionist. Strength, fat loss and meal plans that fit your day.',tags:['Strength','Weight loss','Nutrition','Meal plans','Mobility'],years:6,wa:'+251911000000',tg:'demo_coach',owner:me,approved:true,certified:true,certs:[{n:'Personal Trainer',org:'NASM',y:'2019'},{n:'Sports Nutrition',org:'ISSA',y:'2021'}],ts:now-80*DAY};
     D['pro/'+me]={until:'forever',by:'demo',ts:now};
     const G=[['loss','diet'],['muscle','strength'],['endurance','health'],['mobility','injury'],['loss','endurance'],['strength','diet']];
     for(let i=0;i<6;i++){const uid='dc'+id_().slice(0,10);const name=nm(i+4);D[`coaches/${me}/clients/${uid}`]={uid,name,status:'active',goals:G[i],price:i%2?2500:2000,ts:now-(30-i*3)*DAY,notes:i===0?'Knee feels better. Keep squats light this week.':''};
@@ -2985,7 +3139,7 @@ function openSheet(title,html,mount){
   bg.addEventListener('click',e=>{if(e.target===bg)closeSheet()});
   $('#sheets').appendChild(bg);updateStatus();if(mount)mount(bg.firstElementChild);return bg.firstElementChild}
 function closeSheet(){const s=$('#sheets');if(s.onclose){const f=s.onclose;s.onclose=null;f()}const had=s.innerHTML!=='';s.innerHTML='';if(had&&cur==='biz'&&typeof bizSoft==='function')bizSoft()}
-addEventListener('keydown',e=>{if(e.key==='Escape')closeSheet()});
+addEventListener('keydown',e=>{if(e.key==='Escape'&&!document.querySelector('#sheets [data-sticky]'))closeSheet()});
 
 // ---------- router ----------
 let cur='home';
@@ -3079,7 +3233,7 @@ function listCap(){document.querySelectorAll('#app .list, #app .ranks, #sheets .
   const host=l.closest('.view,.sheet');const lists=host?[...host.querySelectorAll('.list,.ranks')]:[];const key=(host&&host.id||'x')+':'+lists.indexOf(l)+':'+((l.closest('.card')||{}).dataset||{}).fold;
   let n=Math.min(CAPN.get(key)||5,items.length);
   if(!btn){btn=document.createElement('button');btn.type='button';btn.className='btn soft block sm cap-more';l.after(btn)}
-  const draw=()=>{items.forEach((c,i)=>c.classList.toggle('cap-hide',i>=n));const left=items.length-n;btn.hidden=left<=0;btn.textContent=`Show more (${left})`};
+  const draw=()=>{items.forEach((c,i)=>c.classList.toggle('cap-hide',i>=n));const left=items.length-n;btn.hidden=left<=0;btn.innerHTML=`Show more <span class="cnt">${left}</span>`};
   btn.onclick=()=>{n=Math.min(items.length,n+10);CAPN.set(key,n);draw()};draw()})}
 
 // ================= STATS / XP =================
@@ -3551,7 +3705,7 @@ function jTrain(el){
       <div class="ci-stage"><span class="ci-pulse big">${ICON.pin}</span><div class="ci-meta"><b class="num">${S.sessions.filter(x=>x.start>=startOfWeek()).length}<small>/${target}</small></b><span>this week</span></div><div class="ci-meta"><b class="num">${streak}</b><span>week streak</span></div></div>
       ${(()=>{const mg=mainGymId();return `<div class="field"><label for="gymSel">Select gym</label><select class="inp gym-sel" id="gymSel">${S.gyms.map(g=>`<option value="${g.id}" ${g.id===mg?'selected':''}>${esc(g.name)}${g.city?' · '+esc(g.city):''}${g.id===mg&&S.gyms.length>1?' (main)':''}</option>`).join('')}<option value="home" ${mg==='home'?'selected':''}>Home or outdoors</option></select></div>
       ${S.gyms.length?'':`<p class="ci-empty">Training at a gym? Add it, or scan the QR code at the front desk.</p>`}
-      <div class="ci-btns"><button class="btn ci-go" data-act="checkIn">${ICON.pin} Check in now</button><button class="btn ci-qr" data-act="scan" aria-label="Scan the gym's QR code to check in">${ICON.scan} QR check-in</button></div>`})()}</div>`}
+      <div class="ci-btns"><button class="btn ci-go ci-main" data-act="scan" aria-label="Scan the gym's QR code to check in">${ICON.scan} QR check-in</button><button class="btn ci-qr" data-act="checkIn">${ICON.pin} Check in now</button></div>`})()}</div>`}
    <div class="card${fd('j-sess')}"><div class="card-h"><h3>Session history</h3><span class="muted" style="font-size:13px">${S.sessions.length} sessions</span></div>${histList('sessions')}</div>
   </div><div style="display:flex;flex-direction:column;gap:18px;min-width:0">
    <div class="card"><div class="card-h"><h3>Session rate</h3><span class="pill ${rate>=target?'g':rate>=target*.6?'w':'n'}">${rate>=target?'8 week avg on target':rate>=target*.6?'8 week avg close':'8 week avg below'}</span></div>
@@ -3784,6 +3938,7 @@ ACT.exDetail=b=>{const x=EX.find(e=>e.id===b.dataset.id);if(!x)return;const alts
 // ---------- COACHES (trainers & nutritionists) ----------
 const PROS={list:null,type:'trainer',city:null,sub:null,timer:null,state:'idle'};
 function loadPros(){
+  if(pdirOn()){PROS.list=pdirList().filter(p=>!p.hidden);if(!PDIR.polled)PROS.state='loading';pdirPoll();return}
   if(PROS.sub||!NET.db)return;
   try{PROS.list=JSON.parse(localStorage.getItem('jp:pros')||'null')}catch(e){}
   PROS.state='loading';PROS.timer=setTimeout(()=>{if(PROS.state==='loading'){PROS.state='slow';if(cur==='jungle'&&jTab==='coach')RENDER.jungle()}},10000);
@@ -3797,19 +3952,19 @@ function loadPros(){
 function jPros(el){
   if(!PROS.list){try{PROS.list=JSON.parse(localStorage.getItem('jp:pros')||'null')}catch(e){}}
   loadPros();watchReviews();if(PROS.city==null)PROS.city=S.profile.city||'';
-  const all=(PROS.list||[]).filter(p=>p.type===PROS.type&&!p.suspended&&!isBanned(p.owner));const cq=PROS.city.trim().toLowerCase();
+  const all=(PROS.list||[]).filter(p=>proTypes(p).includes(PROS.type)&&!p.suspended&&!isBanned(p.owner));const cq=PROS.city.trim().toLowerCase();
   const byCity=all.filter(p=>!cq||(p.city||'').toLowerCase().includes(cq));PROS.cert=PROS.cert||'all';
   const nC=byCity.filter(p=>p.certified).length;const list=byCity.filter(p=>PROS.cert==='all'||(PROS.cert==='yes'?p.certified:!p.certified)).sort((a,b)=>(b.certified?1:0)-(a.certified?1:0)||(b.ts||0)-(a.ts||0));
-  const mine=(PROS.list||[]).find(p=>p.owner===S.profile.id);
+  const mine=(PROS.list||[]).find(p=>p.owner===S.profile.id)||(pdirOn()&&myRelayPro());
   const tl=PROS.type==='trainer'?'trainers':'nutritionists';
   el.innerHTML=`<div class="seg accent-seg" id="proT"><button data-t="trainer" class="${PROS.type==='trainer'?'on':''}">Personal trainers</button><button data-t="nutritionist" class="${PROS.type==='nutritionist'?'on':''}">Nutritionists</button></div>
-  ${netNote('Browsing the coach directory')}
-  <div class="card" style="display:flex;flex-direction:column;gap:12px"><div class="card-h" style="margin:0"><h3>Find a coach</h3><button class="btn sm ${mine?'soft':''}" data-net="write" data-act="proForm" style="margin-left:auto">${mine?'Edit listing':'Join as coach'}</button></div>
+  ${pdirOn()?(navigator.onLine?'':`<div class="lock-note">${ICON.wifi}<span>You are offline. Showing the coaches saved on this device.</span></div>`):netNote('Browsing the coach directory')}
+  <div class="card" style="display:flex;flex-direction:column;gap:12px"><div class="card-h" style="margin:0"><h3>Find a coach</h3><button class="btn sm ${mine?'soft':''}" data-net="relay" data-act="proForm" style="margin-left:auto">${mine?'Edit listing':'Join as coach'}</button></div>
    <div class="field"><label for="proCity">City</label><input class="inp" id="proCity" placeholder="Any city" value="${esc(PROS.city)}"></div>
-   <div class="chips cert-filter" id="proC" role="group" aria-label="Certification">${[['all','All',byCity.length],['yes','Certified',nC],['no','Non-certified',byCity.length-nC]].map(([k,l,n])=>`<button class="chip ${PROS.cert===k?'on':''}" data-c="${k}" aria-pressed="${PROS.cert===k}">${k==='yes'?CERTI:''}${l} <span class="num">${n}</span></button>`).join('')}</div></div>
-  ${PROS.state==='slow'&&!PROS.list?'<div class="lock-note">The directory is taking a while to load. It will appear when the connection catches up.</div>':''}
+   <div class="chips cert-filter" id="proC" role="group" aria-label="Certification">${[['all','All',byCity.length],['yes','Certified',nC],['no','Non-certified',byCity.length-nC]].map(([k,l,n])=>`<button class="chip ${PROS.cert===k?'on':''}" data-c="${k}" aria-pressed="${PROS.cert===k}">${k==='yes'?CERTI:''}${l} <span class="cnt">${n}</span></button>`).join('')}</div></div>
+  ${PROS.state==='slow'&&!PROS.list?'<div class="lock-note">The directory is taking a while to load. It will appear when the connection catches up.</div>':''}${pdirOn()&&!PDIR.polled&&!list.length&&navigator.onLine?'<div class="lock-note"><span class="spinner"></span><span>Loading the coach directory…</span></div>':''}${pdirOn()&&PROS.state==='err'&&!list.length?'<div class="lock-note">The coach directory could not be reached. Check your connection and open this tab again.</div>':''}
   <div class="pros">${list.length?list.map(p=>proCard(p)).join(''):
-    `<div class="card" style="grid-column:1/-1"><div class="empty">${ICON.pin}<span>No ${tl} listed${cq?' in '+esc(PROS.city):''} yet. Coaches add themselves with the button above, then everyone in the app can find and message them.</span>${cq&&all.length?`<button class="btn soft sm" id="proAny">Show all ${all.length} ${tl}</button>`:''}</div></div>`}</div>`;
+    `<div class="card" style="grid-column:1/-1"><div class="empty">${ICON.pin}<span>No ${tl} listed${cq?' in '+esc(PROS.city):''} yet. Coaches add themselves with the button above, then everyone in the app can find and message them.</span>${cq&&all.length?`<button class="btn soft sm" id="proAny">Show all ${tl} <span class="cnt">${all.length}</span></button>`:''}</div></div>`}</div>`;
   $('#proC',el).onclick=e=>{const b=e.target.closest('[data-c]');if(!b)return;PROS.cert=b.dataset.c;jPros(el)};
   $('#proT',el).onclick=e=>{const b=e.target.closest('[data-t]');if(!b)return;PROS.type=b.dataset.t;jPros(el)};
   const ci=$('#proCity',el);ci.onchange=()=>{PROS.city=ci.value;jPros(el)};
@@ -3820,23 +3975,23 @@ function proCard(p){return `<button class="pro ${p.example?'example':''}" ${p.ex
 function coachMsg(p){const u=S.profile,P=S.plan;const goal={lose:'lose fat',gain:'build muscle',recomp:'build muscle while keeping my weight'}[P?.goal||(u.goalWeight<u.weight-1?'lose':u.goalWeight>u.weight+1?'gain':'recomp')];
   const slots=S.schedule?S.schedule.days.map((d,i)=>d.gym?`${WD[i]} ${hhmm(d.gym.s)}`:null).filter(Boolean).slice(0,4).join(', '):'';
   return `Hi ${p.name.split(' ')[0]}, I'm ${u.name||'a JUNGLE PARK member'} and found your profile on JUNGLE PARK. `+
-   (p.type==='trainer'?`I'm ${u.age}, currently ${u.weight} kg and aiming for ${u.goalWeight} kg to ${goal}. I train ${u.freq}x a week at ${u.level} level${slots?`, usually ${slots}`:''}. Do you have space for personal training${u.city?' in '+u.city:''}? What would you recommend to start?`
+   ((proTypes(p).length>1?PROS.type:proTypes(p)[0])==='trainer'?`I'm ${u.age}, currently ${u.weight} kg and aiming for ${u.goalWeight} kg to ${goal}. I train ${u.freq}x a week at ${u.level} level${slots?`, usually ${slots}`:''}. Do you have space for personal training${u.city?' in '+u.city:''}? What would you recommend to start?`
    :`I'm ${u.age}, ${u.weight} kg with a goal of ${u.goalWeight} kg (${goal}). I train ${u.freq}x a week${P?` and my target is about ${P.kcal} kcal and ${P.protein} g protein a day`:''}. Could you help me with a nutrition plan? What are your rates?`)}
 ACT.proExample=()=>{const p={name:'Coach',type:PROS.type};openSheet('Example listing',`<p class="muted">Real coaches appear here once they list themselves. When you open one, you'll get a ready-made message like this:</p><div class="codebox" style="font-family:var(--f-body);font-size:14px;max-height:none">${esc(coachMsg(p))}</div><button class="btn block" data-act="closeSheet">Got it</button>`)};
 ACT.proOpen=b=>{const p=(PROS.list||[]).find(x=>x.id===b.dataset.id);if(!p)return;const msg=coachMsg(p);const wa=(p.wa||'').replace(/[^\d]/g,''),tg=(p.tg||'').replace(/^@|https?:\/\/t\.me\//g,'').replace(/[^\w]/g,'');
   const link=/^https?:\/\//i.test(p.link||'')?p.link:'';
   openSheet(p.name,`<div style="display:flex;gap:14px;align-items:center"><span class="pro" style="width:96px;border-radius:18px;flex:none"><span class="ph" style="aspect-ratio:1;font-size:36px">${p.photo?`<img src="${esc(p.photo)}" alt="">`:esc(initials(p.name))}</span></span>
-   <div style="min-width:0"><span class="pill">${p.type==='trainer'?'Personal trainer':'Nutritionist'}</span> ${p.certified?`<span class="pill g">${CERTI}Certified</span>`:'<span class="pill n">Non-certified</span>'}<h3 style="margin-top:6px;font-size:20px">${esc(p.name)}</h3><small class="muted">${esc(p.city||'')}</small></div></div>
+   <div style="min-width:0">${proTypes(p).map(t=>`<span class="pill">${t==='trainer'?'Personal trainer':'Nutritionist'}</span>`).join(' ')} ${p.certified?`<span class="pill g">${CERTI}Certified</span>`:'<span class="pill n">Non-certified</span>'}<h3 style="margin-top:6px;font-size:20px">${esc(p.name)}</h3><small class="muted">${esc(p.city||'')}</small></div></div>
    ${(p.tags||[]).length?`<div class="badges">${p.tags.map(t=>`<span class="pill n">${esc(t)}</span>`).join('')}</div>`:''}
    <p style="white-space:pre-wrap">${esc(p.bio||'')}</p>
-   ${(()=>{const cid=p.owner||p.id;const st=requestState(cid);return st==='active'?'<div class="lock-note ok">You train with this coach. Message them from Jungle → My coach.</div>':st==='pending'?'<div class="lock-note">Request sent. Waiting for the coach to accept.</div>':cid===S.profile.id?'':`<button class="btn block" data-act="requestCoach" data-c="${esc(cid)}" data-n="${esc(p.name)}">${ICON.check} Ask to train with ${esc(p.name.split(' ')[0])}</button>`})()}
+   ${(()=>{const cid=p.owner||p.id;const st=requestState(cid);if(pdirOn())return cid===S.profile.id?'<div class="lock-note ok">This is your listing. It stays in the directory while you open the app at least every few weeks.</div>':'<div class="lock-note">Message them on WhatsApp or Telegram below to start training together.</div>';return st==='active'?'<div class="lock-note ok">You train with this coach. Message them from Jungle → My coach.</div>':st==='pending'?'<div class="lock-note">Request sent. Waiting for the coach to accept.</div>':cid===S.profile.id?'':`<button class="btn block" data-act="requestCoach" data-c="${esc(cid)}" data-n="${esc(p.name)}">${ICON.check} Ask to train with ${esc(p.name.split(' ')[0])}</button>`})()}
    <h4 class="sub-h">Reviews</h4>${reviewsHtml(p.id)}
    ${(p.certs||[]).length?`<h4 class="sub-h">Certifications${p.certified?' <small class="muted">· verified by JUNGLE PARK</small>':''}</h4>${certList(p.certs)}`:''}
    ${link?`<a class="btn soft" href="${esc(link)}" target="_blank" rel="noopener noreferrer">${ICON.link} ${esc(link.replace(/^https?:\/\//,'').slice(0,40))}</a>`:''}
    <div class="field"><label for="cMsg">Your message (edit before sending)</label><textarea class="inp" id="cMsg" rows="6">${esc(msg)}</textarea></div>
    <div class="grid2">${wa?`<a class="btn wa" id="waBtn" target="_blank" rel="noopener noreferrer" href="#">${ICON.wa} WhatsApp</a>`:''}${tg?`<a class="btn tg" id="tgBtn" target="_blank" rel="noopener noreferrer" href="https://t.me/${tg}">${ICON.tg} Telegram</a>`:''}</div>
    <div class="muted" style="font-size:12.5px">${wa?`WhatsApp: <span style="user-select:all">+${wa}</span>`:''}${wa&&tg?' · ':''}${tg?`Telegram: <span style="user-select:all">@${tg}</span> (your message is copied when you tap Telegram, paste it in the chat)`:''}</div>
-   ${p.owner===S.profile.id?`<button class="btn ghost" data-act="proForm">Edit my listing</button>`:''}`,el=>{
+   ${p.owner===S.profile.id?`<button class="btn ghost" data-act="proForm">Edit my listing</button>${pdirOn()?'<button class="btn soft danger-btn" data-act="proRemoveRelay">Remove my listing</button>':''}`:''}`,el=>{
     const m=$('#cMsg',el);const upd=()=>{const a=$('#waBtn',el);if(a)a.href=`https://wa.me/${wa}?text=${encodeURIComponent(m.value)}`};upd();m.oninput=upd;
     $('#tgBtn',el)?.addEventListener('click',()=>{copyText(m.value)})})};
 function resizeImage(file,max=360){return new Promise((res,rej)=>{const img=new Image();img.onload=()=>{const s=Math.min(1,max/Math.max(img.width,img.height));const c=document.createElement('canvas');c.width=Math.round(img.width*s);c.height=Math.round(img.height*s);c.getContext('2d').drawImage(img,0,0,c.width,c.height);URL.revokeObjectURL(img.src);res(c.toDataURL('image/jpeg',.78))};img.onerror=rej;img.src=URL.createObjectURL(file)})}
@@ -4234,23 +4389,87 @@ ACT.setPw=()=>{const ids=S.loginIds||[];openSheet(ids.length?'Change password':'
   <button class="btn block" id="spGo" data-net="write">Save password</button>`,el=>{wirePw(el,'sp');$('#spGo',el).onclick=async()=>{if(!needOnline('Saving a password'))return;try{const pw=readPw(el,'sp');await setPassword([$('#spId',el).value],pw);closeSheet();rerender();toast('Password saved')}catch(e){toast(e&&e.msg||'Could not save the password')}}})};
 function accountCard(){return `<div class="card acct-card"><div class="watch-h"><span class="watch-ico" style="background:var(--soft);color:var(--accent)">${ICON.lock}</span><div><h3>Account</h3><small class="muted">Sign in on another device with a QR code or a ${NET.db?6:8}-character code</small></div></div>
   ${syncNote('Signing in on another device')}
-  <div class="grid2"><button class="btn" data-net="relay" data-act="deviceQR">${ICON.qr} Show sign-in code</button><button class="btn soft" data-act="signInOther">${ICON.scan} Sign in from another account</button></div></div>`}
+  <div class="grid2"><button class="btn" data-net="relay" data-act="deviceQR">${ICON.qr} Show sign-in code</button><button class="btn soft" data-act="signInOther">${ICON.scan} Sign in from another account</button></div>${bizPinRow()}</div>`}
+
+// ---------- business lock: a 6-digit PIN saved on the account (synced with the other settings) ----------
+// Only a salted PBKDF2 hash of the PIN is stored. Locking is per device: it stays locked until the PIN is entered.
+const BLOCK_K='jp:bizLocked';const PINT={fails:0,until:0};
+function bizPinSet(){const p=S.settings.bizPin;return !!(p&&p.h&&p.s)}
+function bizLocked(){try{return bizPinSet()&&localStorage.getItem(BLOCK_K)==='1'}catch(e){return false}}
+function setBizLocked(v){try{v?localStorage.setItem(BLOCK_K,'1'):localStorage.removeItem(BLOCK_K)}catch(e){}}
+async function pinHash(pin,salt){const k=await crypto.subtle.importKey('raw',new TextEncoder().encode(String(pin)),'PBKDF2',false,['deriveBits']);const b=new Uint8Array(await crypto.subtle.deriveBits({name:'PBKDF2',salt:new TextEncoder().encode('jp-biz-pin:'+salt),iterations:150000,hash:'SHA-256'},k,256));return btoa(String.fromCharCode(...b))}
+async function pinCheck(pin){const p=S.settings.bizPin;if(!p)return false;return (await pinHash(pin,p.s))===p.h}
+const pinOk=v=>/^\d{6}$/.test(v);
+// a PIN box with its own view / hide eye, like the money amounts
+function pinField(id,label,big){return `<div class="field pin-f"><label for="${id}">${label}</label><div class="pin-wrap ${big?'big':''}"><input class="inp pin-inp" id="${id}" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="6" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="••••••" aria-label="${label}"><button type="button" class="iconbtn pin-eye" data-pin-eye="${id}" aria-pressed="false" aria-label="Show PIN">${ICON.eyeOff}</button></div><div class="pin-dots" aria-hidden="true">${'<i></i>'.repeat(6)}</div></div>`}
+document.addEventListener('input',e=>{const i=e.target.closest('.pin-inp');if(!i)return;const v=i.value.replace(/\D/g,'').slice(0,6);if(v!==i.value)i.value=v;const d=i.closest('.pin-f')?.querySelector('.pin-dots');if(d)[...d.children].forEach((x,k)=>x.classList.toggle('on',k<v.length));i.closest('.pin-f')?.classList.remove('bad')});
+document.addEventListener('click',e=>{const b=e.target.closest('[data-pin-eye]');if(!b)return;const i=document.getElementById(b.dataset.pinEye);if(!i)return;const show=i.type==='password';i.type=show?'text':'password';b.innerHTML=show?ICON.eye:ICON.eyeOff;b.setAttribute('aria-pressed',show);b.setAttribute('aria-label',show?'Hide PIN':'Show PIN');i.focus()});
+function pinBad(el,id,msg){const f=$('#'+id,el)?.closest('.pin-f');if(f){f.classList.remove('bad');void f.offsetWidth;f.classList.add('bad')}if(msg)toast(msg)}
+// set or change the PIN. o.lockAfter: lock the business page once it is saved
+function pinSheet(o={}){const had=bizPinSet();
+  const el=openSheet(had?'Change business PIN':'Set a business PIN',`<p class="muted">${had?'Enter your current PIN, then choose a new one.':'Choose a 6-digit PIN. You will use it to open your business page after you lock it. It is saved with your account, so it works on your other signed-in devices too.'}</p>
+   ${had?pinField('pnOld','Current PIN'):''}${pinField('pnNew','New 6-digit PIN')}${pinField('pnRep','Repeat the PIN')}
+   <button class="btn block" id="pnGo">${ICON.lock} ${o.lockAfter?'Save PIN and lock':'Save PIN'}</button>`);
+  setTimeout(()=>$(had?'#pnOld':'#pnNew',el)?.focus(),250);
+  $('#pnGo',el).onclick=async e=>{const b=e.currentTarget;const n=$('#pnNew',el).value,r=$('#pnRep',el).value;
+    if(had&&!(await pinCheck($('#pnOld',el).value)))return pinBad(el,'pnOld','Current PIN is not right');
+    if(!pinOk(n))return pinBad(el,'pnNew','The PIN needs exactly 6 digits');if(/^(\d)\1{5}$/.test(n)||'0123456789'.includes(n)||'9876543210'.includes(n))return pinBad(el,'pnNew','Pick a PIN that is harder to guess');
+    if(n!==r)return pinBad(el,'pnRep','The two PINs do not match');b.disabled=true;
+    const s=rid(16);S.settings.bizPin={s,h:await pinHash(n,s),t:Date.now()};save('settings');closeSheet();
+    if(o.lockAfter){setBizLocked(true);toast('PIN saved. Business page locked')}else toast(had?'PIN changed':'PIN saved');rerender()}}
+ACT.bizLock=()=>{if(!bizPinSet()){pinSheet({lockAfter:true});return}setBizLocked(true);toast('Business page locked');RENDER.biz()};
+ACT.bizPinSet=()=>pinSheet();
+ACT.bizPinOff=()=>{const el=openSheet('Remove business PIN',`<p class="muted">Without a PIN you can't lock your business page.</p>${pinField('pnCur','Current PIN')}<button class="btn danger-btn block" id="pnX">Remove PIN</button>`);setTimeout(()=>$('#pnCur',el)?.focus(),250);
+  $('#pnX',el).onclick=async()=>{if(!(await pinCheck($('#pnCur',el).value)))return pinBad(el,'pnCur','That PIN is not right');S.settings.bizPin=null;save('settings');setBizLocked(false);closeSheet();toast('PIN removed');rerender()}};
+// forgot the PIN: any business access key used on this account proves it is the owner
+ACT.bizPinForgot=()=>{const el=openSheet('Forgot your PIN?',`<p class="muted">Enter the access key you got when your gym or coaching was approved. We will remove the PIN so you can set a new one.</p><div class="field"><label for="pfK">Access key</label><input class="inp mono" id="pfK" autocomplete="off" autocapitalize="characters" placeholder="e.g. JP-XXXX-XXXX"></div><button class="btn block" id="pfGo">Remove PIN and open</button>`);
+  $('#pfGo',el).onclick=()=>{const k=$('#pfK',el).value.trim().toUpperCase();if(!k||!(S.keysUsed||[]).map(x=>String(x).toUpperCase()).includes(k)){toast('That key is not linked to this account');return}S.settings.bizPin=null;save('settings');setBizLocked(false);closeSheet();toast('PIN removed. Set a new one in Settings → Account');RENDER.biz()}};
+// the locked screen
+function bizLockView(v){v.innerHTML=`${topbar('Business')}<div class="card biz-lock"><span class="bl-ico">${ICON.lock}</span><h3>Business page locked</h3><p class="muted">Enter your 6-digit PIN to open your gym and coaching tools.</p>
+   ${pinField('blPin','PIN',true)}<button class="btn block" id="blGo">Unlock</button><button class="link" data-act="bizPinForgot">Forgot PIN?</button></div>`;
+  const i=$('#blPin',v),go_=$('#blGo',v);setTimeout(()=>i.focus(),200);
+  const tryIt=async()=>{const now=Date.now();if(PINT.until>now){toast(`Too many tries. Wait ${Math.ceil((PINT.until-now)/1000)} seconds`);return}if(!pinOk(i.value)){pinBad(v,'blPin','Enter all 6 digits');return}go_.disabled=true;
+    if(await pinCheck(i.value)){PINT.fails=0;setBizLocked(false);toast('Unlocked');RENDER.biz();return}
+    go_.disabled=false;PINT.fails++;if(PINT.fails>=5){PINT.until=Date.now()+30e3*Math.pow(2,PINT.fails-5);}i.value='';i.dispatchEvent(new Event('input',{bubbles:true}));pinBad(v,'blPin',PINT.fails>=5?'Too many tries. Wait a moment':'That PIN is not right');i.focus()};
+  go_.onclick=tryIt;i.addEventListener('keydown',e=>{if(e.key==='Enter')tryIt()});i.addEventListener('input',()=>{if(i.value.length===6)tryIt()})}
+function bizPinRow(){if(!bizEnabled())return '';const on=bizPinSet();return `<div class="pin-row"><span class="pr-ico">${ICON.lock}</span><span class="t"><b>Business PIN</b><small class="muted">${on?'Set · use it to unlock your business page':'Not set · needed to lock your business page'}</small></span><span class="pin-acts">${on?`<button class="btn soft sm" data-act="bizPinSet">Change</button><button class="link danger-txt" data-act="bizPinOff">Remove</button>`:`<button class="btn sm" data-act="bizPinSet">Set PIN</button>`}</span></div>`}
 
 // ---------- gym owner ----------
 const BIZ={tab:'gym',gid:null,members:[],checkins:[],gym:null,unsub:[],filter:'all',q:'',clients:[],cunsub:null,state:'idle'};
 function bizEnabled(){return (S.myGyms||[]).length||S.coachMode}
 function bizAllowed(){return !!bizEnabled()}
 function memberStatus(m){if(m.status==='pending')return ['Pending','w'];if(m.status==='frozen')return ['Frozen','n'];if(!m.end)return ['No end date','n'];const d=m.end-Date.now();if(d<0)return ['Expired','bad'];if(d<7*DAYMS)return ['Expiring','w'];return ['Active','g']}
+// ---------- recent check-ins: live grid of member cards with their membership state ----------
+const CIS={seen:new Set(),first:true};
+const CI_ICO={ok:'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#1FA463"/><path d="M7.4 12.4l3.1 3.1 6.1-6.6" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+ warn:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.4 21.6 20H2.4z" fill="#F2B300" stroke="#F2B300" stroke-width="2.2" stroke-linejoin="round"/><path d="M12 9.3v5.2" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><circle cx="12" cy="17.5" r="1.35" fill="#fff"/></svg>',
+ bad:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.8 20.8 6.9v10.2L12 22.2 3.2 17.1V6.9z" fill="#E5383B" stroke="#E5383B" stroke-width="1.6" stroke-linejoin="round"/><path d="M8.8 8.8l6.4 6.4M15.2 8.8l-6.4 6.4" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg>'};
+function ciState(c){const m=(BIZ.members||[]).find(x=>(c.mid&&x._id===c.mid)||(c.uid&&x.uid&&x.uid===c.uid));if(!m)return ['bad','Not a member',null];const st=memberStatus(m)[0];
+  if(st==='Active'||st==='No end date')return ['ok','Active',m];if(st==='Expiring'){const d=Math.max(0,Math.ceil((m.end-Date.now())/DAYMS));return ['warn',d<=0?'Ends today':d===1?'Ends tomorrow':`Ends in ${d} days`,m]}
+  return ['bad',st==='Expired'?'Expired':st==='Pending'?'Not approved':st==='Frozen'?'Frozen':'Not active',m]}
+function agoTxt(t){const s=Math.max(0,(Date.now()-t)/1000);if(s<60)return 'just now';if(s<3600)return Math.floor(s/60)+' min ago';return Math.floor(s/3600)+' h ago'}
+function recentCheckinsCard(){const now=Date.now();const L=(BIZ.checkins||[]).filter(c=>c.ts>now-DAYMS).sort((a,b)=>b.ts-a.ts);const n=BIZ.ciN||8;const shown=L.slice(0,n);
+  const fresh=new Set();shown.forEach(c=>{if(!CIS.seen.has(c._id)){if(!CIS.first)fresh.add(c._id);CIS.seen.add(c._id)}});if(BIZ.checkins)CIS.first=false;
+  const cnt={ok:0,warn:0,bad:0};L.forEach(c=>cnt[ciState(c)[0]]++);
+  return `<div class="card ci-card-wrap"><div class="card-h"><div><h3>Recent check-ins <span class="live-dot" title="Updates live"></span></h3><small class="muted">last 24 hours · ${L.length} check-in${L.length===1?'':'s'}</small></div></div>
+   ${L.length?`<div class="ci-legend"><span class="s-ok">${CI_ICO.ok}Active <b class="num">${cnt.ok}</b></span><span class="s-warn">${CI_ICO.warn}Expiring soon <b class="num">${cnt.warn}</b></span><span class="s-bad">${CI_ICO.bad}Not active <b class="num">${cnt.bad}</b></span></div>
+   <div class="ci-grid">${shown.map(c=>{const [k,lab,m]=ciState(c);const tag=m?'button':'div';return `<${tag} class="ci-tile s-${k} ${fresh.has(c._id)?'ci-new':''}" ${m?`data-act="memberOpen" data-id="${esc(m._id)}" type="button"`:''} aria-label="${esc(c.name)}, ${esc(lab)}, ${agoTxt(c.ts)}">
+     <span class="ci-av">${avatar(c.name,c.uid||c.mid||c.name,'lg')}<span class="ci-badge">${CI_ICO[k]}</span></span><b class="ci-nm">${esc(c.name||'Member')}</b><small class="ci-ago" data-ago="${c.ts}">${agoTxt(c.ts)}</small><span class="ci-st">${esc(lab)}</span></${tag}>`}).join('')}</div>
+   ${L.length>shown.length?`<button class="btn soft block sm" data-act="ciMore">Show more <span class="cnt">${L.length-shown.length}</span></button>`:''}`
+   :'<div class="empty">Check-ins from the last 24 hours appear here the moment members scan your gym QR.</div>'}</div>`}
+ACT.ciMore=()=>{BIZ.ciN=(BIZ.ciN||8)+8;RENDER.biz()};
+setInterval(()=>{document.querySelectorAll('[data-ago]').forEach(e=>{e.textContent=agoTxt(+e.dataset.ago)})},30e3);
+
 function stopGymSubs(){BIZ.unsub.forEach(f=>{try{f()}catch(e){}});BIZ.unsub=[]}
-function watchGym(gid){if(BIZ.gid===gid&&BIZ.unsub.length)return;stopGymSubs();BIZ.gid=gid;BIZ.first=0;BIZ.all=false;BIZ.members=[];BIZ.checkins=[];BIZ.gym=null;if(!NET.db)return;BIZ.state='loading';
+function watchGym(gid){if(BIZ.gid===gid&&BIZ.unsub.length)return;stopGymSubs();BIZ.gid=gid;BIZ.first=0;BIZ.all=false;BIZ.ciN=8;CIS.first=true;CIS.seen.clear();BIZ.members=[];BIZ.checkins=[];BIZ.gym=null;if(!NET.db)return;BIZ.state='loading';
   const t=setTimeout(()=>{if(BIZ.state==='loading'){BIZ.state='slow';cur==='biz'&&RENDER.biz()}},10000);
   BIZ.sig={};const chg=(k,v)=>{const sg=typeof v==='string'?v:JSON.stringify(v);if(BIZ.sig[k]===sg)return false;BIZ.sig[k]=sg;return true};
   BIZ.unsub.push(NET.db.doc('gyms/'+gid).onSnapshot(s=>{const d=s.exists?s.data():null;const was=BIZ.state;if(!s.metadata.fromCache){BIZ.state='ok';clearTimeout(t)}if(!chg('g',d)&&was===BIZ.state)return;BIZ.gym=d;bizSoft(!BIZ.first++)},e=>{BIZ.state='err';clearTimeout(t);dbErr(e)}));
   BIZ.unsub.push(NET.db.collection(`gyms/${gid}/members`).limit(1000).onSnapshot(q=>{const L=q.docs.map(d=>Object.assign({_id:d.id},d.data()));if(!chg('m',L))return;BIZ.members=L;bizSoft()},dbErr));
-  BIZ.unsub.push(NET.db.collection(`gyms/${gid}/checkins`).where('ts','>',Date.now()-30*DAYMS).orderBy('ts','desc').limit(500).onSnapshot(q=>{if(!chg('c',q.docs.map(d=>d.id).join('|')))return;BIZ.checkins=q.docs.map(d=>Object.assign({_id:d.id},d.data()));bizSoft()},dbErr))}
+  BIZ.unsub.push(NET.db.collection(`gyms/${gid}/checkins`).where('ts','>',Date.now()-30*DAYMS).orderBy('ts','desc').limit(500).onSnapshot(q=>{if(!chg('c',q.docs.map(d=>d.id).join('|')))return;BIZ.checkins=q.docs.map(d=>Object.assign({_id:d.id},d.data()));bizSoft(true)},dbErr))}
 let bizT;function bizSoft(now){clearTimeout(bizT);bizT=setTimeout(()=>{if((cur==='biz'||cur==='admin')&&!document.querySelector('.sheet')&&!document.activeElement?.matches('input,textarea,select'))RENDER[cur]()},now?0:120)}
 RENDER.biz=()=>{const v=$('#v-biz');if(!v)return;const gyms=S.myGyms||[];
-  if(BIZ.tab==='admin')BIZ.tab='gym';
+  if(BIZ.tab==='admin')BIZ.tab='gym';if(bizLocked()){bizLockView(v);updateStatus();return}
   v.innerHTML=`${topbar('Business')}
    <div class="seg accent-seg" id="bizSeg"><button data-b="gym" class="${BIZ.tab==='gym'?'on':''}">${GYMSVG} My gym</button><button data-b="coach" class="${BIZ.tab==='coach'?'on':''}">${USERSVG} Coaching</button></div>
    ${netNote('Managing your gym and clients')}<div id="bizBody" style="display:flex;flex-direction:column;gap:16px"></div>`;
@@ -4266,22 +4485,22 @@ function bizGym(el){const gyms=S.myGyms||[];
   const q=BIZ.q.toLowerCase();const list=M.filter(F[BIZ.filter]).filter(m=>!q||(m.name+' '+(m.phone||'')+' '+(m.email||'')).toLowerCase().includes(q)).sort((a,b)=>(a.status==='pending'?-1:0)-(b.status==='pending'?-1:0)||(a.end||9e15)-(b.end||9e15));
   el.innerHTML=`${gyms.length>1?`<select class="inp" id="gymPick" aria-label="Choose gym">${gyms.map(id=>`<option value="${id}" ${id===BIZ.gid?'selected':''}>${esc(id===BIZ.gid?g.name:'Gym '+id.slice(0,4))}</option>`).join('')}</select>`:''}
    <div class="card biz-gym"><div class="bg-top"><span class="bh-ico ${g.photo?'ph':''}">${g.photo?`<img src="${photoUrl(g.photo)}" alt="" decoding="async" style="width:100%;height:100%;object-fit:cover;border-radius:inherit">`:GYMSVG}</span><div style="min-width:0"><h3>${esc(g.name)}</h3><small class="muted">${esc([g.city,g.address].filter(Boolean).join(' · ')||'Add your address in settings')}</small></div></div>
-    <div class="grid2"><button class="btn" data-act="gymQR">${ICON.qr} Gym QR code</button><button class="btn soft" data-act="addMember" data-net="write">${ICON.plus} Add member</button></div>
-    <div class="line-btns"><button class="btn-line" data-act="editGym"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>Gym settings</button><button class="btn-line" data-act="newGym" data-net="write">${ICON.plus}Another gym</button></div></div>
-   <div class="rate-grid stack">
+    <div class="grid2"><button class="btn" data-act="gymQR">${ICON.qr} Gym QR code</button><button class="btn soft btn-theme" data-act="addMember" data-net="write">${ICON.plus} Add member</button></div>
+    <div class="line-btns"><button class="btn-line" data-act="editGym"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>Gym settings</button><button class="btn-line btn-line-theme" data-act="newGym" data-net="write">${ICON.plus}Another gym</button></div></div>
+   <div class="card biz-ov${fd('b-ov',true)}"><div class="card-h"><div><h3>Overview</h3><small class="muted">Your gym right now</small></div></div><div class="rate-grid stack biz-stats">
     <div class="rate-tile" style="--c:var(--accent)"><span class="rt-ico">${USERSVG}</span><small>Active members</small><b class="num"><span data-count="${act}">${act}</span></b><span class="rt-sub">${M.length} on file</span></div>
     <div class="rate-tile" style="--c:#4FA37A"><span class="rt-ico">${ICON.pin}</span><small>Check-ins today</small><b class="num"><span data-count="${today.length}">${today.length}</span></b><span class="rt-sub">${week.length} this week</span></div>
     <div class="rate-tile" style="--c:#E9B949"><span class="rt-ico">${ICON.clock}</span><small>Expiring in 7 days</small><b class="num">${exp}</b><span class="rt-sub">renew them early</span></div>
-    <div class="rate-tile" style="--c:#8C6FE0"><span class="rt-ico">${ICON.bolt}</span><small>Waiting for approval</small><b class="num">${pend}</b><span class="rt-sub">joined by QR</span></div></div>
+    <div class="rate-tile" style="--c:#8C6FE0"><span class="rt-ico">${ICON.bolt}</span><small>Waiting for approval</small><b class="num">${pend}</b><span class="rt-sub">joined by QR</span></div></div></div>
    ${BIZ.state==='slow'?'<div class="lock-note">Members are taking a while to load. They will appear when the connection catches up.</div>':''}
    <div class="card"><div class="card-h"><h3>Members</h3><span class="muted num" style="font-size:13px">${list.length} shown</span></div>
     <div class="srch-col"><input class="inp" id="memQ" type="search" enterkeyhint="search" placeholder="Search name, phone or email" value="${esc(BIZ.q)}" autocomplete="off"><div class="srch-btns"><button class="btn soft" data-act="memScan">${ICON.scan} Scan QR</button><button class="btn" id="memGo">${ICON.search} Search</button></div></div>
     <div class="chips" id="memF" style="margin-bottom:6px">${[['all','All'],['active','Active'],['expiring','Expiring'],['expired','Expired'],['pending','Pending'],['noapp','Not on app']].map(([k,l])=>`<button class="chip ${BIZ.filter===k?'on':''}" data-f="${k}">${l}</button>`).join('')}</div>
-    <div class="list">${list.length?list.slice(0,BIZ.all?1e4:40).map(m=>{const [st,c]=ms(m);return `<button class="li" data-act="memberOpen" data-id="${esc(m._id)}" style="border-left:0;border-right:0;border-bottom:0;background:none;width:100%;text-align:left">${avatar(m.name,m.uid||m._id,'sm')}<span class="t"><b>${esc(m.name)}</b><small>${esc(m.plan||'No plan')} · ${m.end?'ends '+fmtDate(m.end):'no end date'}</small></span><span class="mem-tags">${m.uid?'':'<span class="pill n">No app</span>'}<span class="pill ${c==='bad'?'bad':c}">${st}</span></span></button>`}).join('')+(list.length>40&&!BIZ.all?`<button class="btn soft" data-act="memAll" style="margin-top:8px">Show all ${list.length} members</button>`:'')
+    <div class="list">${list.length?list.slice(0,BIZ.all?1e4:40).map(m=>{const [st,c]=ms(m);return `<button class="li" data-act="memberOpen" data-id="${esc(m._id)}" style="border-left:0;border-right:0;border-bottom:0;background:none;width:100%;text-align:left">${avatar(m.name,m.uid||m._id,'sm')}<span class="t"><b>${esc(m.name)}</b><small>${esc(m.plan||'No plan')} · ${m.end?'ends '+fmtDate(m.end):'no end date'}</small></span><span class="mem-tags">${m.uid?'':'<span class="pill n">No app</span>'}<span class="pill ${c==='bad'?'bad':c}">${st}</span></span></button>`}).join('')+(list.length>40&&!BIZ.all?`<button class="btn soft" data-act="memAll" style="margin-top:8px">Show all members <span class="cnt">${list.length}</span></button>`:'')
       :`<div class="empty">${USERSVG}<span>${M.length?'No members match this filter.':'No members yet. Add members yourself, or let people scan your gym QR to join.'}</span></div>`}</div></div>
    ${bizCourses(BIZ.gid)}
    ${gymPaymentsCard(BIZ.gid)}
-   <div class="card"><div class="card-h"><h3>Recent check-ins</h3><span class="muted" style="font-size:12px">last 30 days</span></div><div class="list">${BIZ.checkins.slice(0,15).map(c=>`<div class="li">${avatar(c.name,c.uid,'sm')}<span class="t"><b>${esc(c.name)}</b><small>${relDate(c.ts)}</small></span>${c.warn?`<span class="pill w">${esc(c.warn)}</span>`:''}</div>`).join('')||'<div class="empty">Check-ins appear here when members scan your gym QR.</div>'}</div></div>`;
+   ${recentCheckinsCard()}`;
   $('#gymPick')?.addEventListener('change',e=>{stopGymSubs();BIZ.gid=e.target.value;RENDER.biz()});
   const qi=$('#memQ',el);qi.oninput=()=>{BIZ.q=qi.value;clearTimeout(qi._t);qi._t=setTimeout(()=>{const pos=qi.selectionStart;RENDER.biz();const n=$('#memQ');n.focus();n.setSelectionRange(pos,pos)},250)};
   const mgo=()=>{clearTimeout(qi._t);BIZ.q=qi.value;RENDER.biz();$('#memQ')?.blur()};$('#memGo',el).onclick=mgo;qi.onkeydown=e=>{if(e.key==='Enter')mgo()};
@@ -4289,22 +4508,45 @@ function bizGym(el){const gyms=S.myGyms||[];
 // scan a member's JUNGLE PARK code to find them in the list
 ACT.memScan=()=>{SCAN_HOOK={title:'Scan a member code',fn:txt=>{let id=null;const m=txt.match(/#(?:add|sync)-([a-z0-9]{6,20})/);if(m)id=m[1];else if(txt.startsWith('JP2.')){id=txt.split('.')[1]}else if(txt.startsWith('JP1.')){try{id=JSON.parse(unb64u(txt.slice(4))).id}catch(e){}}else if(/^[a-z0-9]{12}$/.test(txt))id=txt;
   const mem=id&&(BIZ.members||[]).find(x=>x.uid===id);if(!mem){toast(id?'No member with that code at this gym':'That is not a member code');return}BIZ.q=mem.name||'';BIZ.filter='all';RENDER.biz();setTimeout(()=>ACT.memberOpen({dataset:{id:mem._id}}),120)}};ACT.scan({_hook:1})};
-function gymForm(g){g=g||{plans:[{n:'Monthly',price:'',m:1},{n:'Quarterly',price:'',m:3},{n:'Annual',price:'',m:12}]};
-  return `<div class="form"><div class="field full"><label for="gfN">Gym name</label><input class="inp" id="gfN" value="${esc(g.name||'')}" placeholder="e.g. Iron Paradise"></div>
-   <div class="field"><label for="gfC">City</label><input class="inp" id="gfC" value="${esc(g.city||S.profile.city||'')}"></div><div class="field"><label for="gfP">Phone</label><input class="inp" id="gfP" inputmode="tel" value="${esc(g.phone||'')}"></div>
-   <div class="field full"><label for="gfA">Address</label><input class="inp" id="gfA" value="${esc(g.address||'')}"></div>
-   <div class="field full"><span class="lbl">Membership plans</span><div class="plan-grid">${[['1 month',1],['3 months',3],['4 months',4],['1 year',12]].map(([n,m],i)=>{const p=(g.plans||[]).find(x=>x.n===n)||(g.plans||[]).find(x=>+x.m===m)||{};return `<label class="plan-tile"><span class="pt-ico">${ICON.clock}</span><b>${n}</b><input class="inp gf-plan" data-n="${n}" data-m="${m}" placeholder="Price" value="${esc(p.price||'')}"></label>`}).join('')}</div></div></div>`}
-function planRow(p,i){return `<div class="trow plan-row"><div class="field"><label for="pn${i}">Plan</label><input class="inp" id="pn${i}" data-p="n" value="${esc(p.n||'')}"></div><div class="field"><label for="pp${i}">Price</label><input class="inp" id="pp${i}" data-p="price" inputmode="decimal" value="${esc(p.price||'')}"></div><div class="field"><label for="pm${i}">Months</label><input class="inp" id="pm${i}" data-p="m" type="number" min="0" value="${p.m??1}"></div><button class="iconbtn" data-rmplan aria-label="Remove plan">${ICON.trash}</button></div>`}
-function readGymForm(el){const plans=$$('.gf-plan',el).map(i=>({n:i.dataset.n,m:+i.dataset.m,price:i.value.trim()})).filter(p=>p.price);
-  return {name:$('#gfN',el).value.trim(),city:$('#gfC',el).value.trim(),phone:$('#gfP',el).value.trim(),address:$('#gfA',el).value.trim(),plans}}
-function wireGymForm(el){if(!$('#gfAdd',el))return;$('#gfAdd',el).onclick=()=>{const n=$$('.plan-row',el).length;$('#gfPlans',el).insertAdjacentHTML('beforeend',planRow({n:'',price:'',m:1},n+'x'+Date.now()%1000))};
-  $('#gfPlans',el).onclick=e=>{const b=e.target.closest('[data-rmplan]');if(b)b.closest('.plan-row').remove()}}
+// ---------- membership plans: 1, 3, 6 months and 1 year, plus any custom plans ----------
+function planEditor(plans){plans=(plans||[]).filter(p=>p&&(p.n||p.price));const used=new Set();
+  const std=GYM_PLANS.map(([n,m])=>{let p=plans.find(x=>x.n===n);if(!p)p=plans.find(x=>+x.m===m&&!used.has(x));if(p)used.add(p);return {label:n,n:p?p.n:n,m,price:p?p.price:''}});
+  const cust=plans.filter(p=>!used.has(p));
+  return `<div class="plan-ed"><div class="plan-grid">${std.map(p=>`<label class="plan-tile"><span class="pt-ico">${ICON.clock}</span><b>${esc(p.label)}${p.n!==p.label?` <small class="muted">(${esc(p.n)})</small>`:''}</b><input class="inp gf-plan" data-n="${esc(p.n)}" data-m="${p.m}" placeholder="Price, e.g. 1500 ETB" value="${esc(p.price||'')}"></label>`).join('')}</div>
+   <div class="plan-cust">${cust.map(custPlanRow).join('')}</div><button type="button" class="btn soft sm plan-add" data-plan-add>${ICON.plus} Custom plan</button></div>`}
+function custPlanRow(p){p=p||{};return `<div class="cust-plan"><input class="inp" data-pc="n" placeholder="Plan name, e.g. 2 weeks or Student" value="${esc(p.n||'')}" aria-label="Plan name"><input class="inp" data-pc="m" type="number" min="0" step="0.5" inputmode="decimal" placeholder="Months" value="${p.m!=null&&p.m!==''?esc(p.m):''}" aria-label="Length in months"><input class="inp" data-pc="price" placeholder="Price" value="${esc(p.price||'')}" aria-label="Price"><button type="button" class="iconbtn sm" data-plan-rm aria-label="Remove plan">${ICON.trash}</button></div>`}
+function readPlans(el){const std=$$('.gf-plan',el).map(i=>({n:i.dataset.n,m:+i.dataset.m,price:i.value.trim()})).filter(p=>p.price);
+  const cust=$$('.cust-plan',el).map(r=>({n:r.querySelector('[data-pc=n]').value.trim(),m:+r.querySelector('[data-pc=m]').value||0,price:r.querySelector('[data-pc=price]').value.trim(),custom:true})).filter(p=>p.n&&p.price);return [...std,...cust]}
+document.addEventListener('click',e=>{const a=e.target.closest('[data-plan-add]');if(a){const box=a.parentElement.querySelector('.plan-cust');box.insertAdjacentHTML('beforeend',custPlanRow());box.lastElementChild.querySelector('input').focus();return}
+  const r=e.target.closest('[data-plan-rm]');if(r)r.closest('.cust-plan').remove()});
+// ---------- up to 3 phone numbers ----------
+function phoneRowHtml(id,val,first){const m=String(val||'').match(/^(\+\d{1,3})\s*(.*)$/);const cc=m&&CC.some(x=>x[0]===m[1])?m[1]:'+251';const num=m?m[2]:String(val||'').replace(/^0/,'');const k=id+'_'+rid(4);
+  return `<div class="phone-row">${ccSelect(k+'CC',cc)}<input class="inp" id="${k}" inputmode="tel" placeholder="911 223 344" value="${esc(num)}" aria-label="Phone number">${first?'':`<button type="button" class="iconbtn sm" data-ph-rm aria-label="Remove this number">${ICON.x}</button>`}</div>`}
+function phonesField(id,label,list,req){list=(list||[]).filter(Boolean).slice(0,3);if(!list.length)list=[''];
+  return `<div class="field full phones-f" data-ph="${id}"><span class="lbl">${label}${req?' <span class="req">*</span>':''} <small class="muted">· up to 3</small></span><div class="ph-rows">${list.map((v,i)=>phoneRowHtml(id,v,!i)).join('')}</div><button type="button" class="link" data-ph-add ${list.length>=3?'hidden':''}>+ Add another number</button></div>`}
+function readPhones(el,id){return $$(`[data-ph="${id}"] .phone-row`,el).map(r=>{const n=r.querySelector('input').value.replace(/[^\d]/g,'').replace(/^0+/,'');return n.length>=6?r.querySelector('select').value+' '+n.match(/.{1,3}/g).join(' '):''}).filter(Boolean).slice(0,3)}
+document.addEventListener('click',e=>{const a=e.target.closest('[data-ph-add]');if(a){const f=a.closest('.phones-f');const rows=f.querySelector('.ph-rows');if(rows.children.length<3)rows.insertAdjacentHTML('beforeend',phoneRowHtml(f.dataset.ph,'',false));a.hidden=rows.children.length>=3;rows.lastElementChild.querySelector('input').focus();return}
+  const r=e.target.closest('[data-ph-rm]');if(r){const f=r.closest('.phones-f');r.closest('.phone-row').remove();f.querySelector('[data-ph-add]').hidden=f.querySelector('.ph-rows').children.length>=3}});
+const gymPhones=g=>{const a=(Array.isArray(g&&g.phones)?g.phones:[]).filter(Boolean);return (a.length?a:[g&&g.phone].filter(Boolean)).slice(0,3)};
+// a logo for invoices: kept on white so it prints well
+function logoImage(file){return new Promise((res,rej)=>{const img=new Image();img.onload=()=>{const s=Math.min(1,480/Math.max(img.width,img.height));const c=document.createElement('canvas');c.width=Math.max(1,Math.round(img.width*s));c.height=Math.max(1,Math.round(img.height*s));const x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height);x.drawImage(img,0,0,c.width,c.height);URL.revokeObjectURL(img.src);res(c.toDataURL('image/jpeg',.9))};img.onerror=rej;img.src=URL.createObjectURL(file)})}
+function gymForm(g){g=g||{plans:[]};
+  return `<div class="form">${g.name!=null?`<div class="field full logo-field"><span class="lbl">Company logo <small class="muted">· printed on your invoices</small></span><div class="logo-pick"><button type="button" class="logo-box ${g.logo?'has':''}" id="gfLogo" aria-label="Upload logo">${g.logo?`<img src="${esc(g.logo)}" alt="Logo">`:ICON.plus}</button><div class="logo-acts"><button type="button" class="btn soft sm" id="gfLogoB">${ICON.cam||''} ${g.logo?'Change logo':'Upload logo'}</button><button type="button" class="link" id="gfLogoX" ${g.logo?'':'hidden'}>Remove</button><small class="muted">PNG or JPG. Square or wide logos both work.</small></div></div></div>`:''}
+   <div class="field full"><label for="gfN">Gym name</label><input class="inp" id="gfN" value="${esc(g.name||'')}" placeholder="e.g. Iron Paradise"></div>
+   <div class="field full"><label for="gfC">City</label><input class="inp" id="gfC" value="${esc(g.city||S.profile.city||'')}"></div>
+   ${phonesField('gfP','Phone numbers',gymPhones(g))}
+   <div class="field full"><label for="gfA">Address</label><input class="inp" id="gfA" value="${esc(g.address||'')}" placeholder="Sub-city, street, building"></div>
+   <div class="field full"><span class="lbl">Membership plans <small class="muted">· price for each plan you offer</small></span>${planEditor(g.plans)}</div></div>`}
+function readGymForm(el){const phones=readPhones(el,'gfP');const o={name:$('#gfN',el).value.trim(),city:$('#gfC',el).value.trim(),phone:phones[0]||'',phones,address:$('#gfA',el).value.trim(),plans:readPlans(el)};if(el._logo!==undefined)o.logo=el._logo;return o}
+function wireGymForm(el){const box=$('#gfLogo',el);if(!box)return;const set=d=>{el._logo=d;box.classList.toggle('has',!!d);box.innerHTML=d?`<img src="${d}" alt="Logo">`:ICON.plus;$('#gfLogoX',el).hidden=!d;$('#gfLogoB',el).innerHTML=`${ICON.cam||''} ${d?'Change logo':'Upload logo'}`};
+  const pick=()=>pickImage(async f=>{try{set(await logoImage(f))}catch(e){toast('Could not read that image. Try a PNG or JPG.')}});box.onclick=pick;$('#gfLogoB',el).onclick=pick;$('#gfLogoX',el).onclick=()=>set('')}
+
 ACT.newGym=()=>{if(!needOnline('Registering a gym'))return;openSheet('Register a gym',`<p class="muted">Your gym gets its own QR code. Members scan it to join and to check in.</p>${gymForm()}<button class="btn block" id="gfSave">${GYMSVG} Create gym</button>`,el=>{wireGymForm(el);
   $('#gfSave',el).onclick=async()=>{const g=readGymForm(el);if(!g.name){toast('Give your gym a name');return}const gid=rid(12);
     try{await NET.db.doc('gyms/'+gid).set(Object.assign(g,{owner:S.profile.id,ownerName:S.profile.name||'',ts:Date.now()}));S.myGyms=[...(S.myGyms||[]),gid];save('myGyms');
       if(!S.gyms.some(x=>x.gid===gid))S.gyms.push({id:gid,gid,name:g.name,city:g.city,u:Date.now()});save('gyms');BIZ.tab='gym';BIZ.gid=gid;closeSheet();go('biz');toast('Gym created. Share its QR code with members.')}catch(e){dbErr(e);toast('Could not create the gym right now')}}})};
 ACT.editGym=()=>{const g=BIZ.gym;if(!g)return;openSheet('Gym settings',`${gymForm(g)}<button class="btn block" id="gfSave">Save changes</button><button class="btn danger-btn block" id="gfDel">${ICON.trash} Remove gym from my business</button>`,el=>{wireGymForm(el);
-  $('#gfSave',el).onclick=async()=>{const n=readGymForm(el);if(!n.name){toast('Give your gym a name');return}try{await NET.db.doc('gyms/'+BIZ.gid).update(n);closeSheet();toast('Gym saved')}catch(e){dbErr(e);toast('Could not save right now')}};
+  $('#gfSave',el).onclick=async()=>{const n=readGymForm(el);if(!n.name){toast('Give your gym a name');return}try{await NET.db.doc('gyms/'+BIZ.gid).update(n);if(n.logo!==undefined)LOGOC[BIZ.gid]=n.logo;closeSheet();toast('Gym saved')}catch(e){dbErr(e);toast('Could not save right now')}};
   $('#gfDel',el).onclick=e=>{if(e.currentTarget.dataset.sure!=='1'){e.currentTarget.dataset.sure='1';e.currentTarget.textContent='Tap again to remove';return}S.myGyms=(S.myGyms||[]).filter(x=>x!==BIZ.gid);save('myGyms');stopGymSubs();BIZ.gid=null;closeSheet();RENDER.biz();toast('Gym removed from your business')}})};
 ACT.gymQR=()=>{const g=BIZ.gym||{};const link=appLink('g-'+BIZ.gid);openSheet(g.name||'Gym QR code',`<p class="muted">Print it for the front desk. Members scan it with their phone camera or in the app to join your gym and check in.</p>
   <div class="qrbox gymqr"><div id="gqr"></div><b>${esc(g.name||'')}</b><small>Scan to check in · JUNGLE PARK</small></div><div class="codebox">${esc(link)}</div>
@@ -4405,9 +4647,10 @@ function watchClients(){if(BIZ.cunsub||!NET.db)return;BIZ.cunsub=NET.db.collecti
   await Promise.all(BIZ.clients.filter(c=>!c.pub&&c.uid).map(async c=>{try{const s=await NET.db.doc('pub/'+c.uid).get();if(s.exists)c.pub=BIZ.pubs[c.uid]=s.data()}catch(e){}}));bizSoft()},dbErr)}
 function bizCoach(el){if(!S.coachMode){const ap=APPS.mine&&APPS.mine.coach;el.innerHTML=`<div class="card biz-hero locked"><span class="bh-ico">${ICON.lock}</span><h3>Coaching is locked</h3><p class="muted">${ap&&ap.status==='pending'?'Your coaching application is under review. Your access key appears in My Profile once approved.':'Apply to coach on JUNGLE PARK. Your dashboard opens after approval.'}</p><button class="btn bh-go" data-act="proForm">${USERSVG} ${ap?'Edit coaching application':'Apply for coaching'}</button></div>${keyCard()}`;return}
   watchClients();const C=activeClients();const link=appLink('c-'+coachId());
-  el.innerHTML=`<div class="card biz-gym"><div class="bg-top"><span class="bh-ico">${USERSVG}</span><div><h3>Coach ${esc(S.profile.name||'')}</h3><small class="muted">${C.length} client${C.length===1?'':'s'}</small></div></div>
+  loadPros();const myP=((PROS.list||[]).find(p=>p.id===coachId()||p.owner===S.profile.id))||(pdirOn()&&myRelayPro())||null;
+  el.innerHTML=`<div class="card biz-gym"><div class="bg-top"><span class="bh-ico">${USERSVG}</span><div><h3>Coach ${esc(S.profile.name||'')}</h3><small class="muted">${C.length} client${C.length===1?'':'s'}</small>${myP?`<div class="coach-roles">${proTypes(myP).map(t=>`<span class="pill">${t==='trainer'?'Personal trainer':'Nutritionist'}</span>`).join('')}</div>`:''}</div></div>
     <div class="grid2"><button class="btn" data-act="coachQR">${ICON.qr} Client invite QR</button><button class="btn soft" data-act="addClient" data-net="write">${ICON.plus} Add by code</button></div>
-    <div class="line-btns"><button class="btn-line" data-act="proForm" aria-label="Directory listing">${ICON.book}Directory</button><button class="btn-line" data-act="coachOff" aria-label="Turn off coaching">${ICON.power}Turn off</button></div></div>
+    <div class="line-btns"><button class="btn-line" data-act="proForm" aria-label="Directory listing">${ICON.book}Directory</button><button class="btn-line" data-act="bizLock" aria-label="Lock the business page">${ICON.lock}Lock</button></div></div>
    ${coachProCard()}
    ${requestsCardHtml()}
    ${coachMessagesCard()}
@@ -4417,7 +4660,10 @@ function bizCoach(el){if(!S.coachMode){const ap=APPS.mine&&APPS.mine.coach;el.in
    ${coachReviewsCard()}
    ${coachCertCard()}
    <div class="card"><div class="card-h"><h3>Clients</h3></div><div class="list">${C.length?C.map(c=>{const p=c.pub||{};return `<button class="li" data-act="clientOpen" data-id="${esc(c._id)}" style="border-left:0;border-right:0;border-bottom:0;background:none;width:100%;text-align:left">${avatar(c.name,c.uid,'sm')}<span class="t"><b>${esc(c.name)}${(c.goals||[]).length?`<span class="goal-mini">${c.goals.slice(0,4).map(g=>goalIco(g)).join('')}</span>`:''}</b><small>${p.week?`${(p.week.km||0).toFixed(1)} km · ${p.week.gym||0} gym this week`:'Waiting for their first sync'}</small></span><span class="mem-tags">${c.planTs?'<span class="pill g">Plan sent</span>':'<span class="pill n">No plan</span>'}</span></button>`}).join('')
-     :`<div class="empty">${USERSVG}<span>No clients yet. Show them your QR or send your coach link.</span></div>`}</div></div>`}
+     :`<div class="empty">${USERSVG}<span>No clients yet. Show them your QR or send your coach link.</span></div>`}</div></div>
+   <button class="link muted coach-off" data-act="coachOffAsk">${ICON.power} Turn off coaching on this account</button>`}
+ACT.coachOffAsk=()=>openSheet('Turn off coaching?',`<p class="muted">Your coaching tools close on this account. Clients and invoices stay saved, and you can turn coaching back on with your access key.</p><div class="grid2"><button class="btn soft" data-act="closeSheet">Cancel</button><button class="btn danger-btn" data-act="coachOffGo">Turn off</button></div>`);
+ACT.coachOffGo=()=>{closeSheet();ACT.coachOff()};
 ACT.coachOn=()=>{S.coachMode=true;save('coachMode');RENDER.biz();toast('Coaching turned on')};
 ACT.coachOff=()=>{S.coachMode=false;save('coachMode');if(BIZ.cunsub){BIZ.cunsub();BIZ.cunsub=null}BIZ.tab='gym';if(!bizEnabled())go('me');else RENDER.biz()};
 ACT.coachQR=()=>{const link=appLink('c-'+coachId());openSheet('Your coach link',`<p class="muted">Clients scan this or open the link to join you. You'll see their training and can send them custom plans.</p><div class="qrbox"><div id="cqr"></div></div><div class="codebox">${esc(link)}</div><button class="btn block" id="cqC">${ICON.link} Copy link</button>`,el=>{makeQR($('#cqr',el),link);$('#cqC',el).onclick=()=>copyText(link)})};
@@ -4510,8 +4756,8 @@ function courseWhen(c){return [c.days,c.time,c.start?'starts '+fmtDate(c.start):
 // all gyms on JUNGLE PARK (for discovery); cached so the tab opens instantly next time
 function loadGyms(){if(CRS.gSub||!NET.db){if(!NET.db&&!CRS.gyms.length){try{CRS.gyms=JSON.parse(localStorage.getItem('jp:gyms')||'[]')}catch(e){}}return}
   try{CRS.gyms=JSON.parse(localStorage.getItem('jp:gyms')||'[]')}catch(e){}CRS.gState='loading';
-  CRS.gSub=NET.db.collection('gyms').limit(300).onSnapshot(q=>{CRS.gyms=q.docs.map(d=>{const x=d.data();return {id:d.id,name:x.name,city:x.city||'',address:x.address||'',phone:x.phone||'',plans:x.plans||[],photo:x.photo&&x.photo.length<60000?x.photo:'',lat:x.lat,lng:x.lng,courses:x.courses||0,sus:!!x.suspended}}).filter(g=>g.name&&!g.sus);
-    CRS.gState='ok';try{localStorage.setItem('jp:gyms',JSON.stringify(CRS.gyms.map(g=>Object.assign({},g,{photo:''}))))}catch(e){}crsRefresh()},e=>{CRS.gState='err';dbErr(e);crsRefresh()})}
+  CRS.gSub=NET.db.collection('gyms').limit(300).onSnapshot(q=>{CRS.gyms=q.docs.map(d=>{const x=d.data();return {id:d.id,name:x.name,city:x.city||'',address:x.address||'',phone:x.phone||'',phones:gymPhones(x),logo:x.logo&&x.logo.length<90000?x.logo:'',plans:x.plans||[],photo:x.photo&&x.photo.length<60000?x.photo:'',lat:x.lat,lng:x.lng,courses:x.courses||0,sus:!!x.suspended}}).filter(g=>g.name&&!g.sus);
+    CRS.gState='ok';try{localStorage.setItem('jp:gyms',JSON.stringify(CRS.gyms.map(g=>Object.assign({},g,{photo:'',logo:''}))))}catch(e){}crsRefresh()},e=>{CRS.gState='err';dbErr(e);crsRefresh()})}
 function watchCourses(gid){if(!NET.db||CRS.subs[gid])return;const put=q=>{CRS.bygym[gid]=q.docs.map(d=>Object.assign({_id:d.id,gid},d.data())).filter(c=>!c.archived).sort((a,b)=>(a.start||9e15)-(b.start||9e15));crsRefresh()};
   const live=gid===BIZ.gid||myGymIds().includes(gid);const q=NET.db.collection(`gyms/${gid}/courses`).limit(100);
   if(live){CRS.subs[gid]=q.onSnapshot(put,dbErr);return}
@@ -4519,9 +4765,14 @@ function watchCourses(gid){if(!NET.db||CRS.subs[gid])return;const put=q=>{CRS.by
 let crsT=0;function crsRefresh(){clearTimeout(crsT);crsT=setTimeout(()=>{if(document.querySelector('.sheet')||document.activeElement?.matches('input,textarea,select'))return;if(cur==='jungle'&&jTab==='gyms')RENDER.jungle();if(cur==='biz'||cur==='admin')bizSoft()},150)}
 function sameCity(a,b){const n=s=>String(s||'').toLowerCase().trim();return n(a)&&n(a)===n(b)}
 function gymCard(g){const mem=isMember(g.id);const n=(CRS.bygym[g.id]||[]).length;
-  return `<div class="card gym-card"><div class="bg-top"><span class="bh-ico ${g.photo?'ph':''}">${g.photo?`<img src="${photoUrl(g.photo)}" alt="" loading="lazy" decoding="async">`:GYMSVG}</span><div style="min-width:0"><h3>${esc(g.name)} ${mem?'<span class="pill">Your gym</span>':''}</h3><small class="muted">${esc([g.address,g.city].filter(Boolean).join(' · ')||'Address not added yet')}</small></div></div>
+  return `<div class="card gym-card"><div class="bg-top"><span class="bh-ico ${g.photo?'ph':''}">${g.photo?`<img src="${photoUrl(g.photo)}" alt="" loading="lazy" decoding="async">`:GYMSVG}</span><div style="min-width:0"><h3>${esc(g.name)} ${mem?'<span class="pill">Your gym</span>':''}</h3><small class="muted">${esc(g.city||(g.address?'':'Address not added yet'))}</small></div></div>
    ${g.plans&&g.plans.length?`<div class="plan-chips">${g.plans.filter(p=>p.price).slice(0,4).map(p=>`<span class="chip">${esc(p.n||p.name||'Plan')} · <b class="num">${esc(String(p.price))}</b></span>`).join('')}</div>`:''}
-   <div class="grid2"><button class="btn soft" data-act="gymCourses" data-g="${g.id}">${COURSEI} Classes${n?` (${n})`:''}</button>${mem?`<button class="btn soft" data-act="quickCheckIn">${ICON.pin} Check in</button>`:`<button class="btn" data-act="joinGym" data-g="${g.id}">${ICON.plus} Join gym</button>`}</div>${g.phone?`<a class="link" href="tel:${esc(g.phone)}" style="align-self:flex-start">${esc(g.phone)}</a>`:''}</div>`}
+   <div class="grid2"><button class="btn soft" data-act="gymCourses" data-g="${g.id}">${COURSEI} Classes${n?` <span class="cnt">${n}</span>`:''}</button>${mem?`<button class="btn soft" data-act="quickCheckIn">${ICON.pin} Check in</button>`:`<button class="btn" data-act="joinGym" data-g="${g.id}">${ICON.plus} Join gym</button>`}</div>${gymContact(g)}</div>`}
+const PHONEI='<svg class="ico" viewBox="0 0 24 24"><path d="M6.6 3.5h2.6l1.4 4-2 1.3a12 12 0 0 0 6.6 6.6l1.3-2 4 1.4v2.6a2 2 0 0 1-2.2 2A17 17 0 0 1 4.6 5.7a2 2 0 0 1 2-2.2z"/></svg>';
+function mapsLink(g){const q=[g.address,g.city].filter(Boolean).join(', ');return (g.lat&&g.lng)?`https://www.google.com/maps/search/?api=1&query=${g.lat},${g.lng}`:`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`}
+function gymContact(g){const ph=gymPhones(g);const hasA=g.address||g.city;if(!hasA&&!ph.length)return '';
+  return `<div class="gym-contact">${hasA?`<a class="gc-row" href="${esc(mapsLink(g))}" target="_blank" rel="noopener noreferrer" aria-label="Open ${esc(g.name||'gym')} in maps"><span class="gc-ico">${ICON.pin}</span><span class="gc-txt">${esc([g.address,g.city].filter(Boolean).join(', '))}</span></a>`:''}
+   ${ph.length?`<div class="gc-row"><span class="gc-ico">${PHONEI}</span><span class="gc-txt gc-phones">${ph.map(p=>`<a href="tel:${esc(p.replace(/[^\d+]/g,''))}">${esc(p)}</a>`).join('')}</span></div>`:''}</div>`}
 function courseRow(c){const pr=coursePrice(c,c.gid);const reg=CRS.mine[c.gid+'/'+c._id];const full=c.cap&&(c.regs||0)>=c.cap;
   return `<button class="li course-li" data-act="courseOpen" data-g="${c.gid}" data-c="${c._id}"><span class="badge">${COURSEI}</span><span class="t"><b>${esc(c.title)}</b><small>${esc(courseWhen(c)||c.coach||'Schedule to be announced')}</small></span><span class="mem-tags">${reg?`<span class="pill ${reg.status==='confirmed'?'':'w'}">${reg.status==='confirmed'?'Registered':'Requested'}</span>`:full?'<span class="pill bad">Full</span>':''}<span class="pill ${pr.free?'':'n'}">${esc(pr.txt.split(' · ')[0])}</span></span></button>`}
 function jGyms(el){loadGyms();const mine=myGymIds();mine.forEach(watchCourses);
@@ -4530,7 +4781,7 @@ function jGyms(el){loadGyms();const mine=myGymIds();mine.forEach(watchCourses);
   // courses close to you: your gyms if you have any, otherwise gyms in your city
   const srcG=mine.length?mine:near.slice(0,12).map(g=>g.id);srcG.forEach(watchCourses);const courses=srcG.flatMap(id=>CRS.bygym[id]||[]);
   const gName=id=>(CRS.gyms.find(g=>g.id===id)||S.gyms.find(g=>g.gid===id)||{}).name||'Gym';
-  el.innerHTML=`${mine.length?`<div class="sec-t">My gyms <span class="muted" style="font-weight:500">${mine.length}</span></div>${mine.map(id=>gymCard(CRS.gyms.find(g=>g.id===id)||{id,name:gName(id),city:''})).join('')}`
+  el.innerHTML=`${mine.length?`<div class="sec-t sec-t-l">My gyms <span class="sec-n num">${mine.length}</span></div>${mine.map(id=>gymCard(CRS.gyms.find(g=>g.id===id)||{id,name:gName(id),city:''})).join('')}`
      :`<div class="card gym-intro"><div class="watch-h"><span class="watch-ico">${GYMSVG}</span><div><h3>Find your gym</h3><small class="muted">${city?`Gyms and classes in and around ${esc(city)}. Join one by scanning its QR at the front desk, or request to join here.`:'Add your city in My Profile to see gyms near you first.'}</small></div></div></div>`}
    <div class="card"><div class="card-h"><h3>${mine.length?'Classes at your gyms':'Classes near you'}</h3><span class="muted num" style="font-size:13px">${courses.length}</span></div>
     <div class="list">${courses.length?courses.map(c=>courseRow(c).replace('</b><small>',`</b><small>${mine.length>1||!mine.length?esc(gName(c.gid))+' · ':''}`)).join(''):`<div class="empty">${COURSEI}<span>${CRS.gState==='loading'?'Looking for classes…':mine.length?'Your gym has not posted classes yet.':'No classes posted near you yet.'}</span></div>`}</div></div>
@@ -4565,7 +4816,7 @@ async function loadMyRegs(){if(!NET.db)return;for(const r of (S.courseRegs||[]))
 function bizCourses(gid){watchCourses(gid);const L=CRS.bygym[gid];
   return `<div class="card"><div class="card-h"><h3>Classes</h3><button class="btn sm" data-act="courseEdit" data-net="write">${ICON.plus} Add class</button></div>
    <p class="muted" style="font-size:13.5px;margin-bottom:8px">Post classes and programs. Members and people nearby see them in the Jungle and can register.</p>
-   <div class="list">${!L?'<div class="empty"><span class="spinner"></span><span>Loading classes…</span></div>':L.length?L.map(c=>{const p=+c.price||0;return `<button class="li" data-act="courseAdmin" data-c="${c._id}"><span class="badge">${COURSEI}</span><span class="t"><b>${esc(c.title)}</b><small>${esc(courseWhen(c)||'No schedule yet')}</small></span><span class="mem-tags"><span class="pill n num">${c.regs||0}${c.cap?'/'+c.cap:''} reg</span><span class="pill">${!p?'Free':c.memberFree?'Members free':p.toLocaleString()+' '+(c.cur||'ETB')}</span></span></button>`}).join('')
+   <div class="list">${!L?'<div class="empty"><span class="spinner"></span><span>Loading classes…</span></div>':L.length?L.map(c=>{const p=+c.price||0;const full=c.cap&&(c.regs||0)>=c.cap;return `<button class="li course-li" data-act="courseAdmin" data-c="${c._id}"><span class="badge">${COURSEI}</span><span class="t"><b>${esc(c.title)}</b><small>${esc(courseWhen(c)||'No schedule yet')}</small></span><span class="mem-tags"><span class="pill ${full?'bad':'n'} num">${c.regs||0}${c.cap?'/'+c.cap:''} reg</span><span class="pill ${!p?'':'n'}">${!p?'Free':c.memberFree?'Free for members':p.toLocaleString()+' '+(c.cur||'ETB')}</span></span></button>`}).join('')
      :`<div class="empty">${COURSEI}<span>No classes yet. Add your first class, bootcamp or program.</span></div>`}</div></div>`}
 ACT.courseEdit=b=>{const gid=BIZ.gid;const c=b&&b.dataset&&b.dataset.c?(CRS.bygym[gid]||[]).find(x=>x._id===b.dataset.c)||{}:{};
   openSheet(c._id?'Edit class':'New class',`<div class="form">
@@ -5117,15 +5368,36 @@ const GYM_C='#F28A2E',RUN_C='#2F6FE0';
 const chartMode=()=>S.settings.chart==='line'?'line':'bar';
 function chartToggle(){const m=chartMode();return `<span class="ch-tog" role="group" aria-label="Chart type"><button type="button" data-chart="bar" class="${m==='bar'?'on':''}" aria-label="Bar chart" aria-pressed="${m==='bar'}"><svg class="ico" viewBox="0 0 24 24"><path d="M5 20V10M12 20V4M19 20v-7"/></svg></button><button type="button" data-chart="line" class="${m==='line'?'on':''}" aria-label="Line chart" aria-pressed="${m==='line'}"><svg class="ico" viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/></svg></button></span>`}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-chart]');if(!b)return;S.settings.chart=b.dataset.chart;save('settings');rerender()});
-function barsSvg(series,keys,colors,labels,opt={}){const W=340,H=opt.h||150,pl=8,pb=20,pt=14;const n=series.length;const line=chartMode()==='line';
-  const mx=Math.max(1,...series.map(s=>line?Math.max(...keys.map(k=>s[k]||0)):keys.reduce((a,k)=>a+(s[k]||0),0)));const bw=(W-pl*2)/n;const Y=v=>H-pb-(v/mx)*(H-pb-pt);const X=i=>pl+i*bw+bw/2;
-  const lbls=series.map((s,i)=>`<text x="${X(i)}" y="${H-5}" text-anchor="middle" font-size="10" fill="${opt.hi===i?'var(--accent)':'currentColor'}" opacity="${opt.hi===i?1:.6}" font-weight="${opt.hi===i?700:400}">${esc(s.l)}</text>`).join('');
-  const vals=opt.values?series.map((s,i)=>{const v=keys.reduce((a,k)=>a+(s[k]||0),0);return v?`<text x="${X(i)}" y="${Y(v)-5}" text-anchor="middle" font-size="9.5" font-weight="600" fill="currentColor" opacity=".65">${+v.toFixed(1)}</text>`:''}).join(''):'';
-  let body='';if(line){body=keys.map((k,j)=>{const pts=series.map((s,i)=>[X(i),Y(s[k]||0)]);return `<polyline fill="none" stroke="${colors[j]}" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" points="${pts.map(p=>p.join(',')).join(' ')}"/>${pts.map((p,i)=>`<circle cx="${p[0]}" cy="${p[1]}" r="3.2" fill="${colors[j]}"><title>${series[i].l}: ${series[i][k]||0} ${k}</title></circle>`).join('')}`}).join('')}
-  else body=series.map((s,i)=>{let y=H-pb;return keys.map((k,j)=>{const h=(s[k]||0)/mx*(H-pb-pt);y-=h;return h?`<rect x="${pl+i*bw+bw*.18}" y="${y}" width="${bw*.64}" height="${h}" rx="3" fill="${opt.hiCol&&opt.hi!==i?opt.hiCol:colors[j]}"><title>${s.l}: ${s[k]} ${k}</title></rect>`:''}).join('')}).join('');
-  return `<svg class="rep-chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(labels)}">${body}${vals}${lbls}<text x="${W-pl}" y="10" text-anchor="end" font-size="10" fill="currentColor" opacity=".55">max ${+mx.toFixed(1)}</text></svg>`}
-function lineSvg(pts,unit){if(pts.length<2)return '';const W=340,H=110,p=10;const vs=pts.map(x=>x.v),mn=Math.min(...vs),mx=Math.max(...vs),rg=mx-mn||1;const X=i=>p+i*(W-2*p)/(pts.length-1),Y=v=>H-p-(v-mn)/rg*(H-2*p-12);
-  return `<svg class="rep-chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="From ${vs[0]} to ${vs[vs.length-1]} ${unit}"><polyline fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linejoin="round" points="${pts.map((q,i)=>X(i)+','+Y(q.v)).join(' ')}"/>${pts.map((q,i)=>`<circle cx="${X(i)}" cy="${Y(q.v)}" r="3" fill="var(--accent)"/>`).join('')}<text x="${p}" y="10" font-size="10" fill="currentColor" opacity=".6">${mx} ${unit}</text><text x="${p}" y="${H-1}" font-size="10" fill="currentColor" opacity=".6">${mn} ${unit}</text></svg>`}
+// smooth curve through points (kept above the baseline so it never dips below zero)
+function smoothPath(p,floor){if(!p.length)return '';let d=`M${p[0][0].toFixed(1)},${p[0][1].toFixed(1)}`;const t=.18,cl=y=>Math.min(floor,y);
+  for(let i=0;i<p.length-1;i++){const p0=p[i-1]||p[i],p1=p[i],p2=p[i+1],p3=p[i+2]||p2;d+=` C${(p1[0]+(p2[0]-p0[0])*t).toFixed(1)},${cl(p1[1]+(p2[1]-p0[1])*t).toFixed(1)} ${(p2[0]-(p3[0]-p1[0])*t).toFixed(1)},${cl(p2[1]-(p3[1]-p1[1])*t).toFixed(1)} ${p2[0].toFixed(1)},${p2[1].toFixed(1)}`}return d}
+const rTop=(x,y,w,h,r)=>{r=Math.max(0,Math.min(r,w/2,h));return `M${x.toFixed(1)},${(y+h).toFixed(1)}V${(y+r).toFixed(1)}Q${x.toFixed(1)},${y.toFixed(1)} ${(x+r).toFixed(1)},${y.toFixed(1)}H${(x+w-r).toFixed(1)}Q${(x+w).toFixed(1)},${y.toFixed(1)} ${(x+w).toFixed(1)},${(y+r).toFixed(1)}V${(y+h).toFixed(1)}Z`};
+let CHID=0;
+function barsSvg(series,keys,colors,labels,opt={}){const W=340,H=opt.h||168,pl=8,pb=22,pt=20;const n=series.length;const line=chartMode()==='line';const id='jc'+(++CHID);
+  const tot=s=>keys.reduce((a,k)=>a+(s[k]||0),0);const raw=Math.max(0,...series.map(s=>line?Math.max(...keys.map(k=>s[k]||0)):tot(s)));const empty=!(raw>0);const mx=Math.max(1,raw);
+  const bw=(W-pl*2)/n;const base=H-pb;const Y=v=>base-(v/mx)*(base-pt);const X=i=>pl+i*bw+bw/2;const fmt=v=>+(+v).toFixed(1);
+  const defs=`<defs>${colors.map((c,j)=>`<linearGradient id="${id}g${j}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${c}"/><stop offset="1" stop-color="${c}" stop-opacity=".62"/></linearGradient><linearGradient id="${id}a${j}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${c}" stop-opacity=".34"/><stop offset=".75" stop-color="${c}" stop-opacity=".06"/><stop offset="1" stop-color="${c}" stop-opacity="0"/></linearGradient>`).join('')}<filter id="${id}s" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="${colors[0]}" flood-opacity=".32"/></filter></defs>`;
+  const grid=[.5,1].map(f=>`<line x1="${pl}" x2="${W-pl}" y1="${Y(mx*f).toFixed(1)}" y2="${Y(mx*f).toFixed(1)}" stroke="currentColor" stroke-opacity=".08" stroke-dasharray="3 5"/>`).join('')+`<line x1="${pl}" x2="${W-pl}" y1="${base}" y2="${base}" stroke="currentColor" stroke-opacity=".16"/>`;
+  const lbls=series.map((s,i)=>`<text x="${X(i).toFixed(1)}" y="${H-5}" text-anchor="middle" font-size="10" fill="${opt.hi===i?'var(--accent)':'currentColor'}" opacity="${opt.hi===i?1:.6}" font-weight="${opt.hi===i?700:500}">${esc(s.l)}</text>`).join('');
+  let body='';
+  if(line){body=keys.map((k,j)=>{const pts=series.map((s,i)=>[X(i),Y(s[k]||0)]);const d=smoothPath(pts,base);const last=pts.length-1-[...series].reverse().findIndex(s=>(s[k]||0)>0);
+    return `${empty?'':`<path class="ch-area" d="${d} L${pts[pts.length-1][0].toFixed(1)},${base} L${pts[0][0].toFixed(1)},${base} Z" fill="url(#${id}a${j})"/>`}
+     <path class="ch-line" d="${d}" pathLength="1" fill="none" stroke="${colors[j]}" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" ${empty?'stroke-opacity=".35" stroke-dasharray="2 5"':`filter="url(#${id}s)"`}/>
+     ${pts.map((p,i)=>{const v=series[i][k]||0;const hot=!empty&&i===last&&v>0;return `${hot?`<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="8" fill="${colors[j]}" opacity=".18" class="ch-halo"/>`:''}<circle class="ch-dot" cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="${hot?4.6:3.4}" fill="${v?'var(--surface)':'currentColor'}" fill-opacity="${v?1:.25}" stroke="${v?colors[j]:'none'}" stroke-width="2.2"><title>${esc(series[i].l)}: ${fmt(v)} ${k}</title></circle>`}).join('')}`}).join('')}
+  else{const w=Math.min(26,bw*.62),r=Math.min(6,w/2);body=series.map((s,i)=>{const x=X(i)-w/2;const t=tot(s);let y=base;
+    const track=`<rect x="${x.toFixed(1)}" y="${pt}" width="${w.toFixed(1)}" height="${(base-pt).toFixed(1)}" rx="${r}" fill="currentColor" fill-opacity=".045"/>`;
+    if(!t)return `${track}<rect class="ch-zero" x="${x.toFixed(1)}" y="${base-5}" width="${w.toFixed(1)}" height="5" rx="2.5" fill="currentColor" fill-opacity=".2"><title>${esc(s.l)}: 0</title></rect><text x="${X(i).toFixed(1)}" y="${base-10}" text-anchor="middle" font-size="9.5" font-weight="600" fill="currentColor" opacity=".42">0</text>`;
+    const segs=keys.map((k,j)=>({k,j,h:(s[k]||0)/mx*(base-pt)})).filter(z=>z.h>0);
+    return `${track}<g class="ch-bar" filter="url(#${id}s)">${segs.map((z,q)=>{y-=z.h;const top=q===segs.length-1;const fill=opt.hiCol&&opt.hi!==i?opt.hiCol:`url(#${id}g${z.j})`;return top?`<path d="${rTop(x,y,w,z.h,r)}" fill="${fill}"><title>${esc(s.l)}: ${fmt(s[z.k])} ${z.k}</title></path>`:`<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${w.toFixed(1)}" height="${z.h.toFixed(1)}" fill="${fill}"><title>${esc(s.l)}: ${fmt(s[z.k])} ${z.k}</title></rect>`}).join('')}</g>${opt.values?`<text x="${X(i).toFixed(1)}" y="${(Y(t)-6).toFixed(1)}" text-anchor="middle" font-size="9.5" font-weight="700" fill="currentColor" opacity=".7">${fmt(t)}</text>`:''}`}).join('')}
+  const note=empty?`<text x="${W/2}" y="${(pt+base)/2-4}" text-anchor="middle" font-size="11" font-weight="600" fill="currentColor" opacity=".45">No data yet</text>`:'';
+  return `<svg class="rep-chart jc ${line?'is-line':'is-bar'}" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(labels)}">${defs}${grid}${body}${note}${lbls}${empty?'':`<text x="${W-pl}" y="11" text-anchor="end" font-size="10" fill="currentColor" opacity=".55">max ${fmt(mx)}</text>`}</svg>`}
+function lineSvg(pts,unit){if(pts.length<2)return '';const W=340,H=120,p=12,top=18;const id='jl'+(++CHID);const vs=pts.map(x=>x.v),mn=Math.min(...vs),mx=Math.max(...vs),rg=mx-mn||1;const X=i=>p+i*(W-2*p)/(pts.length-1),Y=v=>H-p-(v-mn)/rg*(H-p-top);
+  const P=pts.map((q,i)=>[X(i),Y(q.v)]);const d=smoothPath(P,H-p);const L=P[P.length-1];
+  return `<svg class="rep-chart jc is-line" viewBox="0 0 ${W} ${H}" role="img" aria-label="From ${vs[0]} to ${vs[vs.length-1]} ${unit}"><defs><linearGradient id="${id}a" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--accent)" stop-opacity=".3"/><stop offset="1" stop-color="var(--accent)" stop-opacity="0"/></linearGradient><filter id="${id}s" x="-20%" y="-30%" width="140%" height="170%"><feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="var(--accent)" flood-opacity=".3"/></filter></defs>
+   <line x1="${p}" x2="${W-p}" y1="${Y(mx)}" y2="${Y(mx)}" stroke="currentColor" stroke-opacity=".08" stroke-dasharray="3 5"/><line x1="${p}" x2="${W-p}" y1="${H-p}" y2="${H-p}" stroke="currentColor" stroke-opacity=".14"/>
+   <path class="ch-area" d="${d} L${L[0].toFixed(1)},${H-p} L${P[0][0].toFixed(1)},${H-p} Z" fill="url(#${id}a)"/><path class="ch-line" d="${d}" pathLength="1" fill="none" stroke="var(--accent)" stroke-width="2.8" stroke-linecap="round" filter="url(#${id}s)"/>
+   ${P.map((q,i)=>`<circle class="ch-dot" cx="${q[0].toFixed(1)}" cy="${q[1].toFixed(1)}" r="${i===P.length-1?4.6:3.2}" fill="var(--surface)" stroke="var(--accent)" stroke-width="2.2"><title>${pts[i].v} ${unit}</title></circle>`).join('')}<circle cx="${L[0].toFixed(1)}" cy="${L[1].toFixed(1)}" r="9" fill="var(--accent)" opacity=".16" class="ch-halo"/>
+   <text x="${p}" y="11" font-size="10" fill="currentColor" opacity=".6">${mx} ${unit}</text><text x="${W-p}" y="11" text-anchor="end" font-size="10" font-weight="700" fill="var(--accent)">now ${vs[vs.length-1]} ${unit}</text></svg>`}
 function reportView(r){const m=r.m;const hm=s=>s>=3600?Math.floor(s/3600)+' h '+Math.round(s%3600/60)+' m':Math.round(s/60)+' min';const dw=m.w0!=null&&m.w1!=null?+(m.w1-m.w0).toFixed(1):null;
   const tile=(l,v,s)=>`<div><small>${l}</small><b class="num">${v}</b>${s?`<small>${s}</small>`:''}</div>`;
   return `<div class="rep">
@@ -5149,7 +5421,7 @@ ACT.repPdf=()=>reportPdf(buildReport(repKind,repOff));
 // ---------- tiny PDF writer (no download needed, works offline) ----------
 // Implements the handful of jsPDF calls the report uses. Helvetica, WinAnsi text, filled shapes, lines.
 const HW=[278, 278, 355, 556, 556, 889, 667, 191, 333, 333, 389, 584, 278, 333, 278, 278, 556, 556, 556, 556, 556, 556, 556, 556, 556, 556, 278, 278, 584, 584, 584, 556, 1015, 667, 667, 722, 722, 667, 611, 778, 722, 278, 500, 667, 556, 833, 722, 778, 667, 778, 722, 667, 611, 722, 667, 944, 667, 667, 611, 278, 278, 278, 469, 556, 333, 556, 556, 500, 556, 556, 278, 556, 556, 222, 222, 500, 222, 833, 556, 556, 556, 556, 333, 500, 278, 556, 500, 722, 500, 500, 500, 334, 260, 334, 584, 761, 556, 500, 222, 556, 333, 1000, 556, 556, 333, 1000, 667, 333, 1000, 500, 611, 500, 500, 222, 222, 333, 333, 350, 556, 1000, 333, 1000, 500, 333, 944, 500, 500, 667, 278, 333, 556, 556, 556, 556, 260, 556, 333, 737, 370, 556, 584, 333, 737, 333, 400, 584, 333, 333, 333, 556, 537, 278, 333, 333, 365, 556, 834, 834, 834, 611, 667, 667, 667, 667, 667, 667, 1000, 722, 667, 667, 667, 667, 278, 278, 278, 278, 722, 722, 778, 778, 778, 778, 778, 584, 778, 722, 722, 722, 722, 667, 667, 611, 556, 556, 556, 556, 556, 556, 889, 500, 556, 556, 556, 556, 278, 278, 278, 278, 556, 556, 556, 556, 556, 556, 556, 584, 611, 556, 556, 556, 556, 500, 556, 500],HWB=[278, 333, 474, 556, 556, 889, 722, 238, 333, 333, 389, 584, 278, 333, 278, 278, 556, 556, 556, 556, 556, 556, 556, 556, 556, 556, 333, 333, 584, 584, 584, 611, 975, 722, 722, 722, 722, 667, 611, 778, 722, 278, 556, 722, 611, 833, 722, 778, 667, 778, 722, 667, 611, 722, 667, 944, 667, 667, 611, 333, 278, 333, 584, 556, 333, 556, 611, 556, 611, 556, 333, 611, 611, 278, 278, 556, 278, 889, 611, 611, 611, 611, 389, 556, 333, 611, 556, 778, 556, 556, 500, 389, 280, 389, 584, 761, 556, 500, 278, 556, 500, 1000, 556, 556, 333, 1000, 667, 333, 1000, 500, 611, 500, 500, 278, 278, 500, 500, 350, 556, 1000, 333, 1000, 556, 333, 944, 500, 500, 667, 278, 333, 556, 556, 556, 556, 280, 556, 333, 737, 370, 556, 584, 333, 737, 333, 400, 584, 333, 333, 333, 611, 556, 278, 333, 333, 365, 556, 834, 834, 834, 611, 722, 722, 722, 722, 722, 722, 1000, 722, 667, 667, 667, 667, 278, 278, 278, 278, 722, 722, 778, 778, 778, 778, 778, 584, 778, 722, 722, 722, 722, 667, 667, 611, 556, 556, 556, 556, 556, 556, 889, 556, 556, 556, 556, 556, 278, 278, 278, 278, 611, 611, 611, 611, 611, 611, 611, 584, 611, 611, 611, 611, 611, 556, 611, 556];
-function MiniPDF(){const W=595.28,H=841.89;const pages=[];let cur=null;let fill=[0,0,0],stroke=[0,0,0],tcol=[0,0,0],size=12,bold=false;
+function MiniPDF(){const W=595.28,H=841.89;const pages=[];const imgs=[];let cur=null;let fill=[0,0,0],stroke=[0,0,0],tcol=[0,0,0],size=12,bold=false;
   const f=n=>(+n).toFixed(2);const col=c=>c.map(v=>(v/255).toFixed(3)).join(' ');
   const enc=s=>{s=String(s).replace(/→/g,'->').replace(/[‘’]/g,"'").replace(/[“”]/g,'"');let o='';for(const ch of s){const c=ch.charCodeAt(0);let b=c<128?c:({0xB7:0xB7,0x2013:0x96,0x2014:0x97,0x2026:0x85,0x20AC:0x80,0xE9:0xE9,0xE8:0xE8,0xF6:0xF6,0xFC:0xFC,0xE4:0xE4,0xB0:0xB0,0xD7:0xD7,0xA0:0x20})[c];if(b==null)b=c<256?c:0x3F;
     o+=b===0x28||b===0x29||b===0x5C?'\\'+String.fromCharCode(b):b<32||b>126?'\\'+b.toString(8).padStart(3,'0'):String.fromCharCode(b)}return o};
@@ -5159,10 +5431,14 @@ function MiniPDF(){const W=595.28,H=841.89;const pages=[];let cur=null;let fill=
    rect(x,y,w,h){cur.push(`${col(fill)} rg ${f(x)} ${f(H-y-h)} ${f(w)} ${f(h)} re f`);return api},
    roundedRect(x,y,w,h,r){r=Math.min(r,w/2,h/2);const k=r*.5523,X=x,Y=H-y-h;cur.push(`${col(fill)} rg ${f(X+r)} ${f(Y)} m ${f(X+w-r)} ${f(Y)} l ${f(X+w-r+k)} ${f(Y)} ${f(X+w)} ${f(Y+r-k)} ${f(X+w)} ${f(Y+r)} c ${f(X+w)} ${f(Y+h-r)} l ${f(X+w)} ${f(Y+h-r+k)} ${f(X+w-r+k)} ${f(Y+h)} ${f(X+w-r)} ${f(Y+h)} c ${f(X+r)} ${f(Y+h)} l ${f(X+r-k)} ${f(Y+h)} ${f(X)} ${f(Y+h-r+k)} ${f(X)} ${f(Y+h-r)} c ${f(X)} ${f(Y+r)} l ${f(X)} ${f(Y+r-k)} ${f(X+r-k)} ${f(Y)} ${f(X+r)} ${f(Y)} c f`);return api},
    line(x1,y1,x2,y2){cur.push(`${col(stroke)} RG 0.6 w ${f(x1)} ${f(H-y1)} m ${f(x2)} ${f(H-y2)} l S`);return api},
+   image(img,x,y,w,h){if(!img||!img.bin)return api;let k=imgs.indexOf(img);if(k<0){imgs.push(img);k=imgs.length-1}cur.push(`q ${f(w)} 0 0 ${f(h)} ${f(x)} ${f(H-y-h)} cm /Im${k} Do Q`);return api},
+   getTextWidth(s,sz,b){const os=size,ob=bold;if(sz)size=sz;if(b!=null)bold=!!b;const w=width(s);size=os;bold=ob;return w},
    text(s,x,y,o){o=o||{};const w=width(s);const xx=o.align==='right'?x-w:o.align==='center'?x-w/2:x;cur.push(`BT ${col(tcol)} rg /${bold?'F2':'F1'} ${size} Tf ${f(xx)} ${f(H-y)} Td (${enc(s)}) Tj ET`);return api},
    output(){const objs=[];const add=s=>{objs.push(s);return objs.length};const font1=add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>'),font2=add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>');
+     const imgIds=imgs.map(im=>add(`<< /Type /XObject /Subtype /Image /Width ${im.w} /Height ${im.h} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${im.bin.length} >>\nstream\n${im.bin}\nendstream`));
+     const xo=imgIds.length?` /XObject << ${imgIds.map((id,i)=>`/Im${i} ${id} 0 R`).join(' ')} >>`:'';
      const pagesId=objs.length+1;objs.push(null);const kids=[];
-     for(const pg of pages){const content=pg.join('\n');const cId=add(`<< /Length ${content.length} >>\nstream\n${content}\nendstream`);kids.push(add(`<< /Type /Page /Parent ${pagesId} 0 R /MediaBox [0 0 ${W} ${H}] /Resources << /Font << /F1 ${font1} 0 R /F2 ${font2} 0 R >> >> /Contents ${cId} 0 R >>`))}
+     for(const pg of pages){const content=pg.join('\n');const cId=add(`<< /Length ${content.length} >>\nstream\n${content}\nendstream`);kids.push(add(`<< /Type /Page /Parent ${pagesId} 0 R /MediaBox [0 0 ${W} ${H}] /Resources << /Font << /F1 ${font1} 0 R /F2 ${font2} 0 R >>${xo} >> /Contents ${cId} 0 R >>`))}
      objs[pagesId-1]=`<< /Type /Pages /Kids [${kids.map(k=>k+' 0 R').join(' ')}] /Count ${kids.length} >>`;const cat=add(`<< /Type /Catalog /Pages ${pagesId} 0 R >>`);
      let out='%PDF-1.4\n';const offs=[];objs.forEach((o,i)=>{offs.push(out.length);out+=`${i+1} 0 obj\n${o}\nendobj\n`});const xref=out.length;
      out+=`xref\n0 ${objs.length+1}\n0000000000 65535 f \n`+offs.map(o=>String(o).padStart(10,'0')+' 00000 n \n').join('')+`trailer\n<< /Size ${objs.length+1} /Root ${cat} 0 R >>\nstartxref\n${xref}\n%%EOF`;
@@ -5291,7 +5567,8 @@ ACT.proUpgrade=()=>proSheet('');
 function coachProCard(){watchPro();const on=isPro(),d=proDaysLeft();const req=(APPS.mine||{}).proReq;
   return `<div class="card pro-card ${on?'on':''}"><div class="card-h"><div><h3>${PROI} Coach Pro</h3><small class="muted">${on?(PR0.me.until==='forever'?'Active':d<=5?`Ends in ${d} day${d===1?'':'s'}. Renew to keep assigning.`:`Active until ${fmtDate(+PR0.me.until)}`):req&&req.status==='pending'?'Payment sent, waiting for confirmation':`${PRO_PRICE} ${PRO_CUR} a month · assign workouts and programs`}</small></div>
    ${on&&(PR0.me.until==='forever'||d>5)?'<span class="pill g">Active</span>':`<button class="btn sm" data-act="proUpgrade">${on?'Renew':'Upgrade'}</button>`}</div>
-   ${on?`<button class="btn soft sm" data-act="progBrowse">Browse programs</button>`:''}</div>`}
+   ${on?`<button class="btn sm prog-browse" data-act="progBrowse">${BROWSERI} Browse programs</button>`:''}</div>`}
+const BROWSERI='<svg class="ico" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M3 9h18"/><circle cx="6.5" cy="6.5" r=".6" fill="currentColor"/><circle cx="9" cy="6.5" r=".6" fill="currentColor"/><path d="M8 14h8M8 17h5"/></svg>';
 // ---------- programs ----------
 // Principles used throughout: each muscle trained about twice a week, roughly 10 to 20 hard sets per muscle per week,
 // most sets 1 to 3 reps short of failure (RPE 7 to 9), progressive overload every week and a lighter (deload) week every 4th week.
@@ -5541,38 +5818,149 @@ const monthLabel=k=>new Date(k+'-15').toLocaleDateString([], {month:'long',year:
 function sumByCur(L){const o={};L.forEach(i=>{o[i.cur]=(o[i.cur]||0)+(+i.total||0)});return o}
 const curList=o=>Object.entries(o).filter(([,v])=>v).map(([c,v])=>money(v,c)).join(' + ')||money(0,'ETB');
 // ---------- shared invoice editor ----------
-function invoiceForm({title,toList,pick,price,onSave,from}){let items=price?[{d:price.d||'Coaching',q:1,p:price.amount||''}]:[{d:'',q:1,p:''}];let cur=(price&&price.cur)||'ETB';
+// "1500 ETB", "1,500", "USD 20" → {amount, cur}
+function parsePrice(s,cur0){const t=String(s??'').trim();const n=parseFloat(t.replace(/[^\d.]/g,''));const c=(t.match(/[A-Za-z]{3}/)||[])[0];return {amount:isFinite(n)?n:'',cur:c?c.toUpperCase():(cur0||'ETB')}}
+function planPeriod(p,from){if(!+p.m)return '';const a=new Date(from||Date.now()),b=new Date(a);b.setMonth(b.getMonth()+(+p.m));const f=d=>d.toLocaleDateString([], {day:'numeric',month:'short'});return ` (${f(a)} to ${f(b)} ${b.getFullYear()})`}
+function invoiceForm({title,toList,pick,price,onSave,from,plans,planFor,after}){let items=price?[{d:price.d||'Coaching',q:1,p:price.amount||''}]:[{d:'',q:1,p:''}];let cur=(price&&price.cur)||'ETB';plans=(plans||[]).filter(p=>p&&p.n);
+  const startPlan=planFor&&pick?plans.findIndex(p=>p.n===planFor(pick)):-1;
   const row=(it,i)=>`<div class="inv-row" data-i="${i}"><input class="inp" data-f="d" placeholder="Description" value="${esc(it.d)}"><input class="inp" data-f="q" type="number" min="1" inputmode="numeric" value="${esc(it.q)}" aria-label="Quantity"><input class="inp" data-f="p" type="number" min="0" step="0.01" inputmode="decimal" placeholder="Price" value="${esc(it.p)}" aria-label="Price"><button type="button" class="iconbtn sm" data-rm="${i}" aria-label="Remove line">${ICON.x}</button></div>`;
   const html=()=>`${toList?`<div class="field"><label for="ivTo">Bill to</label><select class="inp" id="ivTo">${toList.map(t=>`<option value="${esc(t.uid||t.id)}" ${pick===(t.uid||t.id)?'selected':''}>${esc(t.name)}</option>`).join('')}</select></div>`:''}
+   ${plans.length?`<div class="field"><label for="ivPl">Membership plan</label><select class="inp" id="ivPl"><option value="">Custom invoice (type your own lines)</option>${plans.map((p,i)=>`<option value="${i}" ${i===startPlan?'selected':''}>${esc(p.n)}${p.price?' · '+esc(String(p.price)):''}</option>`).join('')}</select><small class="muted">Choosing a plan fills in the lines below. You can still change them.</small></div>`:''}
    <div class="form"><div class="field"><label for="ivC">Currency</label><select class="inp" id="ivC">${[...new Set([cur,...CURS])].map(c=>`<option ${c===cur?'selected':''}>${c}</option>`).join('')}<option value="other">Other…</option></select><input class="inp" id="ivCO" placeholder="Currency code, e.g. TRY" hidden style="margin-top:6px"></div><div class="field"><label for="ivD">Due date</label><input class="inp" id="ivD" type="date" value="${toDateInput(Date.now()+7*864e5)}"></div></div>
    <div class="inv-head"><small>Item</small><small>Qty</small><small>Price</small><span></span></div><div id="ivRows">${items.map(row).join('')}</div><button type="button" class="link" id="ivAdd">+ Add line</button>
    <div class="field"><label for="ivN">Note <small class="muted">optional</small></label><input class="inp" id="ivN" placeholder="e.g. November coaching, 12 sessions"></div>
    <div class="inv-tot"><span>Total</span><b class="num" id="ivT"></b></div>${from==='client'?`<small class="muted">JUNGLE PARK's platform fee is ${FEE*100}% of paid invoices, billed to you monthly.</small>`:''}
    <button class="btn block" id="ivGo">${ICON.check} Create invoice</button>`;
-  const el=openSheet(title,`<div class="sb">${html()}</div>`);
-  const read=()=>{$$('.inv-row',el).forEach(r=>{const it=items[+r.dataset.i];$$('[data-f]',r).forEach(i=>it[i.dataset.f]=i.value)});const c=$('#ivC',el).value;cur=c==='other'?($('#ivCO',el).value.trim().toUpperCase()||'ETB'):c};
-  const tot=()=>{read();$('#ivT',el).textContent=money(invTotal(items),cur)};tot();
-  el.addEventListener('input',tot);el.addEventListener('change',e=>{if(e.target.id==='ivC')$('#ivCO',el).hidden=e.target.value!=='other';tot()});
+  const el=openSheet(title,`<div class="sb">${html()}</div>`);el.parentElement.dataset.sticky='1';
+  const read=()=>{$$('.inv-row',el).forEach(r=>{const it=items[+r.dataset.i];if(it)$$('[data-f]',r).forEach(i=>it[i.dataset.f]=i.value)});const c=$('#ivC',el).value;cur=c==='other'?($('#ivCO',el).value.trim().toUpperCase()||'ETB'):c};
+  const tot=()=>{read();$('#ivT',el).textContent=money(invTotal(items),cur)};
+  const setCur=c=>{const s=$('#ivC',el);if(![...s.options].some(o=>o.value===c)){s.insertAdjacentHTML('afterbegin',`<option>${esc(c)}</option>`)}s.value=c;$('#ivCO',el).hidden=true};
+  const usePlan=i=>{const p=plans[+i];if(!p)return;const pr=parsePrice(p.price,cur);items=[{d:`Membership · ${p.n}${planPeriod(p)}`,q:1,p:pr.amount}];setCur(pr.cur);$('#ivRows',el).innerHTML=items.map(row).join('');if(!$('#ivN',el).value)$('#ivN',el).value=`${p.n} membership`;tot()};
+  if(startPlan>=0)usePlan(startPlan);tot();
+  el.addEventListener('input',tot);el.addEventListener('change',e=>{if(e.target.id==='ivC')$('#ivCO',el).hidden=e.target.value!=='other';
+    if(e.target.id==='ivPl'){if(e.target.value!=='')usePlan(e.target.value);else{items=[{d:'',q:1,p:''}];$('#ivRows',el).innerHTML=items.map(row).join('');const n=$('#ivN',el);if(/ membership$/.test(n.value))n.value=''}}
+    if(e.target.id==='ivTo'&&planFor&&$('#ivPl',el)){const k=plans.findIndex(p=>p.n===planFor(e.target.value));if(k>=0){$('#ivPl',el).value=String(k);usePlan(k)}}
+    tot()});
   el.addEventListener('click',async e=>{if(e.target.closest('#ivAdd')){read();items.push({d:'',q:1,p:''});$('#ivRows',el).insertAdjacentHTML('beforeend',row(items[items.length-1],items.length-1));return}
     const rm=e.target.closest('[data-rm]');if(rm){read();if(items.length>1){items.splice(+rm.dataset.rm,1);$('#ivRows',el).innerHTML=items.map(row).join('')}tot();return}
-    if(e.target.closest('#ivGo')){read();const L=items.filter(i=>i.d&&+i.p>0);if(!L.length){toast('Add at least one line with a price');return}if(!needOnline('Creating an invoice'))return;e.target.disabled=true;
-      try{await onSave({to:toList?$('#ivTo',el).value:null,items:L.map(i=>({d:i.d,q:+i.q||1,p:+i.p})),cur,due:fromDateInput($('#ivD',el).value)||Date.now()+7*864e5,note:$('#ivN',el).value.trim()});closeSheet();toast('Invoice created')}catch(err){dbErr(err);toast('Could not save right now');e.target.disabled=false}}})}
+    const go_=e.target.closest('#ivGo');if(go_){read();const L=items.filter(i=>i.d&&+i.p>0);if(!L.length){toast('Add at least one line with a price');return}if(!needOnline('Creating an invoice'))return;go_.disabled=true;
+      try{const saved=await onSave({to:toList?$('#ivTo',el).value:null,items:L.map(i=>({d:i.d,q:+i.q||1,p:+i.p})),cur,due:fromDateInput($('#ivD',el).value)||Date.now()+7*864e5,note:$('#ivN',el).value.trim()});
+        toast('Invoice created');if(after&&saved)after(saved);else closeSheet()}catch(err){dbErr(err);toast('Could not save right now');go_.disabled=false}}})}
 function invRow(v,act,extra,from){const s=INVST[v.status]||INVST.unpaid;return `<button class="li course-li" data-act="${act}" data-id="${v._id}" ${extra||''}><span class="t"><b>${esc(from?v.fromName:(v.toName||v.fromName||''))}</b><small>${esc(v.no)} · ${fmtDate(v.ts)}${v.status==='unpaid'&&v.due<Date.now()?' · <span style="color:#E5383B">overdue</span>':''}</small></span><span class="inv-amt"><b class="num money">${moneyH(money(v.total,v.cur))}</b><span class="pill ${s[1]}">${s[0]}</span></span></button>`}
-function invView(v,opt={}){const s=INVST[v.status]||INVST.unpaid;return `<div class="inv-doc"><div class="inv-top"><div><small class="muted">Invoice</small><b>${esc(v.no)}</b></div><span class="pill ${s[1]}">${s[0]}</span></div>
-   <div class="kv"><div><small>From</small><b>${esc(v.fromName)}</b></div><div><small>To</small><b>${esc(v.toName)}</b></div><div><small>Date</small><b>${fmtDate(v.ts)}</b></div><div><small>Due</small><b>${fmtDate(v.due)}</b></div></div>
+function invView(v,opt={}){const s=INVST[v.status]||INVST.unpaid;return `<div class="inv-doc">${opt.logo?`<div class="inv-logo-row"><img class="inv-logo" src="${esc(opt.logo)}" alt="${esc(v.fromName||'')} logo"></div>`:''}<div class="inv-top"><div><small class="muted">Invoice</small><b>${esc(v.no)}</b></div><span class="pill ${s[1]}">${s[0]}</span></div>
+   <div class="kv"><div><small>From</small><b>${esc(v.fromName)}</b></div><div><small>To</small><b>${esc(v.toName)}</b></div><div><small>Date</small><b>${fmtDate(v.ts)}</b></div><div><small>Due</small><b>${fmtDate(v.due)}</b></div>${v.status==='paid'&&v.paidAt?`<div><small>Paid</small><b>${fmtDate(v.paidAt)}</b></div>`:''}</div>
    <div class="inv-lines">${v.items.map(i=>`<div><span>${esc(i.d)}${i.q>1?` <small class="muted">× ${i.q}</small>`:''}</span><b class="num">${money(i.q*i.p,v.cur)}</b></div>`).join('')}<div class="inv-sum"><span>Total</span><b class="num">${money(v.total,v.cur)}</b></div></div>
    ${v.note?`<p class="iv-note">${esc(v.note)}</p>`:''}${opt.pay?`<div class="pay-box"><small>How to pay</small><p>${esc(opt.pay)}</p></div>`:''}
-   ${(v.receipts||[]).length?`<h4 class="sub-h">Receipts</h4><div class="ph-grid">${v.receipts.map(r=>`<a class="ph-tile" href="${r.img}" target="_blank" rel="noopener"><img src="${r.img}" alt="Receipt"><span class="ph-cap">${new Date(r.ts).toLocaleDateString([], {day:'numeric',month:'short'})}</span></a>`).join('')}</div>`:''}</div>`}
-async function addReceipt(path,v){return new Promise(res=>pickImage(async f=>{try{const img=await resizeImage(f,1200);await NET.db.doc(path).update({receipts:[...(v.receipts||[]),{img,ts:Date.now(),by:S.profile.id}].slice(-4),status:v.status==='paid'?'paid':'review',u:Date.now()});toast('Receipt uploaded');res(true)}catch(e){dbErr(e);toast('Could not upload that receipt');res(false)}}))}
+   ${(v.receipts||[]).length?`<h4 class="sub-h">Receipts</h4><div class="ph-grid">${v.receipts.map(r=>`<a class="ph-tile" href="${r.img}" target="_blank" rel="noopener"><img src="${r.img}" alt="Receipt"><span class="ph-cap">${new Date(r.ts).toLocaleDateString([], {day:'numeric',month:'short'})}</span></a>`).join('')}</div>`:''}
+   <div class="inv-brand"><span class="logo"><i class="paw"></i></span><span>Issued with <b>JUNGLE PARK</b></span></div></div>`}
+// returns the change it saved (so an open invoice can redraw), or false
+async function addReceipt(path,v){return new Promise(res=>pickImage(async f=>{try{const img=await resizeImage(f,1200);const ch={receipts:[...(v.receipts||[]),{img,ts:Date.now(),by:S.profile.id}].slice(-4),status:v.status==='paid'?'paid':'review',u:Date.now()};await NET.db.doc(path).update(ch);toast('Receipt uploaded');res(ch)}catch(e){dbErr(e);toast('Could not upload that receipt');res(false)}}))}
+// ---------- one invoice, open until the person taps outside it or the X ----------
+// o: {path, title, created, logo, note, onPaid(v)}
+function invSheet(v,o){let el;
+  const draw=()=>{const s=v.status||'unpaid';const box=el&&el.querySelector('.inv-sb');if(!box)return;
+    box.innerHTML=`${o.created?`<div class="lock-note ok inv-made">${ICON.check}<span><b>Invoice created.</b> Download it to send, or mark it paid if you already have the money.</span></div>`:''}${invView(v,{logo:o.logo})}${o.note||''}
+     <div class="grid2" style="margin-top:12px"><button class="btn soft" data-iv="pdf">${ICON.dl} Download PDF</button>${s==='paid'?`<button class="btn soft" data-iv="set" data-st="unpaid">Mark unpaid</button>`:`<button class="btn" data-iv="set" data-st="paid">${ICON.check} Mark paid</button>`}</div>
+     <div class="field inv-stbox"><span class="lbl">Status <small class="muted">· change it any time, also after cancelling</small></span><div class="chips">${['unpaid','review','paid','void'].map(k=>`<button type="button" class="chip ${s===k?'on':''}" data-iv="set" data-st="${k}" aria-pressed="${s===k}">${INVST[k][0]}</button>`).join('')}</div></div>
+     <div class="row-btns" style="margin-top:4px"><button class="btn soft sm" data-iv="rc">${ICON.cam||''} Add receipt</button>${s==='void'?'<button class="btn soft sm" data-iv="set" data-st="unpaid">Restore invoice</button>':'<button class="btn soft sm danger-btn" data-iv="set" data-st="void">Cancel invoice</button>'}</div>`};
+  el=openSheet(o.title||'Invoice',`<div class="inv-sb"></div>`);el.parentElement.dataset.sticky='1';draw();
+  if(!o.logo&&v.gid)invLogo(v).then(l=>{if(l&&el.isConnected){o.logo=l;draw()}});
+  el.addEventListener('click',async e=>{const b=e.target.closest('[data-iv]');if(!b||b.disabled)return;const k=b.dataset.iv;
+    if(k==='pdf'){invoicePdf(v,o.logo);return}
+    if(k==='rc'){const ch=await addReceipt(o.path,v);if(ch){Object.assign(v,ch);o.created=false;draw()}return}
+    if(k==='set'){const st=b.dataset.st;if(st===v.status)return;if(st==='void'&&b.dataset.sure!=='1'){b.dataset.sure='1';b.textContent='Tap again to cancel';return}
+      if(!needOnline('Changing an invoice'))return;b.disabled=true;const ch={status:st,u:Date.now(),paidAt:st==='paid'?Date.now():null};
+      try{await NET.db.doc(o.path).update(ch);const was=v.status;Object.assign(v,ch);o.created=false;draw();
+        toast(st==='paid'?'Marked as paid':st==='void'?'Invoice cancelled':was==='void'?'Invoice restored':'Status changed to '+INVST[st][0].toLowerCase());if(st==='paid'&&o.onPaid)o.onPaid(v)}
+      catch(err){dbErr(err);toast('Could not save right now');b.disabled=false}}});
+  return el}
+// a gym's logo for its invoices (from the open dashboard, the gym list, or the gym record)
+const LOGOC={};async function invLogo(v){const gid=v&&v.gid;if(!gid)return '';if(BIZ.gid===gid&&BIZ.gym)return BIZ.gym.logo||'';if(LOGOC[gid]!=null)return LOGOC[gid];
+  const g=(CRS.gyms||[]).find(x=>x.id===gid);if(g&&g.logo)return LOGOC[gid]=g.logo;if(!NET.db)return '';try{const s=await NET.db.doc('gyms/'+gid).get();return LOGOC[gid]=(s.exists&&s.data().logo)||''}catch(e){return ''}}
+// ---------- invoice lists: search, status and date filters, 10 at a time, export ----------
+const IVF={},IVL={};
+function ivState(k){return IVF[k]||(IVF[k]={q:'',st:'all',range:'all',from:'',to:'',n:10})}
+function ivRange(f){const n=new Date();let a=0,b=Infinity;const M=(y,m)=>new Date(y,m,1).getTime();
+  if(f.range==='month')a=M(n.getFullYear(),n.getMonth());else if(f.range==='last'){a=M(n.getFullYear(),n.getMonth()-1);b=M(n.getFullYear(),n.getMonth())}
+  else if(f.range==='3m')a=M(n.getFullYear(),n.getMonth()-2);else if(f.range==='year')a=M(n.getFullYear(),0);
+  else if(f.range==='custom'){a=f.from?fromDateInput(f.from)-12*3600e3:0;b=f.to?fromDateInput(f.to)+12*3600e3:Infinity}return [a,b]}
+function ivActive(f){return f.q.trim()||f.st!=='all'||f.range!=='all'}
+function ivFilter(L,f){const q=f.q.trim().toLowerCase();const [a,b]=ivRange(f);
+  return L.filter(v=>{if(f.st==='overdue'){if(!(v.status==='unpaid'&&v.due<Date.now()))return false}else if(f.st!=='all'&&(v.status||'unpaid')!==f.st)return false;
+    if((v.ts||0)<a||(v.ts||0)>=b)return false;
+    return !q||[v.no,v.toName,v.fromName,v.note,(v.items||[]).map(i=>i.d).join(' '),String(v.total),INVST[v.status||'unpaid'][0]].join(' ').toLowerCase().includes(q)})}
+// k: list key, get: () => invoices, act: row action, who: label for the "to" side
+function invManager(k,get,act,o={}){IVL[k]={get,act,title:o.title||'Invoices',empty:o.empty||'No invoices yet.'};const f=ivState(k);const L=get();
+  if(!L.length)return `<div class="list" data-nocap style="margin-top:8px"><div class="empty"><span>${esc(IVL[k].empty)}</span></div></div>`;
+  return `<div class="inv-tools" data-ivk="${esc(k)}">
+    <div class="inv-srch"><input class="inp" type="search" data-ivq enterkeyhint="search" placeholder="Search member, invoice no. or item" value="${esc(f.q)}" autocomplete="off" aria-label="Search invoices"><button type="button" class="btn soft sm" data-ivexp>${ICON.dl} Export</button></div>
+    <div class="inv-filt"><div class="chips" role="group" aria-label="Status">${[['all','All'],['unpaid','Unpaid'],['overdue','Overdue'],['review','Receipt sent'],['paid','Paid'],['void','Cancelled']].map(([s,l])=>`<button type="button" class="chip ${f.st===s?'on':''}" data-ivst="${s}" aria-pressed="${f.st===s}">${l}</button>`).join('')}</div>
+     <div class="inv-dates"><select class="inp" data-ivr aria-label="Date">${[['all','Any date'],['month','This month'],['last','Last month'],['3m','Last 3 months'],['year','This year'],['custom','Pick dates…']].map(([r,l])=>`<option value="${r}" ${f.range===r?'selected':''}>${l}</option>`).join('')}</select>
+      <span class="inv-cust" ${f.range==='custom'?'':'hidden'}><input class="inp" type="date" data-ivfrom value="${esc(f.from)}" aria-label="From date"><span class="muted">to</span><input class="inp" type="date" data-ivto value="${esc(f.to)}" aria-label="To date"></span></div></div>
+    <div class="inv-res">${ivResHtml(k)}</div></div>`}
+function ivResHtml(k){const src=IVL[k];if(!src)return '';const f=ivState(k);const all=src.get();const L=ivFilter(all,f);const shown=Math.min(f.n,L.length);
+  return `<div class="list" data-nocap>${L.length?L.slice(0,f.n).map(v=>invRow(v,src.act)).join(''):`<div class="empty"><span>No invoices match${ivActive(f)?' these filters':''}.</span>${ivActive(f)?'<button type="button" class="btn soft sm" data-ivclear>Clear filters</button>':''}</div>`}</div>
+   ${L.length>shown?`<button type="button" class="btn soft block sm inv-more" data-ivmore>See more <span class="cnt">${L.length-shown}</span></button>`:''}
+   ${L.length?`<small class="muted inv-count">Showing ${shown} of ${L.length}${L.length!==all.length?' (filtered from '+all.length+')':''}</small>`:''}`}
+function ivPaint(tools){const k=tools.dataset.ivk;const r=tools.querySelector('.inv-res');if(r)r.innerHTML=ivResHtml(k)}
+document.addEventListener('input',e=>{const q=e.target.closest('[data-ivq]');if(!q)return;const t=q.closest('.inv-tools');const f=ivState(t.dataset.ivk);f.q=q.value;f.n=10;clearTimeout(q._t);q._t=setTimeout(()=>ivPaint(t),120)});
+document.addEventListener('change',e=>{const t=e.target.closest('.inv-tools');if(!t)return;const f=ivState(t.dataset.ivk);
+  if(e.target.matches('[data-ivr]')){f.range=e.target.value;t.querySelector('.inv-cust').hidden=f.range!=='custom'}else if(e.target.matches('[data-ivfrom]'))f.from=e.target.value;else if(e.target.matches('[data-ivto]'))f.to=e.target.value;else return;f.n=10;ivPaint(t)});
+document.addEventListener('click',e=>{const t=e.target.closest('.inv-tools');if(!t)return;const k=t.dataset.ivk;const f=ivState(k);
+  const st=e.target.closest('[data-ivst]');if(st){f.st=st.dataset.ivst;f.n=10;$$('[data-ivst]',t).forEach(b=>{b.classList.toggle('on',b===st);b.setAttribute('aria-pressed',b===st)});ivPaint(t);return}
+  if(e.target.closest('[data-ivmore]')){f.n+=10;ivPaint(t);return}
+  if(e.target.closest('[data-ivclear]')){Object.assign(f,{q:'',st:'all',range:'all',from:'',to:'',n:10});bizSoft(1);return}
+  if(e.target.closest('[data-ivexp]'))invExport(k)});
+// ---------- export: all invoices or the filtered ones, as PDF or CSV; receipts as a PDF of the photos ----------
+function invExport(k){const src=IVL[k];if(!src)return;const f=ivState(k);const all=src.get();const fl=ivFilter(all,f);let w=ivActive(f)?'f':'all',kind='inv',fmt='pdf';
+  const rcN=L=>L.reduce((a,v)=>a+(v.receipts||[]).length,0);
+  const el=openSheet('Export '+src.title.toLowerCase(),`<p class="muted">Download your records to keep, share with your accountant or print.</p>
+   <div class="field"><span class="lbl">Which invoices</span><div class="seg" id="exW"><button type="button" data-w="all">All <span class="cnt">${all.length}</span></button><button type="button" data-w="f" ${ivActive(f)?'':'disabled'}>Current filters <span class="cnt">${fl.length}</span></button></div>${ivActive(f)?`<small class="muted">Filters: ${esc([f.st!=='all'?{unpaid:'unpaid',overdue:'overdue',review:'receipt sent',paid:'paid',void:'cancelled'}[f.st]:'',f.range!=='all'?{month:'this month',last:'last month','3m':'last 3 months',year:'this year',custom:[f.from&&fmtDate(fromDateInput(f.from)),f.to&&fmtDate(fromDateInput(f.to))].filter(Boolean).join(' to ')||'custom dates'}[f.range]:'',f.q.trim()?'"'+f.q.trim()+'"':''].filter(Boolean).join(' · '))}</small>`:''}</div>
+   <div class="field"><span class="lbl">What</span><div class="seg" id="exK"><button type="button" data-k="inv">Invoices</button><button type="button" data-k="rc">Receipts</button></div></div>
+   <div class="field" id="exFw"><span class="lbl">Format</span><div class="seg" id="exF"><button type="button" data-f="pdf">PDF</button><button type="button" data-f="csv">Spreadsheet (CSV)</button></div></div>
+   <p class="muted ex-sum" id="exSum"></p><button class="btn block" id="exGo">${ICON.dl} Export</button>`);
+  const pickL=()=>w==='f'?fl:all;
+  const sync=()=>{$$('#exW button',el).forEach(b=>b.classList.toggle('on',b.dataset.w===w));$$('#exK button',el).forEach(b=>b.classList.toggle('on',b.dataset.k===kind));$$('#exF button',el).forEach(b=>b.classList.toggle('on',b.dataset.f===fmt));
+    const L=pickL();const n=kind==='inv'?L.length:rcN(L);$('#exSum',el).textContent=kind==='inv'?`${n} invoice${n===1?'':'s'}${fmt==='pdf'?', one per page':' in one spreadsheet'}.`:fmt==='pdf'?`${n} receipt photo${n===1?'':'s'}, one per page with the invoice it belongs to.`:`${n} receipt${n===1?'':'s'} listed with their invoice, member and date.`;$('#exGo',el).disabled=!n};
+  sync();el.addEventListener('click',async e=>{const b=e.target.closest('[data-w],[data-k],[data-f]');if(b&&!b.disabled){if(b.dataset.w)w=b.dataset.w;if(b.dataset.k)kind=b.dataset.k;if(b.dataset.f)fmt=b.dataset.f;sync();return}
+    const g=e.target.closest('#exGo');if(!g)return;g.disabled=true;const old=g.innerHTML;g.textContent='Preparing…';const L=pickL().slice().sort((a,b)=>(a.ts||0)-(b.ts||0));const stamp=new Date().toISOString().slice(0,10);const base=(src.title||'invoices').toLowerCase().replace(/[^a-z0-9]+/g,'-');
+    try{if(kind==='inv'&&fmt==='csv')await saveFile(`${base}-${stamp}.csv`,invCsv(L));else if(kind==='inv')await invoicesPdf(L,`${base}-${stamp}.pdf`);else if(fmt==='csv')await saveFile(`${base}-receipts-${stamp}.csv`,receiptsCsv(L));else await receiptsPdf(L,`${base}-receipts-${stamp}.pdf`);toast('Export ready')}
+    catch(err){console.error(err);toast('Could not export right now')}g.disabled=false;g.innerHTML=old})}
+const csvCell=x=>{const s=String(x??'');return /[",\n;]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s};
+const csvBlob=rows=>new Blob(['﻿'+rows.map(r=>r.map(csvCell).join(',')).join('\r\n')],{type:'text/csv;charset=utf-8'});
+const isoD=t=>t?toDateInput(t):'';
+function invCsv(L){return csvBlob([['Invoice no','Date','Due','From','Bill to','Items','Currency','Total','Status','Paid on','Receipts','Note'],...L.map(v=>[v.no,isoD(v.ts),isoD(v.due),v.fromName,v.toName,(v.items||[]).map(i=>`${i.d}${i.q>1?' x'+i.q:''} (${i.q*i.p})`).join('; '),v.cur,v.total,(INVST[v.status||'unpaid']||INVST.unpaid)[0],v.status==='paid'?isoD(v.paidAt):'',(v.receipts||[]).length,v.note||''])])}
+function receiptsCsv(L){return csvBlob([['Invoice no','Bill to','Invoice date','Total','Currency','Invoice status','Receipt uploaded'],...L.flatMap(v=>(v.receipts||[]).map(r=>[v.no,v.toName,isoD(v.ts),v.total,v.cur,(INVST[v.status||'unpaid']||INVST.unpaid)[0],r.ts?new Date(r.ts).toLocaleString():'']))])}
 // ---------- invoice PDF ----------
-function invoicePdf(v){try{const d=MiniPDF();const W=595,M=44;let y;d.setFillColor(11,46,31);d.rect(0,0,W,78);d.setTextColor(255,255,255);d.setFont('helvetica','bold');d.setFontSize(22);d.text('INVOICE',M,40);d.setFontSize(10);d.setFont('helvetica','normal');d.text(v.no,M,58);d.text('JUNGLE PARK',W-M,40,{align:'right'});
-  d.setTextColor(30,30,30);y=112;d.setFontSize(9);d.setTextColor(120,110,100);d.text('FROM',M,y);d.text('BILL TO',W/2,y);d.text('DATE',M,y+56);d.text('DUE',W/2,y+56);d.setTextColor(30,30,30);d.setFontSize(12);d.setFont('helvetica','bold');d.text(v.fromName||'',M,y+16);d.text(v.toName||'',W/2,y+16);d.setFont('helvetica','normal');d.setFontSize(11);d.text(fmtDate(v.ts),M,y+72);d.text(fmtDate(v.due),W/2,y+72);
-  y=230;d.setFillColor(245,241,234);d.rect(M,y-14,W-2*M,22);d.setFontSize(9);d.setTextColor(120,110,100);d.text('DESCRIPTION',M+8,y);d.text('QTY',W-M-170,y,{align:'right'});d.text('PRICE',W-M-90,y,{align:'right'});d.text('AMOUNT',W-M-8,y,{align:'right'});y+=26;d.setTextColor(30,30,30);d.setFontSize(11);
-  v.items.forEach(i=>{d.text(String(i.d).slice(0,60),M+8,y);d.text(String(i.q),W-M-170,y,{align:'right'});d.text(money(i.p,v.cur),W-M-90,y,{align:'right'});d.text(money(i.q*i.p,v.cur),W-M-8,y,{align:'right'});d.setDrawColor(230,225,215);d.line(M,y+8,W-M,y+8);y+=26});
+// images for the PDF: drawn on a white canvas and stored as JPEG (the PDF embeds JPEG directly)
+function pdfImg(src,max=700,bg='#FFFFFF'){return new Promise(res=>{if(!src)return res(null);const i=new Image();i.onload=()=>{try{const s=Math.min(1,max/Math.max(i.naturalWidth||1,i.naturalHeight||1));const c=document.createElement('canvas');c.width=Math.max(1,Math.round((i.naturalWidth||1)*s));c.height=Math.max(1,Math.round((i.naturalHeight||1)*s));
+  const x=c.getContext('2d');x.fillStyle=bg;x.fillRect(0,0,c.width,c.height);x.drawImage(i,0,0,c.width,c.height);res({bin:atob(c.toDataURL('image/jpeg',.88).split(',')[1]),w:c.width,h:c.height})}catch(e){res(null)}};i.onerror=()=>res(null);i.src=src})}
+// the JUNGLE PARK tree mark, white on the invoice header green
+let JPLOGO=null;function jpLogoImg(){if(JPLOGO)return JPLOGO;JPLOGO=new Promise(res=>{try{const v=getComputedStyle(document.documentElement).getPropertyValue('--logo');const m=/url\(\s*["']?([^"')]+)["']?\s*\)/.exec(v||'');const src=m?m[1]:'icon192.png';
+  const i=new Image();i.onload=()=>{try{const N=160,c=document.createElement('canvas');c.width=c.height=N;const x=c.getContext('2d');x.fillStyle='rgb(11,46,31)';x.fillRect(0,0,N,N);x.drawImage(i,0,0,N,N);res({bin:atob(c.toDataURL('image/jpeg',.92).split(',')[1]),w:N,h:N})}catch(e){res(null)}};i.onerror=()=>res(null);i.src=src}catch(e){res(null)}});return JPLOGO}
+function fitBox(img,mw,mh){const s=Math.min(mw/img.w,mh/img.h);return [img.w*s,img.h*s]}
+// one invoice on the current page
+function drawInvoice(d,v,jp,logo){const W=595,M=44;let y;d.setFillColor(11,46,31);d.rect(0,0,W,78);d.setTextColor(255,255,255);d.setFont('helvetica','bold');d.setFontSize(22);d.text('INVOICE',M,40);d.setFontSize(10);d.setFont('helvetica','normal');d.text(v.no||'',M,58);
+  d.setFont('helvetica','bold');d.setFontSize(13);d.text('JUNGLE PARK',W-M,44,{align:'right'});d.setFont('helvetica','normal');
+  if(jp){const tw=d.getTextWidth?d.getTextWidth('JUNGLE PARK',13,true):96;d.image(jp,W-M-tw-34,23,28,28)}
+  y=112;if(logo){const [lw,lh]=fitBox(logo,150,60);d.image(logo,M,96,lw,lh);y=96+lh+26}
+  d.setFontSize(9);d.setTextColor(120,110,100);d.text('FROM',M,y);d.text('BILL TO',W/2,y);d.text('DATE',M,y+56);d.text('DUE',W/2,y+56);d.setTextColor(30,30,30);d.setFontSize(12);d.setFont('helvetica','bold');d.text(String(v.fromName||'').slice(0,40),M,y+16);d.text(String(v.toName||'').slice(0,40),W/2,y+16);d.setFont('helvetica','normal');d.setFontSize(11);d.text(fmtDate(v.ts),M,y+72);d.text(fmtDate(v.due),W/2,y+72);
+  y+=118;d.setFillColor(245,241,234);d.rect(M,y-14,W-2*M,22);d.setFontSize(9);d.setTextColor(120,110,100);d.text('DESCRIPTION',M+8,y);d.text('QTY',W-M-170,y,{align:'right'});d.text('PRICE',W-M-90,y,{align:'right'});d.text('AMOUNT',W-M-8,y,{align:'right'});y+=26;d.setTextColor(30,30,30);d.setFontSize(11);
+  (v.items||[]).forEach(i=>{d.text(String(i.d).slice(0,58),M+8,y);d.text(String(i.q),W-M-170,y,{align:'right'});d.text(money(i.p,v.cur),W-M-90,y,{align:'right'});d.text(money(i.q*i.p,v.cur),W-M-8,y,{align:'right'});d.setDrawColor(230,225,215);d.line(M,y+8,W-M,y+8);y+=26});
   y+=6;d.setFont('helvetica','bold');d.setFontSize(14);d.text('Total',W-M-170,y,{align:'right'});d.text(money(v.total,v.cur),W-M-8,y,{align:'right'});d.setFont('helvetica','normal');
-  y+=34;d.setFontSize(11);d.setTextColor(v.status==='paid'?30:150,v.status==='paid'?130:90,v.status==='paid'?80:40);d.text(`Status: ${(INVST[v.status]||INVST.unpaid)[0]}${v.paidAt?' · '+fmtDate(v.paidAt):''}`,M,y);d.setTextColor(30,30,30);
+  y+=34;d.setFontSize(11);const st=v.status||'unpaid';d.setTextColor(st==='paid'?30:st==='void'?190:150,st==='paid'?130:st==='void'?50:90,st==='paid'?80:st==='void'?50:40);d.text(`Status: ${(INVST[st]||INVST.unpaid)[0]}${st==='paid'&&v.paidAt?' · '+fmtDate(v.paidAt):''}`,M,y);d.setTextColor(30,30,30);
   if(v.note){y+=22;d.setFontSize(10);d.text(String(v.note).slice(0,100),M,y)}
-  d.setFontSize(8);d.setTextColor(150,140,130);d.text('Generated by JUNGLE PARK · '+new Date().toLocaleString(),M,820);saveFile(`invoice-${v.no}.pdf`,d.output())}catch(e){console.error(e);toast('Could not make the PDF')}}
+  d.setFontSize(8);d.setTextColor(150,140,130);d.text('Generated by JUNGLE PARK · '+new Date().toLocaleString(),M,820)}
+async function invoicePdf(v,logoSrc){try{const d=MiniPDF();const [jp,logo]=await Promise.all([jpLogoImg(),pdfImg(logoSrc||await invLogo(v),500)]);drawInvoice(d,v,jp,logo);await saveFile(`invoice-${v.no}.pdf`,d.output())}catch(e){console.error(e);toast('Could not make the PDF')}}
+async function invoicesPdf(L,name){const d=MiniPDF();const jp=await jpLogoImg();const logos={};
+  for(let i=0;i<L.length;i++){const v=L[i];if(i)d.addPage();let lg=null;if(v.gid){if(!(v.gid in logos))logos[v.gid]=await pdfImg(await invLogo(v),500);lg=logos[v.gid]}drawInvoice(d,v,jp,lg)}
+  await saveFile(name,d.output())}
+async function receiptsPdf(L,name){const d=MiniPDF();const W=595,M=44;let first=true;const jp=await jpLogoImg();
+  for(const v of L)for(const r of (v.receipts||[])){if(!first)d.addPage();first=false;d.setFillColor(11,46,31);d.rect(0,0,W,64);d.setTextColor(255,255,255);d.setFont('helvetica','bold');d.setFontSize(16);d.text('RECEIPT',M,32);d.setFont('helvetica','normal');d.setFontSize(10);d.text(`Invoice ${v.no||''}`,M,50);
+    d.setFont('helvetica','bold');d.setFontSize(12);d.text('JUNGLE PARK',W-M,38,{align:'right'});d.setFont('helvetica','normal');if(jp)d.image(jp,W-M-124,20,24,24);
+    d.setTextColor(30,30,30);d.setFontSize(11);d.text(`${v.toName||''} · ${money(v.total,v.cur)} · ${(INVST[v.status||'unpaid']||INVST.unpaid)[0]}`,M,92);d.setFontSize(9);d.setTextColor(120,110,100);d.text(`Invoice date ${fmtDate(v.ts)} · receipt uploaded ${r.ts?new Date(r.ts).toLocaleString():''}`,M,108);
+    const img=await pdfImg(r.img,1400);if(img){const [w,h]=fitBox(img,W-2*M,680);d.image(img,(W-w)/2,126,w,h)}else{d.text('This receipt image could not be read.',M,140)}}
+  await saveFile(name,d.output())}
 // ---------- coach: prices, invoices, fee ----------
 const BIL={c:null,cu:null,pay:'',pinv:null,pu:null};
 function watchCoachInv(){if(BIL.cu||!NET.db)return;const cid=coachId();BIL.cu=NET.db.collection(`coaches/${cid}/invoices`).onSnapshot(q=>{BIL.c=q.docs.map(d=>Object.assign({_id:d.id},d.data())).sort((a,b)=>b.ts-a.ts);if(cur==='biz'||cur==='admin')bizSoft()},()=>{});
@@ -5581,10 +5969,10 @@ function watchPinv(toId){if(!NET.db||(BIL.pu&&BIL.pto===toId))return;BIL.pu&&BIL
 function coachPaymentsCard(){watchCoachInv();const L=BIL.c||[];const mk=monthKey(Date.now());const paidM=L.filter(v=>v.status==='paid'&&monthKey(v.paidAt||v.ts)===mk);const col=sumByCur(paidM);const fee={};Object.entries(col).forEach(([c,v])=>fee[c]=Math.round(v*FEE*100)/100);
   const open=L.filter(v=>v.status==='unpaid'||v.status==='review');const pend=(BIL.pinv||[]).filter(p=>p.status!=='paid'&&p.status!=='void');
   return `<div class="card"><div class="card-h"><div><h3>Payments</h3><small class="muted">Clients pay you directly. JUNGLE PARK's fee is ${FEE*100}% of paid invoices.</small></div><div class="pay-tools"><button class="btn sm" data-act="invNew">${ICON.plus} Invoice</button></div></div>
-   <div class="lh-grid pay-grid"><div><small>Collected in ${new Date().toLocaleDateString([], {month:'long'})}</small><b class="num money">${moneyH(curList(col))}</b>${moneyEye()}</div><div><small>Platform fee (${FEE*100}%)</small><b class="num money">${moneyH(curList(fee))}</b>${moneyEye()}</div><div><small>Awaiting payment</small><b class="num">${open.length}</b></div></div>
+   <div class="lh-grid pay-grid">${moneyTile('c-col','Collected in '+new Date().toLocaleDateString([], {month:'long'}),curList(col))}${moneyTile('c-fee',`Platform fee (${FEE*100}%)`,curList(fee))}<div><small>Awaiting payment</small><b class="num">${open.length}</b></div></div>
    ${pend.length?`<div class="lock-note" style="margin-top:10px">${pend.length} invoice${pend.length>1?'s':''} from JUNGLE PARK to pay. <button class="link" data-act="pinvList">View</button></div>`:''}
-   <div class="list" style="margin-top:8px">${L.length?L.slice(0,8).map(v=>invRow(v,'invOpenC')).join(''):'<div class="empty"><span>No invoices yet. Set a price on a client\'s page, then create an invoice.</span></div>'}</div>
-   <div class="line-btns"><button class="btn-line" data-act="payTextC">Payment Details</button><button class="btn-line" data-act="pinvList">App Fees</button></div></div>`}
+   ${invManager('coach',()=>BIL.c||[],'invOpenC',{title:'Coaching invoices',empty:"No invoices yet. Set a price on a client's page, then create an invoice."})}
+   <div class="line-btns"><button class="btn-line pay-line" data-act="payTextC">Payment Details</button><button class="btn-line pay-line" data-act="pinvList">App Fees</button></div></div>`}
 const PERIODS={month:'per month',session:'per session',program:'per program',once:'one-off'};
 function clientPriceHtml(c){const p=c.price;return `<div class="cl-price"><div class="t"><small class="muted">Price</small><b>${p?money(p.amount,p.cur)+' '+(PERIODS[p.period]||''):'Not set'}</b></div><button class="btn soft sm" data-act="priceSet" data-u="${esc(c.uid)}">${p?'Change':'Set price'}</button><button class="btn sm" data-act="invNew" data-u="${esc(c.uid)}">Invoice</button></div>`}
 ACT.priceSet=b=>{const c=BIZ.clients.find(x=>x.uid===b.dataset.u);if(!c)return;const p=c.price||{amount:'',cur:'ETB',period:'month'};
@@ -5593,15 +5981,12 @@ ACT.priceSet=b=>{const c=BIZ.clients.find(x=>x.uid===b.dataset.u);if(!c)return;c
    <button class="btn block" id="psGo">Save price</button>`,el=>{$('#psGo',el).onclick=async()=>{const amount=+$('#psA',el).value;if(!(amount>0)){toast('Add the amount');return}const pr={amount,cur:($('#psC',el).value.trim()||'ETB').toUpperCase(),period:$('#psP',el).value};
     try{await NET.db.doc(`coaches/${coachId()}/clients/${c._id}`).update({price:pr});c.price=pr;closeSheet();toast('Price saved')}catch(e){dbErr(e)}}})};
 ACT.invNew=b=>{const uid=b&&b.dataset&&b.dataset.u;const A=activeClients();if(!A.length){toast('Accept a client first');return}const c=A.find(x=>x.uid===uid)||A[0];
-  const pr=c.price?{amount:c.price.amount,cur:c.price.cur,d:'Coaching '+(PERIODS[c.price.period]||'')}:null;
+  const pr=c.price?{amount:c.price.amount,cur:c.price.cur,d:'Coaching '+(PERIODS[c.price.period]||'')}:null;const id=rid(10);
   invoiceForm({title:'New invoice',toList:A.map(x=>({uid:x.uid,name:x.name})),pick:c.uid,price:pr,from:'client',onSave:async f=>{const to=A.find(x=>x.uid===f.to)||c;const v={no:invNo('INV'),uid:to.uid,toName:to.name,fromName:S.profile.name||'Coach',coachId:coachId(),items:f.items,cur:f.cur,total:invTotal(f.items),due:f.due,note:f.note,status:'unpaid',receipts:[],ts:Date.now(),u:Date.now()};
-    await NET.db.doc(`coaches/${coachId()}/invoices/${rid(10)}`).set(v);await postUpdate(coachId(),to.uid,`New invoice ${v.no}: ${money(v.total,v.cur)}, due ${fmtDate(v.due)}. Open My Profile → Invoices to pay and upload your receipt.`)}})};
-ACT.invOpenC=b=>{const v=(BIL.c||[]).find(x=>x._id===b.dataset.id);if(!v)return;const path=`coaches/${coachId()}/invoices/${v._id}`;
-  openSheet('Invoice',invView(v)+`<div class="grid2" style="margin-top:12px"><button class="btn soft" id="icPdf">${ICON.dl} PDF</button>${v.status!=='paid'&&v.status!=='void'?`<button class="btn" id="icPaid">${ICON.check} Mark paid</button>`:'<span></span>'}</div>
-   <div class="row-btns" style="margin-top:8px"><button class="btn soft sm" id="icRc">${ICON.cam||''} Add receipt</button>${v.status!=='void'&&v.status!=='paid'?'<button class="btn soft sm danger-btn" id="icVoid">Cancel invoice</button>':''}</div>`,el=>{
-    $('#icPdf',el).onclick=()=>invoicePdf(v);$('#icRc',el).onclick=async()=>{if(await addReceipt(path,v))closeSheet()};
-    $('#icPaid',el)?.addEventListener('click',async()=>{try{await NET.db.doc(path).update({status:'paid',paidAt:Date.now(),u:Date.now()});await postUpdate(coachId(),v.uid,`Payment received for invoice ${v.no}. Thank you!`);closeSheet();toast('Marked as paid')}catch(e){dbErr(e)}});
-    $('#icVoid',el)?.addEventListener('click',async e=>{const bt=e.currentTarget;if(bt.dataset.sure!=='1'){bt.dataset.sure='1';bt.textContent='Tap again to cancel';return}try{await NET.db.doc(path).update({status:'void',u:Date.now()});closeSheet();toast('Invoice cancelled')}catch(err){dbErr(err)}})})};
+    await NET.db.doc(`coaches/${coachId()}/invoices/${id}`).set(v);postUpdate(coachId(),to.uid,`New invoice ${v.no}: ${money(v.total,v.cur)}, due ${fmtDate(v.due)}. Open My Profile → Invoices to pay and upload your receipt.`);return Object.assign({_id:id},v)},
+    after:v=>coachInvSheet(v,true)})};
+function coachInvSheet(v,created){return invSheet(v,{path:`coaches/${coachId()}/invoices/${v._id}`,created,onPaid:x=>postUpdate(coachId(),x.uid,`Payment received for invoice ${x.no}. Thank you!`)})}
+ACT.invOpenC=b=>{const v=(BIL.c||[]).find(x=>x._id===b.dataset.id);if(!v)return;coachInvSheet(Object.assign({},v),false)};
 function payTextSheet(title,cur0,save){openSheet(title,`<p class="muted">Shown to your clients on every invoice: Telebirr number, bank account, or anything else they need.</p><textarea class="inp" id="ptT" rows="5" placeholder="Telebirr: 09…&#10;CBE: 1000…">${esc(cur0||'')}</textarea><button class="btn block" id="ptGo" style="margin-top:10px">Save</button>`,el=>{$('#ptGo',el).onclick=async()=>{try{await save($('#ptT',el).value.trim());closeSheet();toast('Saved')}catch(e){dbErr(e)}}})}
 ACT.payTextC=()=>payTextSheet('Payment Details',BIL.pay,t=>NET.db.doc(`coaches/${coachId()}/settings/pay`).set({text:t,u:Date.now()}).then(()=>{BIL.pay=t}));
 function clientInvHtml(c){const L=(BIL.c||[]).filter(v=>v.uid===c.uid);return L.length?`<div class="list">${L.slice(0,5).map(v=>invRow(v,'invOpenC')).join('')}</div>`:''}
@@ -5610,18 +5995,17 @@ const GBIL={};function watchGymInv(gid){if(!NET.db||GBIL[gid])return;GBIL[gid]={
 function gymPaymentsCard(gid){watchGymInv(gid);watchPinv(gid);const L=(GBIL[gid]||{}).list||[];const mk=monthKey(Date.now());const col=sumByCur(L.filter(v=>v.status==='paid'&&monthKey(v.paidAt||v.ts)===mk));const fee={};Object.entries(col).forEach(([c,v])=>fee[c]=Math.round(v*FEE*100)/100);
   const pend=(BIL.pinv||[]).filter(p=>p.toId===gid&&p.status!=='paid'&&p.status!=='void');
   return `<div class="card"><div class="card-h"><div><h3>Payments</h3><small class="muted">Members pay you directly. JUNGLE PARK's fee is ${FEE*100}% of paid invoices.</small></div><div class="pay-tools"><button class="btn sm" data-act="ginvNew">${ICON.plus} Invoice</button></div></div>
-   <div class="lh-grid pay-grid"><div><small>Collected in ${new Date().toLocaleDateString([], {month:'long'})}</small><b class="num money">${moneyH(curList(col))}</b>${moneyEye()}</div><div><small>Platform fee (${FEE*100}%)</small><b class="num money">${moneyH(curList(fee))}</b>${moneyEye()}</div><div><small>Awaiting payment</small><b class="num">${L.filter(v=>v.status==='unpaid'||v.status==='review').length}</b></div></div>
+   <div class="lh-grid pay-grid">${moneyTile('g-col','Collected in '+new Date().toLocaleDateString([], {month:'long'}),curList(col))}${moneyTile('g-fee',`Platform fee (${FEE*100}%)`,curList(fee))}<div><small>Awaiting payment</small><b class="num">${L.filter(v=>v.status==='unpaid'||v.status==='review').length}</b></div></div>
    ${pend.length?`<div class="lock-note" style="margin-top:10px">${pend.length} invoice${pend.length>1?'s':''} from JUNGLE PARK to pay. <button class="link" data-act="pinvList" data-g="${esc(gid)}">View</button></div>`:''}
-   <div class="list" style="margin-top:8px">${L.length?L.slice(0,8).map(v=>invRow(v,'ginvOpen')).join(''):'<div class="empty"><span>No invoices yet. Bill a member for their plan or a paid class.</span></div>'}</div>
-   <div class="line-btns"><button class="btn-line" data-act="payTextG">Payment Details</button><button class="btn-line" data-act="pinvList" data-g="${esc(gid)}">App Fees</button></div></div>`}
-ACT.ginvNew=b=>{const gid=BIZ.gid;const M=(BIZ.members||[]).filter(m=>m.status!=='pending');if(!M.length){toast('Add members first');return}const g=BIZ.gym||{};const m=M.find(x=>x._id===(b&&b.dataset&&b.dataset.m))||M[0];const plan=(g.plans||[]).find(p=>p.n===m.plan);
-  invoiceForm({title:'New invoice',toList:M.map(x=>({id:x._id,name:x.name})),pick:m._id,price:plan?{amount:+plan.price||'',cur:'ETB',d:'Membership · '+plan.n}:null,from:'client',onSave:async f=>{const to=M.find(x=>x._id===f.to)||m;const v={no:invNo('GYM'),uid:to.uid||'',mid:to._id,toName:to.name,fromName:g.name||'Gym',gid,items:f.items,cur:f.cur,total:invTotal(f.items),due:f.due,note:f.note,status:'unpaid',receipts:[],ts:Date.now(),u:Date.now()};
-    await NET.db.doc(`gyms/${gid}/invoices/${rid(10)}`).set(v)}})};
-ACT.ginvOpen=b=>{const gid=BIZ.gid;const v=((GBIL[gid]||{}).list||[]).find(x=>x._id===b.dataset.id);if(!v)return;const path=`gyms/${gid}/invoices/${v._id}`;
-  openSheet('Invoice',invView(v)+`${v.uid?'':'<p class="muted" style="font-size:13px">This member has not joined in the app, so send them the PDF.</p>'}<div class="grid2" style="margin-top:12px"><button class="btn soft" id="igPdf">${ICON.dl} PDF</button>${v.status!=='paid'&&v.status!=='void'?`<button class="btn" id="igPaid">${ICON.check} Mark paid</button>`:'<span></span>'}</div><div class="row-btns" style="margin-top:8px"><button class="btn soft sm" id="igRc">${ICON.cam||''} Add receipt</button>${v.status!=='void'&&v.status!=='paid'?'<button class="btn soft sm danger-btn" id="igVoid">Cancel invoice</button>':''}</div>`,el=>{
-    $('#igPdf',el).onclick=()=>invoicePdf(v);$('#igRc',el).onclick=async()=>{if(await addReceipt(path,v))closeSheet()};
-    $('#igPaid',el)?.addEventListener('click',async()=>{try{await NET.db.doc(path).update({status:'paid',paidAt:Date.now(),u:Date.now()});closeSheet();toast('Marked as paid')}catch(e){dbErr(e)}});
-    $('#igVoid',el)?.addEventListener('click',async e=>{const bt=e.currentTarget;if(bt.dataset.sure!=='1'){bt.dataset.sure='1';bt.textContent='Tap again to cancel';return}try{await NET.db.doc(path).update({status:'void',u:Date.now()});closeSheet();toast('Invoice cancelled')}catch(err){dbErr(err)}})})};
+   ${invManager('gym:'+gid,()=>(GBIL[gid]||{}).list||[],'ginvOpen',{title:'Gym invoices',empty:'No invoices yet. Bill a member for their plan or a paid class.'})}
+   <div class="line-btns"><button class="btn-line pay-line" data-act="payTextG">Payment Details</button><button class="btn-line pay-line" data-act="pinvList" data-g="${esc(gid)}">App Fees</button></div></div>`}
+ACT.ginvNew=b=>{const gid=BIZ.gid;const M=(BIZ.members||[]).filter(m=>m.status!=='pending');if(!M.length){toast('Add members first');return}const g=BIZ.gym||{};const m=M.find(x=>x._id===(b&&b.dataset&&b.dataset.m))||M[0];const id=rid(10);
+  invoiceForm({title:'New invoice',toList:M.map(x=>({id:x._id,name:x.name})),pick:m._id,plans:(g.plans||[]).filter(p=>p.price),planFor:mid=>(M.find(x=>x._id===mid)||{}).plan||'',from:'client',
+    onSave:async f=>{const to=M.find(x=>x._id===f.to)||m;const v={no:invNo('GYM'),uid:to.uid||'',mid:to._id,toName:to.name,fromName:g.name||'Gym',gid,items:f.items,cur:f.cur,total:invTotal(f.items),due:f.due,note:f.note,status:'unpaid',receipts:[],ts:Date.now(),u:Date.now()};
+      await NET.db.doc(`gyms/${gid}/invoices/${id}`).set(v);return Object.assign({_id:id},v)},
+    after:v=>gymInvSheet(v,true)})};
+function gymInvSheet(v,created){const gid=v.gid||BIZ.gid;return invSheet(v,{path:`gyms/${gid}/invoices/${v._id}`,created,logo:(BIZ.gym||{}).logo||'',note:v.uid?'':'<p class="muted" style="font-size:13px;margin-top:8px">This member has not joined in the app, so send them the PDF.</p>'})}
+ACT.ginvOpen=b=>{const gid=BIZ.gid;const v=((GBIL[gid]||{}).list||[]).find(x=>x._id===b.dataset.id);if(!v)return;gymInvSheet(Object.assign({gid},v),false)};
 ACT.payTextG=()=>payTextSheet('Payment Details',(BIZ.gym||{}).payText,t=>NET.db.doc('gyms/'+BIZ.gid).update({payText:t}));
 // ---------- coaches & gyms: invoices from JUNGLE PARK ----------
 ACT.pinvList=b=>{const gid=b&&b.dataset&&b.dataset.g;const toId=gid||coachId();watchPinv(toId);const L=(BIL.pinv||[]).filter(p=>p.toId===toId);
@@ -5671,10 +6055,13 @@ ACT.pinvAdmin=b=>{const v=(BIL.all||[]).find(x=>x._id===b.dataset.id);if(!v)retu
 
 // hide money amounts behind an eye toggle (hidden by default on shared screens)
 function moneyH(t){return String(t).replace(/\d[\d,.]*/g,m=>`<span class="mnum">${m}</span>`)}
-function moneyHidden(){return S.settings.hideMoney!==false}
-function moneyEye(){const h=moneyHidden();return `<button class="iconbtn eye-tg" data-act="moneyEye" aria-pressed="${h}" aria-label="${h?'Show':'Hide'} amounts">${h?ICON.eyeOff:ICON.eye}</button>`}
-function applyMoney(){document.documentElement.classList.toggle('hide-money',moneyHidden())}
-ACT.moneyEye=()=>{S.settings.hideMoney=!moneyHidden();save('settings');applyMoney();$$('.eye-tg').forEach(b=>{const h=moneyHidden();b.innerHTML=h?ICON.eyeOff:ICON.eye;b.setAttribute('aria-pressed',h);b.setAttribute('aria-label',(h?'Show':'Hide')+' amounts')})};
+// each amount has its own eye: tapping one shows or hides only that amount (hidden by default on shared screens)
+function moneyHidden(k){const o=S.settings.hideMoneyK||{};return k&&o[k]!=null?!!o[k]:S.settings.hideMoney!==false}
+function moneyEye(k){const h=moneyHidden(k);return `<button class="iconbtn eye-tg" data-act="moneyEye" data-k="${esc(k||'')}" aria-pressed="${h}" aria-label="${h?'Show':'Hide'} this amount">${h?ICON.eyeOff:ICON.eye}</button>`}
+function moneyTile(k,label,txt){return `<div class="money-tile ${moneyHidden(k)?'mhid':''}" data-mk="${esc(k)}"><small>${esc(label)}</small><b class="num money">${moneyH(txt)}</b>${moneyEye(k)}</div>`}
+function applyMoney(){document.documentElement.classList.remove('hide-money')}
+ACT.moneyEye=b=>{const k=b&&b.dataset&&b.dataset.k;if(!k)return;const h=!moneyHidden(k);S.settings.hideMoneyK=Object.assign({},S.settings.hideMoneyK||{},{[k]:h});save('settings');
+  $$(`[data-mk="${k}"]`).forEach(t=>{t.classList.toggle('mhid',h);const e=t.querySelector('.eye-tg');if(e){e.innerHTML=h?ICON.eyeOff:ICON.eye;e.setAttribute('aria-pressed',h);e.setAttribute('aria-label',(h?'Show':'Hide')+' this amount')}})};
 applyMoney();
 
 // ================= 24-HOUR STORIES =================
@@ -5756,7 +6143,7 @@ function sessRowHtml(s,full){const gn=(S.gyms.find(g=>g.id===s.gymId)||{}).name|
 function prRowHtml(p){return `<div class="li pr-li"><span class="badge pr-b">${ICON.trophy}</span><span class="t"><b>${esc(p.n)}</b><small>${new Date(p.t).toLocaleDateString([], Object.assign({day:'numeric',month:'short'},new Date(p.t).getFullYear()===new Date().getFullYear()?{}:{year:'numeric'}))} · ${PRT[p.type||'kg']}${p.auto?' · auto':''}</small></span><span class="r num">${esc(prRow(p))}</span><button class="iconbtn sm" data-act="prDel" data-id="${p.id}" aria-label="Delete record">${ICON.trash||ICON.x}</button></div>`}
 // on the page: newest 5 + a button to the full view
 function histList(key,opt={}){const H=HIST[key];const L=H.items();const n=opt.n||5;
-  return `<div class="list">${L.length?L.slice(0,n).map(H.row).join(''):`<div class="empty">${opt.empty||H.empty}</div>`}</div>${L.length>n?`<button class="btn soft block sm show-all" data-act="histOpen" data-k="${key}">Show all ${L.length}</button>`:''}`}
+  return `<div class="list">${L.length?L.slice(0,n).map(H.row).join(''):`<div class="empty">${opt.empty||H.empty}</div>`}</div>${L.length>n?`<button class="btn soft block sm show-all" data-act="histOpen" data-k="${key}">Show all <span class="cnt">${L.length}</span></button>`:''}`}
 // the full view: 10 at a time, "Show more" adds 10, and a date search (one day, or a whole month)
 ACT.histOpen=b=>{const key=b.dataset.k;const H=HIST[key];let shown=10,day='',month='';
   const el=openSheet(H.title,`<div class="hist-search"><div class="field"><label for="hsD">Search by date</label><input class="inp" id="hsD" type="date" max="${toDateInput(Date.now())}"></div><div class="field"><label for="hsM">or month</label><input class="inp" id="hsM" type="month" max="${new Date().toISOString().slice(0,7)}"></div><button type="button" class="link" id="hsX" hidden>Clear</button></div><p class="muted hist-count" id="hsN"></p><div class="list" id="hsL"></div><button class="btn soft block" id="hsMore" hidden>Show more</button>`,el=>{
@@ -5802,6 +6189,7 @@ const SI={
  online:'<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/>',group:'<circle cx="8" cy="8" r="3"/><circle cx="16" cy="8" r="3"/><path d="M2 20a6 6 0 0 1 12 0M10 20a6 6 0 0 1 12 0"/>'};
 const SPECS={trainer:[['strength','Strength'],['loss','Fat loss'],['muscle','Muscle gain'],['cardio','Cardio'],['run','Running'],['hiit','HIIT'],['yoga','Yoga & mobility'],['boxing','Boxing'],['rehab','Injury rehab'],['seniors','Seniors'],['women','Women’s fitness'],['kids','Kids & teens'],['online','Online coaching'],['group','Group classes']],
  nutritionist:[['meal','Meal plans'],['loss','Fat loss'],['muscle','Muscle gain'],['sport','Sports nutrition'],['weight','Weight management'],['plant','Plant-based'],['medical','Diabetes & medical'],['gut','Gut health'],['women','Women’s health'],['kids','Kids & family'],['online','Online coaching']]};
+SPECS.both=[...SPECS.trainer,...SPECS.nutritionist.filter(n=>!SPECS.trainer.some(t=>t[1]===n[1]))];
 const SMK=['rehab','boxing','women','seniors','run','yoga','kids'];
 const specIcon=k=>SMK.includes(k)?`<span class="ico mki mk-${k}" aria-hidden="true"></span>`:`<svg class="ico" viewBox="0 0 24 24">${SI[k]||SI.strength}</svg>`;
 function specGrid(type,sel){return `<div class="spec-grid" id="spGrid" role="group" aria-label="Specialties">${SPECS[type].map(([k,l])=>`<button type="button" class="spec ${sel.includes(l)?'on':''}" data-spec="${esc(l)}" data-k="${k}" aria-pressed="${sel.includes(l)}">${specIcon(k)}<span>${l}</span><i class="spec-tick">${ICON.check}</i></button>`).join('')}</div>`}
@@ -5815,13 +6203,13 @@ function coachId(){return S.coachId||S.profile.id}
 // ---------- sending an application ----------
 function canApply(){if(canWrite()||(!window.claude&&navigator.onLine))return true;toast('Applications need a connection. Try again when you are online.');return false}
 async function submitApp(kind,data){
-  if(!window.claude){const app=Object.assign({kind,status:'pending',ts:Date.now(),profileId:S.profile.id,profileName:S.profile.name||''},data);const ok=await emailApp(kind,app,true);if(!ok)throw {msg:'Could not send the application. Check your connection and try again.'};APPS.mine=Object.assign({},APPS.mine||{},{[kind]:app});return app}
+  if(!window.claude){const app=Object.assign({kind,status:'pending',ts:Date.now(),profileId:S.profile.id,profileName:S.profile.name||''},data);const listed=kind==='coach'&&pdirOn()?await pdirPublish(app):false;const ok=await emailApp(kind,app,true);if(!ok&&!listed)throw {msg:'Could not send the application. Check your connection and try again.'};APPS.mine=Object.assign({},APPS.mine||{},{[kind]:app});return app}
   const uid=await viewerId();if(!uid)throw {msg:'Sign in to claude.ai to send an application'};
   const app=Object.assign({kind,status:'pending',ts:Date.now(),profileId:S.profile.id,profileName:S.profile.name||''},data);
   await NET.db.doc('apps/'+uid).set(Object.assign({},APPS.mine||{},{[kind]:app,uid}));
   emailApp(kind,app);return app}
-function appText(kind,a){const CT=(a.certs||[]).filter(c=>c.n).map(c=>[c.n,c.org,c.y].filter(Boolean).join(', ')).join(' | ');const L=kind==='certReq'?[['Coach',a.name],['Certifications',CT],['Note','Certificate photos are attached in the app']]:kind==='coach'?[['Type',a.type==='nutritionist'?'Nutritionist':'Personal trainer'],['Full name',a.name],['City',a.city],['WhatsApp',a.wa],['Telegram','@'+a.tg],['Specialties',(a.tags||[]).join(', ')],['Experience',a.years?a.years+' years':''],['Website / Instagram',a.link],['Certifications',CT],['Bio',a.bio]]
-  :[['Gym name',a.name],['TIN',a.tin],['City',a.city],['Phone',a.phone],['Address',a.address],['Membership plans',(a.plans||[]).map(p=>p.n+': '+p.price).join(' | ')]];
+function appText(kind,a){const CT=(a.certs||[]).filter(c=>c.n).map(c=>[c.n,c.org,c.y].filter(Boolean).join(', ')).join(' | ');const L=kind==='certReq'?[['Coach',a.name],['Certifications',CT],['Note','Certificate photos are attached in the app']]:kind==='coach'?[['Type',proTypeLabel(a)],['Full name',a.name],['City',a.city],['WhatsApp',a.wa],['Telegram','@'+a.tg],['Specialties',(a.tags||[]).join(', ')],['Experience',a.years?a.years+' years':''],['Website / Instagram',a.link],['Certifications',CT],['Bio',a.bio]]
+  :[['Gym name',a.name],['TIN',a.tin],['City',a.city],['Phone',gymPhones(a).join(', ')],['Address',a.address],['Membership plans',(a.plans||[]).map(p=>p.n+': '+p.price).join(' | ')]];
   return `New ${kind==='certReq'?'coach certification review':kind==='coach'?'coach':'gym'} application on JUNGLE PARK\n\n`+L.filter(x=>x[1]).map(([k,v])=>k+': '+v).join('\n')+`\n\nSubmitted ${new Date(a.ts).toLocaleString()} · profile ${a.profileId}\nApprove or decline it in the app: Business → Approvals.`}
 async function emailApp(kind,a,must){ // claude.ai blocks outside requests; the installable copy emails through FormSubmit
   if(window.claude)return false;try{const r=await fetch('https://formsubmit.co/ajax/'+ADMIN_EMAIL,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({_subject:`New ${kind} application: ${a.name}`,_template:'box',message:appText(kind,a)})});if(r.ok){toast('Application emailed for review');return true}}catch(e){}return false}
@@ -5835,9 +6223,9 @@ async function watchMyApps(){if(APPS.unsub||!NET.db)return;const uid=await viewe
   APPS.owner=await isAdmin();APPS.admin=adminOn();if(APPS.admin&&APPS.owner)watchAllApps();admBoot();renderAcct();if(cur==='me'||cur==='admin')rerender()}
 function watchAllApps(){if(APPS.aunsub)return;APPS.aunsub=NET.db.collection('apps').limit(500).onSnapshot(q=>{APPS.all=q.docs.map(d=>Object.assign({_id:d.id},d.data()));if(cur==='biz'||cur==='admin')bizSoft()},dbErr)}
 // ---------- coach application form ----------
-ACT.proForm=()=>{if(!canApply())return;const prev=(APPS.mine&&APPS.mine.coach)||{};let type=prev.type||'trainer',photo=prev.photo||S.profile.photo||'';let sel=prev.tags||[];const certs=JSON.parse(JSON.stringify(prev.certs||[]));
-  const body=()=>`<p class="muted">Tell us about you. Our team reviews every coach before they appear in the directory. Fields marked <span class="req">*</span> are required.</p>
-   <div class="seg accent-seg" id="caT"><button type="button" data-t="trainer" class="${type==='trainer'?'on':''}">Personal trainer</button><button type="button" data-t="nutritionist" class="${type==='nutritionist'?'on':''}">Nutritionist</button></div>
+ACT.proForm=()=>{if(!canApply())return;const prev=(APPS.mine&&APPS.mine.coach)||(pdirOn()&&myRelayPro())||{};let type=prev.type==='both'||(Array.isArray(prev.types)&&prev.types.length>1)?'both':prev.type||'trainer',photo=prev.photo||S.profile.photo||'';let sel=prev.tags||[];const certs=JSON.parse(JSON.stringify(prev.certs||[]));
+  const body=()=>`<p class="muted">${pdirOn()?'Tell us about you. Your listing appears in the coach directory as soon as you send this, and our team gets your application to review your certifications.':'Tell us about you. Our team reviews every coach before they appear in the directory.'} Fields marked <span class="req">*</span> are required.</p>
+   <div class="seg accent-seg" id="caT"><button type="button" data-t="trainer" class="${type==='trainer'?'on':''}">Personal trainer</button><button type="button" data-t="nutritionist" class="${type==='nutritionist'?'on':''}">Nutritionist</button><button type="button" data-t="both" class="${type==='both'?'on':''}">Both</button></div>
    <div class="form">${photoPicker('caPh','Profile photo',photo,true)}
     <div class="field full"><label for="caN">Full name <span class="req">*</span></label><input class="inp" id="caN" autocomplete="name" value="${esc(prev.name||S.profile.name||'')}"></div>
     <div class="field"><label for="caC">City <span class="req">*</span></label><input class="inp" id="caC" value="${esc(prev.city||S.profile.city||'')}"></div><div class="field"><label for="caY">Years of experience</label><input class="inp" id="caY" type="number" min="0" value="${esc(prev.years||'')}"></div>
@@ -5852,10 +6240,10 @@ ACT.proForm=()=>{if(!canApply())return;const prev=(APPS.mine&&APPS.mine.coach)||
    wirePhoto(el,'caPh',d=>photo=d,420);const getCerts=wireCerts(el,certs);
    const grid=()=>$('#spWrap',el).onclick=e=>{const b=e.target.closest('[data-spec]');if(!b)return;const l=b.dataset.spec;sel=sel.includes(l)?sel.filter(x=>x!==l):[...sel,l];b.classList.toggle('on');b.setAttribute('aria-pressed',sel.includes(l))};grid();
    $('#caT',el).onclick=e=>{const b=e.target.closest('[data-t]');if(!b)return;type=b.dataset.t;$$('#caT button',el).forEach(x=>x.classList.toggle('on',x===b));sel=sel.filter(l=>SPECS[type].some(s=>s[1]===l));$('#spWrap',el).innerHTML=specGrid(type,sel)};
-   $('#caGo',el).onclick=async e=>{const btn=e.currentTarget;const d={type,photo,name:$('#caN',el).value.trim(),city:$('#caC',el).value.trim(),years:$('#caY',el).value,wa:readPhone(el,'caW'),tg:$('#caTg',el).value.trim().replace(/^@/,'').replace(/[^\w]/g,''),tags:sel,bio:$('#caB',el).value.trim(),link:$('#caL',el).value.trim(),certs:getCerts()};
+   $('#caGo',el).onclick=async e=>{const btn=e.currentTarget;const d={type,types:typesFromKey(type),photo,name:$('#caN',el).value.trim(),city:$('#caC',el).value.trim(),years:$('#caY',el).value,wa:readPhone(el,'caW'),tg:$('#caTg',el).value.trim().replace(/^@/,'').replace(/[^\w]/g,''),tags:sel,bio:$('#caB',el).value.trim(),link:$('#caL',el).value.trim(),certs:getCerts()};
      const miss=[!d.photo&&'a profile photo',!d.name.includes(' ')&&'your full name (first and last)',!d.city&&'your city',!d.wa&&'your WhatsApp number',!d.tg&&'your Telegram username',!d.tags.length&&'at least one specialty',d.certs.some(c=>!c.proof)&&'a photo of each certificate (or remove the ones without)'].filter(Boolean);
      if(miss.length){toast('Please add '+miss[0]);return}if(d.link&&!/^https?:\/\//i.test(d.link))d.link='https://'+d.link;
-     btn.disabled=true;btn.textContent='Sending…';try{await submitApp('coach',d);closeSheet();go('me');toast('Application sent. You will get your access key once approved.')}catch(err){dbErr(err);toast(err&&err.msg||'Could not send right now');btn.disabled=false;btn.innerHTML=ICON.check+' Send for approval'}}})};
+     btn.disabled=true;btn.textContent='Sending…';try{await submitApp('coach',d);closeSheet();if(pdirOn()){jTab='coach';PROS.type=d.types[0];go('jungle');toast('Your listing is live in the coach directory')}else{go('me');toast('Application sent. You will get your access key once approved.')}}catch(err){dbErr(err);toast(err&&err.msg||'Could not send right now');btn.disabled=false;btn.innerHTML=ICON.check+' Send for approval'}}})};
 // ---------- certifications ----------
 // Coaches list each certificate with a photo of it as proof. Only you (the admin) can grant the Certified badge.
 const CERTI='<svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="9" r="5"/><path d="M9.5 13.3 8 21l4-2 4 2-1.5-7.7"/><path d="m10 9 1.5 1.5L14 8"/></svg>';
@@ -5876,20 +6264,20 @@ ACT.certForm=()=>{if(!canApply())return;const P=(PROS.list||[]).find(p=>p.owner=
    const get=wireCerts(el,certs);$('#cfGo',el).onclick=async e=>{const L=get();if(!L.length){toast('Add at least one certificate');return}if(L.some(c=>!c.proof)){toast('Add a photo of each certificate');return}
      const bt=e.currentTarget;bt.disabled=true;try{await submitApp('certReq',{certs:L,name:P.name||S.profile.name,profileId:P.id||coachId(),photo:P.photo||''});closeSheet();toast('Sent for review')}catch(err){dbErr(err);toast('Could not send right now');bt.disabled=false}}})};
 // ---------- gym application form ----------
-const GYM_PLANS=[['1 month',1],['3 months',3],['4 months',4],['1 year',12]];
+const GYM_PLANS=[['1 month',1],['3 months',3],['6 months',6],['1 year',12]];
 ACT.newGym=()=>{if(!canApply())return;const prev=(APPS.mine&&APPS.mine.gym)||{};let photo=prev.photo||'';const pp=n=>((prev.plans||[]).find(p=>p.n===n)||{}).price||'';
   openSheet('Register a gym',`<p class="muted">Send your gym's details for approval. Once approved you get your gym's QR code and an access key for the gym dashboard. Fields marked <span class="req">*</span> are required.</p>
    <div class="form">${photoPicker('rgPh','Gym profile picture',photo,false)}
     <div class="field full"><label for="rgN">Gym name <span class="req">*</span></label><input class="inp" id="rgN" value="${esc(prev.name||'')}"></div>
     <div class="field"><label for="rgT">TIN <span class="req">*</span></label><input class="inp" id="rgT" inputmode="numeric" value="${esc(prev.tin||'')}" placeholder="Tax ID number"></div><div class="field"><label for="rgC">City <span class="req">*</span></label><input class="inp" id="rgC" value="${esc(prev.city||S.profile.city||'')}"></div>
-    ${phoneField('rgP','Gym phone',prev.phone)}
+    ${phonesField('rgP','Gym phone numbers',gymPhones(prev),true)}
     <div class="field full"><label for="rgA">Address <span class="req">*</span></label><input class="inp" id="rgA" value="${esc(prev.address||'')}" placeholder="Sub-city, street, building"></div>
     <div class="field full"><span class="lbl">Membership plans <span class="req">*</span> <small class="muted">· price for each plan you offer</small></span>
-     <div class="plan-grid">${GYM_PLANS.map(([n,m],i)=>`<label class="plan-tile"><span class="pt-ico">${ICON.clock}</span><b>${n}</b><input class="inp" id="rgPl${i}" data-n="${n}" data-m="${m}" placeholder="Price, e.g. 1500 ETB" value="${esc(pp(n))}"></label>`).join('')}</div></div></div>
+     ${planEditor(prev.plans)}</div></div>
    <button class="btn block" id="rgGo">${ICON.check} Send for approval</button>`,el=>{
    wirePhoto(el,'rgPh',d=>photo=d,640);
-   $('#rgGo',el).onclick=async e=>{const btn=e.currentTarget;const plans=GYM_PLANS.map((p,i)=>({n:p[0],m:p[1],price:$('#rgPl'+i,el).value.trim()})).filter(p=>p.price);
-     const d={photo,name:$('#rgN',el).value.trim(),tin:$('#rgT',el).value.trim(),city:$('#rgC',el).value.trim(),phone:readPhone(el,'rgP'),address:$('#rgA',el).value.trim(),plans};
+   $('#rgGo',el).onclick=async e=>{const btn=e.currentTarget;const plans=readPlans(el);const phones=readPhones(el,'rgP');
+     const d={photo,name:$('#rgN',el).value.trim(),tin:$('#rgT',el).value.trim(),city:$('#rgC',el).value.trim(),phone:phones[0]||'',phones,address:$('#rgA',el).value.trim(),plans};
      const miss=[!d.photo&&'a gym profile picture',!d.name&&'the gym name',!/^\d{6,}$/.test(d.tin.replace(/\s/g,''))&&'a valid TIN',!d.city&&'the city',!d.phone&&'the gym phone',!d.address&&'the address',!plans.length&&'at least one membership plan price'].filter(Boolean);
      if(miss.length){toast('Please add '+miss[0]);return}
      btn.disabled=true;btn.textContent='Sending…';try{await submitApp('gym',d);closeSheet();go('me');toast('Application sent. You will get your gym QR and access key once approved.')}catch(err){dbErr(err);toast(err&&err.msg||'Could not send right now');btn.disabled=false;btn.innerHTML=ICON.check+' Send for approval'}}})};
@@ -5923,7 +6311,7 @@ function keyCard(){return `<div class="card key-card"><div class="watch-h"><span
 function appsCardHtml(){const L=APPS.all.flatMap(d=>['gym','coach','certReq'].filter(k=>d[k]).map(k=>Object.assign({_doc:d._id,_k:k},d[k]))).sort((a,b)=>(a.status==='pending'?-1:0)-(b.status==='pending'?-1:0)||b.ts-a.ts);
   const pend=L.filter(a=>a.status==='pending');
   return `<div class="card"><div class="card-h"><div><h3>Applications</h3><small class="muted">${pend.length} waiting · new ones also show here in real time</small></div></div>
-   <div class="list">${L.length?L.map(a=>`<button class="li" data-act="appOpen" data-doc="${esc(a._doc)}" data-k="${a._k}" style="border-left:0;border-right:0;border-bottom:0;background:none;width:100%;text-align:left"><span class="avatar sm ${a.photo?'has-photo':''}" style="${a.photo?`background-image:url(${a.photo})`:`background:${hashColor(a.name)}`}">${a.photo?'':esc(initials(a.name))}</span><span class="t"><b>${esc(a.name)}</b><small>${a._k==='certReq'?'Certification review · '+(a.certs||[]).length+' certificate'+((a.certs||[]).length===1?'':'s'):a._k==='gym'?'Gym · '+esc(a.city||''):(a.type==='nutritionist'?'Nutritionist':'Trainer')+' · '+esc(a.city||'')} · ${relDate(a.ts)}</small></span><span class="mem-tags"><span class="pill ${a.status==='approved'?'g':a.status==='declined'?'bad':'w'}">${a.status==='approved'?'Approved':a.status==='declined'?'Declined':'Pending'}</span></span></button>`).join('')
+   <div class="list">${L.length?L.map(a=>`<button class="li" data-act="appOpen" data-doc="${esc(a._doc)}" data-k="${a._k}" style="border-left:0;border-right:0;border-bottom:0;background:none;width:100%;text-align:left"><span class="avatar sm ${a.photo?'has-photo':''}" style="${a.photo?`background-image:url(${a.photo})`:`background:${hashColor(a.name)}`}">${a.photo?'':esc(initials(a.name))}</span><span class="t"><b>${esc(a.name)}</b><small>${a._k==='certReq'?'Certification review · '+(a.certs||[]).length+' certificate'+((a.certs||[]).length===1?'':'s'):a._k==='gym'?'Gym · '+esc(a.city||''):proTypeShort(a)+' · '+esc(a.city||'')} · ${relDate(a.ts)}</small></span><span class="mem-tags"><span class="pill ${a.status==='approved'?'g':a.status==='declined'?'bad':'w'}">${a.status==='approved'?'Approved':a.status==='declined'?'Declined':'Pending'}</span></span></button>`).join('')
      :'<div class="empty">No applications yet. Gym and coach applications appear here for you to approve.</div>'}</div></div>`}
 function bizAdmin(el){el.innerHTML=adminBillingHtml()+adminProHtml()+adminVideosHtml()+adminReviewsHtml()+appsCardHtml()}
 ACT.appOpen=b=>{const d=APPS.all.find(x=>x._id===b.dataset.doc);const k=b.dataset.k;const a=d&&d[k];if(!a)return;
@@ -5933,20 +6321,21 @@ ACT.appOpen=b=>{const d=APPS.all.find(x=>x._id===b.dataset.doc);const k=b.datase
     $('#crNo',el)?.addEventListener('click',async()=>{try{await ref.update({certReq:Object.assign({},a,{status:'declined',reason:$('#crWhy',el).value.trim(),decidedAt:Date.now()})});closeSheet();toast('Declined')}catch(e){dbErr(e)}});
     $('#crYes',el)?.addEventListener('click',async e=>{e.currentTarget.disabled=true;try{await NET.db.doc('pros/'+a.profileId).update({certified:true,certs:(a.certs||[]).map(c=>({n:c.n,org:c.org||'',y:c.y||''})),certAt:Date.now(),ts:Date.now()});
       await ref.update({certReq:Object.assign({},a,{status:'approved',decidedAt:Date.now()})});closeSheet();toast('Coach is now certified')}catch(err){dbErr(err);toast('Could not approve. Is this coach listed in the directory yet?')}})});return}
-  const rows=k==='coach'?[['Type',a.type==='nutritionist'?'Nutritionist':'Personal trainer'],['City',a.city],['WhatsApp',a.wa],['Telegram','@'+a.tg],['Experience',a.years?a.years+' years':'Not given'],['Link',a.link||'None']]:[['TIN',a.tin],['City',a.city],['Phone',a.phone],['Address',a.address]];
+  const rows=k==='coach'?[['Applied as',proTypeLabel(a)],['City',a.city],['WhatsApp',a.wa],['Telegram','@'+a.tg],['Experience',a.years?a.years+' years':'Not given'],['Link',a.link||'None']]:[['TIN',a.tin],['City',a.city],['Phone',gymPhones(a).join(', ')],['Address',a.address]];
   openSheet(a.name,`<div class="app-photo ${k==='coach'?'round':''}" style="background-image:url(${a.photo})"></div>
    <div class="kv">${rows.map(([x,y])=>`<div><small>${x}</small><b style="user-select:all">${esc(y||'')}</b></div>`).join('')}</div>
    ${k==='coach'?`<div class="badges">${(a.tags||[]).map(t=>`<span class="pill">${esc(t)}</span>`).join('')}</div>${a.bio?`<p style="white-space:pre-wrap">${esc(a.bio)}</p>`:''}${(a.certs||[]).length?`<h4 class="sub-h">Certifications</h4>${certList(a.certs,true)}`:'<div class="lock-note">No certifications added. Approving lists this coach as non-certified.</div>'}`:`<div class="plan-grid">${(a.plans||[]).map(p=>`<div class="plan-tile"><b>${esc(p.n)}</b><span>${esc(p.price)}</span></div>`).join('')}</div>`}
    ${a.status==='approved'?`<div class="key-box"><small>Access key</small><b class="mono" style="user-select:all">${esc(a.key)}</b><button class="btn soft sm" data-copy="${esc(a.key)}">Copy key</button></div><button class="btn danger-btn block" id="apRev">Turn off this key</button>`
-    :`<div class="field"><label for="apWhy">Reason if declining (shown to applicant)</label><input class="inp" id="apWhy" placeholder="e.g. TIN could not be verified"></div><div class="grid2"><button class="btn danger-btn" id="apNo">Decline</button><button class="btn ${k==='coach'&&(a.certs||[]).length?'soft':''}" id="apYes">${ICON.check} Approve${k==='coach'&&(a.certs||[]).length?' as non-certified':''}</button></div>${k==='coach'&&(a.certs||[]).length?`<button class="btn block" id="apYesC">${CERTI} Approve as certified</button>`:''}`}
+    :`${k==='coach'?`<div class="field"><span class="lbl">Approve as</span><div class="seg accent-seg" id="apType">${[['trainer','Personal trainer'],['nutritionist','Nutritionist'],['both','Both']].map(([t,l])=>`<button type="button" data-t="${t}" class="${(proTypes(a).length>1?'both':proTypes(a)[0])===t?'on':''}">${l}</button>`).join('')}</div><small class="muted">Coaches approved as both appear under Personal trainers and Nutritionists, and get both toolsets.</small></div>`:''}<div class="field"><label for="apWhy">Reason if declining (shown to applicant)</label><input class="inp" id="apWhy" placeholder="e.g. TIN could not be verified"></div><div class="grid2"><button class="btn danger-btn" id="apNo">Decline</button><button class="btn ${k==='coach'&&(a.certs||[]).length?'soft':''}" id="apYes">${ICON.check} Approve${k==='coach'&&(a.certs||[]).length?' as non-certified':''}</button></div>${k==='coach'&&(a.certs||[]).length?`<button class="btn block" id="apYesC">${CERTI} Approve as certified</button>`:''}`}
    <button class="btn soft block" data-copy="${esc(appText(k,a))}">Copy all details</button>`,el=>{
-   const ref=NET.db.doc('apps/'+d._id);
+   const ref=NET.db.doc('apps/'+d._id);let apT=proTypes(a).length>1?'both':proTypes(a)[0];
+   $('#apType',el)?.addEventListener('click',e=>{const b=e.target.closest('[data-t]');if(!b)return;apT=b.dataset.t;$$('#apType button',el).forEach(x=>x.classList.toggle('on',x===b))});
    $('#apNo',el)?.addEventListener('click',async()=>{try{await ref.update({[k]:Object.assign({},a,{status:'declined',reason:$('#apWhy',el).value.trim(),decidedAt:Date.now()})});closeSheet();toast('Application declined')}catch(e){dbErr(e)}});
    const approve=async(e,cert)=>{const btn=e.currentTarget;btn.disabled=true;btn.textContent='Approving…';const key=newKey();
      try{let extra={};
-       if(k==='gym'){const gid=rid(12);await NET.db.doc('gyms/'+gid).set({name:a.name,city:a.city,phone:a.phone,address:a.address,tin:a.tin,photo:a.photo,plans:a.plans,owner:a.profileId,ownerName:a.profileName,approved:true,ts:Date.now()});extra.gid=gid;
+       if(k==='gym'){const gid=rid(12);await NET.db.doc('gyms/'+gid).set({name:a.name,city:a.city,phone:a.phone,phones:gymPhones(a),address:a.address,tin:a.tin,photo:a.photo,plans:a.plans,owner:a.profileId,ownerName:a.profileName,approved:true,ts:Date.now()});extra.gid=gid;
          await NET.db.doc('keys/'+await keyHash(key)).set({type:'gym',gid,name:a.name,uid:a.profileId,ts:Date.now()})}
-       else{await NET.db.doc('pros/'+a.profileId).set({type:a.type,name:a.name,city:a.city,bio:a.bio,tags:a.tags,link:a.link,wa:a.wa,tg:a.tg,photo:a.photo,years:a.years,owner:a.profileId,approved:true,certified:!!cert,certs:(a.certs||[]).map(c=>({n:c.n,org:c.org||'',y:c.y||''})),ts:Date.now()});
+       else{extra.type=apT;extra.types=typesFromKey(apT);await NET.db.doc('pros/'+a.profileId).set({type:apT,types:typesFromKey(apT),name:a.name,city:a.city,bio:a.bio,tags:a.tags,link:a.link,wa:a.wa,tg:a.tg,photo:a.photo,years:a.years,owner:a.profileId,approved:true,certified:!!cert,certs:(a.certs||[]).map(c=>({n:c.n,org:c.org||'',y:c.y||''})),ts:Date.now()});
          await NET.db.doc('keys/'+await keyHash(key)).set({type:'coach',uid:a.profileId,name:a.name,ts:Date.now()})}
        await ref.update({[k]:Object.assign({},a,extra,{status:'approved',key,decidedAt:Date.now()})});closeSheet();toast('Approved. The applicant sees their key in the app.')}catch(err){dbErr(err);toast('Could not approve right now');btn.disabled=false;btn.textContent='Approve'}};
    $('#apYes',el)?.addEventListener('click',e=>approve(e,false));$('#apYesC',el)?.addEventListener('click',e=>approve(e,true));
@@ -6502,13 +6891,13 @@ function admCoaches(el){loadPros();if(!PR0.allSub&&NET.db){PR0.allSub=NET.db.col
   const P=PROS.list||[];const proOn=id=>{const p=PR0.all[id];return !!(p&&(p.until==='forever'||+p.until>Date.now()))};
   el.innerHTML=`<div class="card"><div class="card-h"><div><h3>Coaches</h3><small class="muted">${P.length} in the directory · ${P.filter(p=>p.certified).length} certified · ${P.filter(p=>proOn(p.owner||p.id)).length} Pro</small></div></div>${admSearch('acQ','coaches','Search coaches by name, city or specialty')}<div id="acL"></div></div>`;
   const draw=()=>{if(!PROS.list){$('#acL',el).innerHTML=admLoading();return}const q=ADM.q.coaches.trim().toLowerCase();const L=P.filter(p=>!q||[p.name,p.city,(p.tags||[]).join(' ')].join(' ').toLowerCase().includes(q)).sort((a,b)=>(b.ts||0)-(a.ts||0));
-    $('#acL',el).innerHTML=`<div class="list">${L.length?L.slice(0,ADM.n.coaches).map(p=>{const id=p.owner||p.id;return `<button class="li course-li" data-act="admCoach" data-id="${esc(p.id)}">${admThumb(p.photo,p.name,true)}<span class="t"><b>${esc(p.name)}</b><small>${p.type==='nutritionist'?'Nutritionist':'Trainer'}${p.city?' · '+esc(p.city):''}</small></span><span class="r adm-pills">${admPill(p.certified,'Certified','g')}${admPill(proOn(id),'Pro','w')}${admPill(p.suspended,'Suspended','bad')}${admPill(p.demo,'Demo','n')}</span></button>`}).join(''):'<div class="empty">No coaches match.</div>'}</div>${admMore('coaches',L.length-ADM.n.coaches)}`};
+    $('#acL',el).innerHTML=`<div class="list">${L.length?L.slice(0,ADM.n.coaches).map(p=>{const id=p.owner||p.id;return `<button class="li course-li" data-act="admCoach" data-id="${esc(p.id)}">${admThumb(p.photo,p.name,true)}<span class="t"><b>${esc(p.name)}</b><small>${proTypeShort(p)}${p.city?' · '+esc(p.city):''}</small></span><span class="r adm-pills">${admPill(p.certified,'Certified','g')}${admPill(proOn(id),'Pro','w')}${admPill(p.suspended,'Suspended','bad')}${admPill(p.demo,'Demo','n')}</span></button>`}).join(''):'<div class="empty">No coaches match.</div>'}</div>${admMore('coaches',L.length-ADM.n.coaches)}`};
   draw();admWireSearch(el,'acQ','coaches',draw)}
 ACT.admCoach=b=>{const p=(PROS.list||[]).find(x=>x.id===b.dataset.id);if(!p)return;const id=p.owner||p.id;const pr=PR0.all[id];const on=!!(pr&&(pr.until==='forever'||+pr.until>Date.now()));
   openSheet(p.name,`${p.photo?`<div class="app-photo round" style="background-image:url(${p.photo})"></div>`:''}
    <div class="form"><div class="field full"><label for="ecN">Name</label><input class="inp" id="ecN" value="${esc(p.name||'')}"></div>
     <div class="field"><label for="ecC">City</label><input class="inp" id="ecC" value="${esc(p.city||'')}"></div><div class="field"><label for="ecW">WhatsApp</label><input class="inp" id="ecW" value="${esc(p.wa||'')}"></div>
-    <div class="field"><label for="ecT">Telegram</label><input class="inp" id="ecT" value="${esc(p.tg||'')}"></div><div class="field"><label for="ecY">Type</label><select class="inp" id="ecY"><option value="trainer" ${p.type!=='nutritionist'?'selected':''}>Personal trainer</option><option value="nutritionist" ${p.type==='nutritionist'?'selected':''}>Nutritionist</option></select></div>
+    <div class="field"><label for="ecT">Telegram</label><input class="inp" id="ecT" value="${esc(p.tg||'')}"></div><div class="field"><label for="ecY">Type</label><select class="inp" id="ecY">${(()=>{const t=proTypes(p).length>1?'both':proTypes(p)[0];return [['trainer','Personal trainer'],['nutritionist','Nutritionist'],['both','Personal trainer & nutritionist']].map(([k,l])=>`<option value="${k}" ${t===k?'selected':''}>${l}</option>`).join('')})()}</select></div>
     <div class="field full"><label for="ecB">Bio</label><textarea class="inp" id="ecB" rows="3">${esc(p.bio||'')}</textarea></div></div>
    <label class="adm-toggle"><input type="checkbox" id="ecCert" ${p.certified?'checked':''}> <span>Certified badge</span></label>
    ${certList(p.certs)}
@@ -6517,7 +6906,7 @@ ACT.admCoach=b=>{const p=(PROS.list||[]).find(x=>x.id===b.dataset.id);if(!p)retu
    ${admKeysBlock('coach',id,p.name)}
    <div class="grid2" style="margin-top:12px"><button class="btn soft" id="ecSus">${p.suspended?'Restore coach':'Suspend coach'}</button><button class="btn danger-btn" id="ecDel">Remove from directory</button></div>
    <small class="muted">Suspended coaches are hidden from the directory and can't take new clients. Removing deletes their listing; their access key keeps working until you turn it off.</small>`,el=>{
-    $('#ecSave',el).onclick=async e=>{const ch={name:$('#ecN',el).value.trim(),city:$('#ecC',el).value.trim(),wa:$('#ecW',el).value.trim(),tg:$('#ecT',el).value.trim().replace(/^@/,''),type:$('#ecY',el).value,bio:$('#ecB',el).value.trim(),certified:$('#ecCert',el).checked,ts:Date.now()};if(!ch.name){toast('The coach needs a name');return}
+    $('#ecSave',el).onclick=async e=>{const ch={name:$('#ecN',el).value.trim(),city:$('#ecC',el).value.trim(),wa:$('#ecW',el).value.trim(),tg:$('#ecT',el).value.trim().replace(/^@/,''),type:$('#ecY',el).value,types:typesFromKey($('#ecY',el).value),bio:$('#ecB',el).value.trim(),certified:$('#ecCert',el).checked,ts:Date.now()};if(!ch.name){toast('The coach needs a name');return}
       e.currentTarget.disabled=true;try{await NET.db.doc('pros/'+p.id).update(ch);Object.assign(p,ch);closeSheet();toast('Coach updated');admSoft()}catch(err){dbErr(err);toast('Could not save right now');e.currentTarget.disabled=false}};
     $('#ecSus',el).onclick=async()=>{try{await NET.db.doc('pros/'+p.id).update({suspended:!p.suspended,ts:Date.now()});p.suspended=!p.suspended;closeSheet();toast(p.suspended?'Coach suspended':'Coach restored');admSoft()}catch(err){dbErr(err)}};
     admConfirm($('#ecDel',el),'Tap again to remove',async()=>{try{await NET.db.doc('pros/'+p.id).delete();closeSheet();toast('Coach removed from the directory')}catch(err){dbErr(err)}});
@@ -6639,7 +7028,7 @@ function crewFold(L,buddies,xp){const t=tierOf(L.lvl);const all=[{name:S.profile
    <div class="cg-lvl"><div class="cg-lv num"><b>LV ${L.lvl}</b><span>${Math.max(0,Math.round(L.next)).toLocaleString()} XP to LV ${L.lvl+1}</span></div><span class="cg-bar"><i style="width:${Math.min(100,L.pct).toFixed(0)}%"></i></span></div>
    ${buddies.length?`<div class="cg-list">${all.slice(0,5).map((f,i)=>`<div class="cg-row ${f.me?'me':''}"><span class="cg-pos num">${i<3?['🥇','🥈','🥉'][i]:i+1}</span>${avatar(f.name,f.id,'sm')}<b>${esc(f.name)}${f.me?' (you)':''}</b><span class="num">${f.xp.toLocaleString()}<small> XP</small></span></div>`).join('')}</div><button class="btn soft block" data-tab="crew">${ICON.trophy} Open Crew</button>`
    :`<div class="cg-empty"><span class="cg-pod" aria-hidden="true"><span class="p2"><i>2</i></span><span class="p1"><em>${ICON.crown}</em><i>1</i></span><span class="p3"><i>3</i></span></span><div><b>Race your friends</b><span>Scan each other's code and fight for the crown.</span><div class="cg-btns"><button class="btn sm" data-act="myQR">${ICON.qr} My code</button><button class="btn soft sm" data-tab="crew">${ICON.trophy} Crew</button></div></div></div>`}</div>`}
-ACT.quickCheckIn=()=>{jTab='train';go('jungle')};
+ACT.quickCheckIn=()=>{jTab='train';if(cur==='jungle')RENDER.jungle();else go('jungle');setTimeout(()=>{if(S.live){toast('You are already checked in');return}ACT.scan()},350)};
 ACT.goSched=()=>{jTab='schedule';go('jungle')};
 ACT.goPlan=()=>{jTab='plan';go('jungle')};
 
@@ -8427,6 +8816,73 @@ ACT.demoExit=()=>openSheet('Leave demo mode?',`<p class="muted">You go back to y
   const leave=reset=>{try{localStorage.removeItem('jp:demo');if(reset){localStorage.removeItem('jp-demo-state');localStorage.removeItem('jp-demo-db');try{indexedDB.deleteDatabase('jp-photos-demo')}catch(e){}}}catch(e){}location.hash='#home';location.reload()};
   $('#dxGo',el).onclick=()=>leave(false);$('#dxReset',el).onclick=()=>leave(true)});
 if(window.__JP_DEMO){const b=document.createElement('button');b.className='demo-band';b.type='button';b.innerHTML='<i></i><span>Demo</span><b>Exit</b>';b.setAttribute('aria-label','Demo mode with sample data. Tap to exit.');b.onclick=()=>ACT.demoExit();document.body.appendChild(b);document.body.classList.add('is-demo');try{if(sessionStorage.getItem('jp:demoGo')){sessionStorage.removeItem('jp:demoGo');setTimeout(()=>{BIZ.tab='gym';go('biz');setTimeout(()=>toast('Demo mode: a sample gym and coach profile with every feature unlocked'),600)},1200)}}catch(e){}}
+
+// ================= COACH DIRECTORY OVER THE RELAY (installable copy, no server of our own) =================
+// The claude.ai version keeps the directory in its cloud store. This copy has no store, so coaches publish their listing
+// to one public directory topic on the sync relay, and everyone's app reads that topic.
+//  • Listings are encrypted with an app-wide key (the directory is public inside the app; the relay sees only ciphertext).
+//  • Each listing is signed with a key that only the coach's device holds (ECDSA P-256). The first key seen for a coach is
+//    pinned, so nobody else can overwrite or remove someone's listing.
+//  • The relay keeps messages for 12 hours, so the coach's app republishes the listing every few hours while it is open,
+//    and every app keeps the listings it has seen on the device for 30 days. The directory opens instantly and offline.
+//  • Photos travel as their own message (they are larger) and are cached with the listing.
+const PDIR={secret:'jungle-park-coach-directory-v1',topic:'',key:null,cache:null,pins:null,busy:false,polled:0,pubT:0};
+const PDIR_REPUB=4*3600e3,PDIR_KEEP=30*864e5;
+// a coach can be a personal trainer, a nutritionist, or both
+const proTypes=p=>{if(!p)return ['trainer'];const t=Array.isArray(p.types)&&p.types.length?p.types:p.type==='both'?['trainer','nutritionist']:[p.type||'trainer'];const o=[...new Set(t.filter(x=>x==='trainer'||x==='nutritionist'))];return o.length?o:['trainer']};
+const proTypeLabel=p=>{const t=proTypes(p);return t.length>1?'Personal trainer & nutritionist':t[0]==='nutritionist'?'Nutritionist':'Personal trainer'};
+const proTypeShort=p=>{const t=proTypes(p);return t.length>1?'Trainer & nutritionist':t[0]==='nutritionist'?'Nutritionist':'Trainer'};
+const typesFromKey=k=>k==='both'?['trainer','nutritionist']:[k==='nutritionist'?'nutritionist':'trainer'];
+function pdirOn(){return !NET.db&&!!(window.crypto&&crypto.subtle)&&typeof fetch==='function'}
+async function pdirInit(){if(PDIR.topic)return;PDIR.topic=await rTopic('pros-dir:',PDIR.secret);PDIR.key=await rKey('pros-dir-key:',PDIR.secret)}
+function pdirLoad(){if(PDIR.cache)return;try{PDIR.cache=JSON.parse(localStorage.getItem('jp:prosdir')||'{}')||{}}catch(e){PDIR.cache={}}try{PDIR.pins=JSON.parse(localStorage.getItem('jp:prosdirPins')||'{}')||{}}catch(e){PDIR.pins={}}
+  const now=Date.now();for(const [id,x] of Object.entries(PDIR.cache))if(!x||!x.doc||now-(x.seen||0)>PDIR_KEEP)delete PDIR.cache[id];
+  for(const [id,p] of Object.entries(PDIR.pins))if(!p||typeof p!=='object'||now-(p.t||0)>PDIR_KEEP)delete PDIR.pins[id]}
+let pdirSaveT=0;function pdirSave(){clearTimeout(pdirSaveT);pdirSaveT=setTimeout(()=>{const ids=Object.keys(PDIR.cache).sort((a,b)=>(PDIR.cache[b].seen||0)-(PDIR.cache[a].seen||0)).slice(0,150);const o={};ids.forEach(i=>o[i]=PDIR.cache[i]);PDIR.cache=o;
+  try{localStorage.setItem('jp:prosdir',JSON.stringify(o))}catch(e){try{const lite={};ids.slice(0,80).forEach(i=>lite[i]=Object.assign({},o[i],{photo:''}));localStorage.setItem('jp:prosdir',JSON.stringify(lite))}catch(x){}}
+  try{localStorage.setItem('jp:prosdirPins',JSON.stringify(PDIR.pins))}catch(e){}},400)}
+function pdirList(){pdirLoad();return Object.entries(PDIR.cache).map(([id,x])=>Object.assign({},x.doc,{id,photo:x.photo||'',relay:1}))}
+// ---------- signing key (one per profile, kept on this device) ----------
+async function pdirSigner(){let k=null;try{k=JSON.parse(localStorage.getItem('jp:prosdirKey')||'null')}catch(e){}
+  if(!k||k.pid!==S.profile.id){const kp=await crypto.subtle.generateKey({name:'ECDSA',namedCurve:'P-256'},true,['sign','verify']);k={pid:S.profile.id,priv:await crypto.subtle.exportKey('jwk',kp.privateKey),pub:await crypto.subtle.exportKey('jwk',kp.publicKey)};try{localStorage.setItem('jp:prosdirKey',JSON.stringify(k))}catch(e){}}
+  return {pub:{x:k.pub.x,y:k.pub.y},key:await crypto.subtle.importKey('jwk',k.priv,{name:'ECDSA',namedCurve:'P-256'},false,['sign'])}}
+async function pdirSign(body){const s=await pdirSigner();const sig=new Uint8Array(await crypto.subtle.sign({name:'ECDSA',hash:'SHA-256'},s.key,RTE.encode(rStab(body))));return Object.assign({},body,{pk:s.pub,sig:rB64(sig)})}
+async function pdirVerify(o){try{if(!o||!o.pk||!o.sig||!o.id)return false;const body=Object.assign({},o);delete body.pk;delete body.sig;
+  const k=await crypto.subtle.importKey('jwk',{kty:'EC',crv:'P-256',x:o.pk.x,y:o.pk.y,ext:true},{name:'ECDSA',namedCurve:'P-256'},false,['verify']);
+  return await crypto.subtle.verify({name:'ECDSA',hash:'SHA-256'},k,rUnB64(o.sig),RTE.encode(rStab(body)))}catch(e){return false}}
+// ---------- reading ----------
+async function pdirApply(o){if(!o||o.v!==1||!o.id||!(await pdirVerify(o)))return false;const fp=o.pk.x+'.'+o.pk.y;const pin=PDIR.pins[o.id];
+  if(pin&&pin.fp!==fp)return false; // signed by a different key than this coach's: ignore
+  PDIR.pins[o.id]={fp,t:Date.now()};const cur_=PDIR.cache[o.id];
+  if(o.kind==='del'){if(!cur_||(o.ts||0)>=(cur_.doc.ts||0)){delete PDIR.cache[o.id];return true}return false}
+  if(o.kind==='photo'){if(cur_&&o.ts>=(cur_.pts||0)){cur_.photo=String(o.photo||'').startsWith('data:image/')?o.photo:'';cur_.pts=o.ts;return true}if(!cur_){PDIR.cache[o.id]={doc:{ts:0,owner:o.id,name:'',hidden:1},photo:o.photo,pts:o.ts,seen:Date.now()};return true}return false}
+  if(o.kind==='pro'&&o.doc&&o.doc.name){const d=Object.assign({},o.doc,{owner:o.id,certified:false,approved:false});
+    if(!cur_||(d.ts||0)>=(cur_.doc.ts||0)){PDIR.cache[o.id]=Object.assign(cur_||{},{doc:d,seen:Date.now()});return true}cur_.seen=Date.now();return true}
+  return false}
+async function pdirPoll(force){if(!pdirOn()||PDIR.busy)return;if(!force&&Date.now()-PDIR.polled<60e3)return;PDIR.busy=true;pdirLoad();
+  try{await pdirInit();const r=await fetch(relayURL()+'/'+PDIR.topic+'/json?poll=1&since=all');if(!r.ok)throw 0;let ch=false;
+    for(const l of (await r.text()).split('\n')){if(!l.trim())continue;let m;try{m=JSON.parse(l)}catch(e){continue}if(m.event!=='message')continue;const t=await rMsgText(m);if(!t)continue;
+      const o=await rUnseal(PDIR.key,t);if(await pdirApply(o))ch=true}
+    PDIR.polled=Date.now();PROS.state='ok';if(ch)pdirSave()}catch(e){PROS.state=PDIR.polled?'ok':'err'}
+  PDIR.busy=false;PROS.list=pdirList().filter(p=>!p.hidden);
+  if(cur==='jungle'&&jTab==='coach'&&!document.querySelector('.sheet')&&!document.activeElement?.matches('input,textarea,select'))RENDER.jungle()}
+// ---------- publishing (coach side) ----------
+function myRelayPro(){try{return JSON.parse(localStorage.getItem('jp:mypro')||'null')}catch(e){return null}}
+function setMyRelayPro(d){try{d?localStorage.setItem('jp:mypro',JSON.stringify(d)):localStorage.removeItem('jp:mypro')}catch(e){}}
+async function smallPhoto(src){if(!src)return '';return new Promise(res=>{const i=new Image();i.onload=()=>{const s=Math.min(1,240/Math.max(i.width,i.height));const c=document.createElement('canvas');c.width=Math.round(i.width*s);c.height=Math.round(i.height*s);const x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height);x.drawImage(i,0,0,c.width,c.height);res(c.toDataURL('image/jpeg',.72))};i.onerror=()=>res('');i.src=src})}
+async function pdirPost(body){await pdirInit();const o=await pdirSign(Object.assign({v:1},body));await rPost(PDIR.topic,PDIR.key,o);await pdirApply(o);pdirSave()}
+async function pdirPublish(app,force){if(!pdirOn()||!app)return false;const types=proTypes(app);
+  const doc={type:types.length>1?'both':types[0],types,name:app.name,city:app.city||'',bio:app.bio||'',tags:(app.tags||[]).slice(0,12),link:app.link||'',wa:app.wa||'',tg:app.tg||'',years:app.years||'',ts:app.ts||Date.now(),
+    certs:(app.certs||[]).filter(c=>c&&c.n).map(c=>({n:c.n,org:c.org||'',y:c.y||''}))};
+  const mine={doc,photo:app.photo||'',pubAt:Date.now()};setMyRelayPro(Object.assign({},app,{pubAt:Date.now()}));
+  try{await pdirPost({kind:'pro',id:S.profile.id,ts:doc.ts,doc});const ph=await smallPhoto(mine.photo);if(ph)await pdirPost({kind:'photo',id:S.profile.id,ts:doc.ts,photo:ph});PROS.list=pdirList().filter(p=>!p.hidden);return true}
+  catch(e){return false}}
+async function pdirRemove(){const id=S.profile.id;setMyRelayPro(null);try{await pdirPost({kind:'del',id,ts:Date.now()})}catch(e){delete (PDIR.cache||{})[id];pdirSave()}PROS.list=pdirList().filter(p=>!p.hidden)}
+// keep my listing alive on the relay (it forgets messages after 12 hours)
+async function pdirKeepAlive(){if(!pdirOn()||!navigator.onLine)return;const m=myRelayPro();if(!m||!m.name)return;if(Date.now()-(m.pubAt||0)<PDIR_REPUB)return;await pdirPublish(m)}
+if(!window.__JP_DEMO){setTimeout(()=>{if(pdirOn()){pdirKeepAlive();pdirPoll()}},4000);setInterval(()=>{if(pdirOn())pdirKeepAlive()},20*60e3);
+  addEventListener('online',()=>{if(pdirOn()){pdirKeepAlive();pdirPoll(true)}});document.addEventListener('visibilitychange',()=>{if(!document.hidden&&pdirOn()){pdirKeepAlive();if(cur==='jungle'&&jTab==='coach')pdirPoll()}})}
+ACT.proRemoveRelay=async b=>{if(b.dataset.sure!=='1'){b.dataset.sure='1';b.textContent='Tap again to remove';return}b.disabled=true;await pdirRemove();closeSheet();toast('Listing removed');if(cur==='jungle')RENDER.jungle()};
 
 // ================= INIT =================
 runSplash();
