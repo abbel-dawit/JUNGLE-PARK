@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="disabled-adaptations" content="watch"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon192.png"><link rel="apple-touch-icon" href="icon180.png"><meta name="apple-mobile-web-app-status-bar-style" content="default"><style>:root{padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}body{margin:0}</style></head><body>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="disabled-adaptations" content="watch"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><link rel="manifest" href="manifest.webmanifest"><link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=2"><link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png?v=2"><link rel="icon" type="image/png" sizes="48x48" href="favicon-48.png?v=2"><link rel="shortcut icon" href="favicon.ico?v=2"><link rel="apple-touch-icon" href="icon180.png?v=2"><meta name="apple-mobile-web-app-status-bar-style" content="default"><style>:root{padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}body{margin:0}</style></head><body>
 <title>JUNGLE PARK</title>
 
 
@@ -2546,6 +2546,28 @@ button.ci-tile{cursor:pointer;transition:transform .15s,box-shadow .2s}
 .coach-off{align-self:center;display:inline-flex;align-items:center;gap:6px;font-size:13px}
 .coach-off .ico{width:15px;height:15px}
 </style>
+<style id="v17">
+/* invoice filters: status chips with the date dropdown on the right, same pill design */
+.inv-filt{flex-direction:row!important;flex-wrap:wrap;align-items:center;gap:8px}
+.inv-filt>.chips{flex:1 1 auto;min-width:0;margin:0}
+.chip-sel-w{position:relative;display:inline-flex;align-items:center;margin-left:auto;flex:none}
+.chip-sel-w .ico{position:absolute;right:10px;width:14px;height:14px;pointer-events:none;color:var(--muted)}
+.chip-sel-w.on .ico{color:#fff}
+select.chip.chip-sel{appearance:none;-webkit-appearance:none;padding:6px 30px 6px 12px;font-size:12.5px;font-family:inherit;font-weight:600;cursor:pointer;background-image:none;line-height:1.2;height:auto}
+.inv-cust{flex:1 1 100%!important}
+/* set PIN pop-up: no orange focus ring or progress dots, and the placeholder clears on tap */
+.pin-plain .pin-dots{display:none}
+.pin-plain .pin-inp:focus{border-color:var(--line)!important;box-shadow:none!important;outline:none}
+.pin-inp:focus::placeholder{color:transparent;opacity:0}
+/* reset: green back-up reminder above the red confirmation */
+.reset-backup{display:flex;gap:12px;align-items:flex-start;padding:14px;border-radius:20px;border:1.5px solid color-mix(in srgb,#1FA463 45%,transparent);background:color-mix(in srgb,#1FA463 9%,var(--surface));margin-bottom:10px}
+.reset-backup .rb-ico{width:36px;height:36px;border-radius:12px;display:grid;place-items:center;background:#1FA463;color:#fff;flex:none}
+.reset-backup .rb-ico .ico{width:18px;height:18px}
+.reset-backup b{color:color-mix(in srgb,#1FA463 75%,var(--fg))}
+.reset-backup p{font-size:13.5px;line-height:1.45;margin:3px 0 10px;color:var(--fg)}
+.btn.rb-btn{background:#1FA463!important;color:#fff!important;border-color:#1FA463!important}
+.btn.rb-btn.done{background:color-mix(in srgb,#1FA463 18%,var(--surface))!important;color:#1A8A54!important}
+</style>
 <div id="splash" aria-live="polite" aria-label="Loading JUNGLE PARK"><div class="sp-bg"></div><div class="sp-in">
  <span class="logo sp-logo"><i class="paw"></i></span><div class="sp-title">JUNGLE PARK</div>
  <div class="sp-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"><i id="spFill"></i></div>
@@ -4408,9 +4430,8 @@ function pinBad(el,id,msg){const f=$('#'+id,el)?.closest('.pin-f');if(f){f.class
 // set or change the PIN. o.lockAfter: lock the business page once it is saved
 function pinSheet(o={}){const had=bizPinSet();
   const el=openSheet(had?'Change business PIN':'Set a business PIN',`<p class="muted">${had?'Enter your current PIN, then choose a new one.':'Choose a 6-digit PIN. You will use it to open your business page after you lock it. It is saved with your account, so it works on your other signed-in devices too.'}</p>
-   ${had?pinField('pnOld','Current PIN'):''}${pinField('pnNew','New 6-digit PIN')}${pinField('pnRep','Repeat the PIN')}
+   <div class="pin-plain">${had?pinField('pnOld','Current PIN'):''}${pinField('pnNew','New 6-digit PIN')}${pinField('pnRep','Repeat the PIN')}</div>
    <button class="btn block" id="pnGo">${ICON.lock} ${o.lockAfter?'Save PIN and lock':'Save PIN'}</button>`);
-  setTimeout(()=>$(had?'#pnOld':'#pnNew',el)?.focus(),250);
   $('#pnGo',el).onclick=async e=>{const b=e.currentTarget;const n=$('#pnNew',el).value,r=$('#pnRep',el).value;
     if(had&&!(await pinCheck($('#pnOld',el).value)))return pinBad(el,'pnOld','Current PIN is not right');
     if(!pinOk(n))return pinBad(el,'pnNew','The PIN needs exactly 6 digits');if(/^(\d)\1{5}$/.test(n)||'0123456789'.includes(n)||'9876543210'.includes(n))return pinBad(el,'pnNew','Pick a PIN that is harder to guess');
@@ -4661,8 +4682,8 @@ function bizCoach(el){if(!S.coachMode){const ap=APPS.mine&&APPS.mine.coach;el.in
    ${coachCertCard()}
    <div class="card"><div class="card-h"><h3>Clients</h3></div><div class="list">${C.length?C.map(c=>{const p=c.pub||{};return `<button class="li" data-act="clientOpen" data-id="${esc(c._id)}" style="border-left:0;border-right:0;border-bottom:0;background:none;width:100%;text-align:left">${avatar(c.name,c.uid,'sm')}<span class="t"><b>${esc(c.name)}${(c.goals||[]).length?`<span class="goal-mini">${c.goals.slice(0,4).map(g=>goalIco(g)).join('')}</span>`:''}</b><small>${p.week?`${(p.week.km||0).toFixed(1)} km · ${p.week.gym||0} gym this week`:'Waiting for their first sync'}</small></span><span class="mem-tags">${c.planTs?'<span class="pill g">Plan sent</span>':'<span class="pill n">No plan</span>'}</span></button>`}).join('')
      :`<div class="empty">${USERSVG}<span>No clients yet. Show them your QR or send your coach link.</span></div>`}</div></div>
-   <button class="link muted coach-off" data-act="coachOffAsk">${ICON.power} Turn off coaching on this account</button>`}
-ACT.coachOffAsk=()=>openSheet('Turn off coaching?',`<p class="muted">Your coaching tools close on this account. Clients and invoices stay saved, and you can turn coaching back on with your access key.</p><div class="grid2"><button class="btn soft" data-act="closeSheet">Cancel</button><button class="btn danger-btn" data-act="coachOffGo">Turn off</button></div>`);
+   <button class="link muted coach-off" data-act="coachOffAsk">${ICON.power} Deactivate coaching account</button>`}
+ACT.coachOffAsk=()=>openSheet('Deactivate coaching account?',`<p class="muted">Your coaching tools close on this account. Clients and invoices stay saved, and you can turn coaching back on with your access key.</p><div class="grid2"><button class="btn soft" data-act="closeSheet">Cancel</button><button class="btn danger-btn" data-act="coachOffGo">Deactivate</button></div>`);
 ACT.coachOffGo=()=>{closeSheet();ACT.coachOff()};
 ACT.coachOn=()=>{S.coachMode=true;save('coachMode');RENDER.biz();toast('Coaching turned on')};
 ACT.coachOff=()=>{S.coachMode=false;save('coachMode');if(BIZ.cunsub){BIZ.cunsub();BIZ.cunsub=null}BIZ.tab='gym';if(!bizEnabled())go('me');else RENDER.biz()};
@@ -5894,9 +5915,9 @@ function invManager(k,get,act,o={}){IVL[k]={get,act,title:o.title||'Invoices',em
   if(!L.length)return `<div class="list" data-nocap style="margin-top:8px"><div class="empty"><span>${esc(IVL[k].empty)}</span></div></div>`;
   return `<div class="inv-tools" data-ivk="${esc(k)}">
     <div class="inv-srch"><input class="inp" type="search" data-ivq enterkeyhint="search" placeholder="Search member, invoice no. or item" value="${esc(f.q)}" autocomplete="off" aria-label="Search invoices"><button type="button" class="btn soft sm" data-ivexp>${ICON.dl} Export</button></div>
-    <div class="inv-filt"><div class="chips" role="group" aria-label="Status">${[['all','All'],['unpaid','Unpaid'],['overdue','Overdue'],['review','Receipt sent'],['paid','Paid'],['void','Cancelled']].map(([s,l])=>`<button type="button" class="chip ${f.st===s?'on':''}" data-ivst="${s}" aria-pressed="${f.st===s}">${l}</button>`).join('')}</div>
-     <div class="inv-dates"><select class="inp" data-ivr aria-label="Date">${[['all','Any date'],['month','This month'],['last','Last month'],['3m','Last 3 months'],['year','This year'],['custom','Pick dates…']].map(([r,l])=>`<option value="${r}" ${f.range===r?'selected':''}>${l}</option>`).join('')}</select>
-      <span class="inv-cust" ${f.range==='custom'?'':'hidden'}><input class="inp" type="date" data-ivfrom value="${esc(f.from)}" aria-label="From date"><span class="muted">to</span><input class="inp" type="date" data-ivto value="${esc(f.to)}" aria-label="To date"></span></div></div>
+    <div class="inv-filt"><div class="chips" role="group" aria-label="Status">${[['all','All'],['unpaid','Unpaid'],['overdue','Overdue'],['review','Receipt sent'],['paid','Paid'],['void','Cancelled']].map(([s,l])=>`<button type="button" class="chip ${f.st===s?'on':''}" data-ivst="${s}" aria-pressed="${f.st===s}">${l}</button>`).join('')}
+     <span class="chip-sel-w ${f.range!=='all'?'on':''}"><select class="chip chip-sel ${f.range!=='all'?'on':''}" data-ivr aria-label="Date">${[['all','Any date'],['month','This month'],['last','Last month'],['3m','Last 3 months'],['year','This year'],['custom','Pick dates…']].map(([r,l])=>`<option value="${r}" ${f.range===r?'selected':''}>${l}</option>`).join('')}</select><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></div>
+      <span class="inv-cust" ${f.range==='custom'?'':'hidden'}><input class="inp" type="date" data-ivfrom value="${esc(f.from)}" aria-label="From date"><span class="muted">to</span><input class="inp" type="date" data-ivto value="${esc(f.to)}" aria-label="To date"></span></div>
     <div class="inv-res">${ivResHtml(k)}</div></div>`}
 function ivResHtml(k){const src=IVL[k];if(!src)return '';const f=ivState(k);const all=src.get();const L=ivFilter(all,f);const shown=Math.min(f.n,L.length);
   return `<div class="list" data-nocap>${L.length?L.slice(0,f.n).map(v=>invRow(v,src.act)).join(''):`<div class="empty"><span>No invoices match${ivActive(f)?' these filters':''}.</span>${ivActive(f)?'<button type="button" class="btn soft sm" data-ivclear>Clear filters</button>':''}</div>`}</div>
@@ -5905,7 +5926,7 @@ function ivResHtml(k){const src=IVL[k];if(!src)return '';const f=ivState(k);cons
 function ivPaint(tools){const k=tools.dataset.ivk;const r=tools.querySelector('.inv-res');if(r)r.innerHTML=ivResHtml(k)}
 document.addEventListener('input',e=>{const q=e.target.closest('[data-ivq]');if(!q)return;const t=q.closest('.inv-tools');const f=ivState(t.dataset.ivk);f.q=q.value;f.n=10;clearTimeout(q._t);q._t=setTimeout(()=>ivPaint(t),120)});
 document.addEventListener('change',e=>{const t=e.target.closest('.inv-tools');if(!t)return;const f=ivState(t.dataset.ivk);
-  if(e.target.matches('[data-ivr]')){f.range=e.target.value;t.querySelector('.inv-cust').hidden=f.range!=='custom'}else if(e.target.matches('[data-ivfrom]'))f.from=e.target.value;else if(e.target.matches('[data-ivto]'))f.to=e.target.value;else return;f.n=10;ivPaint(t)});
+  if(e.target.matches('[data-ivr]')){f.range=e.target.value;t.querySelector('.inv-cust').hidden=f.range!=='custom';e.target.classList.toggle('on',f.range!=='all');e.target.parentElement.classList.toggle('on',f.range!=='all')}else if(e.target.matches('[data-ivfrom]'))f.from=e.target.value;else if(e.target.matches('[data-ivto]'))f.to=e.target.value;else return;f.n=10;ivPaint(t)});
 document.addEventListener('click',e=>{const t=e.target.closest('.inv-tools');if(!t)return;const k=t.dataset.ivk;const f=ivState(k);
   const st=e.target.closest('[data-ivst]');if(st){f.st=st.dataset.ivst;f.n=10;$$('[data-ivst]',t).forEach(b=>{b.classList.toggle('on',b===st);b.setAttribute('aria-pressed',b===st)});ivPaint(t);return}
   if(e.target.closest('[data-ivmore]')){f.n+=10;ivPaint(t);return}
@@ -7067,7 +7088,7 @@ RENDER.me=()=>{
    ${typeof adminOn==='function'&&adminOn()?`<div class="card adm-cta"><div class="watch-h"><span class="watch-ico">${SHIELD}</span><div><h3>Admin console</h3><small class="muted">Approvals, payments, gyms, coaches and users</small></div></div><button class="btn" data-tab="admin">${SHIELD} Open admin console</button></div>`:''}
    ${bizCard()}
    ${watchCard()}
-   <div class="danger" id="resetBox"><button class="btn danger-btn" data-act="reset">${ICON.trash} Reset device</button></div>
+   ${resetHtml()}
    <button class="link" data-go="landing">About JUNGLE PARK</button>
   </div></div>`;
   $('#pfpBtn').onclick=()=>{const fi=$('#photoFile');fi.onchange=async()=>{const f=fi.files[0];fi.value='';if(!f)return;try{p.photo=await squarePhoto(f,256);save('profile');S.sync.pushedPub='';rerender();toast('Profile picture updated')}catch(e){toast('Could not read that image. Try a JPG or PNG.')}};fi.click()};
@@ -7111,14 +7132,20 @@ ACT.removeDev=b=>{const id=b.dataset.id;const d=(S.devices||{})[id]||{};
    $('#dvRm',el).onclick=()=>{S.revoked=S.revoked||{};S.revoked[id]=Date.now();delete S.devices[id];save('devices');closeSheet();rerender();toast(online()?'Device removed':'Device removed. It will be unlinked when you are back online.')}})};
 ACT.unlinkMe=()=>!NET.db?ACT.relayStop():openSheet('Unlink this device?',`<p>This device stops syncing with your other devices. Everything already here stays as a separate profile.</p><div class="grid2"><button class="btn soft" data-act="closeSheet">Cancel</button><button class="btn danger-btn solid" id="unl">Unlink</button></div>`,el=>{
    $('#unl',el).onclick=async()=>{S.revoked=S.revoked||{};S.revoked[DEV_ID]=Date.now();delete S.devices[DEV_ID];save('devices');try{await pushNow()}catch(e){}closeSheet();unlinkSelf(false)}});
-ACT.exportBackup=()=>saveFile(`jungle-park-backup-${new Date().toISOString().slice(0,10)}.json`,new Blob([JSON.stringify(S)],{type:'application/json'}));
+ACT.exportBackup=async()=>{await saveFile(`jungle-park-backup-${new Date().toISOString().slice(0,10)}.json`,new Blob([JSON.stringify(S)],{type:'application/json'}));if(RESET_ASK){RESET_ASK='saved';const r=$('#resetBackup .rb-btn');if(r){r.innerHTML=`${ICON.check} Backup downloaded`;r.classList.add('done')}}};
 ACT.importBackup=()=>$('#backupFile').click();
 $('#backupFile')?.addEventListener('change',async e=>{const f=e.target.files[0];e.target.value='';if(!f)return;try{const x=JSON.parse(await f.text());if(x.v!==1||!x.profile)throw 0;
   mergeCore(Object.assign({},x,{ts:Object.fromEntries(Object.keys(x.ts||{}).map(k=>[k,Math.max(x.ts[k],S.ts[k]||0)+1]))}));
   for(const r of x.runs||[])if(!S.runs.some(y=>y.id===r.id)&&!S.deleted[r.id])S.runs.push(r);S.runs.sort((a,b)=>b.start-a.start);save();applyTheme();rerender();toast('Backup restored')}catch(err){toast('That is not a JUNGLE PARK backup file')}});
-ACT.reset=()=>{const box=$('#resetBox');if(!box)return;box.classList.add('ask');box.innerHTML=`<p><b>Reset this device?</b> This removes your runs, sessions, plan and settings from this device. Linked devices and friends keep their copies.</p><div class="grid2"><button class="btn soft" data-act="resetCancel">Cancel</button><button class="btn danger-btn solid" data-act="resetConfirm">${ICON.trash} Yes, reset</button></div>`};
-ACT.resetCancel=()=>{const box=$('#resetBox');if(!box)return;box.classList.remove('ask');box.innerHTML=`<button class="btn danger-btn" data-act="reset">${ICON.trash} Reset device</button>`};
-ACT.resetConfirm=()=>{try{localStorage.removeItem(LS);localStorage.removeItem('jp:rl')}catch(e){}if(typeof rStop==='function')rStop();S=freshState();saveNow();applyTheme();toast('This device was reset');go('welcome')};
+// reset: a green back-up reminder, then the red confirmation. Kept in a flag so a background refresh of the page keeps it open
+let RESET_ASK=false;
+function resetHtml(){if(!RESET_ASK)return `<div class="danger" id="resetBox"><button class="btn danger-btn" data-act="reset">${ICON.trash} Reset device</button></div>`;
+  return `<div class="reset-backup" id="resetBackup" role="status"><span class="rb-ico">${ICON.dl}</span><div><b>Back up before you reset</b><p>Download a backup file first, so you can restore your runs, sessions, plan and settings later. Or tap Cancel to keep everything.</p><button class="btn sm rb-btn ${RESET_ASK==='saved'?'done':''}" data-act="exportBackup">${RESET_ASK==='saved'?ICON.check+' Backup downloaded':ICON.dl+' Download backup'}</button></div></div>
+   <div class="danger ask" id="resetBox"><p><b>Reset this device?</b> This removes your runs, sessions, plan and settings from this device. Linked devices and friends keep their copies.</p><div class="grid2"><button class="btn soft" data-act="resetCancel">Cancel</button><button class="btn danger-btn solid" data-act="resetConfirm">${ICON.trash} Yes, reset</button></div></div>`}
+function resetPaint(){const box=$('#resetBox');if(!box)return;$('#resetBackup')?.remove();box.outerHTML=resetHtml();if(RESET_ASK)$('#resetBackup')?.scrollIntoView({block:'nearest',behavior:'smooth'})}
+ACT.reset=()=>{RESET_ASK=true;resetPaint()};
+ACT.resetCancel=()=>{RESET_ASK=false;resetPaint()};
+ACT.resetConfirm=()=>{RESET_ASK=false;try{localStorage.removeItem(LS);localStorage.removeItem('jp:rl')}catch(e){}if(typeof rStop==='function')rStop();S=freshState();saveNow();applyTheme();toast('This device was reset');go('welcome')};
 
 // ================= ONBOARDING =================
 // sign-up: a full-screen two-step flow. Step 1 (name + city) is required to create the account; step 2 (body details) can be skipped.
