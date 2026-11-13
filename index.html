@@ -2568,6 +2568,10 @@ select.chip.chip-sel{appearance:none;-webkit-appearance:none;padding:6px 30px 6p
 .btn.rb-btn{background:#1FA463!important;color:#fff!important;border-color:#1FA463!important}
 .btn.rb-btn.done{background:color-mix(in srgb,#1FA463 18%,var(--surface))!important;color:#1A8A54!important}
 </style>
+<style id="v18">
+.gym-code{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px;border-radius:16px;background:var(--surface-2);border:1px dashed color-mix(in srgb,var(--accent) 40%,var(--line));text-align:center}
+.gym-code small{color:var(--muted);font-size:12px}.gym-code b{font-size:20px;letter-spacing:.06em;color:var(--fg)}
+</style>
 <div id="splash" aria-live="polite" aria-label="Loading JUNGLE PARK"><div class="sp-bg"></div><div class="sp-in">
  <span class="logo sp-logo"><i class="paw"></i></span><div class="sp-title">JUNGLE PARK</div>
  <div class="sp-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"><i id="spFill"></i></div>
@@ -2778,6 +2782,20 @@ if(window.__JP_DEMO){(()=>{
       gyms:[{id:gid,gid,name:'Jungle Demo Gym',city:'Addis Ababa',u:now}],myGyms:[gid],coachMode:true,coachId:me,keysUsed:['DEMO'],ts:{profile:now,myGyms:now,coachMode:now,coachId:now}};
     try{localStorage.setItem('jp-demo-state',JSON.stringify(st));localStorage.setItem(K,JSON.stringify(D))}catch(e){}
   }
+  // ---------- other gyms nearby, so the member side has gyms to find and join ----------
+  if(!D['gyms/xgbolefit26']){const P=[{n:'1 month',price:'1800 ETB',m:1},{n:'3 months',price:'5000 ETB',m:3},{n:'6 months',price:'9500 ETB',m:6},{n:'1 year',price:'17000 ETB',m:12}];
+    D['gyms/xgbolefit26']={name:'Bole Fitness Center',city:'Addis Ababa',phone:'+251 911 234 567',phones:['+251 911 234 567','+251 116 612 345'],address:'Bole Medhanialem, Africa Avenue',plans:P,owner:'demo-other-1',ownerName:'Selam Bekele',approved:true,ts:now-200*DAY};
+    D['gyms/xgbolefit26/courses/k0']={title:'Spin & Core',coach:'Selam',days:'Mon, Thu',time:'6:00 PM',cap:16,regs:9,price:500,memberFree:true,weeks:0,start:now+2*DAY,desc:'Indoor cycling then 15 minutes of core.',ts:now-3*DAY};
+    D['gyms/xgpiassa26']={name:'Piassa Power Gym',city:'Addis Ababa',phone:'+251 922 456 789',phones:['+251 922 456 789'],address:'Piassa, near St. George Church',plans:P.map(p=>Object.assign({},p,{price:(parseInt(p.price)*.8|0)+' ETB'})),owner:'demo-other-2',ownerName:'Kidus Alemu',approved:true,ts:now-320*DAY};
+    D['gyms/xgcmc26']={name:'CMC Wellness Club',city:'Addis Ababa',phone:'+251 930 112 233',address:'CMC Road, Sunshine building',plans:P.slice(0,2),owner:'demo-other-3',ownerName:'Liya Haile',approved:true,ts:now-60*DAY};persist()}
+  // ---------- demo access keys: open the demo as a trainer, a nutritionist or a gym ----------
+  try{const role=localStorage.getItem('jp:demoRole');const st=JSON.parse(localStorage.getItem('jp-demo-state')||'null');
+    if(role&&st&&st.demoRole!==role){const me=st.profile.id;const gid=(st.myGyms&&st.myGyms[0])||(Object.keys(D).find(k=>/^gyms\/dg[^/]*$/.test(k))||'').split('/')[1];const p=D['pros/'+me]||{};
+      if(role==='gym'){st.coachMode=false;st.myGyms=gid?[gid]:[];st.profile.name='Demo Gym Owner';st.keysUsed=['JP-DEMO-GYMS-2026']}
+      else{const types=role==='both'?['trainer','nutritionist']:[role];st.coachMode=true;st.coachId=me;st.myGyms=role==='both'&&gid?[gid]:[];st.profile.name=role==='trainer'?'Demo Trainer':role==='nutritionist'?'Demo Nutritionist':'Demo Coach';
+        D['pros/'+me]=Object.assign(p,{type:types.length>1?'both':types[0],types,name:st.profile.name,tags:role==='nutritionist'?['Meal plans','Weight loss','Sports nutrition','Gut health']:role==='trainer'?['Strength','Weight loss','Muscle gain','Mobility']:p.tags});
+        st.keysUsed=[role==='trainer'?'JP-DEMO-TRNR-2026':role==='nutritionist'?'JP-DEMO-NUTR-2026':'DEMO']}
+      st.demoRole=role;st.ts=Object.assign(st.ts||{},{profile:now,myGyms:now,coachMode:now,coachId:now});localStorage.setItem('jp-demo-state',JSON.stringify(st));persist()}}catch(e){}
   // ---------- a small local database with the same API the app uses ----------
   const kids=p=>{const n=p.split('/').length+1;return Object.keys(D).filter(k=>k.startsWith(p+'/')&&k.split('/').length===n)};
   const cmp=(x,op,v)=>op==='=='?x===v:op==='>'?x>v:op==='<'?x<v:op==='>='?x>=v:op==='<='?x<=v:op==='in'?(v||[]).includes(x):op==='array-contains'?Array.isArray(x)&&x.includes(v):op==='!='?x!==v:true;
@@ -3196,7 +3214,7 @@ function handleHash(){
   const h=decodeURIComponent(location.hash.slice(1));if(h===hashHandled)return;
   const v=h.match(/^v-([A-Za-z0-9_-]+)$/);if(v){hashHandled=h;openSharedInline(v[1]);try{history.replaceState(null,'','#home')}catch(e){}return}
   const hr=h.match(/^hr-([a-z0-9]{6,12})$/);if(hr){showApp('home');hashHandled=h;openHrRelay(hr[1]);try{history.replaceState(null,'','#home')}catch(e){}return}
-  const bz=h.match(/^(g|i|c)-([a-z0-9]{6,24})$/);if(bz){showApp(bz[1]==='c'?'jungle':'home');if(!NET.ready&&window.claude&&window.claude.use)return;hashHandled=h;({g:openGymLink,i:openInvite,c:openCoachLink})[bz[1]](bz[2]);try{history.replaceState(null,'','#home')}catch(e){}return}
+  const bz=h.match(/^(g|i|c)-([a-z0-9]{2,24})$/);if(bz){showApp(bz[1]==='c'?'jungle':'home');if(!NET.ready&&window.claude&&window.claude.use)return;hashHandled=h;({g:openGymLink,i:openInvite,c:openCoachLink})[bz[1]](bz[2]);try{history.replaceState(null,'','#home')}catch(e){}return}
   const sh=h.match(/^s-([a-z0-9]{6,20})$/);if(sh){showApp('home');if(!NET.ready&&window.claude&&window.claude.use)return;hashHandled=h;openShared(sh[1]);try{history.replaceState(null,'','#home')}catch(e){}return}
   const jc=h.match(/^j-([A-Za-z0-9]{6})$/);if(jc){showApp('home');if(!NET.ready&&window.claude&&window.claude.use)return;hashHandled=h;try{history.replaceState(null,'','#home')}catch(e){}useCode(jc[1]);return}
   const m=h.match(/^(add|sync)-([a-z0-9]{6,20})$/);
@@ -4095,8 +4113,8 @@ RENDER.crew=()=>{
     <div class="ar-actions"><button class="btn sm ar-share" data-act="shareMenu">${ICON.share} Share</button>${online()?`<button class="btn soft sm ar-sync" data-act="refreshLB">${ICON.sync} Sync</button>`:''}</div>
     ${online()?'':'<p class="muted" style="text-align:center;margin-top:12px;font-size:12.5px">Showing last synced scores</p>'}
    </section>
-   <div class="card${fd('c-bud')}"><div class="card-h"><h3 class="bud-h">Buddies <span class="bud-n num" aria-label="${S.buddies.length} of 5 buddies"><b>${S.buddies.length}</b><span class="of">/5</span></span></h3><button class="link" data-act="myQR">+ Add</button></div>
-    <p class="muted" style="font-size:13.5px;margin-bottom:10px">Star up to 5 friends to see them live while they run or train, and share the board.</p>
+   <div class="card${fd('c-bud')}"><div class="card-h"><h3 class="bud-h">Buddies <span class="bud-n num" aria-label="${S.friends.length} friends, ${S.buddies.length} of 5 starred"><b>${S.friends.length}</b></span></h3><button class="link" data-act="myQR">+ Add</button></div>
+    <p class="muted" style="font-size:13.5px;margin-bottom:10px">${S.friends.length} friend${S.friends.length===1?'':'s'} · <b class="num">${S.buddies.length}/5</b> starred live buddies. Star live friends to see them while they run or train. Friends added from an offline snapshot show their stats but can't be starred.</p>
     <div class="list">${S.friends.length?S.friends.map(f=>{const b=S.buddies.includes(f.id);const s=f.snap||{};return `<div class="li">${avatar(f.name,f.id,'sm')}<span class="t"><b>${esc(f.name)} ${liveTag(f)}</b><small>${f.mode==='offline'?'Snapshot from '+(s.at?relDate(s.at):'a QR code'):(s.week?`${(s.week.km*1000/U()).toFixed(1)} ${uName()} · ${s.week.gym} gym this week`:'Waiting for first sync')}</small></span>
       ${f.mode==='live'?`<button class="iconbtn" data-act="buddy" data-id="${f.id}" aria-label="${b?'Remove buddy':'Make buddy'}" style="${b?'color:var(--accent)':''}">${b?ICON.starF:ICON.star}</button>`:''}<button class="iconbtn" data-act="rmFriend" data-id="${f.id}" aria-label="Remove ${esc(f.name)}">${ICON.x}</button></div>`}).join('')
       :`<div class="empty">No friends yet. Share your code or scan theirs.</div>`}</div></div>
@@ -4164,15 +4182,15 @@ function snapshotCodeOld(){const c=publicCard();const s={n:c.name,i:S.profile.id
 function makeQR(el,text){el.innerHTML='';if(!window.QRCode){try{const m=QRLite.make(text,text.length>600?'L':'M');const n=m.length,q=2,sz=464,c=document.createElement('canvas');c.width=c.height=sz;const x=c.getContext('2d');x.fillStyle='#ffffff';x.fillRect(0,0,sz,sz);const cell=sz/(n+q*2);x.fillStyle='#120D0A';
     for(let r=0;r<n;r++)for(let k=0;k<n;k++)if(m[r][k])x.fillRect(Math.floor((k+q)*cell),Math.floor((r+q)*cell),Math.ceil(cell)+.5,Math.ceil(cell)+.5);c.setAttribute('role','img');c.setAttribute('aria-label','QR code');el.appendChild(c)}catch(e){el.innerHTML='<p style="color:#333;font-size:12px;text-align:center">This code is too long for a QR. Share the text below.</p>'}return}
   try{new QRCode(el,{text,width:464,height:464,colorDark:'#120D0A',colorLight:'#ffffff',correctLevel:text.length>600?QRCode.CorrectLevel.L:QRCode.CorrectLevel.M})}catch(e){el.innerHTML='<p style="color:#333;font-size:12px">This code is too long for a QR. Share the text below.</p>'}}
-ACT.myQR=()=>{const RLY=!NET.db&&relayOk();const live=canWrite()||RLY;let mode=live?'live':'snap';let fc=RLY?(S.rfriend&&S.rfriend.code||''):(S.profile.fcode||'');
+ACT.myQR=()=>{const RLY=!NET.db&&!!(window.crypto&&crypto.subtle);const live=canWrite()||RLY;let mode=live?'live':'snap';let fc=RLY?(S.rfriend&&S.rfriend.code||''):(S.profile.fcode||'');
   openSheet('Your JUNGLE PARK code',`<div class="seg" id="qrMode"><button data-q="live" class="${mode==='live'?'on':''}" ${live?'':'disabled'}>Live friend code</button><button data-q="snap" class="${mode==='snap'?'on':''}">Offline snapshot</button></div>
    <div class="qrbox" id="qrBox"></div><div class="code-big num" id="qrCode" hidden></div><p class="muted" id="qrHelp" style="font-size:13.5px;text-align:center"></p>
    <div class="codebox" id="qrText" hidden></div><div class="grid2"><button class="btn soft" id="qrCopy">${ICON.copy} Copy code</button><button class="btn soft" id="qrShare">${ICON.share} Share</button></div>
    ${live?'':syncNote('Live friend codes')}`,el=>{
     const draw=()=>{const box=$('#qrBox',el),cb=$('#qrCode',el),tx=$('#qrText',el);
       if(mode==='live'){tx.hidden=true;cb.hidden=false;if(!fc){cb.textContent='···-···';box.innerHTML='<p class="muted" style="color:#555;font-size:13px;text-align:center">Making your code…</p>';(RLY?rFriendCode():friendCode()).then(c=>{fc=c;if(el.isConnected&&mode==='live'){if(c)draw();else{box.innerHTML='<p style="color:#555;font-size:13px;text-align:center">Could not make a code right now.</p>'}}});}
-        else{cb.textContent=fmtCode(fc);makeQR(box,RLY?rFriendQR():codeQrText(fc));if(RLY){rAnnounceCode().catch(()=>{});rPushCard()}}
-        $('#qrHelp',el).textContent='Friends scan this or type the code in their app. You both appear on each other\'s leaderboard and stay in sync.'}
+        else{cb.textContent=fmtCode(fc);makeQR(box,RLY?rFriendQR():codeQrText(fc));if(RLY&&relayOk()){rAnnounceCode(true).catch(()=>{});rPushCard()}}
+        $('#qrHelp',el).textContent=window.__JP_DEMO?'Demo mode: this code only works on this device. Leave demo mode to add real friends.':RLY&&!relayOk()?'You are offline. The code goes live as soon as you are back online.':'Friends scan this or type the code in their app. You both appear on each other\'s leaderboard and stay in sync.'}
       else{const t=snapshotCode();cb.hidden=true;tx.hidden=false;tx.textContent=t;makeQR(box,t);$('#qrHelp',el).textContent='A one-time copy of your current stats. Works with no internet: a friend scans it in their app to compare records.'}};
     draw();$('#qrMode',el).onclick=e=>{const b=e.target.closest('[data-q]');if(!b||b.disabled)return;mode=b.dataset.q;$$('#qrMode button',el).forEach(x=>x.classList.toggle('on',x===b));draw()};
     const txt=()=>mode==='live'?fmtCode(fc):$('#qrText',el).textContent;
@@ -4184,22 +4202,39 @@ ACT.scan=b=>{let stream=null,raf=0;if(!(b&&b._hook))SCAN_HOOK=null;
   openSheet(SCAN_HOOK?SCAN_HOOK.title:'Scan a code',`<video class="scan-video" id="scV" playsinline muted hidden></video>
    <div id="scMsg" class="lock-note" hidden></div>
    <button class="btn block" id="scPhoto">${ICON.scan} Scan from photo</button>
-   <div class="field"><label for="scTxt">Or enter a code</label><div class="code-row"><input class="inp code-inp" id="scTxt" placeholder="ABC-123" maxlength="2000" autocomplete="off" autocapitalize="characters" autocorrect="off" spellcheck="false"><button class="btn" id="scGo">${SCAN_HOOK?'Go':'Add'}</button></div></div>`,async el=>{
+   <div class="field"><label for="scTxt">Or enter a code <small class="muted">· friend, sign-in or GYM code</small></label><div class="code-row"><input class="inp code-inp" id="scTxt" placeholder="ABC-123" maxlength="2000" autocomplete="off" autocapitalize="characters" autocorrect="off" spellcheck="false"><button class="btn" id="scGo">${SCAN_HOOK?'Go':'Add'}</button></div></div>`,async el=>{
     const v=$('#scV',el);const stop=()=>{cancelAnimationFrame(raf);if(stream)stream.getTracks().forEach(t=>t.stop());stream=null};$('#sheets').onclose=stop;
-    try{if(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia&&window.jsQR){stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}});v.srcObject=stream;v.hidden=false;await v.play();
-      const c=document.createElement('canvas'),ctx=c.getContext('2d',{willReadFrequently:true});const loop=()=>{if(!stream)return;if(v.videoWidth){c.width=v.videoWidth;c.height=v.videoHeight;ctx.drawImage(v,0,0);const r=jsQR(ctx.getImageData(0,0,c.width,c.height).data,c.width,c.height);if(r&&r.data){stop();closeSheet();handleScan(r.data);return}}raf=requestAnimationFrame(loop)};loop()}}
-    catch(e){v.hidden=true}
+    const msg=t=>{const m=$('#scMsg',el);if(!m)return;m.hidden=!t;m.textContent=t||''};
+    try{if(!(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia)){msg(window.isSecureContext===false?'The camera only works when the app is opened over https. Use Scan from photo or type the code.':'This browser cannot open the camera here. Use Scan from photo or type the code.')}
+      else{const dec=await qrDecoder();if(!dec){msg('The QR reader could not load. Check your connection, or type the code.')}
+        else{stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'},width:{ideal:1280},height:{ideal:720}}});if(!el.isConnected){stop();return}v.srcObject=stream;v.hidden=false;await v.play();
+          let busy=false,last=0;const loop=async t=>{if(!stream)return;if(!busy&&v.videoWidth&&t-last>120){busy=true;last=t;try{const r=await dec(v);if(r&&stream){stop();closeSheet();handleScan(r);return}}catch(e){}busy=false}raf=requestAnimationFrame(loop)};raf=requestAnimationFrame(loop)}}}
+    catch(e){v.hidden=true;msg(e&&(e.name==='NotAllowedError'||e.name==='SecurityError')?'Camera access is blocked. Allow the camera for this site in your browser settings, or use Scan from photo.':e&&e.name==='NotFoundError'?'No camera found. Use Scan from photo or type the code.':'The camera could not start. Use Scan from photo or type the code.')}
     $('#scPhoto',el).onclick=()=>$('#qrFile').click();
-    const sct=$('#scTxt',el);const SL=NET.db?6:8,SH=SL/2;sct.placeholder=NET.db?'ABC-123':'ABCD-1234';sct.oninput=()=>{const v=sct.value;if(/^[A-Za-z0-9-]{0,9}$/.test(v)&&!/^jp/i.test(v)){let x=v.toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,SL);sct.value=x.length>SH?x.slice(0,SH)+'-'+x.slice(SH):x}};
+    const sct=$('#scTxt',el);const SL=NET.db?6:8,SH=SL/2;sct.placeholder=NET.db?'ABC-123':'ABCD-1234';sct.oninput=()=>{const v=sct.value;if(/^[A-Za-z0-9-]{0,9}$/.test(v)&&!/^(jp|gy)/i.test(v)){let x=v.toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,SL);sct.value=x.length>SH?x.slice(0,SH)+'-'+x.slice(SH):x}};
     const goT=()=>{const t=sct.value.trim();if(t){stop();closeSheet();handleScan(t)}};$('#scGo',el).onclick=goT;sct.onkeydown=e=>{if(e.key==='Enter')goT()};
   })};
-$('#qrFile')?.addEventListener('change',async e=>{const f=e.target.files[0];e.target.value='';if(!f)return;if(!window.jsQR){toast('QR reader did not load. Paste the code instead.');return}
-  try{const img=await createImageBitmap(f);const s=Math.min(1,1400/Math.max(img.width,img.height));const c=document.createElement('canvas');c.width=img.width*s;c.height=img.height*s;const ctx=c.getContext('2d');ctx.drawImage(img,0,0,c.width,c.height);
-    const r=jsQR(ctx.getImageData(0,0,c.width,c.height).data,c.width,c.height,{inversionAttempts:'attemptBoth'});if(!r){toast('No QR code found in that photo. Try again closer.');return}closeSheet();handleScan(r.data)}catch(err){toast('Could not read that image')}});
+$('#qrFile')?.addEventListener('change',async e=>{const f=e.target.files[0];e.target.value='';if(!f)return;const dec=await qrDecoder(true);if(!dec){toast('The QR reader could not load. Type the code instead.');return}
+  try{const img=await createImageBitmap(f);const s=Math.min(1,1400/Math.max(img.width,img.height));const c=document.createElement('canvas');c.width=Math.round(img.width*s);c.height=Math.round(img.height*s);c.getContext('2d').drawImage(img,0,0,c.width,c.height);
+    const r=await dec(c);if(!r){toast('No QR code found in that photo. Try again closer.');return}closeSheet();handleScan(r)}catch(err){toast('Could not read that image')}});
+// QR decoding: the browser's own reader when it has one, otherwise jsQR (tried from three CDNs; the offline cache keeps it after the first load)
+let JSQR_P=null;function loadJsQR(){if(window.jsQR)return Promise.resolve(true);if(JSQR_P)return JSQR_P;
+  const urls=['https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js','https://unpkg.com/jsqr@1.4.0/dist/jsQR.js','https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.min.js'];
+  JSQR_P=(async()=>{for(const u of urls){const ok=await new Promise(r=>{const s=document.createElement('script');s.src=u;s.async=true;const t=setTimeout(()=>r(false),8000);s.onload=()=>{clearTimeout(t);r(!!window.jsQR)};s.onerror=()=>{clearTimeout(t);r(false)};document.head.appendChild(s)});if(ok)return true}JSQR_P=null;return false})();return JSQR_P}
+const QRC=document.createElement('canvas');const QRX=QRC.getContext('2d',{willReadFrequently:true});
+async function qrDecoder(still){if('BarcodeDetector' in window){try{const fm=await BarcodeDetector.getSupportedFormats();if(fm.includes('qr_code')){const d=new BarcodeDetector({formats:['qr_code']});const nat=async src=>{const r=await d.detect(src);return r&&r[0]&&r[0].rawValue||''};
+      if(await loadJsQR())return async src=>(await nat(src))||jsqrRead(src,still);return nat}}catch(e){}}
+  if(await loadJsQR())return async src=>jsqrRead(src,still);return null}
+function jsqrRead(src,still){const w=src.videoWidth||src.width,h=src.videoHeight||src.height;if(!w||!h)return '';const s=Math.min(1,(still?1400:720)/Math.max(w,h));QRC.width=Math.round(w*s);QRC.height=Math.round(h*s);QRX.drawImage(src,0,0,QRC.width,QRC.height);
+  const r=jsQR(QRX.getImageData(0,0,QRC.width,QRC.height).data,QRC.width,QRC.height,{inversionAttempts:still?'attemptBoth':'dontInvert'});return r&&r.data||''}
+setTimeout(()=>{if(!window.jsQR)loadJsQR()},6000);
+const gymCode=gid=>'GYM-'+String(gid||'').toUpperCase().replace(/(.{4})(?=.)/g,'$1-');
+const parseGymCode=t=>{const m=String(t||'').trim().match(/^GYM[\s-]*([A-Za-z0-9][A-Za-z0-9\s-]{1,40})$/i);return m?m[1].replace(/[\s-]/g,'').toLowerCase():''};
 function handleScan(txt){txt=String(txt).trim();if(SCAN_HOOK){const h=SCAN_HOOK;SCAN_HOOK=null;h.fn(txt);return}
+  const gc=parseGymCode(txt);if(gc){openGymLink(gc);return}
   if(relayScan(txt))return;
   if(parseCode(txt)){useCode(txt);return}
-  const bz=txt.match(/#(g|i|c)-([a-z0-9]{6,24})/);if(bz){({g:openGymLink,i:openInvite,c:openCoachLink})[bz[1]](bz[2]);return}
+  const bz=txt.match(/#(g|i|c)-([a-z0-9]{2,24})/);if(bz){({g:openGymLink,i:openInvite,c:openCoachLink})[bz[1]](bz[2]);return}
   let m=txt.match(/#(add|sync)-([a-z0-9]{6,20})/);if(m){if(m[1]==='add')addLiveFriend(m[2]);else linkDevicePrompt(m[2]);return}
   if(/^JP2\./i.test(txt)){const s=parseSnap2(txt.replace(/^jp2/i,'JP2'));if(s)addSnapshotFriend(s);else toast('That code is damaged or incomplete');return}
   if(txt.startsWith('JP1.')){try{const s=JSON.parse(unb64u(txt.slice(4)));addSnapshotFriend(s)}catch(e){toast('That code is damaged or incomplete')}return}
@@ -4211,7 +4246,8 @@ async function addLiveFriend(id){
   let snap=null;try{const s=await NET.db.doc('pub/'+id).get();if(s.exists)snap=s.data()}catch(e){dbErr(e)}
   if(!snap){toast("Couldn't find that runner yet. They need to open the app online once.");return}
   const ex=S.friends.find(f=>f.id===id);if(ex){ex.snap=snap;ex.mode='live';ex.name=snap.name;ex.u=Date.now()}else S.friends.push({id,name:snap.name||'Runner',snap,mode:'live',ts:Date.now(),u:Date.now()});
-  delete S.deleted[id];save('friends');subscribeBuddies();sendFriendHello(id);toast(`${snap.name||'Friend'} added to your crew`);if(cur!=='crew')go('crew');else RENDER.crew()}
+  delete S.deleted[id];save('friends');autoBuddy(id);subscribeBuddies();sendFriendHello(id);toast(`${snap.name||'Friend'} added to your crew`);if(cur!=='crew')go('crew');else RENDER.crew()}
+function autoBuddy(id){if(id&&!S.buddies.includes(id)&&S.buddies.length<5){S.buddies.push(id);save('buddies');try{subscribeBuddies()}catch(e){}}}
 function addSnapshotFriend(s){if(s.i===S.profile.id){toast("That's your own code");return}
   const snap={name:s.n,xp:s.x,streak:s.k,gymRate:s.g,badges:s.b||[],week:s.w,all:s.a,month:s.m,t:s.t,at:s.at,recent:(s.r||[])};
   const ex=S.friends.find(f=>f.id===s.i);if(ex){if(ex.mode!=='live'||!online()){ex.snap=snap;ex.name=s.n}ex.u=Date.now()}else S.friends.push({id:s.i,name:s.n,snap,mode:online()?'live':'offline',ts:Date.now(),u:Date.now()});
@@ -4570,9 +4606,10 @@ ACT.editGym=()=>{const g=BIZ.gym;if(!g)return;openSheet('Gym settings',`${gymFor
   $('#gfSave',el).onclick=async()=>{const n=readGymForm(el);if(!n.name){toast('Give your gym a name');return}try{await NET.db.doc('gyms/'+BIZ.gid).update(n);if(n.logo!==undefined)LOGOC[BIZ.gid]=n.logo;closeSheet();toast('Gym saved')}catch(e){dbErr(e);toast('Could not save right now')}};
   $('#gfDel',el).onclick=e=>{if(e.currentTarget.dataset.sure!=='1'){e.currentTarget.dataset.sure='1';e.currentTarget.textContent='Tap again to remove';return}S.myGyms=(S.myGyms||[]).filter(x=>x!==BIZ.gid);save('myGyms');stopGymSubs();BIZ.gid=null;closeSheet();RENDER.biz();toast('Gym removed from your business')}})};
 ACT.gymQR=()=>{const g=BIZ.gym||{};const link=appLink('g-'+BIZ.gid);openSheet(g.name||'Gym QR code',`<p class="muted">Print it for the front desk. Members scan it with their phone camera or in the app to join your gym and check in.</p>
-  <div class="qrbox gymqr"><div id="gqr"></div><b>${esc(g.name||'')}</b><small>Scan to check in · JUNGLE PARK</small></div><div class="codebox">${esc(link)}</div>
-  <div class="grid2"><button class="btn" id="gqC">${ICON.link} Copy link</button><button class="btn soft" id="gqS">${ICON.dl} Save QR</button></div>`,el=>{makeQR($('#gqr',el),link);$('#gqC',el).onclick=()=>copyText(link);
-   $('#gqS',el).onclick=()=>{const c=$('#gqr canvas',el);if(!c)return;const o=document.createElement('canvas');o.width=600;o.height=720;const x=o.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,600,720);x.drawImage(c,60,40,480,480);x.fillStyle='#120D0A';x.textAlign='center';x.font='800 40px "Plus Jakarta Sans",system-ui,sans-serif';x.fillText(g.name||'',300,590);x.font='600 24px "Plus Jakarta Sans",system-ui,sans-serif';x.fillStyle='#8A7F78';x.fillText('Scan to join and check in · JUNGLE PARK',300,640);o.toBlob(b=>b&&saveFile('gym-qr.png',b),'image/png')}})};
+  <div class="qrbox gymqr"><div id="gqr"></div><b>${esc(g.name||'')}</b><small>Scan to check in · JUNGLE PARK</small></div>
+  <div class="gym-code"><small>Gym code · members can type this in the app</small><b class="mono">${gymCode(BIZ.gid)}</b><button class="btn soft sm" id="gqK">${ICON.copy} Copy code</button></div><div class="codebox">${esc(link)}</div>
+  <div class="grid2"><button class="btn" id="gqC">${ICON.link} Copy link</button><button class="btn soft" id="gqS">${ICON.dl} Save QR</button></div>`,el=>{makeQR($('#gqr',el),link);$('#gqC',el).onclick=()=>copyText(link);$('#gqK',el).onclick=()=>copyText(gymCode(BIZ.gid));
+   $('#gqS',el).onclick=()=>{const c=$('#gqr canvas',el);if(!c)return;const o=document.createElement('canvas');o.width=600;o.height=740;const x=o.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,600,740);x.drawImage(c,60,40,480,480);x.fillStyle='#120D0A';x.textAlign='center';x.font='800 40px "Plus Jakarta Sans",system-ui,sans-serif';x.fillText(g.name||'',300,590);x.font='600 24px "Plus Jakarta Sans",system-ui,sans-serif';x.fillStyle='#8A7F78';x.fillText('Scan to join and check in · JUNGLE PARK',300,640);x.font='700 28px ui-monospace,Menlo,monospace';x.fillStyle='#120D0A';x.fillText(gymCode(BIZ.gid),300,690);o.toBlob(b=>b&&saveFile('gym-qr.png',b),'image/png')}})};
 function memberForm(m){m=m||{};const plans=(BIZ.gym&&BIZ.gym.plans)||[];return `<div class="form">
   <div class="field full"><label for="mfN">Full name</label><input class="inp" id="mfN" value="${esc(m.name||'')}"></div>
   <div class="field"><label for="mfPh">Phone</label><input class="inp" id="mfPh" inputmode="tel" value="${esc(m.phone||'')}"></div><div class="field"><label for="mfE">Email</label><input class="inp" id="mfE" type="email" value="${esc(m.email||'')}"></div>
@@ -4613,7 +4650,7 @@ async function makeInvite(m){if(!needOnline('Creating invites'))return;const iid
    ${m.phone?`<a class="btn wa block" target="_blank" rel="noopener noreferrer" href="https://wa.me/${esc(String(m.phone).replace(/[^\d]/g,''))}?text=${encodeURIComponent(msg)}">${ICON.wa} Send on WhatsApp</a><div class="muted" style="font-size:12.5px">WhatsApp number: <span style="user-select:all">${esc(m.phone)}</span></div>`:''}`,el=>{makeQR($('#iqr',el),link);$('#iCopy',el).onclick=()=>copyText(link);$('#iMsg',el).onclick=()=>copyText(msg)})}
 
 // ---------- member side: gym QR, invites ----------
-async function openGymLink(gid){if(!NET.db){toast('Gym codes need a connection');return}let g=null;try{const s=await NET.db.doc('gyms/'+gid).get();if(s.exists)g=s.data()}catch(e){dbErr(e)}
+async function openGymLink(gid){if(!NET.db){openSheet('Gyms are not in this copy yet',`<p class="muted">Gyms, memberships and gym check-ins are kept in JUNGLE PARK's online database, which this installed copy can't reach. Open JUNGLE PARK on claude.ai to join this gym, or try Demo mode to see how it works.</p><button class="btn block" data-act="closeSheet">OK</button>`);return}let g=null;try{const s=await NET.db.doc('gyms/'+gid).get();if(s.exists)g=s.data()}catch(e){dbErr(e)}
   if(!g){toast('That gym code is not valid or the gym was removed');return}
   const mine=S.gyms.find(x=>x.gid===gid);let mem=null;try{const s=await NET.db.doc(`gyms/${gid}/members/u-${S.profile.id}`).get();if(s.exists)mem=Object.assign({_id:s.id},s.data())}catch(e){}
   if(!mem&&mine&&mine.mid){try{const s=await NET.db.doc(`gyms/${gid}/members/${mine.mid}`).get();if(s.exists)mem=Object.assign({_id:s.id},s.data())}catch(e){}}
@@ -4807,7 +4844,7 @@ function jGyms(el){loadGyms();const mine=myGymIds();mine.forEach(watchCourses);
    <div class="card"><div class="card-h"><h3>${mine.length?'Classes at your gyms':'Classes near you'}</h3><span class="muted num" style="font-size:13px">${courses.length}</span></div>
     <div class="list">${courses.length?courses.map(c=>courseRow(c).replace('</b><small>',`</b><small>${mine.length>1||!mine.length?esc(gName(c.gid))+' · ':''}`)).join(''):`<div class="empty">${COURSEI}<span>${CRS.gState==='loading'?'Looking for classes…':mine.length?'Your gym has not posted classes yet.':'No classes posted near you yet.'}</span></div>`}</div></div>
    <div class="sec-t">${mine.length?'Other gyms':'Gyms near you'}${city?` <span class="muted" style="font-weight:500">${esc(city)}</span>`:''}</div>
-   ${near.length?near.map(gymCard).join(''):`<div class="card"><div class="empty">${GYMSVG}<span>${CRS.gState==='loading'?'Loading gyms…':CRS.gState==='err'?'Gyms could not load. Check your connection.':`No other gyms in ${esc(city||'your city')} yet.`}</span></div></div>`}
+   ${near.length?near.map(gymCard).join(''):!NET.db?`<div class="card"><div class="empty">${GYMSVG}<span>Gyms are kept in JUNGLE PARK's online database, which this installed copy can't reach. Open JUNGLE PARK on claude.ai to find and join gyms, or try Demo mode.</span><button class="btn soft sm" data-act="demoMode">${ICON.play} Demo mode</button></div></div>`:`<div class="card"><div class="empty">${GYMSVG}<span>${CRS.gState==='loading'?'Loading gyms…':CRS.gState==='err'?'Gyms could not load. Check your connection.':`No other gyms in ${esc(city||'your city')} yet.`}</span><button class="btn soft sm" data-act="scan">${ICON.scan} Scan or type a gym code</button></div></div>`}
    ${far.length?`<details class="card more-gyms"><summary><b>All gyms</b><span class="muted">${far.length} in other cities</span>${CHEV}</summary><div class="stack">${far.slice(0,60).map(gymCard).join('')}</div></details>`:''}`}
 const CHEV='<svg class="ico chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>';
 ACT.joinGym=b=>openGymLink(b.dataset.g);
@@ -4878,7 +4915,7 @@ ACT.courseAdmin=b=>{const gid=BIZ.gid,cid=b.dataset.c;const c=(CRS.bygym[gid]||[
 // ================= CLIENT INTAKE & GOALS =================
 // Based on the gym's Client Information Sheet: basic info, goals, medical, lifestyle.
 // Saved once on the user's profile (S.intake, synced to their devices) and shared with every coach they join.
-const GOALS=[['loss','Weight loss','<path d="M12 3c3 4 6 7 6 11a6 6 0 0 1-12 0c0-4 3-7 6-11z"/><path d="M9.5 14.5h5"/>'],['muscle','Muscle gain','<path d="M7 12h10M4 9v6M20 9v6M2 11v2M22 11v2M7 8v8M17 8v8"/>'],
+const GOALS=[['loss','Weight loss','<path d="M12 3c3 4 6 7 6 11a6 6 0 0 1-12 0c0-4 3-7 6-11z"/><path d="M9.5 14.5h5"/>'],['muscle','Muscle gain','<path fill="currentColor" stroke="none" d="M8.6 2.2C10.6 2.2 11.9 3.7 11.7 5.6C11.6 6.6 11 7.4 10.2 7.9L9.5 12.2C10.3 10.2 12 8.7 14.2 8.7C17 8.7 19 10.5 19.5 12.9C21 13.4 22 14.8 22 16.5V21.5H6.6C3.9 21.5 2.2 19.5 2.5 16.9L4.6 6.8C4.9 4.1 6.4 2.2 8.6 2.2Z"/>'],
  ['diet','Diet & nutrition','<path d="M12 7c-3-3-8-1-8 4 0 6 4 10 8 10s8-4 8-10c0-5-5-7-8-4z"/><path d="M12 7c0-2 1-4 3-4"/>'],['health','General health','<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>'],
  ['strength','Strength','<path d="M4.5 19.5c-.9-3.3-.6-6.7.9-9.8L7.6 5c.4-.9 1.3-1.5 2.3-1.5h1.7c.9 0 1.5.9 1.1 1.7l-.6 1.5c-.3.7-1 1.1-1.8 1H9.5L8.4 11c1.6-1.7 4-2.4 6.3-1.6 1.5-1.4 3.8-1.6 5.5-.3 1.6 1.2 2 3.5 1 5.3-1.7 3.1-5 5.1-8.6 5.1z"/><path d="M11.5 13.2c1.3-.6 2.8-.6 4.1 0"/>'],['endurance','Endurance & running','<circle cx="15.5" cy="4.5" r="2"/><path d="M7 10.5 10 8h4.5l2.5 4 3 1.5M13.5 8.5 11.5 13.5l3.5 3-1.5 4.5M11.5 13.5 9 17.5H4.5"/>'],
  ['mobility','Mobility & flexibility','<circle cx="12" cy="4.5" r="2"/><path d="M12 8.5v5M12 9.5 8.5 12.5 6 15.5M12 9.5l3.5 3 2.5 3M4 19.5c2.4-2.4 5-3.5 8-3.5s5.6 1.1 8 3.5M7 19.5h10"/>'],['rehab','Injury recovery','<path d="m9 9 6 6M15 9l-6 6"/><rect x="3" y="8" width="18" height="8" rx="4" transform="rotate(-45 12 12)"/>'],
@@ -6199,7 +6236,7 @@ function readPhone(el,id){const n=$('#'+id,el).value.replace(/[^\d]/g,'').replac
 // specialties with icons
 const SI={
  strength:'<path d="M4 9v6M20 9v6M7 6v12M17 6v12M7 12h10"/>',loss:'<path d="M12 21c4 0 7-2.7 7-7 0-4-3-6-4-9-1 2-2 3-3 3 0-2-1-4-3-6 0 4-4 6-4 12 0 4.3 3 7 7 7z"/>',
- muscle:'<path d="M5 18c-1-5 1-9 4-11l3-3 2 2-2 3c2 0 5 2 6 5 0 3-3 5-7 5H5z"/>',cardio:'<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/><path d="M5 12h4l2-3 2 6 2-3h4"/>',
+ muscle:'<path fill="currentColor" stroke="none" d="M8.6 2.2C10.6 2.2 11.9 3.7 11.7 5.6C11.6 6.6 11 7.4 10.2 7.9L9.5 12.2C10.3 10.2 12 8.7 14.2 8.7C17 8.7 19 10.5 19.5 12.9C21 13.4 22 14.8 22 16.5V21.5H6.6C3.9 21.5 2.2 19.5 2.5 16.9L4.6 6.8C4.9 4.1 6.4 2.2 8.6 2.2Z"/>',cardio:'<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/><path d="M5 12h4l2-3 2 6 2-3h4"/>',
  run:'<circle cx="15" cy="4.5" r="1.8"/><path d="m7 21 3.5-6 3 2.5V22M9 11l2.5-3.5 3.5 1 2.5 3.5H20"/>',hiit:'<path d="M13 2 4 14h7l-1 8 9-12h-7z"/>',
  yoga:'<circle cx="12" cy="4.5" r="2"/><path d="M12 7v6M5 10l7 3 7-3M8 21l4-8 4 8"/>',boxing:'<path d="M7 8a5 5 0 0 1 10 0v5a4 4 0 0 1-4 4h-2a4 4 0 0 1-4-4z"/><path d="M8 17v4h8v-4M7 11h5"/>',
  rehab:'<path d="M12 4v16M4 12h16"/><rect x="3" y="3" width="18" height="18" rx="5"/>',seniors:'<circle cx="10" cy="4.5" r="2"/><path d="M10 7v7l-3 7M10 14l3 7M10 9l4 3M17 11v10"/>',
@@ -6303,15 +6340,20 @@ ACT.newGym=()=>{if(!canApply())return;const prev=(APPS.mine&&APPS.mine.gym)||{};
      if(miss.length){toast('Please add '+miss[0]);return}
      btn.disabled=true;btn.textContent='Sending…';try{await submitApp('gym',d);closeSheet();go('me');toast('Application sent. You will get your gym QR and access key once approved.')}catch(err){dbErr(err);toast(err&&err.msg||'Could not send right now');btn.disabled=false;btn.innerHTML=ICON.check+' Send for approval'}}})};
 // ---------- access keys ----------
-async function unlockKey(key,auto){try{if(!NET.db)throw {msg:'Access keys need a connection'};const h=await keyHash(key);const s=await NET.db.doc('keys/'+h).get();if(!s.exists)throw {msg:'That access key is not valid'};const k=s.data();
+// demo access keys work in every copy of the app: they open Demo mode in that role, with sample data
+const DEMO_KEYS={'JPDEMOTRNR2026':'trainer','JPDEMONUTR2026':'nutritionist','JPDEMOGYMS2026':'gym'};
+function demoKeyRole(key){return DEMO_KEYS[String(key||'').toUpperCase().replace(/[^A-Z0-9]/g,'')]||''}
+function startDemoAs(role){try{localStorage.setItem('jp:demo','1');localStorage.setItem('jp:demoRole',role);sessionStorage.setItem('jp:demoGo','1')}catch(e){}toast('Opening the demo…');setTimeout(()=>{location.hash='#biz';location.reload()},300)}
+async function unlockKey(key,auto){const dr=demoKeyRole(key);if(dr){if(auto)return;if(window.__JP_DEMO){try{if(localStorage.getItem('jp:demoRole')===dr){go('biz');return {type:'demo'}}}catch(e){}}startDemoAs(dr);return {type:'demo'}}
+  try{if(!NET.db)throw {msg:'Real access keys are checked against JUNGLE PARK\'s online database, which this installed copy can\'t reach. Use the key in the claude.ai version, or use a demo key here.'};const h=await keyHash(key);const s=await NET.db.doc('keys/'+h).get();if(!s.exists)throw {msg:'That access key is not valid'};const k=s.data();
   if(k.revoked)throw {msg:'That access key was turned off'};
   if(k.type==='admin'){if(auto)return;admUnlock(h);return k}
   if(k.type==='gym'){S.myGyms=[...new Set([...(S.myGyms||[]),k.gid])];save('myGyms');if(!S.gyms.some(x=>x.gid===k.gid)){S.gyms.push({id:k.gid,gid:k.gid,name:k.name,u:Date.now()});save('gyms')}BIZ.tab='gym';BIZ.gid=k.gid}
   else{S.coachMode=true;S.coachId=k.uid;save('coachMode');save('coachId');BIZ.tab='coach';if(BIZ.cunsub){BIZ.cunsub();BIZ.cunsub=null}}
   S.keysUsed=[...new Set([...(S.keysUsed||[]),String(key).trim().toUpperCase()])];save('keysUsed');renderAcct();if(cur==='biz')RENDER.biz();
   toast(auto?(k.type==='gym'?'Your gym was approved. Dashboard unlocked.':'Your coach profile was approved. Dashboard unlocked.'):'Dashboard unlocked');return k}catch(e){if(!auto)throw e}}
-ACT.enterKey=()=>openSheet('Enter access key',`<p class="muted">Use the key you received after approval. It unlocks your gym or coaching dashboard on this device.</p>${netNote('Unlocking a dashboard')}
-  <div class="field"><label for="akK">Access key</label><input class="inp mono key-inp" id="akK" placeholder="JP-XXXX-XXXX-XXXX" autocomplete="off" autocapitalize="characters"></div><button class="btn block" id="akGo" data-net="write">${ICON.lock} Unlock dashboard</button>`,el=>{
+ACT.enterKey=()=>openSheet('Enter access key',`<p class="muted">Use the key you received after approval. It unlocks your gym or coaching dashboard on this device.</p>${!NET.db?'<p class="muted" style="font-size:12.5px">In this installed copy, demo keys open Demo mode. Real keys from an approval work in the claude.ai version.</p>':netNote('Unlocking a dashboard')}
+  <div class="field"><label for="akK">Access key</label><input class="inp mono key-inp" id="akK" placeholder="JP-XXXX-XXXX-XXXX" autocomplete="off" autocapitalize="characters"></div><button class="btn block" id="akGo">${ICON.lock} Unlock dashboard</button>`,el=>{
   $('#akGo',el).onclick=async e=>{const b=e.currentTarget;b.disabled=true;try{const k=await unlockKey($('#akK',el).value);closeSheet();if(!k||k.type!=='admin')go('biz')}catch(err){toast(err&&err.msg||'Could not check the key right now');b.disabled=false}}});
 // ---------- business landing (apply / pending / approved) ----------
 function appStatusCard(kind){const a=APPS.mine&&APPS.mine[kind];if(!a)return '';
@@ -7247,7 +7289,7 @@ ACT.signInOther=()=>openSheet('Sign in from another device',`<p class="muted">On
    const inp=$('#soCode',el);const CL=NET.db?6:8,H=CL/2;inp.oninput=()=>{let v=inp.value.toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,CL);inp.value=v.length>H?v.slice(0,H)+'-'+v.slice(H):v};
    const go_=async()=>{const b=$('#soGo',el);b.disabled=true;const ok=await useCode(inp.value);if(ok)closeSheet();else{b.disabled=false;inp.focus()}};
    $('#soGo',el).onclick=go_;inp.onkeydown=e=>{if(e.key==='Enter')go_()};
-   $('#soScan',el).onclick=()=>{SCAN_HOOK={title:'Scan the sign-in code',fn:t=>useCode(t)};ACT.scan({_hook:1})};
+   $('#soScan',el).onclick=()=>{SCAN_HOOK={title:'Scan the sign-in code',fn:t=>{if(relayScan(t))return;const c=parseCode(t)||(!NET.db&&parseCode8(t));if(c){useCode(t);return}handleScan(t)}};ACT.scan({_hook:1})};
    setTimeout(()=>inp.focus(),300)});
 ACT.signIn=ACT.signInOther; // older buttons (invites) open the same sheet
 
@@ -8701,7 +8743,7 @@ async function relayJoin(secret,pid,mode){toast('Signing in…');
 
 // ---------- friends ----------
 async function myFriendSecret(){if(!S.rfriend||!S.rfriend.secret){S.rfriend={secret:newSecret(),code:newCode8(),u:Date.now()};saveNow();relaySchedule();rListenSoon()}return S.rfriend.secret}
-async function rAnnounceCode(force){if(!relayOk()||!S.rfriend)return;if(!force&&Date.now()-(S.rfriend.ann||0)<6*3600e3)return;const c=S.rfriend.code;
+async function rAnnounceCode(force){if(!relayOk()||!S.rfriend)return;if(!force&&Date.now()-(S.rfriend.ann||0)<3*3600e3)return;if(force&&Date.now()-(S.rfriend.ann||0)<60e3)return;const c=S.rfriend.code;
   await rPost(await rTopic('fcode-id:',c),await rKey('fcode-key:',c),{t:'fcode',pid:S.profile.id,name:S.profile.name||'Runner',fs:S.rfriend.secret,at:Date.now()});S.rfriend.ann=Date.now();saveNow()}
 async function rFriendCode(){await myFriendSecret();try{await rAnnounceCode()}catch(e){}return S.rfriend.code}
 const rFriendQR=()=>relayQRText('friend',S.rfriend.secret+'.'+S.profile.id);
@@ -8709,13 +8751,13 @@ async function rPushCard(force){if(!relayOk()||!S.onboarded||!S.rfriend)return;c
   if(!force&&h===S.sync.rpub&&Date.now()-(S.sync.rpubT||0)<2*3600e3)return;if(!force&&Date.now()-(S.sync.rpubT||0)<60000){setTimeout(()=>rPushCard(),61000-(Date.now()-(S.sync.rpubT||0)));return}
   const fs=S.rfriend.secret;try{await rPost(await rTopic('friend-id:',fs),await rKey('friend-key:',fs),{t:'card',dev:DEV_ID,pid:S.profile.id,at:Date.now(),card});S.sync.rpub=h;S.sync.rpubT=Date.now();saveNow()}catch(e){}}
 async function addRelayFriend(pid,name,fs){if(!pid||!fs)return;if(pid===S.profile.id){toast("That's your own code");return}
-  const ex=S.friends.find(f=>f.id===pid);if(ex){ex.rk=fs;ex.mode='live';ex.u=Date.now()}else S.friends.push({id:pid,name:name||'Runner',snap:null,mode:'live',rk:fs,ts:Date.now(),u:Date.now()});delete S.deleted[pid];save('friends');
+  const ex=S.friends.find(f=>f.id===pid);if(ex){ex.rk=fs;ex.mode='live';ex.u=Date.now()}else S.friends.push({id:pid,name:name||'Runner',snap:null,mode:'live',rk:fs,ts:Date.now(),u:Date.now()});delete S.deleted[pid];save('friends');autoBuddy(pid);
   const my=await myFriendSecret();
   try{await rPost(await rTopic('friend-in:',fs),await rKey('friend-key:',fs),{t:'hello',pid:S.profile.id,name:S.profile.name||'Runner',fs:my,at:Date.now()})}catch(e){}
   rPushCard(true);await rListen();toast(`${(S.friends.find(f=>f.id===pid)||{}).name||'Friend'} added to your crew`);if(cur!=='crew')go('crew');else RENDER.crew()}
 function onRelayHello(o){if(o.t!=='hello'||!o.pid||!o.fs||o.pid===S.profile.id)return;if(S.deleted[o.pid]&&S.deleted[o.pid]>(o.at||0))return;
   const ex=S.friends.find(f=>f.id===o.pid);if(ex){if(ex.rk===o.fs&&ex.mode==='live')return;ex.rk=o.fs;ex.mode='live';ex.u=Date.now()}
-  else{S.friends.push({id:o.pid,name:o.name||'Runner',snap:null,mode:'live',rk:o.fs,ts:Date.now(),u:Date.now()});toast(`${o.name||'A friend'} added you. You're now on each other's leaderboard.`)}
+  else{S.friends.push({id:o.pid,name:o.name||'Runner',snap:null,mode:'live',rk:o.fs,ts:Date.now(),u:Date.now()});autoBuddy(o.pid);toast(`${o.name||'A friend'} added you. You're now on each other's leaderboard.`)}
   delete S.deleted[o.pid];save('friends');rPushCard(true);rListenSoon();rerenderSoft()}
 function onRelayCard(id,o){if(o.t==='post'||o.t==='unpost'){if(S.buddies.includes(id))relayWall(id,o);return}if(o.t!=='card'||!o.card)return;const f=S.friends.find(x=>x.id===id);if(!f||(o.at||0)<=(f.snapAt||0))return;
   f.snap=Object.assign({},o.card,{at:o.at});f.snapAt=o.at;f.name=o.card.name||f.name;f.live=Date.now();saveNow();if(cur==='crew'||cur==='home')rerenderSoft()}
@@ -8837,10 +8879,10 @@ const DEMO_PW='09876543210';
 ACT.demoMode=()=>{if(window.__JP_DEMO){go('biz');return}openSheet('Demo mode',`<p class="muted">Try the full gym business and coach (personal trainer &amp; nutritionist) dashboards with sample members, clients, classes and Pro features. Demo mode uses its own sample data on this device; your real profile is not touched.</p>
   <div class="field"><label for="dmPw">Demo password</label><input class="inp mono" id="dmPw" type="password" inputmode="numeric" autocomplete="off" placeholder="Enter the demo password"></div>
   <button class="btn block" id="dmGo">${ICON.play} Start demo</button>`,el=>{const i=$('#dmPw',el);setTimeout(()=>i.focus(),250);
-   const go_=()=>{if(i.value.trim()!==DEMO_PW){toast('That demo password is not right');i.select();return}try{localStorage.setItem('jp:demo','1');sessionStorage.setItem('jp:demoGo','1')}catch(e){}toast('Opening demo…');setTimeout(()=>{location.hash='#biz';location.reload()},300)};
+   const go_=()=>{const dr=demoKeyRole(i.value);if(dr){startDemoAs(dr);return}if(i.value.trim()!==DEMO_PW){toast('That demo password is not right');i.select();return}try{localStorage.setItem('jp:demoRole','both');localStorage.setItem('jp:demo','1');sessionStorage.setItem('jp:demoGo','1')}catch(e){}toast('Opening demo…');setTimeout(()=>{location.hash='#biz';location.reload()},300)};
    $('#dmGo',el).onclick=go_;i.onkeydown=e=>{if(e.key==='Enter')go_()}})};
 ACT.demoExit=()=>openSheet('Leave demo mode?',`<p class="muted">You go back to your own profile. The sample data stays here in case you open the demo again. Choose Reset to start the next demo fresh.</p><div class="grid2"><button class="btn soft" id="dxReset">Leave and reset</button><button class="btn" id="dxGo">Leave demo</button></div>`,el=>{
-  const leave=reset=>{try{localStorage.removeItem('jp:demo');if(reset){localStorage.removeItem('jp-demo-state');localStorage.removeItem('jp-demo-db');try{indexedDB.deleteDatabase('jp-photos-demo')}catch(e){}}}catch(e){}location.hash='#home';location.reload()};
+  const leave=reset=>{try{localStorage.removeItem('jp:demo');localStorage.removeItem('jp:demoRole');if(reset){localStorage.removeItem('jp-demo-state');localStorage.removeItem('jp-demo-db');try{indexedDB.deleteDatabase('jp-photos-demo')}catch(e){}}}catch(e){}location.hash='#home';location.reload()};
   $('#dxGo',el).onclick=()=>leave(false);$('#dxReset',el).onclick=()=>leave(true)});
 if(window.__JP_DEMO){const b=document.createElement('button');b.className='demo-band';b.type='button';b.innerHTML='<i></i><span>Demo</span><b>Exit</b>';b.setAttribute('aria-label','Demo mode with sample data. Tap to exit.');b.onclick=()=>ACT.demoExit();document.body.appendChild(b);document.body.classList.add('is-demo');try{if(sessionStorage.getItem('jp:demoGo')){sessionStorage.removeItem('jp:demoGo');setTimeout(()=>{BIZ.tab='gym';go('biz');setTimeout(()=>toast('Demo mode: a sample gym and coach profile with every feature unlocked'),600)},1200)}}catch(e){}}
 
