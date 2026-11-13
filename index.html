@@ -2374,6 +2374,20 @@ input.inp::-webkit-date-and-time-value{text-align:left;margin:0;min-height:1.25e
 @keyframes lpIn{from{opacity:0;transform:translate(-50%,10px)}}@keyframes lpPulse{70%{box-shadow:0 0 0 7px rgba(74,222,128,0)}100%{box-shadow:0 0 0 0 rgba(74,222,128,0)}}
 @media (min-width:900px){.live-pill{bottom:24px}}
 body:has(.sheet) .live-pill{display:none}body:has(.sheet) .toast{bottom:auto!important}
+
+/* v51 fixes */
+.relay-panel{display:flex;flex-direction:column;gap:10px;margin-top:12px}.relay-st{display:flex;gap:8px;align-items:center;font-size:13.5px;color:var(--muted)}.relay-st i{width:8px;height:8px;border-radius:50%;background:var(--muted);flex:none}.relay-st i.on{background:#22C55E}.relay-st i.err{background:#E9B949}
+.relay-adv summary{cursor:pointer;font-size:13px;font-weight:700;color:var(--muted)}.danger-txt{color:#D9483B!important}
+.relay-panel .btn{white-space:normal;line-height:1.2}
+
+/* v51 fixes */
+.pend-run{display:flex;align-items:center;gap:12px;padding:14px 16px;margin-bottom:14px;border:1.5px solid color-mix(in srgb,var(--accent) 45%,var(--line))}.pend-run .t{flex:1;min-width:0;display:flex;flex-direction:column}.pend-run small{color:var(--muted);font-size:12.5px}.pend-ico{display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:var(--soft);color:var(--accent);flex:none}.pend-ico .ico{width:22px;height:22px}
+.run-indoor .rh-mapbtn,.run-indoor #immersive .map-attr,.run-indoor .runhero .map-attr{display:none!important}
+.code-inp{text-align:left!important;padding-left:16px!important}.code-inp::placeholder{font-size:15px;font-weight:500;letter-spacing:.06em;text-align:left;opacity:.5}.code-inp:focus::placeholder{color:transparent;opacity:0}
+.wt-form .inp{text-align:center;line-height:46px}.wt-form input[type=date]::-webkit-date-and-time-value{text-align:center;line-height:46px;margin:0}.wt-form input[type=date]::-webkit-datetime-edit{display:inline-flex;justify-content:center;width:100%;padding:0}
+@media (min-width:821px){.l-cards{width:min(620px,calc(100% - 48px));gap:16px;bottom:36px}.l-cards .l-card{grid-template-columns:minmax(0,1fr) 210px;padding:26px 28px;gap:22px;border-radius:22px}.l-cards .l-card small{font-size:14.5px}.l-cards .l-card .big{font-size:50px;margin-top:4px}.l-cards .l-card .row{gap:30px;margin-top:16px}.l-cards .l-card .row div{font-size:19px}.l-cards .l-card .row span{font-size:11px;margin-bottom:3px}.l-cards .l-card canvas,.l-cards .lc-bars{min-height:160px;border-radius:14px}.lc-bars{gap:9px;padding:14px}}
+@media (min-width:821px) and (max-height:820px){.l-cards .l-card{padding:20px 24px}.l-cards .l-card .big{font-size:42px}.l-cards .l-card canvas,.l-cards .lc-bars{min-height:130px}}
+.ph-pend{position:absolute;top:6px;left:6px;display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:rgba(0,0,0,.55);color:#fff}.ph-pend .ico{width:13px;height:13px}
 </style>
 <div id="splash" aria-live="polite" aria-label="Loading JUNGLE PARK"><div class="sp-bg"></div><div class="sp-in">
  <span class="logo sp-logo"><i class="paw"></i></span><div class="sp-title">JUNGLE PARK</div>
@@ -2650,7 +2664,7 @@ const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const DAY=864e5, WD=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
 const pad=n=>String(n).padStart(2,'0');
 function fmtDur(s){s=Math.max(0,Math.round(s));const h=Math.floor(s/3600),m=Math.floor(s%3600/60),x=s%60;return h?`${pad(h)}:${pad(m)}:${pad(x)}`:`${pad(m)}:${pad(x)}`}
-function fmtDurLong(s){s=Math.round(s);return `${pad(Math.floor(s/3600))}:${pad(Math.floor(s%3600/60))}:${pad(s%60)}`}
+function fmtDurLong(s){s=Math.max(0,Math.floor(s+1e-6));return `${pad(Math.floor(s/3600))}:${pad(Math.floor(s%3600/60))}:${pad(s%60)}`}
 function fmtMin(m){m=Math.round(m);return m>=60?`${Math.floor(m/60)}h ${m%60}m`:`${m}m`}
 const isMi=()=>S.settings.units==='mi';
 const U=()=>isMi()?1609.344:1000;
@@ -2759,7 +2773,7 @@ function freshState(){return {v:1,onboarded:false,profile:{id:rid(12),name:'',ge
   deleted:{},devices:{},revoked:{},prs:[],weights:[],ts:{},sync:{pushedCore:'',pushedPub:'',runs:{}},updatedAt:Date.now()}}
 let S=(()=>{try{const x=JSON.parse(localStorage.getItem(LS));if(x&&x.v===1){const f=freshState();return Object.assign(f,x,{settings:Object.assign(f.settings,x.settings||{}),profile:Object.assign(f.profile,x.profile||{}),sync:Object.assign(f.sync,x.sync||{})})}}catch(e){}return freshState()})();
 let saveT=0;
-function save(section){if(section)S.ts[section]=Date.now();S.updatedAt=Date.now();clearTimeout(saveT);saveT=setTimeout(()=>{try{localStorage.setItem(LS,JSON.stringify(S))}catch(e){}},150);scheduleSync()}
+function save(section){if(section)S.ts[section]=Date.now();if(section==='settings')stampSettings();S.updatedAt=Date.now();clearTimeout(saveT);saveT=setTimeout(()=>{try{localStorage.setItem(LS,JSON.stringify(S))}catch(e){}},150);scheduleSync()}
 function saveNow(){try{localStorage.setItem(LS,JSON.stringify(S))}catch(e){}}
 addEventListener('pagehide',saveNow);
 
@@ -2789,23 +2803,24 @@ addEventListener('online',()=>{NET.online=true;updateStatus();scheduleSync();ref
 addEventListener('offline',()=>{NET.online=false;updateStatus()});
 function updateStatus(){const st=$$('.status');let cls='local',txt='On this device';
   if(NET.db&&NET.online&&!NET.err){cls=NET.ro?'local':'on';txt=NET.ro?'View-only sync':'Live sync'}else if(NET.db){txt='Offline · saved'}
+  else if(typeof relayOn==='function'&&relayOn()){cls=RL.err?'local':'on';txt=RL.err?'Sync retrying':'Device sync'}
   st.forEach(e=>{e.className='status '+cls;e.innerHTML=`<i></i><span>${txt}</span>`});
-  $$('[data-net]').forEach(e=>{const need=e.dataset.net;const ok=need==='write'?canWrite():online();e.classList.toggle('locked',!ok);if(e.tagName==='BUTTON')e.disabled=!ok})}
+  $$('[data-net]').forEach(e=>{const need=e.dataset.net;const ok=need==='relay'?(canWrite()||(typeof relayOk==='function'&&relayOk())):need==='write'?canWrite():online();e.classList.toggle('locked',!ok);if(e.tagName==='BUTTON')e.disabled=!ok})}
 function netNote(what){if(online())return '';const why=NET.db?(NET.online?'Sync is paused.':'You are offline.'):'Live sync is not available in this copy of the app.';
   return `<div class="lock-note">${ICON.wifi}<span>${esc(what)} needs a connection. ${why} Everything else keeps working and syncs later.</span></div>`}
 function dbErr(e){const c=e&&e.code;if(c==='invalid_argument'&&!NET.roWarned){NET.ro=true;NET.roWarned=true;toast('This link is view-only, so sync is paused. Ask the owner for edit access.');updateStatus()}
   else if(c==='revoked'||c==='not_granted'||c==='capability_disabled'){NET.err=true;updateStatus()}
   else if(c==='quota_exceeded')toast('Cloud storage is full. Delete old runs to keep syncing.')}
 async function initCloud(){
-  if(!window.claude||!window.claude.use){updateStatus();return}
+  if(!window.claude||!window.claude.use){updateStatus();relayStart();return}
   try{NET.db=await window.claude.use('db')}catch(e){NET.db=null}
   try{NET.dl=await window.claude.use('downloads')}catch(e){}
   try{NET.user=await window.claude.use('user')}catch(e){}
-  NET.ready=true;updateStatus();
-  if(NET.db){touchDevice();startSync();watchFriendInbox();friendCode();subscribeCoachPlans();watchMyApps();refreshFriends();subscribeBuddies();setTimeout(loadMyRegs,1500);setTimeout(()=>{shareIntake();loadCoachNotes();watchCoachWorkouts();watchMyRequests();watchStories();setTimeout(pruneStories,8000);setTimeout(watchMyInvoices,1500);if(S.coachMode)watchCoachInv();watchCoachPrograms();if(S.coachMode)watchPro();watchMyPhotos();watchLib();if(S.coachMode)watchMySubs();setTimeout(autoReports,4000);myCoachIds().forEach(cid=>{ftWatch(cid);watchThread(cid,S.profile.id)});if(S.coachMode)ftWatch(coachId())},4000);if(location.hash)handleHash()}
+  NET.ready=true;updateStatus();if(!NET.db)relayStart();
+  if(NET.db){setTimeout(flushPhotos,2500);touchDevice();startSync();watchFriendInbox();friendCode();subscribeCoachPlans();watchMyApps();refreshFriends();subscribeBuddies();setTimeout(loadMyRegs,1500);setTimeout(()=>{shareIntake();loadCoachNotes();watchCoachWorkouts();watchMyRequests();watchStories();setTimeout(pruneStories,8000);setTimeout(watchMyInvoices,1500);if(S.coachMode)watchCoachInv();watchCoachPrograms();if(S.coachMode)watchPro();watchMyPhotos();watchLib();if(S.coachMode)watchMySubs();setTimeout(autoReports,4000);myCoachIds().forEach(cid=>{ftWatch(cid);watchThread(cid,S.profile.id)});if(S.coachMode)ftWatch(coachId())},4000);if(location.hash)handleHash()}
 }
 // --- pack/merge ---
-const CORE_KEYS=['onboarded','profile','settings','gyms','sessions','friends','buddies','plan','schedule','schedIn','deleted','devices','revoked','loginIds','myGyms','coachMode','myCoaches','coachId','keysUsed','prs','weights','health','courseRegs','intake','workouts','repSent','coachReqs','ts'];
+const CORE_KEYS=['onboarded','profile','settings','sts','phDel','gyms','sessions','friends','buddies','plan','schedule','schedIn','deleted','devices','revoked','loginIds','myGyms','coachMode','myCoaches','coachId','keysUsed','prs','weights','health','courseRegs','intake','workouts','repSent','coachReqs','ts'];
 function corePack(){const o={};for(const k of CORE_KEYS)o[k]=S[k];return JSON.stringify(o)}
 function mergeById(a=[],b=[],del={}){const m=new Map();for(const x of a)m.set(x.id,x);for(const x of b){const y=m.get(x.id);if(!y||(x.u||x.ts||0)>(y.u||y.ts||0))m.set(x.id,x)}return [...m.values()].filter(x=>!del[x.id])}
 function mergeCore(remote){
@@ -2814,7 +2829,9 @@ function mergeCore(remote){
   for(const k of ['gyms','sessions','friends','prs','weights','workouts'])S[k]=mergeById(S[k]||[],remote[k]||[],del);
   S.runs=S.runs.filter(r=>!del[r.id]);
   const rts=remote.ts||{};
-  for(const k of ['profile','settings','plan','schedule','schedIn','buddies','loginIds','myGyms','coachMode','myCoaches','coachId','keysUsed','health']){if((rts[k]||0)>(S.ts[k]||0)&&remote[k]!==undefined){S[k]=remote[k];S.ts[k]=rts[k]}}
+  const perKey=!!(remote.sts&&remote.settings);
+  for(const k of ['profile','settings','plan','schedule','schedIn','buddies','loginIds','myGyms','coachMode','myCoaches','coachId','keysUsed','health']){if(k==='settings'&&perKey)continue;if((rts[k]||0)>(S.ts[k]||0)&&remote[k]!==undefined){S[k]=remote[k];S.ts[k]=rts[k]}}
+  if(perKey){S.sts=S.sts||{};S.settings=Object.assign({},S.settings);for(const [k,t] of Object.entries(remote.sts)){if((t||0)>(S.sts[k]||0)&&remote.settings[k]!==undefined){S.settings[k]=remote.settings[k];S.sts[k]=t}}S._sp=JSON.parse(JSON.stringify(S.settings));if((rts.settings||0)>(S.ts.settings||0))S.ts.settings=rts.settings}
   if(remote.onboarded)S.onboarded=true;
   S.revoked=Object.assign({},remote.revoked||{},S.revoked||{});
   const dv=Object.assign({},S.devices||{});for(const [k,v] of Object.entries(remote.devices||{})){if(!dv[k]||(v.u||0)>(dv[k].u||0))dv[k]=v}
@@ -2832,7 +2849,7 @@ function unlinkSelf(remote){const keep=S.profile.id;S.profile=Object.assign({},S
   S.sync={pushedCore:'',pushedPub:'',runs:{}};saveNow();try{for(const k in NET.subs)NET.subs[k]&&NET.subs[k]()}catch(e){}NET.subs={};
   if(NET.db){touchDevice(true);startSync();watchFriendInbox();subscribeBuddies();scheduleSync()}rerender();toast(remote?'This device was removed from your linked devices. Your data here is kept as a separate profile.':'This device is now unlinked')}
 let syncT=0,syncing=false;
-function scheduleSync(){clearTimeout(syncT);syncT=setTimeout(pushNow,700)}
+function scheduleSync(){clearTimeout(syncT);syncT=setTimeout(pushNow,700);if(!NET.db&&typeof relaySchedule==='function')relaySchedule()}
 function slimRun(r){const o=Object.assign({},r);if(o.pts&&o.pts.length>1500){const step=Math.ceil(o.pts.length/1500);o.pts=o.pts.filter((p,i)=>i%step===0||i===o.pts.length-1)}return o}
 async function pushNow(){
   if(!canWrite()||syncing||!S.onboarded)return;syncing=true;const id=S.profile.id;
@@ -2938,6 +2955,7 @@ function go(h){if(location.hash==='#'+h)route();else location.hash=h}
 function route(){
   const h=decodeURIComponent(location.hash.slice(1));
   if(/^(add|sync|s|v|g|i|c|hr|j)-/.test(h)){handleHash();return}
+  if(/^\/(link|friend)\//.test(h)){showApp('home');try{history.replaceState(null,'','#home')}catch(e){}setTimeout(()=>relayScan('#'+h),300);return}
   if(h==='welcome'||(!h&&!S.onboarded)){showLanding();return}
   showApp(h||'home');
 }
@@ -3127,7 +3145,7 @@ function autoRunName(r){const d=new Date(r.start),hr=d.getHours();const tod=hr<5
 function runName(r){return (r.name&&String(r.name).trim())||autoRunName(r)}
 // ================= RUN ENGINE =================
 const R={state:'idle',mode:'gps',pts:[],raw:0,dist:0,elev:0,altRef:null,start:0,active:0,resumeAt:0,watch:null,splits:[],kf:null,lastFix:0,acc:null,tick:null,wake:null,lock:false,lastSplit:0};
-function runActiveSec(){return (R.active+(R.state==='running'?Date.now()-R.resumeAt:0))/1000}
+function runActiveSec(){const n=Date.now();return (R.active+(R.state==='running'?n-R.resumeAt-apIdle(n):0))/1000}
 function kalman(lat,lng,acc,t,spd){ // simple 2D Kalman on lat/lng in meters variance
   const Q=spd!=null&&spd>=0?Math.max(1.5,Math.min(6,spd*1.2)):3; acc=Math.max(acc||10,3);
   if(!R.kf){R.kf={lat,lng,v:acc*acc,t};return [lat,lng]}
@@ -3147,12 +3165,12 @@ function onFix(pos){
   const [la,ln]=kalman(c.latitude,c.longitude,c.accuracy,t,c.speed);
   const p=[+la.toFixed(6),+ln.toFixed(6),t,c.altitude!=null?Math.round(c.altitude*10)/10:null];
   const last=R.pts[R.pts.length-1];
-  if(!last){R.pts.push(p);return}
+  if(!last){R.pts.push(p);R.lastMove=Date.now();return}
   const d=hav(last,p),dt=(t-last[2])/1000;if(dt<=0)return;
   const v=d/dt;if(v>11)return; // spike: faster than a sprinter
   if(c.speed!=null&&c.speed>=0&&dt<10&&v>Math.max(4,c.speed*2.5)+2)return; // the jump disagrees with the speed the phone measured
   if(d<Math.max(2.5,c.accuracy*.2)){R.lastGood=t;return} // jitter
-  if(S.settings.autoPause&&v<.45&&dt>8&&dt<60){R.active-=Math.min(dt*1000,Date.now()-R.resumeAt);}
+  {const id=apIdle(Date.now());if(id>0)R.active-=id;R.lastMove=Date.now()}
   // coming back from a gap (phone locked, app in background, tunnel): swap the pace estimate for the real path.
   // The straight line is the shortest you could have gone, so keep the estimate when it is plausibly a curved route.
   if(R.gapEst){const est=R.gapEst;R.dist-=est;R.gapEst=0;R.dist+=Math.max(d,Math.min(est,d*1.5));R.gaps=(R.gaps||0)+1;p.push(1)}else R.dist+=d;
@@ -3239,12 +3257,12 @@ function runTick(){
   set('imTime',fmtDurLong(sec));set('imDist',fmtDist(R.dist));set('imCal',cal);set('imPace',fmtPace(pace));set('imDu',uName());set('imPu','/'+uName());
   set('rhTime',fmtDurLong(sec));set('rhDist',fmtDist(R.dist));set('rhCal',cal);set('rhPace',fmtPace(pace));
   set('imClock',new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}));
-  if(!$('#immersive').hidden){const im=$('#immersive');drawRoute($('#imCanvas'),R.pts.length?R.pts:(R.here?[R.here]:[]),{live:true,area:areaBetween(im,$('.im-stats',im),$('.im-ctrl',im),.1),lw:5})}
+  if(!$('#immersive').hidden){const im=$('#immersive');drawRoute($('#imCanvas'),R.mode==='indoor'?[]:(R.pts.length?R.pts:(R.here?[R.here]:[])),{live:true,area:areaBetween(im,$('.im-stats',im),$('.im-ctrl',im),.1),lw:5})}
   if($('#rhMap'))drawHero();
 }
 ACT.pauseRun=()=>{if(R.lock)return;
-  if(R.state==='running'){R.active+=Date.now()-R.resumeAt;R.state='paused';if(R.mode==='demo')clearInterval(R.demo)}
-  else if(R.state==='paused'){R.state='running';R.resumeAt=Date.now();R.kf=null;const l=R.pts[R.pts.length-1];if(l)l[2]=Date.now();if(R.mode==='demo')demoStart()}
+  if(R.state==='running'){R.active+=Date.now()-R.resumeAt-apIdle(Date.now());R.state='paused';if(R.mode==='demo')clearInterval(R.demo)}
+  else if(R.state==='paused'){R.state='running';R.resumeAt=Date.now();R.lastMove=Date.now();R.kf=null;const l=R.pts[R.pts.length-1];if(l)l[2]=Date.now();if(R.mode==='demo')demoStart()}
   syncPauseBtns();runTick()};
 function syncPauseBtns(){const p=R.state==='paused';$$('[data-act=pauseRun]').forEach(b=>{b.innerHTML=p?ICON.play:ICON.pause;b.classList.toggle('go',p);b.setAttribute('aria-label',p?'Resume':'Pause')})}
 ACT.lockToggle=b=>{R.lock=!R.lock;b.classList.toggle('go',R.lock);toast(R.lock?'Controls locked. Tap the lock again to unlock.':'Controls unlocked')};
@@ -3254,14 +3272,14 @@ ACT.stopRun=()=>{if(R.lock){toast('Unlock controls first');return}
    <div class="grid2"><button class="btn soft" data-act="closeSheet">Keep going</button><button class="btn" data-act="finishRun">Finish</button></div>`)};
 ACT.finishRun=()=>{
   closeSheet();if(R.watch!=null)navigator.geolocation.clearWatch(R.watch);R.watch=null;clearInterval(R.tick);clearInterval(R.demo);wakeLock(false);motionStop();stopKeepAlive();clearLive();setTimeout(()=>pushLive(true),300);
-  if(R.state==='running')R.active+=Date.now()-R.resumeAt;
+  if(R.state==='running')R.active+=Date.now()-R.resumeAt-apIdle(Date.now());
   const run={id:rid(10),start:R.start,end:Date.now(),dur:Math.round(R.active/1000),dist:Math.round(R.dist),elev:Math.round(R.elev),pts:R.pts.map(p=>[p[0],p[1],Math.round((p[2]-R.start)/1000),p[3]]),splits:R.splits.map(Math.round),src:R.mode==='indoor'?(R.estSrc==='steps'?'steps':'est'):R.mode,est:R.estimated&&R.mode==='gps'?1:0,steps:MOT.steps||0,u:Date.now()};
   {const hs=hrStats(R.hr);if(hs){run.hr=R.hr.slice();run.hrAvg=hs.avg;run.hrMax=hs.max}}
   const demo=R.mode==='demo';
   R.state='idle';$('#immersive').hidden=true;syncPauseBtns();
   if(demo){toast('Demo finished. Nothing was saved.');runSummary(Object.assign(run,{cal:Math.round((S.profile.weight||70)*run.dist/1000*1.036)}),{demo:true});return}
   if(run.dur<10){toast('Run too short to save');rerender();return}
-  saveRun(run);
+  reviewRun(run);
 };
 function saveRun(run){const before=recordSnap();if(!run.name)run.name=autoRunName(run);run.cal=Math.round((S.profile.weight||70)*run.dist/1000*1.036);S.runs.unshift(run);S.runs.sort((a,b)=>b.start-a.start);save('runs');rerender();runSummary(run,{fresh:true});setTimeout(()=>celebrateDiff(before),700)}
 // demo route: a loop through a fake neighbourhood
@@ -3297,8 +3315,9 @@ $('#gpxFile')?.addEventListener('change',async e=>{const f=e.target.files[0];e.t
 function runSummary(run,o={}){
   const pace=paceOf(run);
   const splitRows=(run.splits||[]).map((s,i)=>{const mx=Math.max(...run.splits);return `<tr><td>${i+1}</td><td class="num">${fmtPace(s)}</td><td style="width:50%"><span class="bar" style="width:${Math.round(s/mx*100)}%;opacity:${(.45+.55*(1-(s-Math.min(...run.splits))/(mx-Math.min(...run.splits)+1))).toFixed(2)}"></span></td></tr>`}).join('');
-  openSheet(o.fresh?'Run saved':relDate(run.start),`
-   <button class="run-name" data-act="renameRun" data-id="${run.id}" ${o.demo?'disabled':''}><span><small>${o.fresh?'Named automatically · tap to rename':'Run name · tap to rename'}</small><b>${esc(runName(run))}</b></span>${ICON.pen}</button>
+  const pending=!!(S.pendingRun&&S.pendingRun.id===run.id);
+  openSheet(pending?'Save this run?':o.fresh?'Run saved':relDate(run.start),`
+   <button class="run-name" data-act="renameRun" data-id="${run.id}" ${o.demo?'disabled':''}><span><small>${o.fresh||pending?'Named automatically · tap to rename':'Run name · tap to rename'}</small><b>${esc(runName(run))}</b></span>${ICON.pen}</button>
    ${trailOf(run)?`<div class="runhero sum-map" style="min-height:240px"><canvas class="map" id="sumMap"></canvas><span class="map-attr" hidden>© OpenStreetMap contributors</span></div>`:''}
    <div class="kpis num">
     <button class="kpi kpi-edit" ${o.demo?'disabled':`data-act="editDist" data-id="${run.id}"`}><small>Distance ${o.demo?'':'· Edit'}</small><b>${fmtDist(run.dist)} ${uName()}</b></button>
@@ -3310,20 +3329,21 @@ function runSummary(run,o={}){
    </div>
    ${run.hr&&run.hr.length>1?`<div class="hr-box"><div class="lbl">Heart rate</div>${hrGraphSvg(run.hr)}</div>`:''}
    ${splitRows?`<div><div class="lbl" style="margin-bottom:4px">Splits per ${uName()}</div><div class="tblwrap"><table class="splits"><thead><tr><th>${uName().toUpperCase()}</th><th>Pace</th><th></th></tr></thead><tbody>${splitRows}</tbody></table></div></div>`:''}
-   <div class="grid2"><button class="btn soft" data-act="shareRun" data-id="${run.id}">${ICON.link} Share run</button><button class="btn soft" data-act="shareTrail" data-id="${run.id}">${ICON.tree} Share trail</button></div>
-   <div class="grid2"><button class="btn" data-act="overlay" data-id="${run.id}">${ICON.dl} Overlay</button>${o.demo?'<button class="btn soft" data-act="closeSheet">Close</button>':`<button class="btn soft" data-act="delRun" data-id="${run.id}">${ICON.trash} Delete</button>`}</div>`,
+   ${pending?`<p class="muted" style="font-size:13px;text-align:center;margin:0">Save it to add it to your stats and unlock any medals you earned.</p>
+   <div class="grid2"><button class="btn danger-btn" data-act="discardRun">${ICON.trash} Delete</button><button class="btn" data-act="savePending">${ICON.check} Save run</button></div>`:`<div class="grid2"><button class="btn soft" data-act="shareRun" data-id="${run.id}">${ICON.link} Share run</button><button class="btn soft" data-act="shareTrail" data-id="${run.id}">${ICON.tree} Share trail</button></div>
+   <div class="grid2"><button class="btn" data-act="overlay" data-id="${run.id}">${ICON.dl} Overlay</button>${o.demo?'<button class="btn soft" data-act="closeSheet">Close</button>':`<button class="btn danger-btn" data-act="delRun" data-id="${run.id}">${ICON.trash} Delete</button>`}</div>`}`,
   el=>{const c=$('#sumMap',el);const tr=trailOf(run);if(c&&tr){const go=()=>{drawRoute(c,tr.pts);const a=$('.map-attr',el);if(a)a.hidden=c.dataset.map!=='on'};requestAnimationFrame(go);TILES.waiting.add(()=>setTimeout(go,50))}});
   LAST_RUN=run;
 }
 let LAST_RUN=null;
-ACT.editDist=b=>{const run=S.runs.find(x=>x.id===b.dataset.id);if(!run)return;
+ACT.editDist=b=>{const run=findRun(b.dataset.id);if(!run)return;
   openSheet('Edit distance',`<p class="muted">We tracked ${fmtDist(run.dist)} ${uName()} in ${fmtDur(run.dur)}. Change it if your treadmill or watch shows something different.</p>
   <div class="field"><label for="edD">Distance (${uName()})</label><input class="inp" id="edD" type="number" step="0.01" min="0" inputmode="decimal" value="${fmtDist(run.dist)}"></div>
   <div class="grid2"><button class="btn soft" data-act="closeSheet">Cancel</button><button class="btn" id="edSave">Save</button></div>`,el=>{const i=$('#edD',el);setTimeout(()=>{i.focus();i.select()},120);
    $('#edSave',el).onclick=()=>{const v=parseFloat(i.value);if(!(v>0)){toast('Enter a distance above zero');return}const nd=Math.round(v*U());
      if(run.dist>0&&run.splits&&run.splits.length){const k=run.dist/nd;run.splits=run.splits.map(x=>Math.round(x*k))}
      run.dist=nd;run.cal=Math.round((S.profile.weight||70)*nd/1000*1.036);run.edited=1;run.u=Date.now();delete S.sync.runs[run.id];save('runs');closeSheet();rerender();runSummary(run);toast('Distance updated')}})};
-ACT.renameRun=b=>{const run=S.runs.find(x=>x.id===b.dataset.id);if(!run)return;
+ACT.renameRun=b=>{const run=findRun(b.dataset.id);if(!run)return;
   openSheet('Rename run',`<div class="field"><label for="rnN">Run name</label><input class="inp" id="rnN" maxlength="60" value="${esc(runName(run))}"></div>
   <p class="muted" style="font-size:12.5px">Suggested: ${esc(autoRunName(run))}</p>
   <div class="grid2"><button class="btn soft" id="rnAuto">Use suggestion</button><button class="btn" id="rnSave">Save</button></div>`,el=>{const i=$('#rnN',el);setTimeout(()=>{i.focus();i.select()},120);
@@ -3378,7 +3398,7 @@ function drawOverlay(c,run,layout,prog,live){
   ctx.font=`500 ${26*s}px Figtree, system-ui, sans-serif`;ctx.globalAlpha=.7;ctx.fillText(new Date(run.start).toLocaleDateString([], {day:'numeric',month:'short',year:'numeric'}),left+250*s,y+400*s);ctx.restore()}
 
 function drawHero(){const c=$('#rhMap');if(!c)return;const hero=c.parentElement;const live=R.state!=='idle';const last=S.runs.find(r=>trailOf(r));if(!R.here){const lp=lastPos();if(lp)R.here=lp.p}
-  const here=R.here?[R.here]:[];drawRoute(c,live?(R.pts.length?R.pts:here):(last?last.pts:here),{live,area:areaBetween(hero,$('.rh-stats',hero),$('.rh-ctrl',hero),.1)});
+  const here=R.here?[R.here]:[];drawRoute(c,live?(R.mode==='indoor'?[]:(R.pts.length?R.pts:here)):(last?last.pts:here),{live,area:areaBetween(hero,$('.rh-stats',hero),$('.rh-ctrl',hero),.1)});
   const a=$('#rhAttr');if(a){a.hidden=c.dataset.map!=='on';a.textContent='© OpenStreetMap contributors'}
   const b=$('.rh-mapbtn');if(b){b.classList.toggle('on',mapOn());b.setAttribute('aria-pressed',mapOn());b.title=!mapOn()?'Map background off':c.dataset.map==='blocked'?'Map tiles cannot load here':c.dataset.map==='on'?'Map background on':'Map shows once a run has GPS points'}}
 TILES.onState=()=>drawHero();
@@ -3498,7 +3518,7 @@ function jTrain(el){
   </div></div>`;
   wirePr(el);wireWt(el);paintHr();
   myMemberships();
-  if(L){renderExList();clearInterval(liveTick);liveTick=setInterval(()=>{const t=$('#gymTimer');if(!t||!S.live){clearInterval(liveTick);return}t.textContent=fmtDurLong((Date.now()-S.live.start)/1000)},1000)}
+  if(L){renderExList();clearInterval(liveTick);liveTick=setInterval(()=>{const t=$('#gymTimer');if(!t||!S.live){clearInterval(liveTick);return}t.textContent=fmtDurLong(WK.on&&S.live?wkSec():(Date.now()-S.live.start)/1000)},250)}
 }
 function lineGraph(W){const w=320,h=150,pl=24,pr=10,pt=14,pb=26;const mx=Math.max(2,...W.map(x=>Math.max(x.gym,x.run)));const n=W.length;
   const X=i=>pl+i*(w-pl-pr)/(n-1),Y=v=>pt+(1-v/mx)*(h-pt-pb);
@@ -3909,14 +3929,14 @@ function snapshotCode(){const c=publicCard();const s={n:c.name,i:S.profile.id,x:
 function makeQR(el,text){el.innerHTML='';if(!window.QRCode){try{const m=QRLite.make(text,text.length>600?'L':'M');const n=m.length,q=2,sz=464,c=document.createElement('canvas');c.width=c.height=sz;const x=c.getContext('2d');x.fillStyle='#ffffff';x.fillRect(0,0,sz,sz);const cell=sz/(n+q*2);x.fillStyle='#120D0A';
     for(let r=0;r<n;r++)for(let k=0;k<n;k++)if(m[r][k])x.fillRect(Math.floor((k+q)*cell),Math.floor((r+q)*cell),Math.ceil(cell)+.5,Math.ceil(cell)+.5);c.setAttribute('role','img');c.setAttribute('aria-label','QR code');el.appendChild(c)}catch(e){el.innerHTML='<p style="color:#333;font-size:12px;text-align:center">This code is too long for a QR. Share the text below.</p>'}return}
   try{new QRCode(el,{text,width:464,height:464,colorDark:'#120D0A',colorLight:'#ffffff',correctLevel:text.length>600?QRCode.CorrectLevel.L:QRCode.CorrectLevel.M})}catch(e){el.innerHTML='<p style="color:#333;font-size:12px">This code is too long for a QR. Share the text below.</p>'}}
-ACT.myQR=()=>{const live=canWrite();let mode=live?'live':'snap';let fc=S.profile.fcode||'';
+ACT.myQR=()=>{const RLY=!NET.db&&relayOk();const live=canWrite()||RLY;let mode=live?'live':'snap';let fc=RLY?(S.rfriend&&S.rfriend.code||''):(S.profile.fcode||'');
   openSheet('Your JUNGLE PARK code',`<div class="seg" id="qrMode"><button data-q="live" class="${mode==='live'?'on':''}" ${live?'':'disabled'}>Live friend code</button><button data-q="snap" class="${mode==='snap'?'on':''}">Offline snapshot</button></div>
    <div class="qrbox" id="qrBox"></div><div class="code-big num" id="qrCode" hidden></div><p class="muted" id="qrHelp" style="font-size:13.5px;text-align:center"></p>
-   <div class="codebox" id="qrText" hidden></div><div class="grid2"><button class="btn soft" id="qrCopy">Copy code</button><button class="btn soft" id="qrShare">${ICON.share} Share</button></div>
-   ${live?'':netNote('Live friend codes')}`,el=>{
+   <div class="codebox" id="qrText" hidden></div><div class="grid2"><button class="btn soft" id="qrCopy">${ICON.copy} Copy code</button><button class="btn soft" id="qrShare">${ICON.share} Share</button></div>
+   ${live?'':syncNote('Live friend codes')}`,el=>{
     const draw=()=>{const box=$('#qrBox',el),cb=$('#qrCode',el),tx=$('#qrText',el);
-      if(mode==='live'){tx.hidden=true;cb.hidden=false;if(!fc){cb.textContent='···-···';box.innerHTML='<p class="muted" style="color:#555;font-size:13px;text-align:center">Making your code…</p>';friendCode().then(c=>{fc=c;if(el.isConnected&&mode==='live'){if(c)draw();else{box.innerHTML='<p style="color:#555;font-size:13px;text-align:center">Could not make a code right now.</p>'}}});}
-        else{cb.textContent=fmtCode(fc);makeQR(box,codeQrText(fc))}
+      if(mode==='live'){tx.hidden=true;cb.hidden=false;if(!fc){cb.textContent='···-···';box.innerHTML='<p class="muted" style="color:#555;font-size:13px;text-align:center">Making your code…</p>';(RLY?rFriendCode():friendCode()).then(c=>{fc=c;if(el.isConnected&&mode==='live'){if(c)draw();else{box.innerHTML='<p style="color:#555;font-size:13px;text-align:center">Could not make a code right now.</p>'}}});}
+        else{cb.textContent=fmtCode(fc);makeQR(box,RLY?rFriendQR():codeQrText(fc));if(RLY){rAnnounceCode().catch(()=>{});rPushCard()}}
         $('#qrHelp',el).textContent='Friends scan this or type the code in their app. You both appear on each other\'s leaderboard and stay in sync.'}
       else{const t=snapshotCode();cb.hidden=true;tx.hidden=false;tx.textContent=t;makeQR(box,t);$('#qrHelp',el).textContent='A one-time copy of your current stats. Works with no internet: a friend scans it in their app to compare records.'}};
     draw();$('#qrMode',el).onclick=e=>{const b=e.target.closest('[data-q]');if(!b||b.disabled)return;mode=b.dataset.q;$$('#qrMode button',el).forEach(x=>x.classList.toggle('on',x===b));draw()};
@@ -3935,13 +3955,14 @@ ACT.scan=b=>{let stream=null,raf=0;if(!(b&&b._hook))SCAN_HOOK=null;
       const c=document.createElement('canvas'),ctx=c.getContext('2d',{willReadFrequently:true});const loop=()=>{if(!stream)return;if(v.videoWidth){c.width=v.videoWidth;c.height=v.videoHeight;ctx.drawImage(v,0,0);const r=jsQR(ctx.getImageData(0,0,c.width,c.height).data,c.width,c.height);if(r&&r.data){stop();closeSheet();handleScan(r.data);return}}raf=requestAnimationFrame(loop)};loop()}}
     catch(e){v.hidden=true}
     $('#scPhoto',el).onclick=()=>$('#qrFile').click();
-    const sct=$('#scTxt',el);sct.oninput=()=>{const v=sct.value;if(/^[A-Za-z0-9-]{0,7}$/.test(v)){let x=v.toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,6);sct.value=x.length>3?x.slice(0,3)+'-'+x.slice(3):x}};
+    const sct=$('#scTxt',el);const SL=NET.db?6:8,SH=SL/2;sct.placeholder=NET.db?'ABC-123':'ABCD-1234';sct.oninput=()=>{const v=sct.value;if(/^[A-Za-z0-9-]{0,9}$/.test(v)){let x=v.toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,SL);sct.value=x.length>SH?x.slice(0,SH)+'-'+x.slice(SH):x}};
     const goT=()=>{const t=sct.value.trim();if(t){stop();closeSheet();handleScan(t)}};$('#scGo',el).onclick=goT;sct.onkeydown=e=>{if(e.key==='Enter')goT()};
   })};
 $('#qrFile')?.addEventListener('change',async e=>{const f=e.target.files[0];e.target.value='';if(!f)return;if(!window.jsQR){toast('QR reader did not load. Paste the code instead.');return}
   try{const img=await createImageBitmap(f);const s=Math.min(1,1400/Math.max(img.width,img.height));const c=document.createElement('canvas');c.width=img.width*s;c.height=img.height*s;const ctx=c.getContext('2d');ctx.drawImage(img,0,0,c.width,c.height);
     const r=jsQR(ctx.getImageData(0,0,c.width,c.height).data,c.width,c.height,{inversionAttempts:'attemptBoth'});if(!r){toast('No QR code found in that photo. Try again closer.');return}closeSheet();handleScan(r.data)}catch(err){toast('Could not read that image')}});
 function handleScan(txt){txt=String(txt).trim();if(SCAN_HOOK){const h=SCAN_HOOK;SCAN_HOOK=null;h.fn(txt);return}
+  if(relayScan(txt))return;
   if(parseCode(txt)){useCode(txt);return}
   const bz=txt.match(/#(g|i|c)-([a-z0-9]{6,24})/);if(bz){({g:openGymLink,i:openInvite,c:openCoachLink})[bz[1]](bz[2]);return}
   let m=txt.match(/#(add|sync)-([a-z0-9]{6,20})/);if(m){if(m[1]==='add')addLiveFriend(m[2]);else linkDevicePrompt(m[2]);return}
@@ -3973,12 +3994,12 @@ async function linkProfile(id){
   if(!s.exists)throw {msg:'That profile has not synced yet. Open the app on the other device first.'};
   const old=S.profile.id;S.profile.id=id;S.sync={pushedCore:'',pushedPub:'',runs:{}};S.ts={};mergeCore(JSON.parse(s.data().core));S.profile.id=id;S.onboarded=true;S.devices=S.devices||{};delete S.devices[DEV_ID];touchDevice(true);
   S.friends=S.friends.filter(f=>f.id!==id&&f.id!==old);saveNow();startSync();watchFriendInbox();subscribeBuddies();applyTheme();scheduleSync();closeSheet();rerender()}
-ACT.deviceQR=()=>{if(!canWrite()){toast('Signing in on another device needs a live connection');return}
+ACT.deviceQR=()=>{if(!NET.db){if(relayOk())rDeviceQR();else toast('Signing in on another device needs a connection');return}if(!canWrite()){toast('Signing in on another device needs a live connection');return}
   let code='',exp=0,tm=0;
   openSheet('Sign in on another device',`<p class="muted">On the other phone, tablet or computer, open JUNGLE PARK and tap <b>Sign in from another device</b>. Scan this QR code or type the code. It signs that device straight into your account.</p>
    <div class="qrbox" id="dqr"><p class="muted" style="color:#555;font-size:13px;text-align:center">Making your code…</p></div>
    <div class="code-big num" id="dCode" aria-live="polite">···-···</div><p class="muted code-exp" id="dExp"></p>
-   <div class="grid2"><button class="btn soft" id="dCopy">Copy code</button><button class="btn soft" id="dNew">${ICON.sync} New code</button></div>
+   <div class="grid2"><button class="btn soft" id="dCopy">${ICON.copy} Copy code</button><button class="btn soft" id="dNew">${ICON.sync} New code</button></div>
    <p class="muted" style="font-size:12px">Keep this code private: whoever uses it can see and edit your data. It works once and expires after 10 minutes.</p>`,el=>{
     const make=async()=>{$('#dCode',el).textContent='···-···';try{code=await claimCode('d',DEV_TTL);exp=Date.now()+DEV_TTL;if(!el.isConnected)return;$('#dCode',el).textContent=fmtCode(code);makeQR($('#dqr',el),codeQrText(code))}catch(e){toast(e&&e.msg||'Could not make a code');$('#dqr',el).innerHTML='<p style="color:#555;font-size:13px;text-align:center">No code. Check your connection and tap New code.</p>'}};
     const tick=()=>{if(!el.isConnected){clearInterval(tm);return}const left=Math.max(0,exp-Date.now());const e=$('#dExp',el);if(!code){e.textContent='';return}if(!left){make();return}e.textContent='Expires in '+Math.floor(left/60000)+':'+String(Math.floor(left/1000)%60).padStart(2,'0')};
@@ -4152,9 +4173,9 @@ ACT.signIn=()=>openSheet('Sign in',`<p class="muted">Use the phone number and pa
 ACT.setPw=()=>{const ids=S.loginIds||[];openSheet(ids.length?'Change password':'Create a password',`<p class="muted">Sign in on any phone, tablet or computer with this phone number and password.</p>${netNote('Saving a password')}
   <div class="field"><label for="spId">Phone number</label><input class="inp" id="spId" type="tel" inputmode="tel" value="${esc((ids.find(x=>!x.includes('@'))||''))}" autocomplete="username tel" placeholder="+251 9…"></div>${pwFields('sp')}
   <button class="btn block" id="spGo" data-net="write">Save password</button>`,el=>{wirePw(el,'sp');$('#spGo',el).onclick=async()=>{if(!needOnline('Saving a password'))return;try{const pw=readPw(el,'sp');await setPassword([$('#spId',el).value],pw);closeSheet();rerender();toast('Password saved')}catch(e){toast(e&&e.msg||'Could not save the password')}}})};
-function accountCard(){return `<div class="card acct-card"><div class="watch-h"><span class="watch-ico" style="background:var(--soft);color:var(--accent)">${ICON.lock}</span><div><h3>Account</h3><small class="muted">Sign in on another device with a QR code or a 6-character code</small></div></div>
-  ${netNote('Signing in on another device')}
-  <div class="grid2"><button class="btn" data-net="write" data-act="deviceQR">${ICON.qr} Show sign-in code</button><button class="btn soft" data-act="signInOther">${ICON.scan} Sign in from another account</button></div></div>`}
+function accountCard(){return `<div class="card acct-card"><div class="watch-h"><span class="watch-ico" style="background:var(--soft);color:var(--accent)">${ICON.lock}</span><div><h3>Account</h3><small class="muted">Sign in on another device with a QR code or a ${NET.db?6:8}-character code</small></div></div>
+  ${syncNote('Signing in on another device')}
+  <div class="grid2"><button class="btn" data-net="relay" data-act="deviceQR">${ICON.qr} Show sign-in code</button><button class="btn soft" data-act="signInOther">${ICON.scan} Sign in from another account</button></div></div>`}
 
 // ---------- gym owner ----------
 const BIZ={tab:'gym',gid:null,members:[],checkins:[],gym:null,unsub:[],filter:'all',q:'',clients:[],cunsub:null,state:'idle'};
@@ -4953,8 +4974,8 @@ function watchMyPhotos(){if(!NET.db||PH.unsub)return;PH.unsub=NET.db.collection(
 async function imgPair(file){const big=await resizeImage(file,1000);const th=await resizeImage(file,240);return {img:big,th}}
 function pickImage(cb,capture){const fi=document.createElement('input');fi.type='file';fi.accept='image/*';if(capture)fi.setAttribute('capture','environment');fi.onchange=()=>{const f=fi.files[0];if(f)cb(f)};fi.click()}
 function photoGrid(L,opt={}){if(!L||!L.length)return `<div class="empty">${ICON.cam||''}<span>${opt.empty||'No progress photos yet.'}</span></div>`;
-  return `<div class="ph-grid">${L.slice(0,opt.max||12).map(p=>`<button class="ph-tile" data-act="${opt.act||'photoOpen'}" data-id="${p._id}" ${opt.uid?`data-u="${esc(opt.uid)}"`:''} aria-label="Progress photo ${fmtDate(p.t)}"><img src="${p.th||p.img}" alt="" loading="lazy" decoding="async"><span class="ph-cap">${new Date(p.t).toLocaleDateString([], {day:'numeric',month:'short'})}${p.pose?' · '+p.pose:''}</span>${p.by==='coach'?'<span class="ph-by">Coach</span>':''}${opt.own&&p.shared?'<span class="ph-sh" title="Shared with your coach">'+(ICON.share||'↗')+'</span>':''}</button>`).join('')}</div>`}
-function photosCard(){watchMyPhotos();let L=PH.mine;if(!L){try{L=JSON.parse(localStorage.getItem('jp:phth')||'[]')}catch(e){L=[]}}const coach=hasCoach();
+  return `<div class="ph-grid">${L.slice(0,opt.max||12).map(p=>`<button class="ph-tile" data-act="${opt.act||'photoOpen'}" data-id="${p._id}" ${opt.uid?`data-u="${esc(opt.uid)}"`:''} aria-label="Progress photo ${fmtDate(p.t)}"><img src="${p.th||p.img}" alt="" loading="lazy" decoding="async"><span class="ph-cap">${new Date(p.t).toLocaleDateString([], {day:'numeric',month:'short'})}${p.pose?' · '+p.pose:''}</span>${p.by==='coach'?'<span class="ph-by">Coach</span>':''}${opt.own&&p.shared?'<span class="ph-sh" title="Shared with your coach">'+(ICON.share||'↗')+'</span>':''}${opt.own&&p.pending?'<span class="ph-pend" title="Saved on this device, waiting to sync">'+ICON.sync+'</span>':''}</button>`).join('')}</div>`}
+function photosCard(){watchMyPhotos();let L=myPhotos();if(!L.length&&!PH.mine&&!PDB.ready){try{L=JSON.parse(localStorage.getItem('jp:phth')||'[]')}catch(e){L=[]}}const coach=hasCoach();
   return `<div class="card ph-card${fd('j-photos')}"><div class="card-h"><div><h3>Progress photos</h3><small class="muted">${L.length?L.length+' photo'+(L.length===1?'':'s')+(coach?' · shared ones go to your coach':''):'Same pose, same light, every few weeks'}</small></div><button class="btn sm" data-act="photoAdd">${ICON.cam||ICON.plus} Add</button></div>
    ${photoGrid(L,{own:true,empty:'Take a front, side and back photo today. You will be glad you did.'})}${L.length>1?`<button class="btn soft sm" data-act="photoCompare" style="margin-top:10px">Compare first and latest</button>`:''}</div>`}
 // add (yourself, or a coach for a client)
@@ -4966,23 +4987,31 @@ function photoForm({title,uid,byCoach}){let pair=null;const coach=hasCoach();
    ${byCoach?'<p class="muted" style="font-size:13px">Saved to your client\'s progress photos and visible to them.</p>':coach?'<label class="agree"><input type="checkbox" id="phSh" '+(S.settings.sharePhotos!==false?'checked':'')+'> Share with my coach</label>':''}
    <button class="btn block" id="phGo" disabled>${ICON.check} Save photo</button>`,el=>{
     let pose='front';$('#phPose',el).onclick=e=>{const b=e.target.closest('[data-p]');if(!b)return;pose=b.dataset.p;$$('#phPose button',el).forEach(x=>x.classList.toggle('on',x===b))};
-    $('#phPick',el).onclick=()=>pickImage(async f=>{try{pair=await imgPair(f);$('#phPick',el).innerHTML=`<img src="${pair.img}" alt="Selected photo">`;$('#phGo',el).disabled=false}catch(e){toast('Could not read that image')}},true);
-    $('#phGo',el).onclick=async e=>{if(!pair)return;if(!needOnline('Saving a photo'))return;const sh=byCoach?true:$('#phSh',el)?$('#phSh',el).checked:false;if(!byCoach&&$('#phSh',el)){S.settings.sharePhotos=sh;save('settings')}
+    $('#phPick',el).onclick=()=>pickImage(async f=>{try{pair=await imgPair(f);$('#phPick',el).innerHTML=`<img src="${pair.img}" alt="Selected photo">`;$('#phGo',el).disabled=false}catch(e){toast('Could not read that image')}});
+    $('#phGo',el).onclick=async e=>{if(!pair)return;const sh=byCoach?true:$('#phSh',el)?$('#phSh',el).checked:false;if(!byCoach&&$('#phSh',el)){S.settings.sharePhotos=sh;save('settings')}
       e.currentTarget.disabled=true;e.currentTarget.textContent='Saving…';
       const d={img:pair.img,th:pair.th,t:fromDateInput($('#phD',el).value)||Date.now(),pose,kg:+$('#phKg',el).value||null,note:$('#phN',el).value.trim(),shared:sh,by:byCoach?'coach':'me',coach:byCoach?coachId():'',ts:Date.now()};
-      try{await NET.db.doc(`prog/${uid}/p/${rid(10)}`).set(d);if(byCoach)await postUpdate(coachId(),uid,'Your coach added a progress photo for you.');else if(sh)myCoachIds().forEach(cid=>postUpdate(cid,uid,`${S.profile.name||'Your client'} shared a new progress photo.`));
-        closeSheet();toast('Photo saved');if(byCoach)setTimeout(()=>loadClientPhotos(uid),300)}catch(err){dbErr(err);toast(err&&/size|large/i.test(String(err.message||err.code))?'That photo is too large':'Could not save right now');e.currentTarget.disabled=false;e.currentTarget.textContent='Save photo'}}})}
+      const btn=e.currentTarget;const p=Object.assign(d,{_id:rid(10),uid,pending:1});
+      try{await pdbPut(p)}catch(err){toast('Could not save on this device. Free up some storage and try again.');btn.disabled=false;btn.innerHTML=ICON.check+' Save photo';return}
+      PDB.list.push(p);closeSheet();
+      const up=await uploadPhoto(p);if(uid===S.profile.id)relayPhoto(p);
+      toast(up?'Photo saved':(byCoach?'Photo saved on this device. It goes to your client when you are back online.':'Photo saved on this device.'+((hasCoach()&&sh)||(typeof relayOn==='function'&&relayOn())?' It syncs to your coach and other devices when you are online.':'')));
+      if(byCoach)setTimeout(()=>loadClientPhotos(uid),300);if(cur==='jungle')RENDER.jungle()}})}
 ACT.photoAdd=()=>photoForm({title:'Add progress photo',uid:S.profile.id});
-ACT.photoOpen=b=>{const p=(PH.mine||[]).find(x=>x._id===b.dataset.id);if(!p)return;const coach=hasCoach();
-  openSheet(fmtDate(p.t),`<img class="ph-full" src="${p.img||p.th}" alt="Progress photo, ${p.pose||''}"><p class="muted">${[p.pose&&p.pose[0].toUpperCase()+p.pose.slice(1),p.kg?p.kg+' kg':'',p.by==='coach'?'taken by your coach':''].filter(Boolean).join(' · ')}</p>${p.note?`<p>${esc(p.note)}</p>`:''}
+ACT.photoOpen=b=>{const p=myPhotos().find(x=>x._id===b.dataset.id);if(!p)return;const coach=hasCoach();
+  openSheet(fmtDate(p.t),`<img class="ph-full" src="${p.img||p.th}" alt="Progress photo, ${p.pose||''}"><p class="muted">${[p.pose&&p.pose[0].toUpperCase()+p.pose.slice(1),p.kg?p.kg+' kg':'',p.by==='coach'?'taken by your coach':'',p.pending?'saved on this device, syncs when online':''].filter(Boolean).join(' · ')}</p>${p.note?`<p>${esc(p.note)}</p>`:''}
    ${coach&&p.by!=='coach'?`<label class="agree"><input type="checkbox" id="phShT" ${p.shared?'checked':''}> Shared with my coach</label>`:''}<button class="btn soft danger-btn block" id="phDel" style="margin-top:10px">Delete photo</button>`,el=>{
-    $('#phShT',el)?.addEventListener('change',async e=>{try{await NET.db.doc(`prog/${S.profile.id}/p/${p._id}`).update({shared:e.target.checked});toast(e.target.checked?'Shared with your coach':'Now private')}catch(err){dbErr(err)}});
-    $('#phDel',el).onclick=async e=>{const bt=e.currentTarget;if(bt.dataset.sure!=='1'){bt.dataset.sure='1';bt.textContent='Tap again to delete';return}try{await NET.db.doc(`prog/${S.profile.id}/p/${p._id}`).delete();closeSheet();toast('Photo deleted')}catch(err){dbErr(err)}}})};
+    $('#phShT',el)?.addEventListener('change',async e=>{const on=e.target.checked;const loc=PDB.list.find(x=>x._id===p._id);if(loc){loc.shared=on;await pdbPut(loc)}
+      if(loc&&loc.pending){toast(on?'Will be shared with your coach when it syncs':'Kept private');return}
+      try{await NET.db.doc(`prog/${S.profile.id}/p/${p._id}`).update({shared:on});toast(on?'Shared with your coach':'Now private')}catch(err){dbErr(err);toast('Changing sharing needs a connection')}});
+    $('#phDel',el).onclick=async e=>{const bt=e.currentTarget;if(bt.dataset.sure!=='1'){bt.dataset.sure='1';bt.textContent='Tap again to delete';return}
+      S.phDel=S.phDel||{};S.phDel[p._id]=Date.now();const wasCloud=!p.pending||(PH.mine||[]).some(x=>x._id===p._id);await pdbDel(p._id);PDB.list=PDB.list.filter(x=>x._id!==p._id);
+      if(PH.mine)PH.mine=PH.mine.filter(x=>x._id!==p._id);if(wasCloud){S.phDelQ=S.phDelQ||{};S.phDelQ[p._id]=S.profile.id}save();closeSheet();toast('Photo deleted');flushPhotos();if(cur==='jungle')RENDER.jungle()}})};
 function compareSheet(L){const pose=POSES.map(p=>p[0]).find(k=>L.filter(p=>p.pose===k).length>1)||null;const set=pose?L.filter(p=>p.pose===pose):L;const a=set[set.length-1],b=set[0];
   openSheet('Compare',`<p class="muted">${pose?pose[0].toUpperCase()+pose.slice(1)+' · ':''}${fmtDate(a.t)} → ${fmtDate(b.t)} (${(w=>w<1?'same week':w===1?'1 week':w+' weeks')(Math.round((b.t-a.t)/864e5/7))})</p>
    <div class="cmp"><img src="${b.img||b.th}" alt="Latest"><div class="cmp-a" style="width:50%"><img src="${a.img||a.th}" alt="First"></div><input type="range" min="0" max="100" value="50" aria-label="Slide to compare" id="cmpR"><span class="cmp-l">Before</span><span class="cmp-r">Now</span></div>
    ${a.kg&&b.kg?`<p style="text-align:center;margin-top:8px"><b class="num">${a.kg} kg → ${b.kg} kg</b> <span class="muted">(${b.kg-a.kg>0?'+':''}${(b.kg-a.kg).toFixed(1)} kg)</span></p>`:''}`,el=>{const r=$('#cmpR',el),A=$('.cmp-a',el);r.oninput=()=>{A.style.width=r.value+'%'}})}
-ACT.photoCompare=()=>{const L=(PH.mine||[]);if(L.length>1)compareSheet(L)};
+ACT.photoCompare=()=>{const L=myPhotos();if(L.length>1)compareSheet(L)};
 // coach side
 async function loadClientPhotos(uid){if(!NET.db)return;try{const q=await NET.db.collection(`prog/${uid}/p`).get();PH.client[uid]=q.docs.map(d=>Object.assign({_id:d.id},d.data())).filter(p=>p.shared||p.coach===coachId()).sort((a,b)=>b.t-a.t)}catch(e){PH.client[uid]=[]}
   const box=document.querySelector(`.cl-ph[data-u="${uid}"] .cl-ph-g`);if(box)box.innerHTML=photoGrid(PH.client[uid],{act:'photoOpenC',uid,empty:'No shared photos yet. You can take one for them.'})+(PH.client[uid].length>1?`<button class="btn soft sm" data-act="photoCompareC" data-u="${esc(uid)}" style="margin-top:8px">Compare first and latest</button>`:'')}
@@ -6580,10 +6609,10 @@ RENDER.me=()=>{
    <div class="card"><h3 style="margin-bottom:6px">Devices &amp; sync</h3>
     <p class="muted" style="font-size:13.5px;margin-bottom:12px">No account. Your data is saved on this device and, when online, synced to every device you link by QR.</p>
     <div class="lbl" style="margin-bottom:4px">Linked devices</div><div class="list dev-list">${deviceRows()}</div>
-    ${netNote('Linking devices')}
-    <div class="grid2" style="margin-top:10px"><button class="btn" data-net="write" data-act="deviceQR">${ICON.qr} Link a device</button><button class="btn soft" data-act="signInOther">${ICON.scan} Enter a code</button></div>
+    ${syncNote('Linking devices')}${relayPanel()}
+    <div class="grid2" style="margin-top:10px"><button class="btn" data-net="relay" data-act="deviceQR">${ICON.qr} Link a device</button><button class="btn soft" data-act="signInOther">${ICON.scan} Enter a code</button></div>
     <div class="grid2" style="margin-top:10px"><button class="btn ghost" data-act="exportBackup">${ICON.dl} Backup file</button><button class="btn ghost" data-act="importBackup">Restore backup</button></div>
-    ${p.fcode?`<p class="muted" style="font-size:12px;margin-top:10px">Friend code: <span class="mono" style="user-select:all;font-weight:700">${fmtCode(p.fcode)}</span></p>`:''}</div>
+    ${(NET.db?p.fcode:S.rfriend&&S.rfriend.code)?`<p class="muted" style="font-size:12px;margin-top:10px">Friend code: <span class="mono" style="user-select:all;font-weight:700">${fmtCode(NET.db?p.fcode:S.rfriend.code)}</span></p>`:''}</div>
    <div class="card"><h3 style="margin-bottom:6px">Install</h3><p class="muted" style="font-size:13.5px">On iPhone, tap Share then Add to Home Screen. On Android, open the browser menu and choose Install app.</p><button class="btn soft sm" style="margin-top:10px" data-act="a2hs">${ICON.dl} Show install steps</button></div>
    ${devicesCard()}
    ${accountCard()}
@@ -6632,7 +6661,7 @@ ACT.renameDev=b=>{const id=b.dataset.id;const d=(S.devices||{})[id]||{n:autoDevi
 ACT.removeDev=b=>{const id=b.dataset.id;const d=(S.devices||{})[id]||{};
   openSheet('Remove device?',`<p>Remove <b>${esc(d.n||'this device')}</b> from your linked devices? It stops syncing with this profile the next time it goes online. Data already on it stays there.</p><div class="grid2"><button class="btn soft" data-act="closeSheet">Cancel</button><button class="btn danger-btn solid" id="dvRm">${ICON.trash} Remove</button></div>`,el=>{
    $('#dvRm',el).onclick=()=>{S.revoked=S.revoked||{};S.revoked[id]=Date.now();delete S.devices[id];save('devices');closeSheet();rerender();toast(online()?'Device removed':'Device removed. It will be unlinked when you are back online.')}})};
-ACT.unlinkMe=()=>openSheet('Unlink this device?',`<p>This device stops syncing with your other devices. Everything already here stays as a separate profile.</p><div class="grid2"><button class="btn soft" data-act="closeSheet">Cancel</button><button class="btn danger-btn solid" id="unl">Unlink</button></div>`,el=>{
+ACT.unlinkMe=()=>!NET.db?ACT.relayStop():openSheet('Unlink this device?',`<p>This device stops syncing with your other devices. Everything already here stays as a separate profile.</p><div class="grid2"><button class="btn soft" data-act="closeSheet">Cancel</button><button class="btn danger-btn solid" id="unl">Unlink</button></div>`,el=>{
    $('#unl',el).onclick=async()=>{S.revoked=S.revoked||{};S.revoked[DEV_ID]=Date.now();delete S.devices[DEV_ID];save('devices');try{await pushNow()}catch(e){}closeSheet();unlinkSelf(false)}});
 ACT.exportBackup=()=>saveFile(`jungle-park-backup-${new Date().toISOString().slice(0,10)}.json`,new Blob([JSON.stringify(S)],{type:'application/json'}));
 ACT.importBackup=()=>$('#backupFile').click();
@@ -6641,7 +6670,7 @@ $('#backupFile')?.addEventListener('change',async e=>{const f=e.target.files[0];
   for(const r of x.runs||[])if(!S.runs.some(y=>y.id===r.id)&&!S.deleted[r.id])S.runs.push(r);S.runs.sort((a,b)=>b.start-a.start);save();applyTheme();rerender();toast('Backup restored')}catch(err){toast('That is not a JUNGLE PARK backup file')}});
 ACT.reset=()=>{const box=$('#resetBox');if(!box)return;box.classList.add('ask');box.innerHTML=`<p><b>Reset this device?</b> This removes your runs, sessions, plan and settings from this device. Linked devices and friends keep their copies.</p><div class="grid2"><button class="btn soft" data-act="resetCancel">Cancel</button><button class="btn danger-btn solid" data-act="resetConfirm">${ICON.trash} Yes, reset</button></div>`};
 ACT.resetCancel=()=>{const box=$('#resetBox');if(!box)return;box.classList.remove('ask');box.innerHTML=`<button class="btn danger-btn" data-act="reset">${ICON.trash} Reset device</button>`};
-ACT.resetConfirm=()=>{try{localStorage.removeItem(LS)}catch(e){}S=freshState();saveNow();applyTheme();toast('This device was reset');go('welcome')};
+ACT.resetConfirm=()=>{try{localStorage.removeItem(LS);localStorage.removeItem('jp:rl')}catch(e){}if(typeof rStop==='function')rStop();S=freshState();saveNow();applyTheme();toast('This device was reset');go('welcome')};
 
 // ================= ONBOARDING =================
 // sign-up: a full-screen two-step flow. Step 1 (name + city) is required to create the account; step 2 (body details) can be skipped.
@@ -6710,7 +6739,7 @@ addEventListener('scroll',e=>{if(e.target&&e.target.closest&&e.target.closest('.
 // Letters that look alike (0/O, 1/I/L) are left out, so codes are easy to read out and type.
 const CODE_A='23456789ABCDEFGHJKMNPQRSTUVWXYZ';const DEV_TTL=10*60e3;
 function newCode(){const r=crypto.getRandomValues(new Uint8Array(6));let c='';for(const x of r)c+=CODE_A[x%CODE_A.length];return c}
-const fmtCode=c=>c?c.slice(0,3)+'-'+c.slice(3):'';
+const fmtCode=c=>!c?'':c.length===8?c.slice(0,4)+'-'+c.slice(4):c.slice(0,3)+'-'+c.slice(3);
 function parseCode(t){t=String(t||'').trim();const m=t.match(/#j-([A-Za-z0-9]{6})\b/)||t.match(/^JP:([A-Za-z0-9-]{6,7})$/i);if(m)t=m[1];
   t=t.toUpperCase().replace(/[\s-]/g,'').replace(/O/g,'0').replace(/[IL]/g,'1');if(t.length!==6)return '';if([...t].some(ch=>!CODE_A.includes(ch)))return '';return t}
 function shareBase(){if(APP_URL.startsWith('http'))return APP_URL;if(!window.claude&&/^https?:/.test(location.protocol))return location.href.split('#')[0];return ''}
@@ -6724,7 +6753,7 @@ async function friendCode(){if(!canWrite())return S.profile.fcode||'';const c=S.
   if(c){if(S.sync.fcode!==c+S.profile.id){try{const s=await NET.db.doc('codes/'+c).get();if(!s.exists||s.data().id!==S.profile.id){if(s.exists){S.profile.fcode='';return friendCode()}await NET.db.doc('codes/'+c).set({k:'f',id:S.profile.id,ts:Date.now()})}S.sync.fcode=c+S.profile.id;saveNow()}catch(e){}}return c}
   try{const n=await claimCode('f');S.profile.fcode=n;S.sync.fcode=n+S.profile.id;save('profile');return n}catch(e){return ''}}
 // what to do with a code someone typed or scanned
-async function useCode(raw){const c=parseCode(raw);if(!c){toast('Enter the 6-character code, like K7M-2QX');return false}
+async function useCode(raw){if(!NET.db)return relayUseCode(raw);const c=parseCode(raw);if(!c){toast('Enter the 6-character code, like K7M-2QX');return false}
   if(!online()){toast('Codes need a connection. Try again when you are online.');return false}
   if(c===S.profile.fcode){toast("That's your own code");return false}
   try{const d=await resolveCode(c);if(d.id===S.profile.id){toast(d.k==='d'?'This device is already signed in to that account':"That's your own code");return false}
@@ -6735,12 +6764,12 @@ async function signInWith(id){toast('Signing in…');await linkProfile(id);S.pro
   const o=$('#onb');if(o){clearInterval(o._w);o.classList.add('out');setTimeout(()=>o.remove(),350)}
   showApp('home');try{history.replaceState(null,'','#home')}catch(e){}setTimeout(()=>toast(`Signed in as ${S.profile.name||'you'}. Your data syncs live on this device.`),400)}
 // sheet: sign in from another device (scan its QR or type its code)
-ACT.signInOther=()=>openSheet('Sign in from another device',`<p class="muted">On a phone or computer that is already signed in, open <b>My Profile</b> and tap <b>Show sign-in code</b>. Scan the QR code it shows, or type the 6-character code.</p>
-  ${netNote('Signing in')}
-  <button class="btn block" id="soScan" data-net="1">${ICON.scan} Scan QR code</button>
+ACT.signInOther=()=>openSheet('Sign in from another device',`<p class="muted">On a phone or computer that is already signed in, open <b>My Profile</b> and tap <b>Show sign-in code</b>. Scan the QR code it shows, or type the ${NET.db?6:8}-character code.</p>
+  ${syncNote('Signing in')}
+  <button class="btn block" id="soScan" data-net="relay">${ICON.scan} Scan QR code</button>
   <div class="onb-or"><span>or type the code</span></div>
-  <div class="code-row"><input class="inp code-inp" id="soCode" maxlength="7" autocomplete="one-time-code" autocapitalize="characters" autocorrect="off" spellcheck="false" placeholder="ABC-123" aria-label="Sign-in code"><button class="btn" id="soGo" data-net="1">Sign in</button></div>`,el=>{
-   const inp=$('#soCode',el);inp.oninput=()=>{let v=inp.value.toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,6);inp.value=v.length>3?v.slice(0,3)+'-'+v.slice(3):v};
+  <div class="code-row"><input class="inp code-inp" id="soCode" maxlength="${NET.db?7:9}" autocomplete="one-time-code" autocapitalize="characters" autocorrect="off" spellcheck="false" placeholder="${NET.db?'ABC-123':'ABCD-1234'}" aria-label="Sign-in code"><button class="btn" id="soGo" data-net="relay">Sign in</button></div>`,el=>{
+   const inp=$('#soCode',el);const CL=NET.db?6:8,H=CL/2;inp.oninput=()=>{let v=inp.value.toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,CL);inp.value=v.length>H?v.slice(0,H)+'-'+v.slice(H):v};
    const go_=async()=>{const b=$('#soGo',el);b.disabled=true;const ok=await useCode(inp.value);if(ok)closeSheet();else{b.disabled=false;inp.focus()}};
    $('#soGo',el).onclick=go_;inp.onkeydown=e=>{if(e.key==='Enter')go_()};
    $('#soScan',el).onclick=()=>{SCAN_HOOK={title:'Scan the sign-in code',fn:t=>useCode(t)};ACT.scan({_hook:1})};
@@ -8046,7 +8075,7 @@ function busyWith(want){ // returns true (and explains) if the other activity is
 
 // ================= FLOATING LIVE TIMER =================
 // While a run or workout is going and you are on another page, a small pill floats above the bottom bar. Tap it to go back.
-function livePill(){let p=document.getElementById('livePill');const run=runActive(),wk=WK.on;
+function livePill(){document.body.classList.toggle('run-indoor',R.state!=='idle'&&R.mode==='indoor');let p=document.getElementById('livePill');const run=runActive(),wk=WK.on;
   const imm=!$('#immersive').hidden||!$('#wkimm').hidden;let show=(run||wk)&&!imm&&!$('#app').hidden&&!document.querySelector('#onb,.sheet,#storyv');
   if(show){const hero=run?$('#v-park.on .runhero:not(.wkhero)'):$('#v-jungle.on .wkhero');if(hero){const r=hero.getBoundingClientRect();if(r.bottom>80&&r.top<innerHeight-120)show=false}}
   if(!p){if(!show)return;p=document.createElement('button');p.id='livePill';p.type='button';p.className='live-pill';p.onclick=()=>{if(runActive())openImmersive();else if(WK.on)openWk();livePill()};document.body.appendChild(p)}
@@ -8054,7 +8083,7 @@ function livePill(){let p=document.getElementById('livePill');const run=runActiv
   const paused=run?R.state==='paused':WK.paused;const sec=run?runActiveSec():wkSec();
   const html=`<i class="lp-dot ${paused?'paused':''}"></i>${run?ICON.run:'<svg class="ico" viewBox="0 0 24 24"><path d="M6.5 6.5v11M17.5 6.5v11M3 9v6M21 9v6M6.5 12h11"/></svg>'}<b class="num">${fmtDurLong(sec)}</b>${run?`<span class="lp-sub num">${fmtDist(R.dist)} ${uName()}</span>`:`<span class="lp-sub">${paused?'Paused':'Workout'}</span>`}`;
   if(p._h!==html){p.innerHTML=html;p._h=html}p.setAttribute('aria-label',(run?'Run':'Workout')+' in progress, '+fmtDurLong(sec)+'. Tap to open.')}
-setInterval(livePill,1000);addEventListener('scroll',()=>{if(runActive()||WK.on)livePill()},{passive:true});addEventListener('hashchange',()=>setTimeout(livePill,60));
+setInterval(livePill,250);addEventListener('scroll',()=>{if(runActive()||WK.on)livePill()},{passive:true});addEventListener('hashchange',()=>setTimeout(livePill,60));
 
 
 // map tiles are darkened once when they arrive (works in Safari too, which has no canvas filter), so redraws stay cheap
@@ -8070,6 +8099,237 @@ function warmTiles(la,ln){if(!mapOn())return;const W=2*Math.PI*MR;for(const z of
 let warmed=0;function warmMap(){if(!mapOn()||Date.now()-warmed<120000)return;warmed=Date.now();const lp=lastPos();if(lp){R.here=R.here||lp.p;warmTiles(lp.p[0],lp.p[1])}
   const get=()=>{try{navigator.geolocation.getCurrentPosition(p=>{rememberPos(p.coords.latitude,p.coords.longitude);warmTiles(p.coords.latitude,p.coords.longitude);if(cur==='park'&&R.state==='idle')drawHero()},()=>{},{enableHighAccuracy:false,maximumAge:300000,timeout:8000})}catch(e){}};
   try{navigator.permissions&&navigator.permissions.query({name:'geolocation'}).then(r=>{if(r.state==='granted')get()}).catch(()=>{})}catch(e){}}
+
+// ================= DEVICE & FRIEND SYNC OVER A RELAY (no login, no server of our own) =================
+// Used when the cloud store of the claude.ai version is not there (the installable copy).
+// Everything is end-to-end encrypted in the browser before it leaves the device: JSON → gzip → AES-GCM (random IV).
+// The relay (ntfy.sh by default, configurable) only ever sees random-looking topic names and ciphertext.
+//  • Account sync: a random 128-bit secret. topic = SHA-256("sync-id:"+secret), key = SHA-256("sync-key:"+secret)
+//  • Pairing: an 8-character code valid 15 min. Its own topic/key carry the account secret to the joining device.
+//  • Friends: each account has a friend secret. Friends get it from your QR or 8-character friend code and then
+//    read your encrypted stats card on SHA-256("friend-id:"+fs); they say hello on SHA-256("friend-in:"+fs).
+// Messages are plain POSTs with a text body (no custom headers, so no CORS preflight). Devices listen live with
+// EventSource on /<topics>/sse and also poll on focus, on reconnect and every 90 s. Own messages are ignored.
+const RL={es:null,esKey:'',seen:new Set(),lastT:0,polled:new Set(),parts:{},keys:{},topics:{},routes:{},busy:false,lastDelta:0,status:'',err:0};
+const relayURL=()=>{let u='';try{u=localStorage.getItem('jp:relay')||''}catch(e){}return (u||'https://ntfy.sh').trim().replace(/\/+$/,'')};
+function relayOk(){return !NET.db&&navigator.onLine!==false&&!!(window.crypto&&crypto.subtle)&&typeof fetch==='function'}
+const relayOn=()=>relayOk()&&!!(S.rsync&&S.rsync.secret);
+const RTE=new TextEncoder(),RTD=new TextDecoder();
+const rB64=u8=>{let s='';for(let i=0;i<u8.length;i+=0x8000)s+=String.fromCharCode.apply(null,u8.subarray(i,i+0x8000));return btoa(s).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')};
+const rUnB64=s=>{s=s.replace(/-/g,'+').replace(/_/g,'/');while(s.length%4)s+='=';const b=atob(s);const u=new Uint8Array(b.length);for(let i=0;i<b.length;i++)u[i]=b.charCodeAt(i);return u};
+const newSecret=()=>rB64(crypto.getRandomValues(new Uint8Array(16)));
+function newCode8(){const r=crypto.getRandomValues(new Uint8Array(8));let c='';for(const x of r)c+=CODE_A[x%CODE_A.length];return c}
+function parseCode8(t){t=String(t||'').trim().toUpperCase().replace(/[\s-]/g,'').replace(/O/g,'0').replace(/[IL]/g,'1');if(t.length!==8||[...t].some(ch=>!CODE_A.includes(ch)))return '';return t}
+async function rSha(s){return new Uint8Array(await crypto.subtle.digest('SHA-256',RTE.encode(s)))}
+async function rTopic(p,secret){const id=p+secret;if(RL.topics[id])return RL.topics[id];const h=await rSha(id);return RL.topics[id]='jp'+[...h.slice(0,16)].map(x=>x.toString(16).padStart(2,'0')).join('')}
+async function rKey(p,secret){const id=p+secret;if(RL.keys[id])return RL.keys[id];const h=await rSha(id);return RL.keys[id]=await crypto.subtle.importKey('raw',h,'AES-GCM',false,['encrypt','decrypt'])}
+const rCanGz=typeof CompressionStream==='function'&&typeof DecompressionStream==='function';
+async function rGz(u8,pack){const s=new Blob([u8]).stream().pipeThrough(pack?new CompressionStream('gzip'):new DecompressionStream('gzip'));return new Uint8Array(await new Response(s).arrayBuffer())}
+async function rSeal(key,obj){let d=RTE.encode(JSON.stringify(obj)),f='n';if(rCanGz){d=await rGz(d,1);f='z'}const iv=crypto.getRandomValues(new Uint8Array(12));
+  const ct=new Uint8Array(await crypto.subtle.encrypt({name:'AES-GCM',iv},key,d));const o=new Uint8Array(12+ct.length);o.set(iv);o.set(ct,12);return 'JP2'+f+':'+rB64(o)}
+async function rUnseal(key,txt){const m=/^JP2([nz]):([A-Za-z0-9_-]+)$/.exec((txt||'').trim());if(!m)return null;
+  try{const u=rUnB64(m[2]);let d=new Uint8Array(await crypto.subtle.decrypt({name:'AES-GCM',iv:u.slice(0,12)},key,u.slice(12)));if(m[1]==='z')d=await rGz(d,0);return JSON.parse(RTD.decode(d))}catch(e){return null}}
+// stable fingerprint of an object (key order does not matter), to skip sending what the other side already has
+const rStab=o=>JSON.stringify(o,(k,v)=>v&&typeof v==='object'&&!Array.isArray(v)?Object.keys(v).sort().reduce((a,x)=>(a[x]=v[x],a),{}):v);
+function rHash(s){let h=0x811c9dc5;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,0x01000193)}return (h>>>0).toString(36)+':'+s.length}
+const PART=1500000; // bigger payloads are split into parts of at most 1.5 MB
+async function rPost(topic,key,obj){const txt=await rSeal(key,obj);const parts=[];
+  if(txt.length<=PART)parts.push(txt);else{const g=rid(8),n=Math.ceil(txt.length/PART);for(let i=0;i<n;i++)parts.push(`JPP:${g}:${i}:${n}:`+txt.slice(i*PART,(i+1)*PART))}
+  for(const p of parts){let r;try{r=await fetch(relayURL()+'/'+topic,{method:'POST',body:p})}catch(e){RL.err=Date.now();throw {msg:'Could not reach the sync relay'}}
+    if(!r.ok){RL.err=Date.now();throw {msg:r.status===429?'The sync relay is busy. Try again in a minute.':'The sync relay refused the message ('+r.status+')'}}}RL.err=0}
+async function rMsgText(m){if(m.attachment&&m.attachment.url){try{const r=await fetch(m.attachment.url);return r.ok?await r.text():null}catch(e){return null}}return m.message||''}
+async function rHandle(m){if(!m||m.event!=='message'||!m.id||RL.seen.has(m.id))return;RL.seen.add(m.id);if(m.time>RL.lastT)RL.lastT=m.time;
+  const rt=RL.routes[m.topic];if(!rt)return;let txt=await rMsgText(m);if(!txt)return;
+  const pm=/^JPP:([^:]+):(\d+):(\d+):/.exec(txt);
+  if(pm){const g=RL.parts[pm[1]]=RL.parts[pm[1]]||{n:+pm[3],p:{}};g.p[pm[2]]=txt.slice(pm[0].length);if(Object.keys(g.p).length<g.n)return;txt=Array.from({length:g.n},(_,i)=>g.p[i]).join('');delete RL.parts[pm[1]]}
+  const o=await rUnseal(rt.key,txt);if(!o||(o.dev&&o.dev===DEV_ID))return; // never act on our own messages
+  try{rt.fn(o,m)}catch(e){}rSaveMeta()}
+let rq=Promise.resolve();function rQueue(m){rq=rq.then(()=>rHandle(m)).catch(()=>{});return rq}
+// remember what we have seen, so a reload does not replay 12 hours of messages
+function rLoadMeta(){try{const o=JSON.parse(localStorage.getItem('jp:rl')||'null');if(o&&o.u===relayURL()){RL.lastT=o.t||0;(o.p||[]).forEach(t=>RL.polled.add(t));(o.s||[]).forEach(i=>RL.seen.add(i))}}catch(e){}}
+let rmT=0;function rSaveMeta(){clearTimeout(rmT);rmT=setTimeout(()=>{try{localStorage.setItem('jp:rl',JSON.stringify({u:relayURL(),t:RL.lastT,p:[...RL.polled].slice(-200),s:[...RL.seen].slice(-500)}))}catch(e){}},800)}
+// which topics this device listens to, and what to do with each
+async function rRoutes(){const r={};if(!relayOk()){RL.routes=r;return []}
+  if(relayOn()){const s=S.rsync.secret;r[await rTopic('sync-id:',s)]={key:await rKey('sync-key:',s),fn:onRelayAcct}}
+  if(S.rfriend&&S.rfriend.secret){const fs=S.rfriend.secret;r[await rTopic('friend-in:',fs)]={key:await rKey('friend-key:',fs),fn:onRelayHello}}
+  for(const f of S.friends)if(f.rk&&!S.deleted[f.id]){const id=f.id;r[await rTopic('friend-id:',f.rk)]={key:await rKey('friend-key:',f.rk),fn:o=>onRelayCard(id,o)}}
+  RL.routes=r;return Object.keys(r)}
+async function rPoll(ts,since){ts=ts||Object.keys(RL.routes);if(!ts.length||!relayOk())return 0;since=since||(RL.lastT?Math.max(0,RL.lastT-120):'all');let n=0;
+  try{const r=await fetch(relayURL()+'/'+ts.join(',')+'/json?poll=1&since='+since);if(!r.ok){RL.err=Date.now();return 0}RL.err=0;
+    for(const l of (await r.text()).split('\n')){if(!l.trim())continue;let m;try{m=JSON.parse(l)}catch(e){continue}n++;rQueue(m)}await rq;ts.forEach(t=>RL.polled.add(t));rSaveMeta()}catch(e){RL.err=Date.now()}updateStatus();return n}
+function rStop(){try{RL.es&&RL.es.close()}catch(e){}RL.es=null;RL.esKey=''}
+async function rListen(){if(!relayOk()){rStop();return}const ts=await rRoutes();if(!ts.length){rStop();updateStatus();return}
+  const fresh=ts.filter(t=>!RL.polled.has(t));if(fresh.length)await rPoll(fresh,'all');
+  const k=ts.slice().sort().join(',');
+  if(k!==RL.esKey||!RL.es||RL.es.readyState===2){rStop();RL.esKey=k;try{const es=new EventSource(relayURL()+'/'+k+'/sse');es.onmessage=e=>{try{rQueue(JSON.parse(e.data))}catch(x){}};es.onopen=()=>{RL.err=0;updateStatus()};RL.es=es}catch(e){}}
+  updateStatus()}
+let rlT=0;function rListenSoon(){clearTimeout(rlT);rlT=setTimeout(rListen,800)}
+async function rFetchLatest(topic,key){let r;try{r=await fetch(relayURL()+'/'+topic+'/json?poll=1&since=all')}catch(e){throw {msg:'Could not reach the sync relay. Check your connection.'}}
+  if(!r.ok)throw {msg:'Could not reach the sync relay ('+r.status+')'};const ls=(await r.text()).split('\n').filter(x=>x.trim()).reverse();
+  for(const l of ls){let m;try{m=JSON.parse(l)}catch(e){continue}if(m.event!=='message')continue;const t=await rMsgText(m);if(!t)continue;const o=await rUnseal(key,t);if(o)return o}return null}
+
+// ---------- account (device) sync ----------
+function mergeRuns(list){let ch=false;for(const r of list||[]){if(!r||!r.id||S.deleted[r.id])continue;const i=S.runs.findIndex(x=>x.id===r.id);
+    if(i<0){S.runs.push(r);ch=true}else if((r.u||0)>(S.runs[i].u||0)){S.runs[i]=r;ch=true}S.sync.rruns=S.sync.rruns||{};S.sync.rruns[r.id]=1}
+  if(ch)S.runs.sort((a,b)=>(b.start||0)-(a.start||0));return ch}
+function onRelayAcct(o){
+  if(o.pid&&o.pid!==S.profile.id)return;
+  if(o.t==='off'){if((o.at||0)>(S.rsync&&S.rsync.on||0)){relayLocalOff();toast('Sync was turned off on all devices. Your data stays on this device.')}return}
+  if(o.t==='bye'){if(S.devices&&S.devices[o.dev]){delete S.devices[o.dev];saveNow();rerenderSoft()}return}
+  if(o.t==='photo'){if(o.photo)relayTakePhotos([o.photo],{});return}
+  if(o.t!=='full'&&o.t!=='delta')return;
+  if(o.photos||o.phDel)relayTakePhotos(o.photos,o.phDel);
+  let remote=null;if(o.core){try{remote=JSON.parse(o.core);mergeCore(remote)}catch(e){remote=null}}
+  if(remote&&checkRevoked()){relayLocalOff();return} // this device was removed from the list on another device
+  if(o.rfriend&&o.rfriend.secret&&(!S.rfriend||(o.rfriend.u||0)<(S.rfriend.u||0)))S.rfriend=o.rfriend; // everyone ends up with the oldest friend secret
+  mergeRuns(o.runs);
+  S.sync.rcore=remote?rHash(rStab(remote)):'';saveNow();applyTheme();rerenderSoft();relaySchedule();rListenSoon()}
+let rT=0;function relaySchedule(){if(!relayOk())return;clearTimeout(rT);const wait=Math.max(4000,15000-(Date.now()-RL.lastDelta));rT=setTimeout(()=>{rPushDelta();rPushCard()},wait);rListenSoon()}
+function rPack(t,runs){const o={t,dev:DEV_ID,pid:S.profile.id,at:Date.now(),core:corePack(),rfriend:S.rfriend||null,runs:runs.map(slimRun),phDel:S.phDel||{}};if(t==='full')o.photos=PDB.list.filter(p=>(p.uid||S.profile.id)===S.profile.id).map(p=>Object.assign({},p,{img:'',pending:0}));return o}
+async function rPushDelta(forceFull){if(!relayOn()||RL.busy||!S.onboarded)return;RL.busy=true;
+  try{const s=S.rsync.secret,topic=await rTopic('sync-id:',s),key=await rKey('sync-key:',s);S.sync.rruns=S.sync.rruns||{};
+    if(forceFull||Date.now()-(S.rsync.full||0)>2*3600e3){const p=rPack('full',S.runs);await rPost(topic,key,p);S.rsync.full=Date.now();S.runs.forEach(r=>S.sync.rruns[r.id]=1);S.sync.rcore=rHash(rStab(JSON.parse(p.core)));saveNow();return}
+    const core=corePack(),h=rHash(rStab(JSON.parse(core)));const runs=S.runs.filter(r=>!S.sync.rruns[r.id]);
+    if(h!==S.sync.rcore||runs.length){const p=rPack('delta',runs);await rPost(topic,key,p);S.sync.rcore=h;runs.forEach(r=>S.sync.rruns[r.id]=1);RL.lastDelta=Date.now();saveNow()}
+  }catch(e){}finally{RL.busy=false;updateStatus()}}
+function relayLocalOff(){S.rsync=null;S.sync.rcore='';S.sync.rruns={};saveNow();rListen();rerenderSoft();updateStatus()}
+function relayQRText(kind,v){const b=shareBase();return b?b+'#/'+kind+'/'+v:(kind==='link'?'JPL:':'JPF:')+v}
+async function ensureSyncSecret(){if(!S.rsync||!S.rsync.secret){S.rsync={secret:newSecret(),on:Date.now()};S.sync.rcore='';S.sync.rruns={};touchDevice(true);saveNow();await rListen()}return S.rsync.secret}
+// show the code + QR on the device that is already signed in
+async function rDeviceQR(){let code='',exp=0,tm=0;let secret='';
+  openSheet('Sign in on another device',`<p class="muted">On the other phone, tablet or computer, open JUNGLE PARK and tap <b>Sign in from another device</b>. Scan this QR code or type the code.</p>
+   <div class="qrbox" id="dqr"><p class="muted" style="color:#555;font-size:13px;text-align:center">Making your code…</p></div>
+   <div class="code-big num" id="dCode" aria-live="polite">····-····</div><p class="muted code-exp" id="dExp"></p>
+   <div class="grid2"><button class="btn soft" id="dCopy">${ICON.copy} Copy code</button><button class="btn soft" id="dNew">${ICON.sync} New code</button></div>
+   <p class="muted" style="font-size:12px">The code works for 15 minutes. The QR code holds your sync key itself, so only show it to devices you own. Data is end-to-end encrypted on this device before it is sent.</p>`,el=>{
+    const make=async()=>{$('#dCode',el).textContent='····-····';try{secret=await ensureSyncSecret();if(el.isConnected)makeQR($('#dqr',el),relayQRText('link',secret));
+        code=newCode8();exp=Date.now()+15*60e3;await rPost(await rTopic('pair-id:',code),await rKey('pair-key:',code),{t:'pair',secret,pid:S.profile.id,name:S.profile.name||'',exp});
+        if(!el.isConnected)return;$('#dCode',el).textContent=fmtCode(code);rPushDelta(true)}catch(e){code='';toast(e&&e.msg||'Could not make a code');if(el.isConnected)$('#dCode',el).textContent='No code'}};
+    const tick=()=>{if(!el.isConnected){clearInterval(tm);return}const left=Math.max(0,exp-Date.now());const e=$('#dExp',el);if(!code){e.textContent='';return}if(!left){make();return}e.textContent='Expires in '+Math.floor(left/60000)+':'+String(Math.floor(left/1000)%60).padStart(2,'0')};
+    tm=setInterval(tick,1000);$('#sheets').onclose=()=>clearInterval(tm);
+    $('#dCopy',el).onclick=()=>code&&copyText(fmtCode(code));$('#dNew',el).onclick=()=>{code='';make()};make()})}
+// joining device: merge with what is here, or replace it
+function relayJoinPrompt(secret,pid,name){if(S.rsync&&S.rsync.secret===secret){toast('This device is already synced with that account');return}
+  if(!S.onboarded||(!S.runs.length&&!S.sessions.length&&!S.friends.length)){relayJoin(secret,pid,'merge');return}
+  openSheet('Sign in to '+(name?esc(name)+'’s':'this')+' account?',`<p class="muted">This device already has its own data. Choose what happens to it.</p>
+    <div class="list" style="gap:10px;display:grid"><button class="btn block" id="jMerge">Merge: keep this device’s runs and sessions and add them to the account</button><button class="btn soft block" id="jRep">Replace: erase this device’s data and use the account’s</button></div>`,el=>{
+    $('#jMerge',el).onclick=()=>{closeSheet();relayJoin(secret,pid,'merge')};$('#jRep',el).onclick=()=>{closeSheet();relayJoin(secret,pid,'replace')}})}
+async function relayJoin(secret,pid,mode){toast('Signing in…');
+  try{if(!pid){const o=await rFetchLatest(await rTopic('sync-id:',secret),await rKey('sync-key:',secret));if(!o||!o.pid)throw {msg:'Nothing to sync from yet. Open the app on your other device and show the code again.'};pid=o.pid}
+    if(mode==='replace'){S=freshState()}
+    const old=S.profile.id;S.profile.id=pid;S.ts={};S.onboarded=true;S.rsync={secret,on:Date.now()};S.sync.rcore='';S.sync.rruns={};S.sync.pushedPub='';
+    S.friends=S.friends.filter(f=>f.id!==pid&&f.id!==old);if(S.devices)delete S.devices[DEV_ID];saveNow();
+    RL.polled.clear();RL.lastT=0;RL.seen.clear();await rListen();S.profile.id=pid;touchDevice(true);S.profile.setup=S.profile.setup||1;saveNow();rPushDelta(true);
+    const ob=$('#onb');if(ob){clearInterval(ob._w);ob.classList.add('out');setTimeout(()=>ob.remove(),350)}
+    applyTheme();showApp('home');try{history.replaceState(null,'','#home')}catch(e){}rerender();setTimeout(()=>toast(`Signed in as ${S.profile.name||'you'}. This device now syncs with your others.`),400)}
+  catch(e){toast(e&&e.msg||'Could not sign in right now')}}
+
+// ---------- friends ----------
+async function myFriendSecret(){if(!S.rfriend||!S.rfriend.secret){S.rfriend={secret:newSecret(),code:newCode8(),u:Date.now()};saveNow();relaySchedule();rListenSoon()}return S.rfriend.secret}
+async function rAnnounceCode(force){if(!relayOk()||!S.rfriend)return;if(!force&&Date.now()-(S.rfriend.ann||0)<6*3600e3)return;const c=S.rfriend.code;
+  await rPost(await rTopic('fcode-id:',c),await rKey('fcode-key:',c),{t:'fcode',pid:S.profile.id,name:S.profile.name||'Runner',fs:S.rfriend.secret,at:Date.now()});S.rfriend.ann=Date.now();saveNow()}
+async function rFriendCode(){await myFriendSecret();try{await rAnnounceCode()}catch(e){}return S.rfriend.code}
+const rFriendQR=()=>relayQRText('friend',S.rfriend.secret+'.'+S.profile.id);
+async function rPushCard(force){if(!relayOk()||!S.onboarded||!S.rfriend)return;const card=publicCard();const h=rHash(rStab(card));
+  if(!force&&h===S.sync.rpub&&Date.now()-(S.sync.rpubT||0)<2*3600e3)return;if(!force&&Date.now()-(S.sync.rpubT||0)<60000){setTimeout(()=>rPushCard(),61000-(Date.now()-(S.sync.rpubT||0)));return}
+  const fs=S.rfriend.secret;try{await rPost(await rTopic('friend-id:',fs),await rKey('friend-key:',fs),{t:'card',dev:DEV_ID,pid:S.profile.id,at:Date.now(),card});S.sync.rpub=h;S.sync.rpubT=Date.now();saveNow()}catch(e){}}
+async function addRelayFriend(pid,name,fs){if(!pid||!fs)return;if(pid===S.profile.id){toast("That's your own code");return}
+  const ex=S.friends.find(f=>f.id===pid);if(ex){ex.rk=fs;ex.mode='live';ex.u=Date.now()}else S.friends.push({id:pid,name:name||'Runner',snap:null,mode:'live',rk:fs,ts:Date.now(),u:Date.now()});delete S.deleted[pid];save('friends');
+  const my=await myFriendSecret();
+  try{await rPost(await rTopic('friend-in:',fs),await rKey('friend-key:',fs),{t:'hello',pid:S.profile.id,name:S.profile.name||'Runner',fs:my,at:Date.now()})}catch(e){}
+  rPushCard(true);await rListen();toast(`${(S.friends.find(f=>f.id===pid)||{}).name||'Friend'} added to your crew`);if(cur!=='crew')go('crew');else RENDER.crew()}
+function onRelayHello(o){if(o.t!=='hello'||!o.pid||!o.fs||o.pid===S.profile.id)return;if(S.deleted[o.pid]&&S.deleted[o.pid]>(o.at||0))return;
+  const ex=S.friends.find(f=>f.id===o.pid);if(ex){if(ex.rk===o.fs&&ex.mode==='live')return;ex.rk=o.fs;ex.mode='live';ex.u=Date.now()}
+  else{S.friends.push({id:o.pid,name:o.name||'Runner',snap:null,mode:'live',rk:o.fs,ts:Date.now(),u:Date.now()});toast(`${o.name||'A friend'} added you. You're now on each other's leaderboard.`)}
+  delete S.deleted[o.pid];save('friends');rPushCard(true);rListenSoon();rerenderSoft()}
+function onRelayCard(id,o){if(o.t!=='card'||!o.card)return;const f=S.friends.find(x=>x.id===id);if(!f||(o.at||0)<=(f.snapAt||0))return;
+  f.snap=Object.assign({},o.card,{at:o.at});f.snapAt=o.at;f.name=o.card.name||f.name;f.live=Date.now();saveNow();if(cur==='crew'||cur==='home')rerenderSoft()}
+// typed / scanned codes and links
+async function relayUseCode(raw){const c=parseCode8(raw);if(!c){toast('Enter the 8-character code, like K7M2-QX4P');return false}if(!relayOk()){toast('Codes need a connection. Try again when you are online.');return false}
+  if(S.rfriend&&c===S.rfriend.code){toast("That's your own code");return false}
+  try{const p=await rFetchLatest(await rTopic('pair-id:',c),await rKey('pair-key:',c));
+    if(p&&p.t==='pair'){if((p.exp||0)<Date.now()){toast('That code has expired. Tap New code on the other device.');return false}relayJoinPrompt(p.secret,p.pid,p.name);return true}
+    const f=await rFetchLatest(await rTopic('fcode-id:',c),await rKey('fcode-key:',c));
+    if(f&&f.t==='fcode'){await addRelayFriend(f.pid,f.name,f.fs);return true}
+    toast('Nothing found for that code. Check the letters, and ask them to open the app so their code is live.');return false}catch(e){toast(e&&e.msg||'Could not use that code right now');return false}}
+function relayScan(txt){txt=String(txt||'').trim();
+  const l=txt.match(/#\/link\/([A-Za-z0-9_-]{20,24})/)||txt.match(/^JPL:([A-Za-z0-9_-]{20,24})$/);if(l){if(!relayOk()){toast('Signing in needs a connection');return true}relayJoinPrompt(l[1]);return true}
+  const f=txt.match(/#\/friend\/([A-Za-z0-9_-]{20,24})\.([a-z0-9]{6,20})/)||txt.match(/^JPF:([A-Za-z0-9_-]{20,24})\.([a-z0-9]{6,20})$/);if(f){if(!relayOk()){toast('Adding friends needs a connection');return true}addRelayFriend(f[2],'',f[1]);return true}
+  if(!NET.db&&parseCode8(txt)){relayUseCode(txt);return true}return false}
+// settings panel (Devices & sync card)
+function relayPanel(){if(NET.db)return '';const on=relayOn();const ok=relayOk();
+  return `<div class="relay-panel"><div class="relay-st"><i class="${on&&!RL.err?'on':RL.err?'err':''}"></i><span>${!ok?'Offline. Changes sync when you are back online.':on?(RL.err?'Sync relay not reachable right now. Retrying…':'Device sync is on, end-to-end encrypted.'):'Device sync is off. Tap Link a device to start.'}</span></div>
+   ${on?`<div class="grid2"><button class="btn soft" data-act="relaySyncNow">${ICON.sync} Sync now</button><button class="btn soft" data-act="relayStop">Stop syncing this device</button></div><button class="btn ghost block danger-txt" data-act="relayOffAll">Turn off sync everywhere</button>`:''}
+   <details class="relay-adv"><summary>Sync relay</summary><div class="field" style="margin-top:8px"><label for="rlUrl">Relay URL</label><div class="code-row"><input class="inp" id="rlUrl" value="${esc(relayURL())}" spellcheck="false" autocapitalize="off"><button class="btn soft" data-act="relaySetUrl">Save</button></div></div><small class="muted">Any ntfy server works. The relay only sees encrypted messages. Every device must use the same relay.</small></details></div>`}
+ACT.relaySyncNow=async()=>{toast('Syncing…');await rListen();await rPoll();await rPushDelta(true);rPushCard(true);toast(RL.err?'Could not reach the sync relay':'Up to date')};
+ACT.relayStop=()=>openSheet('Stop syncing this device?',`<p class="muted">This device keeps everything it has but stops sending and receiving changes. Your other devices keep syncing.</p><div class="grid2"><button class="btn soft" data-act="closeSheet">Cancel</button><button class="btn" id="rsGo">Stop syncing</button></div>`,el=>{
+  $('#rsGo',el).onclick=async()=>{closeSheet();try{if(relayOn())await rPost(await rTopic('sync-id:',S.rsync.secret),await rKey('sync-key:',S.rsync.secret),{t:'bye',dev:DEV_ID,pid:S.profile.id,at:Date.now()})}catch(e){}relayLocalOff();toast('This device no longer syncs')}});
+ACT.relayOffAll=()=>openSheet('Turn off sync everywhere?',`<p class="muted">Every linked device stops syncing. Each one keeps the data it has. You can link devices again later with a new code.</p><div class="grid2"><button class="btn soft" data-act="closeSheet">Cancel</button><button class="btn danger-btn solid" id="roGo">Turn off everywhere</button></div>`,el=>{
+  $('#roGo',el).onclick=async()=>{closeSheet();try{if(relayOn())await rPost(await rTopic('sync-id:',S.rsync.secret),await rKey('sync-key:',S.rsync.secret),{t:'off',dev:DEV_ID,pid:S.profile.id,at:Date.now()})}catch(e){toast('Could not reach the relay; turned off here only')}relayLocalOff();toast('Sync is off on all devices')}});
+ACT.relaySetUrl=()=>{const v=($('#rlUrl')||{}).value||'';const u=v.trim();if(u&&!/^https?:\/\/[^\s]+$/.test(u)){toast('Enter a full URL, like https://ntfy.sh');return}try{u&&u!=='https://ntfy.sh'?localStorage.setItem('jp:relay',u):localStorage.removeItem('jp:relay')}catch(e){}
+  rStop();RL.polled.clear();RL.seen.clear();RL.lastT=0;rSaveMeta();rListen().then(()=>{if(relayOn())rPushDelta(true);rPushCard(true)});toast('Relay saved')};
+// start, and keep listening
+function relayStart(){if(NET.db||!(window.crypto&&crypto.subtle))return;rLoadMeta();rListen().then(()=>rPoll());setTimeout(()=>{rPushDelta();if(S.rfriend){rPushCard();rAnnounceCode().catch(()=>{})}},3000)}
+setInterval(()=>{if(!NET.db&&relayOk()&&document.visibilityState==='visible')rPoll()},90000);
+setInterval(()=>{if(!NET.db&&relayOk()){rPushDelta();if(S.rfriend){rPushCard();rAnnounceCode().catch(()=>{})}}},10*60e3);
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&!NET.db&&relayOk()){rListen().then(()=>rPoll())}});
+addEventListener('online',()=>{if(!NET.db){rListen().then(()=>rPoll());relaySchedule()}});addEventListener('offline',()=>{rStop();updateStatus()});
+
+function syncNote(what){return (online()||(!NET.db&&relayOk()))?'':netNote(what)}
+function stampSettings(){const now=Date.now();const prev=S._sp||{};S.sts=S.sts||{};for(const k in S.settings){if(JSON.stringify(prev[k])!==JSON.stringify(S.settings[k]))S.sts[k]=now}S._sp=JSON.parse(JSON.stringify(S.settings))}
+if(!S._sp)S._sp=JSON.parse(JSON.stringify(S.settings||{}));
+
+// ================= RUN REVIEW =================
+// A finished run waits here (kept on the device, so closing the app loses nothing) until you save or delete it.
+function findRun(id){return S.runs.find(x=>x.id===id)||(S.pendingRun&&S.pendingRun.id===id?S.pendingRun:null)}
+function reviewRun(run){if(!run.name)run.name=autoRunName(run);run.cal=Math.round((S.profile.weight||70)*run.dist/1000*1.036);S.pendingRun=run;saveNow();rerender();runSummary(run)}
+ACT.savePending=()=>{const r=S.pendingRun;if(!r)return;S.pendingRun=null;saveNow();closeSheet();setTimeout(()=>saveRun(r),250)};
+ACT.discardRun=b=>{if(b.dataset.sure!=='1'){b.dataset.sure='1';b.innerHTML=ICON.trash+' Tap again to delete';return}S.pendingRun=null;saveNow();closeSheet();rerender();toast('Run deleted')};
+ACT.reviewPending=()=>{if(S.pendingRun)runSummary(S.pendingRun)};
+{const _rp=RENDER.park;RENDER.park=()=>{_rp();const v=$('#v-park');if(!S.pendingRun||!v)return;const r=S.pendingRun;const h=v.querySelector('.runhero');
+  const html=`<div class="card pend-run"><span class="pend-ico">${ICON.run}</span><span class="t"><b>Unsaved run</b><small>${fmtDist(r.dist)} ${uName()} · ${fmtDur(r.dur)} · ${relDate(r.start)}</small></span><button class="btn sm" data-act="reviewPending">Review</button></div>`;
+  if(h)h.insertAdjacentHTML('beforebegin',html);else v.insertAdjacentHTML('afterbegin',html)}}
+setTimeout(()=>{if(S.pendingRun&&S.onboarded&&!document.querySelector('.sheet,#onb'))runSummary(S.pendingRun)},2500);
+
+
+// run clock: refresh the time text 4x a second (the map and stats still update once a second)
+setInterval(()=>{if(R.state==='idle')return;const s=fmtDurLong(runActiveSec());for(const id of ['imTime','rhTime']){const e=document.getElementById(id);if(e&&e.textContent!==s)e.textContent=s}},250);
+// auto-pause: the clock stops 10 s after you stop moving and picks up again from the same number when you move (no jumping back)
+function apIdle(now){if(!S.settings.autoPause||R.state!=='running'||R.mode!=='gps'||!R.lastMove||R.lastMove<R.resumeAt)return 0;if(now-(R.lastFix||0)>15000)return 0;const idle=now-R.lastMove-10000;return idle>0?idle:0}
+
+ICON.copy='<svg class="ico" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M15 9V6.5A1.5 1.5 0 0 0 13.5 5h-7A1.5 1.5 0 0 0 5 6.5v7A1.5 1.5 0 0 0 6.5 15H9"/></svg>';
+
+// ================= PROGRESS PHOTOS: SAVED ON THE DEVICE FIRST =================
+// Every photo goes into this device's IndexedDB straight away (works with no connection), then uploads when it can:
+// to the cloud store (your coach sees shared ones) and, on the installable copy, to your other linked devices over the relay.
+const PDB={db:null,list:[],ready:false,busy:false};
+function pdbOpen(){if(PDB.db)return Promise.resolve(PDB.db);return new Promise((res,rej)=>{let r;try{r=indexedDB.open('jp-photos',1)}catch(e){rej(e);return}r.onupgradeneeded=()=>r.result.createObjectStore('p',{keyPath:'_id'});r.onsuccess=()=>{PDB.db=r.result;res(PDB.db)};r.onerror=()=>rej(r.error)})}
+async function pdbAll(){const db=await pdbOpen();return new Promise(res=>{const q=db.transaction('p').objectStore('p').getAll();q.onsuccess=()=>res(q.result||[]);q.onerror=()=>res([])})}
+async function pdbPut(p){const db=await pdbOpen();return new Promise((res,rej)=>{const tx=db.transaction('p','readwrite');tx.objectStore('p').put(p);tx.oncomplete=()=>res();tx.onerror=()=>rej(tx.error)})}
+async function pdbDel(id){const db=await pdbOpen();return new Promise(res=>{const tx=db.transaction('p','readwrite');tx.objectStore('p').delete(id);tx.oncomplete=()=>res();tx.onerror=()=>res()})}
+async function pdbLoad(){try{const all=await pdbAll();S.phDel=S.phDel||{};PDB.list=all.filter(p=>!S.phDel[p._id]);PDB.ready=true}catch(e){PDB.list=[];PDB.ready=true}}
+// my photos = cloud copies + the ones on this device (cloud wins when both exist)
+function myPhotos(){const m=new Map();const me=S.profile.id;const del=S.phDel||{};
+  for(const p of PDB.list)if((p.uid||me)===me&&!del[p._id])m.set(p._id,p);
+  for(const p of (PH.mine||[]))if(!del[p._id])m.set(p._id,Object.assign({},m.get(p._id)||{},p,{pending:0}));
+  return [...m.values()].sort((a,b)=>(b.t||0)-(a.t||0))}
+const phClean=p=>{const o=Object.assign({},p);delete o._id;delete o.uid;delete o.pending;return o};
+async function uploadPhoto(p){if(!canWrite()||!p.pending)return false;
+  try{await NET.db.doc(`prog/${p.uid}/p/${p._id}`).set(phClean(p));
+    if(p.by==='coach')await postUpdate(p.coach||coachId(),p.uid,'Your coach added a progress photo for you.');else if(p.shared)myCoachIds().forEach(cid=>postUpdate(cid,p.uid,`${S.profile.name||'Your client'} shared a new progress photo.`));
+    p.pending=0;await pdbPut(p);return true}catch(e){dbErr(e);return false}}
+async function flushPhotos(){if(PDB.busy)return;PDB.busy=true;let n=0;
+  try{if(!PDB.ready)await pdbLoad();
+    if(canWrite()){for(const p of PDB.list.filter(x=>x.pending))if(await uploadPhoto(p))n++;
+      S.phDelQ=S.phDelQ||{};for(const [id,uid] of Object.entries(S.phDelQ)){try{await NET.db.doc(`prog/${uid}/p/${id}`).delete();delete S.phDelQ[id]}catch(e){}}saveNow()}
+  }finally{PDB.busy=false}if(n){toast(n===1?'Your progress photo synced':n+' progress photos synced');if(cur==='jungle')rerenderSoft()}}
+addEventListener('online',()=>setTimeout(flushPhotos,1500));setInterval(()=>{if(PDB.list.some(p=>p.pending)||Object.keys(S.phDelQ||{}).length)flushPhotos()},60000);
+pdbLoad().then(()=>{if(cur==='jungle')rerenderSoft()});
+// relay (installable copy): new photos go to your other devices; the 2-hourly full copy carries thumbnails
+async function relayPhoto(p){if(typeof relayOn!=='function'||!relayOn())return;try{await rPost(await rTopic('sync-id:',S.rsync.secret),await rKey('sync-key:',S.rsync.secret),{t:'photo',dev:DEV_ID,pid:S.profile.id,at:Date.now(),photo:Object.assign({},p,{pending:0})})}catch(e){}}
+async function relayTakePhotos(list,del){S.phDel=S.phDel||{};let ch=false;for(const [id,t] of Object.entries(del||{}))if(!S.phDel[id]||S.phDel[id]<t){S.phDel[id]=t;await pdbDel(id);ch=true}
+  for(const p of list||[]){if(!p||!p._id||S.phDel[p._id])continue;const ex=PDB.list.find(x=>x._id===p._id);if(ex&&(ex.img||!p.img))continue;const q=Object.assign({},ex||{},p,{pending:0,uid:S.profile.id});await pdbPut(q);ch=true}
+  if(ch){await pdbLoad();saveNow();if(cur==='jungle')rerenderSoft()}}
 
 // ================= INIT =================
 runSplash();
