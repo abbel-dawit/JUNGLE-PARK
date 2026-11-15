@@ -2648,6 +2648,25 @@ select.chip.chip-sel{appearance:none;-webkit-appearance:none;padding:6px 30px 6p
 .pub-plans>div{display:flex;flex-direction:column;gap:2px;padding:10px 12px;border-radius:14px;background:var(--surface-2)}
 .pub-plans small{font-size:12px;color:var(--muted)}.pub-plans b{font-size:15px}
 </style>
+<style id="v22">
+.im-pocket{align-self:center;display:flex;align-items:center;gap:10px;margin:6px auto 0;padding:9px 16px 9px 12px;border-radius:999px;border:1px solid #ffffff38;background:#ffffff14;color:#fff;font:inherit;cursor:pointer;backdrop-filter:blur(6px);position:relative;z-index:2}
+.im-pocket .ico{width:22px;height:22px}.im-pocket span{display:flex;flex-direction:column;text-align:left;line-height:1.2}.im-pocket b{font-size:14px}.im-pocket small{font-size:11.5px;opacity:.8}
+#pocket{position:fixed;inset:0;z-index:9000;background:#000;color:#8a8a8a;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:calc(env(safe-area-inset-top) + 16px) 22px calc(env(safe-area-inset-bottom) + 28px);touch-action:none;user-select:none;-webkit-user-select:none}
+#pocket[hidden]{display:none}
+.pk-top{width:100%;display:flex;justify-content:space-between;align-items:center}.pk-top .gps{opacity:.75}.pk-clock{font-size:14px}
+.pk-mid{display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center}
+.pk-time{font-size:56px;font-weight:800;color:#bdbdbd;letter-spacing:.02em}
+.pk-row{display:flex;gap:34px}.pk-row div{display:flex;flex-direction:column;align-items:center}.pk-row b{font-size:30px;color:#a8a8a8}.pk-row small{font-size:12px}
+.pk-note{max-width:300px;font-size:13px;line-height:1.45;color:#6d6d6d;margin:8px 0 0}
+.pk-hold{position:relative;width:96px;height:96px;border-radius:50%;border:1.5px solid #333;background:#0b0b0b;color:#9a9a9a;font:inherit;font-size:12px;font-weight:600;display:grid;place-items:center;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.pk-ring{position:absolute;inset:-4px;border-radius:50%;background:conic-gradient(var(--accent) 0deg,transparent 0deg);-webkit-mask:radial-gradient(circle,transparent 46px,#000 47px);mask:radial-gradient(circle,transparent 46px,#000 47px)}
+.pk-hold.holding .pk-ring{animation:pkFill 1.1s linear forwards}
+@property --pk{syntax:'<angle>';inherits:false;initial-value:0deg}
+.pk-hold .pk-ring{background:conic-gradient(var(--accent) var(--pk),transparent var(--pk))}
+@keyframes pkFill{from{--pk:0deg}to{--pk:360deg}}
+.pk-txt{position:relative}
+body.pk-open{overflow:hidden}
+</style>
 <div id="splash" aria-live="polite" aria-label="Loading JUNGLE PARK"><div class="sp-bg"></div><div class="sp-in">
  <span class="logo sp-logo"><i class="paw"></i></span><div class="sp-title">JUNGLE PARK</div>
  <div class="sp-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"><i id="spFill"></i></div>
@@ -2796,6 +2815,7 @@ select.chip.chip-sel{appearance:none;-webkit-appearance:none;padding:6px 30px 6p
     <div><small>Avg. Pace</small><span><span id="imPace">0'00"</span><sub id="imPu">/km</sub></span></div>
   </div>
   <div class="im-lap" id="imLap"></div>
+  <button class="im-pocket" data-act="pocketOn" aria-label="Pocket mode: keeps the screen on and black so GPS keeps tracking"><svg class="ico" viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg><span><b>Pocket mode</b><small>Exact GPS with the phone in your pocket</small></span></button>
   <div class="im-ctrl">
     <button class="cbtn" data-act="lockToggle" aria-label="Lock screen controls" id="imLock"><svg class="ico" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></button>
     <button class="cbtn big" data-act="pauseRun" id="imPause" aria-label="Pause"><svg class="ico" viewBox="0 0 24 24"><path d="M9 5v14M15 5v14"/></svg></button>
@@ -2803,6 +2823,12 @@ select.chip.chip-sel{appearance:none;-webkit-appearance:none;padding:6px 30px 6p
   </div>
 </div>
 
+<div id="pocket" hidden role="dialog" aria-label="Pocket mode">
+  <div class="pk-top"><span class="gps" id="pkGps"><i></i><span>GPS</span></span><span class="pk-clock num" id="pkClock"></span></div>
+  <div class="pk-mid"><div class="pk-time num" id="pkTime">00:00:00</div><div class="pk-row num"><div><b id="pkDist">0.00</b><small id="pkDu">km</small></div><div><b id="pkPace">0'00"</b><small id="pkPu">/km</small></div></div>
+   <p class="pk-note" id="pkNote">Screen stays on and black to save battery. Put the phone in your pocket. GPS keeps tracking.</p></div>
+  <button class="pk-hold" id="pkHold" aria-label="Hold to unlock"><span class="pk-ring"></span><span class="pk-txt">Hold to unlock</span></button>
+</div>
 <div id="wkimm" hidden>
   <canvas id="wkHrC" class="wk-hrc" aria-hidden="true"></canvas>
   <div class="im-top"><span class="gps ok"><i></i><span>Workout</span></span><button class="cbtn hl-btn" data-act="liveHealth" aria-label="Health details" style="margin-left:auto;margin-right:10px"><svg class="ico" viewBox="0 0 24 24"><path d="M3 12h4l3-7 4 14 3-7h4"/></svg></button><span id="wkClock" class="num"></span><button class="cbtn" data-act="wkClose" aria-label="Minimise"><svg class="ico" viewBox="0 0 24 24"><path d="M4 14h6v6M20 10h-6V4M14 10l7-7M3 21l7-7"/></svg></button></div>
@@ -3526,14 +3552,27 @@ function updGps(state){const el=$$('.gps').filter(g=>!g.closest('#wkimm,.wkhero'
   if(R.mode==='indoor'){cls='weak';txt=Date.now()-MOT.last<4000?'Counting steps':'Auto distance'}
   else if(state==='denied'){txt='Location blocked'}else if(R.acc!=null){cls=R.acc<=15?'ok':R.acc<=40?'weak':'no';txt=`GPS ±${Math.round(R.acc)} m`}
   el.forEach(e=>{e.className='gps '+cls;e.querySelector('span').textContent=txt})}
-async function wakeLock(on){try{if(on&&'wakeLock'in navigator){R.wake=await navigator.wakeLock.request('screen')}else if(!on&&R.wake){await R.wake.release();R.wake=null}}catch(e){}}
+async function wakeLock(on){try{if(on&&'wakeLock'in navigator){if(R.wake&&!R.wake.released)return true;R.wake=await navigator.wakeLock.request('screen');R.wake.addEventListener('release',()=>{if(R.state!=='idle'&&document.visibilityState==='visible')setTimeout(()=>wakeLock(true),800)});return true}else if(!on&&R.wake){await R.wake.release();R.wake=null}}catch(e){}return false}
+// Browsers stop giving a web page GPS while it is hidden or the screen is off (iPhone and Android alike).
+// So: keep the screen awake while the run screen is open, offer Pocket mode (black screen, page stays in front),
+// and when the page was hidden anyway, fill that stretch from your pace and correct it with the first GPS fix back.
 document.addEventListener('visibilitychange',()=>{if(R.state==='idle')return;
-  if(document.visibilityState==='visible'){wakeLock(R.state==='running');restartWatch();runTick();if(R.mode==='gps')try{navigator.geolocation.getCurrentPosition(onFix,()=>{},{enableHighAccuracy:true,maximumAge:5000,timeout:15000})}catch(e){}}
-  else saveLive()});
+  if(document.visibilityState==='visible'){wakeLock(R.state==='running');restartWatch();if(KA&&KA.paused)KA.play().catch(()=>{});runTick();if(R.mode==='gps')try{navigator.geolocation.getCurrentPosition(onFix,()=>{},{enableHighAccuracy:true,maximumAge:5000,timeout:15000})}catch(e){}
+    const away=R.hiddenAt?Date.now()-R.hiddenAt:0;R.hiddenAt=0;if(R.state==='running'&&R.mode==='gps'&&away>45e3){R.bgMs=(R.bgMs||0)+away;
+      toast(`Back after ${Math.round(away/60000)||1} min. That stretch was estimated from your pace and is being corrected from GPS. Use Pocket mode to keep it exact.`)}}
+  else{R.hiddenAt=Date.now();saveLive()}});
 addEventListener('pagehide',()=>{if(R.state!=='idle')saveLive()});
 // some browsers silently drop the location watch while the page sleeps: start a fresh one on wake
 function restartWatch(){if(R.mode!=='gps'||!('geolocation'in navigator))return;if(R.watch!=null)navigator.geolocation.clearWatch(R.watch);
   R.watch=navigator.geolocation.watchPosition(onFix,onFixErr,{enableHighAccuracy:true,maximumAge:0,timeout:20000})}
+// ---------- Pocket mode ----------
+const PK={on:false};
+ACT.pocketOn=async()=>{if(R.state==='idle')return;const ok=await wakeLock(true);PK.on=true;const p=$('#pocket');p.hidden=false;document.body.classList.add('pk-open');
+  if(!ok)$('#pkNote').textContent='Your browser may still turn the screen off. Set your phone\'s auto-lock to Never for this run, then put it in your pocket.';else $('#pkNote').textContent='Screen stays on and black to save battery. Put the phone in your pocket. GPS keeps tracking.';
+  runTick();S.settings.pocketTip=1;save('settings')};
+function pocketOff(){PK.on=false;$('#pocket').hidden=true;document.body.classList.remove('pk-open');runTick()}
+(()=>{const b=document.getElementById('pkHold');if(!b)return;let t=0;const start=e=>{e.preventDefault();b.classList.add('holding');t=setTimeout(()=>{b.classList.remove('holding');pocketOff();try{navigator.vibrate&&navigator.vibrate(40)}catch(x){}},1100)};
+  const end=()=>{clearTimeout(t);b.classList.remove('holding')};b.addEventListener('pointerdown',start);['pointerup','pointerleave','pointercancel'].forEach(k=>b.addEventListener(k,end));b.addEventListener('contextmenu',e=>e.preventDefault())})();
 // the live run is saved every few seconds, so a run survives the browser closing the tab in the background
 const LIVE_K='jp:liverun';
 function saveLive(){if(R.state==='idle'||R.mode==='demo')return;try{localStorage.setItem(LIVE_K,JSON.stringify({state:R.state,mode:R.mode,pts:R.pts.slice(-6000),dist:R.dist,elev:R.elev,altRef:R.altRef,start:R.start,active:R.active,resumeAt:R.resumeAt,splits:R.splits,estimated:R.estimated,estSrc:R.estSrc,hr:(R.hr||[]).slice(-3000),gapEst:R.gapEst||0,steps:MOT.steps,saved:Date.now()}))}catch(e){}}
@@ -3556,13 +3595,14 @@ setInterval(()=>{if(R.state!=='idle')saveLive()},5000);
 function startRun(mode){
   if(R.state!=='idle'){openImmersive();return}
   if(mode!=='demo'&&busyWith('run'))return;
-  Object.assign(R,{state:'running',mode:mode||'gps',hr:[],pts:[],gapEst:0,gaps:0,dist:0,elev:0,altRef:null,start:Date.now(),active:0,resumeAt:Date.now(),splits:[],kf:null,lock:false,estimated:false,estSrc:null,lastTick:Date.now(),lastFix:Date.now()});
+  Object.assign(R,{state:'running',mode:mode||'gps',hr:[],pts:[],gapEst:0,gaps:0,bgMs:0,hiddenAt:0,dist:0,elev:0,altRef:null,start:Date.now(),active:0,resumeAt:Date.now(),splits:[],kf:null,lock:false,estimated:false,estSrc:null,lastTick:Date.now(),lastFix:Date.now()});
   MOT.steps=0;MOT.pending=0;motionStart();
   if(R.mode==='gps'){
     if(!('geolocation'in navigator)){R.mode='indoor'}
     else R.watch=navigator.geolocation.watchPosition(onFix,onFixErr,{enableHighAccuracy:true,maximumAge:0,timeout:20000});
   }
   clearInterval(R.tick);R.tick=setInterval(runTick,1000);wakeLock(true);startKeepAlive();updGps();openImmersive();runTick();saveLive();setTimeout(()=>pushLive(true),500);
+  if(R.mode==='gps'&&!S.settings.pocketTip)setTimeout(()=>{if(R.state!=='idle')toast('Tip: tap Pocket mode before you put the phone away. Locking the phone pauses GPS in the browser.')},2500);
 }
 ACT.startRun=()=>{if(R.state!=='idle'){openImmersive();return}if(busyWith('run'))return;startRunSheet()};
 function startRunSheet(){
@@ -3585,6 +3625,8 @@ function runTick(){
   set('imTime',fmtDurLong(sec));set('imDist',fmtDist(R.dist));set('imCal',cal);set('imPace',fmtPace(pace));set('imDu',uName());set('imPu','/'+uName());
   set('rhTime',fmtDurLong(sec));set('rhDist',fmtDist(R.dist));set('rhCal',cal);set('rhPace',fmtPace(pace));
   set('imClock',new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}));
+  if(PK.on){set('pkTime',fmtDurLong(sec));set('pkDist',fmtDist(R.dist));set('pkPace',fmtPace(pace));set('pkDu',uName());set('pkPu','/'+uName());set('pkClock',new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}));
+    const g=$('#pkGps'),s=$('#imGps');if(g&&s){g.className=s.className;g.querySelector('span').textContent=s.querySelector('span').textContent}}
   if(!$('#immersive').hidden){const im=$('#immersive');drawRoute($('#imCanvas'),R.mode==='indoor'?[]:(R.pts.length?R.pts:(R.here?[R.here]:[])),{live:true,area:areaBetween(im,$('.im-stats',im),$('.im-ctrl',im),.1),lw:5})}
   if($('#rhMap'))drawHero();
 }
@@ -3599,9 +3641,9 @@ ACT.stopRun=()=>{if(R.lock){toast('Unlock controls first');return}
   openSheet('Finish this run?',`<p class="muted">${fmtDist(R.dist)} ${uName()} in ${fmtDur(runActiveSec())}.</p>
    <div class="grid2"><button class="btn soft" data-act="closeSheet">Keep going</button><button class="btn" data-act="finishRun">Finish</button></div>`)};
 ACT.finishRun=()=>{
-  closeSheet();if(R.watch!=null)navigator.geolocation.clearWatch(R.watch);R.watch=null;clearInterval(R.tick);clearInterval(R.demo);wakeLock(false);motionStop();stopKeepAlive();clearLive();setTimeout(()=>pushLive(true),300);
+  if(PK.on)pocketOff();closeSheet();if(R.watch!=null)navigator.geolocation.clearWatch(R.watch);R.watch=null;clearInterval(R.tick);clearInterval(R.demo);wakeLock(false);motionStop();stopKeepAlive();clearLive();setTimeout(()=>pushLive(true),300);
   if(R.state==='running')R.active+=Date.now()-R.resumeAt-apIdle(Date.now());
-  const run={id:rid(10),start:R.start,end:Date.now(),dur:Math.round(R.active/1000),dist:Math.round(R.dist),elev:Math.round(R.elev),pts:R.pts.map(p=>[p[0],p[1],Math.round((p[2]-R.start)/1000),p[3]]),splits:R.splits.map(Math.round),src:R.mode==='indoor'?(R.estSrc==='steps'?'steps':'est'):R.mode,est:R.estimated&&R.mode==='gps'?1:0,steps:MOT.steps||0,u:Date.now()};
+  const run={id:rid(10),start:R.start,end:Date.now(),dur:Math.round(R.active/1000),dist:Math.round(R.dist),elev:Math.round(R.elev),pts:R.pts.map(p=>[p[0],p[1],Math.round((p[2]-R.start)/1000),p[3]]),splits:R.splits.map(Math.round),src:R.mode==='indoor'?(R.estSrc==='steps'?'steps':'est'):R.mode,est:R.estimated&&R.mode==='gps'?1:0,bg:Math.round((R.bgMs||0)/1000)||undefined,steps:MOT.steps||0,u:Date.now()};
   {const hs=hrStats(R.hr);if(hs){run.hr=R.hr.slice();run.hrAvg=hs.avg;run.hrMax=hs.max}}
   const demo=R.mode==='demo';
   R.state='idle';$('#immersive').hidden=true;syncPauseBtns();
@@ -5024,7 +5066,7 @@ ACT.courseAdmin=b=>{const gid=BIZ.gid,cid=b.dataset.c;const c=(CRS.bygym[gid]||[
 // Saved once on the user's profile (S.intake, synced to their devices) and shared with every coach they join.
 const GOALS=[['loss','Weight loss','<path d="M12 3c3 4 6 7 6 11a6 6 0 0 1-12 0c0-4 3-7 6-11z"/><path d="M9.5 14.5h5"/>'],['muscle','Muscle gain','<path fill="currentColor" stroke="none" d="M8.6 2.2C10.6 2.2 11.9 3.7 11.7 5.6C11.6 6.6 11 7.4 10.2 7.9L9.5 12.2C10.3 10.2 12 8.7 14.2 8.7C17 8.7 19 10.5 19.5 12.9C21 13.4 22 14.8 22 16.5V21.5H6.6C3.9 21.5 2.2 19.5 2.5 16.9L4.6 6.8C4.9 4.1 6.4 2.2 8.6 2.2Z"/>'],
  ['diet','Diet & nutrition','<path d="M12 7c-3-3-8-1-8 4 0 6 4 10 8 10s8-4 8-10c0-5-5-7-8-4z"/><path d="M12 7c0-2 1-4 3-4"/>'],['health','General health','<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>'],
- ['strength','Strength','<path d="M4.5 19.5c-.9-3.3-.6-6.7.9-9.8L7.6 5c.4-.9 1.3-1.5 2.3-1.5h1.7c.9 0 1.5.9 1.1 1.7l-.6 1.5c-.3.7-1 1.1-1.8 1H9.5L8.4 11c1.6-1.7 4-2.4 6.3-1.6 1.5-1.4 3.8-1.6 5.5-.3 1.6 1.2 2 3.5 1 5.3-1.7 3.1-5 5.1-8.6 5.1z"/><path d="M11.5 13.2c1.3-.6 2.8-.6 4.1 0"/>'],['endurance','Endurance & running','<circle cx="15.5" cy="4.5" r="2"/><path d="M7 10.5 10 8h4.5l2.5 4 3 1.5M13.5 8.5 11.5 13.5l3.5 3-1.5 4.5M11.5 13.5 9 17.5H4.5"/>'],
+ ['strength','Strength','<rect x="2.6" y="8.2" width="3" height="7.6" rx="1.1"/><rect x="18.4" y="8.2" width="3" height="7.6" rx="1.1"/><rect x="5.6" y="6.2" width="2.8" height="11.6" rx="1.1"/><rect x="15.6" y="6.2" width="2.8" height="11.6" rx="1.1"/><path d="M8.4 12h7.2M1 12h1.6M21.4 12H23"/>'],['endurance','Endurance & running','<circle cx="15.5" cy="4.5" r="2"/><path d="M7 10.5 10 8h4.5l2.5 4 3 1.5M13.5 8.5 11.5 13.5l3.5 3-1.5 4.5M11.5 13.5 9 17.5H4.5"/>'],
  ['mobility','Mobility & flexibility','<circle cx="12" cy="4.5" r="2"/><path d="M12 8.5v5M12 9.5 8.5 12.5 6 15.5M12 9.5l3.5 3 2.5 3M4 19.5c2.4-2.4 5-3.5 8-3.5s5.6 1.1 8 3.5M7 19.5h10"/>'],['rehab','Injury recovery','<path d="m9 9 6 6M15 9l-6 6"/><rect x="3" y="8" width="18" height="8" rx="4" transform="rotate(-45 12 12)"/>'],
  ['sport','Sports performance','<circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18M5.6 5.6c3 3 9.8 3 12.8 0M5.6 18.4c3-3 9.8-3 12.8 0"/>']];
 const goalIco=k=>{const g=GOALS.find(x=>x[0]===k);if(!g)return '';return g[2].startsWith('mk:')?`<span class="ico mki mk-${g[2].slice(3)}" aria-hidden="true"></span>`:`<svg class="ico" viewBox="0 0 24 24">${g[2]}</svg>`};
@@ -9009,10 +9051,12 @@ function pubJSON(k){try{return JSON.parse(localStorage.getItem(k)||'null')}catch
 function pubPut(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
 async function pubIndex(){if(PUB.idx&&Date.now()-(PUB.idx._t||0)<PUB_TTL)return PUB.idx;const c=pubJSON('jp:pubidx');if(c)PUB.idx=c;
   if(!pubOn()||(c&&Date.now()-(c._t||0)<PUB_TTL))return PUB.idx;try{const r=await fetch(PUB_BASE+'index.json',{cache:'no-cache'});if(r.ok){const j=await r.json();j._t=Date.now();PUB.idx=j;pubPut('jp:pubidx',j)}}catch(e){}return PUB.idx}
-function pubFileFor(city){const ix=PUB.idx||pubJSON('jp:pubidx');if(!ix||!ix.cities||!city)return '';const k=Object.keys(ix.cities).find(c=>c.toLowerCase()===String(city).trim().toLowerCase());return k?ix.cities[k]:''}
-function pubCityNow(city){const f=pubFileFor(city);if(!f)return null;return PUB.data[f]||(PUB.data[f]=pubJSON('jp:pub:'+f))}
-async function pubCity(city){await pubIndex();const f=pubFileFor(city);if(!f)return null;const c=pubCityNow(city);if(c&&Date.now()-(c._t||0)<PUB_TTL)return c;if(PUB.busy[f])return PUB.busy[f];
-  PUB.busy[f]=(async()=>{try{const r=await fetch(PUB_BASE+'cities/'+f,{cache:'no-cache'});if(r.ok){const j=await r.json();j._t=Date.now();PUB.data[f]=j;pubPut('jp:pub:'+f,j)}}catch(e){}PUB.busy[f]=null;return PUB.data[f]||c})();return PUB.busy[f]}
+// cities are grouped into a few region files (directory/regions/*.json); only your own city is kept on the phone
+function pubKey(city){const ix=PUB.idx||pubJSON('jp:pubidx');if(!ix||!ix.cities||!city)return '';return Object.keys(ix.cities).find(c=>c.toLowerCase()===String(city).trim().toLowerCase())||''}
+function pubFileFor(city){const k=pubKey(city);return k?(PUB.idx||pubJSON('jp:pubidx')).cities[k]:''}
+function pubCityNow(city){const k=pubKey(city);if(!k)return null;return PUB.data[k]||(PUB.data[k]=pubJSON('jp:pub:'+k))}
+async function pubCity(city){await pubIndex();const k=pubKey(city),f=pubFileFor(city);if(!f)return null;const c=pubCityNow(city);if(c&&Date.now()-(c._t||0)<PUB_TTL)return c;if(PUB.busy[k])return PUB.busy[k];
+  PUB.busy[k]=(async()=>{try{const r=await fetch(PUB_BASE+(f.includes('/')?f:'cities/'+f),{cache:'no-cache'});if(r.ok){const j=await r.json();const d=j&&j.cities?j.cities[k]:j;if(d){const o=Object.assign({city:k},d,{_t:Date.now()});PUB.data[k]=o;pubPut('jp:pub:'+k,o)}}}catch(e){}PUB.busy[k]=null;return PUB.data[k]||c})();return PUB.busy[k]}
 const pubCityName=()=>S.profile.city||'Addis Ababa';
 function pubGym(x){return {id:x.id,name:x.name,city:x.city||'',address:x.address||'',phone:(x.phones||[])[0]||'',phones:(x.phones||[]).slice(0,3),logo:x.logo||'',plans:x.plans||[],photo:'',lat:x.lat,lng:x.lng,hours:x.hours||'',courses:(x.classes||[]).length,pub:1,sample:!!x.sample}}
 function pubCoach(x){const t=x.type==='both'?['trainer','nutritionist']:[x.type==='nutritionist'?'nutritionist':'trainer'];return {id:x.id,owner:x.id,type:t.length>1?'both':t[0],types:t,name:x.name,city:x.city||'',bio:x.bio||'',tags:x.tags||[],years:x.years||'',price:x.price||'',wa:x.wa||'',tg:x.tg||'',link:x.link||'',photo:x.photo||'',certs:x.certs||[],approved:true,certified:!!x.certified,pub:1,sample:!!x.sample,ts:0}}

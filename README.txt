@@ -17,10 +17,11 @@ Map tiles are cached by the service worker (sw.js, cache "jp-tiles-v1", about 60
 Coach and gym applications from this copy are emailed to abbeldawit@gmail.com through FormSubmit (formsubmit.co). The first application triggers a one-time confirmation email: click Activate in it, and every later application arrives in your inbox.
 
 PUBLIC LIST OF GYMS AND COACHES (until the app has its own database)
-- Gyms and coaches come from the "directory" folder: directory/index.json lists the cities, and each city has its own file in directory/cities/ (for example directory/cities/addis-ababa.json).
-- Each city file starts with 10 sample gyms, 10 sample personal trainers and 10 sample nutritionists. Samples have "sample": true and show a Sample badge in the app.
-- To add a real gym or coach: open the city file on GitHub, press the pencil (Edit), copy one entry, change it, set "sample" to false (or delete samples you don't want), and Commit changes. Apps pick up the change within about 30 minutes, or the next time they open.
+- Gyms and coaches come from the "directory" folder: directory/index.json says which region file each city is in, and directory/regions/ holds 7 region files: ethiopia, africa, middle-east, south-asia, asia-pacific, europe and americas. The whole app is 19 files, under GitHub's 100-files-per-upload limit, and every file is far under the 25 MB limit.
+- Inside a region file, each city is on its own line: "City name":{"currency":...,"gyms":[...],"coaches":[...]}. Each city starts with 10 sample gyms, 10 sample personal trainers and 10 sample nutritionists. Samples have "sample": true and show a Sample badge in the app.
+- To add a real gym or coach: open the region file on GitHub, press the pencil (Edit), find the city line (Ctrl+F / Cmd+F), copy one entry, change it, set "sample" to false (or delete samples you don't want), and Commit changes. Apps pick up the change within about 30 minutes, or the next time they open.
 - Gym fields: id (letters and numbers only, unique, e.g. "pgbolefit01"), name, address, phones (up to 3), hours, plans (n, m = months, price), classes (title, days, time, cap, price, memberFree).
 - Coach fields: id (letters and numbers only, unique), type ("trainer", "nutritionist" or "both"), name, bio, tags, years, price, wa (WhatsApp number), tg (Telegram username).
 - Keep the files valid JSON (commas between entries, double quotes). GitHub shows an error preview if something is wrong.
+- Phones download only their region file and keep just their own city, so the list works offline after the first load.
 - In this installed copy, joining a listed gym saves it on the phone so members can check in and log visits. In Demo mode the listed gyms and coaches go into the demo database, so joining, approval, check-in and coach requests all work end to end.
