@@ -25,3 +25,8 @@ PUBLIC LIST OF GYMS AND COACHES (until the app has its own database)
 - Keep the files valid JSON (commas between entries, double quotes). GitHub shows an error preview if something is wrong.
 - Phones download only their region file and keep just their own city, so the list works offline after the first load.
 - In this installed copy, joining a listed gym saves it on the phone so members can check in and log visits. In Demo mode the listed gyms and coaches go into the demo database, so joining, approval, check-in and coach requests all work end to end.
+
+UPDATES
+- The app updates itself, also when it was added to the home screen. It checks for a new version when it opens, whenever it comes back to the front, and every 30 minutes, then reloads on its own.
+- It never reloads during a run, a workout, an open form or while someone is typing; it waits and shows "An update is ready".
+- Just upload the new files to GitHub. Changing index.html alone is enough; sw.js only needs a change when the offline files change (its first line holds the version name).
