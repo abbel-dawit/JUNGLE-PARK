@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-11-13",
+ "updated": "2026-11-15",
  "note": "Sample listings. Cities are grouped into region files in regions/. Edit a region file to add your real gyms and coaches, then commit to GitHub.",
  "cities": {
   "Addis Ababa": "regions/ethiopia.json",
