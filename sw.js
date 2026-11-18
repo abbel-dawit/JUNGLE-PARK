@@ -1,4 +1,4 @@
-const C='jp-v69';const T='jp-tiles-v1';const PRE=['./','index.html','manifest.webmanifest','icon192.png','icon512.png','icon180.png','favicon-16.png','favicon-32.png','favicon-48.png','favicon.ico'];
+const C='jp-v70';const T='jp-tiles-v1';const PRE=['./','index.html','manifest.webmanifest','icon192.png','icon512.png','icon180.png','favicon-16.png','favicon-32.png','favicon-48.png','favicon.ico'];
 // install: fetch fresh copies (never from the browser's HTTP cache), then take over right away
 self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(PRE.map(u=>new Request(u,{cache:'reload'})))).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==C&&x!==T).map(x=>caches.delete(x)))).then(()=>self.clients.claim()))});
