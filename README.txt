@@ -9,7 +9,7 @@ Sync without accounts or a server of your own:
 - The coach directory works here too, over the same relay. A coach's listing goes live as soon as they send the Join as coach form (the application is still emailed for review). Listings are signed on the coach's device so nobody else can change or remove them, every app keeps the listings it has seen for 30 days, and the coach's app republishes the listing every few hours while it is open (the relay forgets messages after 12 hours). The Certified badge is only given in the claude.ai version, where the admin approves coaches. A listing can be edited or removed only from the device that created it.
 - Gym memberships, invites, stories and coaching still need the live sync of the claude.ai version, or use Demo mode.
 
-Demo mode: My Profile > For gyms & coaches > Demo mode (password 09876543210). Opens a sample gym business and coach (personal trainer & nutritionist) profile with Pro, running on a local sandbox database on the device. Your real profile is untouched; tap Demo > Exit to leave.
+Demo mode: My Profile > For gyms & coaches > Demo mode (password 09876543210). Opens a sample gym business and coach (personal trainer & nutritionist) profile with Pro, running on a sandbox database on the device that stays in sync with every other device in Demo mode (over the sync relay, see NEW IN 3.4). Your real profile is untouched; tap Demo > Exit to leave.
 
 Progress photos are saved on the device first (IndexedDB) and upload when a connection is back: to your coach in the claude.ai version, and to your linked devices over the relay here.
 QR codes are drawn by a built-in encoder when the CDN library cannot load, so they also work offline.
@@ -27,7 +27,7 @@ PUBLIC LIST OF GYMS AND COACHES (until the app has its own database)
 - In this installed copy, joining a listed gym saves it on the phone so members can check in and log visits. In Demo mode the listed gyms and coaches go into the demo database, so joining, approval, check-in and coach requests all work end to end.
 
 UPDATES
-- The app updates itself, also when it was added to the home screen. It checks for a new version when it opens, whenever it comes back to the front, and every 30 minutes, then reloads on its own.
+- The app updates itself, also when it was added to the home screen. It checks for a new version when it opens, whenever it comes back to the front, when the connection returns, and every 5 minutes, then reloads on its own (changed in 3.4).
 - It never reloads during a run, a workout, an open form or while someone is typing; it waits and shows "An update is ready".
 - Just upload the new files to GitHub. Changing index.html alone is enough; sw.js only needs a change when the offline files change (its first line holds the version name).
 
@@ -95,3 +95,18 @@ NEW IN 3.3.1
 - Real camera frame times are used when the browser provides them.
 - If no pulse shows after a few seconds, the screen asks you to touch more lightly. A hard press squeezes the pulse out of the fingertip.
 - To make sure your phone has this version: close the app completely and open it again. When an update is waiting, the app switches to it.
+
+NEW IN 3.4
+- Demo mode works between devices. The demo gym and demo coach have the same ids on every device, and every change in Demo mode (join requests, approvals, check-ins, channels, follows, posts, coach requests, messages, stories) is sent end-to-end encrypted over the sync relay to every other device in Demo mode. Newest change wins. The relay keeps messages 12 hours, so an open demo device re-sends the last 3 days of changes every few hours. Old demo data is cleared once.
+- Note: the demo relay key comes from the demo password, so everyone who knows the password shares the same demo. Use test photos (not real faces or receipts) in Demo mode.
+- Demo QR codes and links: links made in Demo mode end in ?demo=1. Scanning the demo gym QR (or a demo coach or channel QR) with a phone camera, or opening the link on a phone that is not in Demo mode, asks for the demo password once and opens the member side with that gym, coach or channel. The typed gym code GYM-DGJU-NGLE-DEMO works too. Before, a phone camera scan opened the normal app, which could not find the demo gym.
+- Cities: the gym and coach city pickers, and city suggestions, list only cities in Ethiopia. The coach City filter is now a list instead of a text box.
+- Nationality is shown as the country's flag (for example on coach cards, coach details, gym join requests and coach requests). Phones that cannot draw flag emoji (such as Windows) show the 3-letter country code instead (ETH). The nationality lists show the flag next to each name.
+- Recent check-ins has a full-screen button for the front desk: a live view with a clock, counts (active, expiring, not active), the latest check-in large, and recent check-ins below. The screen stays on. Leave with Exit, Esc or the back gesture.
+- Spacing: the buttons in the channel window (New post, Edit channel, Share link, QR code) and the coloured tags at the top of coach details no longer touch.
+- Channel photos are cropped to a centred square when uploaded, and existing photos fill their frame centred.
+- Stories, camera: the shutter ring fills smoothly and the button stays inside its ring; the press shows straight away. Recorded videos preview as a looping video (3.3 showed a black box with a crossed-out play icon, because the codec list was written into the video data and broke it). Videos are smaller (about 540p), so they upload faster.
+- Stories, sharing: tapping Share closes the camera at once; the story uploads in the background ("Posting…" under your story bubble) and retries until it goes through, also after the connection drops. Stories that were posted with the broken video type in 3.3 play now.
+- Stories, friends: story photos and videos are stored in IndexedDB, so friends' videos are no longer dropped when the phone's small localStorage fills up. A story whose download failed (for example a network blip) is fetched again on the next sync instead of being lost. The offline worker no longer caches sync-relay requests, which could make the app reuse an old list and miss new stories, posts and friend updates.
+- Faster updates: the offline worker saves the new version before it announces it, so the app reloads once straight into it (it used to reload into the old copy and then again). Checks run on open, on return to the front, when the connection returns and every 5 minutes.
+- Faster loading: the built-in images are about 145 KB smaller, the offline install downloads index.html once instead of twice, and returning members get a shorter splash screen.
