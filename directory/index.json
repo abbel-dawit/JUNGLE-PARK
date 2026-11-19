@@ -1,7 +1,7 @@
 {
  "version": 1,
- "updated": "2026-11-15",
- "note": "Sample listings. Cities are grouped into region files in regions/. Edit a region file to add your real gyms and coaches, then commit to GitHub.",
+ "updated": "2026-11-18",
+ "note": "Add your real gyms and coaches to the region files in regions/ (each city has empty \"gyms\" and \"coaches\" lists), then commit to GitHub. The demo gym and demo coach live inside the app, not here.",
  "cities": {
   "Addis Ababa": "regions/ethiopia.json",
   "Adama": "regions/ethiopia.json",

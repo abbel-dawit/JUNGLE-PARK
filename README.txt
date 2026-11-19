@@ -60,3 +60,38 @@ NEW IN 2.9.1
 - The swipe card decks are gone: Park and Jungle → Train are normal scrolling pages again, and Jungle tabs change from the tab bar only.
 - Park, in order: run dashboard, your stats (two per row), weekly distance, then your run history. On wide screens: dashboard and history on the left, stats and weekly on the right.
 - Jungle → Train, in order: workout dashboard, check in (or your live session), session rate (two per row), then the training log cards. On wide screens: dashboard and training log on the left, check in and session rate on the right.
+
+NEW IN 3.1
+- Buddy board: tapping a photo opens it full screen in the app (tap to zoom, tap outside or the X to close). Your own posts have a bin button that deletes them for everyone (tap twice). "Clear all" hides every current post just for you (your buddies keep theirs; new posts still arrive). Long posts fold after 4 lines with "Show more", and the board shows the 8 newest posts with a "Show more posts" button.
+- Stories with photo or video: the big box is the live camera. Tap the shutter for a photo, hold it to record a video (up to 10 seconds, with a red progress ring). Switch between front and back camera, pick a photo or short video (15 s max) from the gallery, or make a text story on a colour. Videos play in the story viewer with a sound button.
+- Channels: the Discover window has room between the explanation and the link box, and a QR scanner button. Every channel has "Share link" and "QR code"; scanning the QR with the in-app scanner or a phone camera, or opening the link, opens the channel to follow.
+- Check in button now says "Check in". Volume this week uses the dumbbell icon.
+- Coach details: WhatsApp and Telegram buttons use the apps' green and blue.
+- Gym details: no tinted band behind the gym name. The number of gyms near you sits in a theme-coloured circle.
+- Theme colours: 10 strong preset colours (Violet, Indigo, Ocean, Lagoon, Teal, Jungle, Ember, Crimson, Berry, Plum), all readable with white text. The custom colour picker is gone; anyone on a removed or custom colour switches to Violet.
+- Coaches: every coach you train with has a card in Jungle → My coach with recent messages and a Message button (also through the Messages inbox). The ⋯ menu mutes alerts, clears the conversation or stops training with that coach.
+
+NEW IN 3.2
+- Heart rate measuring is now a full-screen view. It opens the rear camera and flash straight away (no Start button). A large ring fills as the reading settles, the heart pulses with each beat, a live pulse wave scrolls underneath, and a small camera bubble shows whether your finger covers the lens. Plain tips tell you what to fix: cover the camera, too dark, hold still.
+- Faster, steadier readings. It samples the middle of the camera image and filters the signal properly, working out the rate from the whole pulse pattern instead of counting single beats. A first number shows after about 4 seconds and the reading locks at about 7 to 8 seconds (it was 15 seconds or more, and often never). It switches colour channel by itself when the flash is too bright, and also works without a flash in good light. In tests it read 45 to 190 bpm within 8%.
+- The result screen shows your rate, what it means (resting, raised, training zone), and your last few readings. Tap "Measure again" or "Done". Every reading is saved to your health history.
+- Every heart-rate section (Health heart-rate card, Jungle heart-rate card, Start a workout, live run or workout health) has two buttons: "Scan with phone" and "Pair WHOOP". The measuring screen also has a Pair WHOOP button at the top.
+
+NEW IN 3.3
+- Sample data removed. The public directory (directory/regions/*.json) keeps every city but has empty "gyms" and "coaches" lists, ready for real listings. Old cached sample gyms and coaches are cleared from phones once.
+- Demo mode has just one demo gym (Jungle Demo Gym, with plans and two bookable classes) and one demo coach (Demo Coach). The sample members, check-ins, clients and other gyms are gone, and anything from an older demo is wiped once.
+- Demo mode now has two sides that share the same demo gym and coach: the Business side (gym and coach dashboards) and the Member side (its own profile, copied from your real name and body stats). Tap the Demo button at the bottom to switch sides. You can also open one side in each of two browser tabs, and changes show up in both. The gym and coach no longer approve requests by themselves; you do it from the business side.
+- The demo gym and demo coach show up in the normal Find gym and Find a coach lists with a Demo tag. Tapping one asks for the demo password (once per device) and opens the member side. To hide them before launch, set SHOW_DEMO_LISTINGS to false in index.html.
+- Stories: once you have a story, the extra Add bubble is gone from the Crew row. Add more from the + button in your own story viewer.
+- Nationality is required. New users choose it when signing up, and existing users are asked once. Change it in My Profile. Coaches must add it to their listing. Find a coach has a Nationality filter next to City, and coach cards and profiles show it. Gyms see it on join requests, and coaches see it on client requests.
+- Gyms near you has two tabs, Gyms and Classes (tap or swipe). Gyms: your gyms, membership and requests, then other gyms in the chosen city. Classes: your bookings, classes at your gyms, then other classes in the city.
+- Phone numbers: every phone field has a fixed +251 prefix and accepts only valid Ethiopian numbers, 9 digits starting with 9 or 7. Gym business phones can also be landlines starting with an area code (11, 22, 25, 33, 34, 46, 47, 57 or 58). A leading 0 or a pasted +251 is handled automatically. Forms will not send until the number is valid, and the message says what to fix. This covers class booking, coach WhatsApp, gym phone numbers, member records, password and business sign-in, and the admin edit forms.
+
+NEW IN 3.3.1
+- Camera heart rate works on more phones. A strong flash can wash the fingertip out to near white, and 3.2 then never noticed the finger. That case is now recognised.
+- A brief wobble no longer restarts the reading from zero. Frames where the lens is briefly uncovered are skipped.
+- Red and green are measured side by side, and the clearer signal is used.
+- On phones with several rear cameras, the app looks for the one with the flash.
+- Real camera frame times are used when the browser provides them.
+- If no pulse shows after a few seconds, the screen asks you to touch more lightly. A hard press squeezes the pulse out of the fingertip.
+- To make sure your phone has this version: close the app completely and open it again. When an update is waiting, the app switches to it.
